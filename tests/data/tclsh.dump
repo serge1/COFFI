@@ -1,0 +1,187 @@
+Dump of file TCLSH.EXE
+
+File Header
+  Machine:                      014C (I386)
+  Number of Sections:           0006
+  TimeDateStamp:                53484543 -> Fri Apr 11 22:40:51 2014
+  PointerToSymbolTable:         00000000
+  NumberOfSymbols:              00000000
+  SizeOfOptionalHeader:         00E0
+  Characteristics:              030F
+    RELOCS_STRIPPED
+    EXECUTABLE_IMAGE
+    LINE_NUMS_STRIPPED
+    LOCAL_SYMS_STRIPPED
+    32BIT_MACHINE
+    DEBUG_STRIPPED
+
+Optional Header
+  Magic                         010B
+  linker version                2.56
+  size of code                  A00
+  size of initialized data      2600
+  size of uninitialized data    200
+  entrypoint RVA                1280
+  base of code                  1000
+  base of data                  2000
+  image base                    400000
+  section align                 1000
+  file align                    200
+  required OS version           4.00
+  image version                 1.00
+  subsystem version             4.00
+  Win32 Version                 0
+  size of image                 8000
+  size of headers               400
+  checksum                      3146
+  Subsystem                     0003 (Windows character)
+  DLL flags                     0000
+  stack reserve size            200000
+  stack commit size             1000
+  heap reserve size             100000
+  heap commit size              1000
+  RVAs & sizes                  10
+
+Data Directory
+  EXPORT           rva: 00000000  size: 00000000
+  IMPORT           rva: 00005000  size: 00000358
+  RESOURCE         rva: 00006000  size: 0000129C
+  EXCEPTION        rva: 00000000  size: 00000000
+  SECURITY         rva: 00000000  size: 00000000
+  BASERELOC        rva: 00000000  size: 00000000
+  DEBUG            rva: 00000000  size: 00000000
+  ARCHITECTURE     rva: 00000000  size: 00000000
+  GLOBALPTR        rva: 00000000  size: 00000000
+  TLS              rva: 00000000  size: 00000000
+  LOAD_CONFIG      rva: 00000000  size: 00000000
+  BOUND_IMPORT     rva: 00000000  size: 00000000
+  IAT              rva: 00000000  size: 00000000
+  DELAY_IMPORT     rva: 00000000  size: 00000000
+  COM_DESCRPTR     rva: 00000000  size: 00000000
+  unused           rva: 00000000  size: 00000000
+
+Section Table
+  01 .text     VirtSize: 000009E4  VirtAddr:  00001000
+    raw data offs:   00000400  raw data size: 00000A00
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60500060
+      CODE  INITIALIZED_DATA  EXECUTE  READ  ALIGN_16BYTES
+
+  02 .data     VirtSize: 00000010  VirtAddr:  00002000
+    raw data offs:   00000E00  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0300040
+      INITIALIZED_DATA  READ  WRITE  ALIGN_4BYTES
+
+  03 .rdata    VirtSize: 000001A0  VirtAddr:  00003000
+    raw data offs:   00001000  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40600040
+      INITIALIZED_DATA  READ  ALIGN_32BYTES
+
+  04 .bss      VirtSize: 00000054  VirtAddr:  00004000
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0400080
+      UNINITIALIZED_DATA  READ  WRITE  ALIGN_8BYTES
+
+  05 .idata    VirtSize: 00000358  VirtAddr:  00005000
+    raw data offs:   00001200  raw data size: 00000400
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA  READ  ALIGN_4BYTES
+
+  06 .rsrc     VirtSize: 0000129C  VirtAddr:  00006000
+    raw data offs:   00001600  raw data size: 00001400
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0300040
+      INITIALIZED_DATA  READ  WRITE  ALIGN_4BYTES
+
+
+
+Resources (RVA: 6000)
+ResDir (0) Entries:03 (Named:00, ID:03) TimeDate:50A2E8C6
+    --------------------------------------------------------------
+    ResDir (ICON) Entries:04 (Named:00, ID:04) TimeDate:50A2E8C6
+        ResDir (1) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000124
+            DataRVA: 06184  DataSize: 002E8  CodePage: 0
+        ResDir (2) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000134
+            DataRVA: 0646C  DataSize: 00130  CodePage: 0
+        ResDir (3) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000144
+            DataRVA: 0659C  DataSize: 00128  CodePage: 0
+        ResDir (4) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000154
+            DataRVA: 066C4  DataSize: 008A8  CodePage: 0
+    --------------------------------------------------------------
+    ResDir (GROUP_ICON) Entries:01 (Named:01, ID:00) TimeDate:50A2E8C6
+        ResDir (TCLSH) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000164
+            DataRVA: 06F6C  DataSize: 0003E  CodePage: 0
+    --------------------------------------------------------------
+    ResDir (VERSION) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+        ResDir (1) Entries:01 (Named:00, ID:01) TimeDate:50A2E8C6
+            ID: 00000409  DataEntryOffs: 00000174
+            DataRVA: 06FAC  DataSize: 002F0  CodePage: 0
+
+Imports Table:
+  KERNEL32.dll
+  Import Lookup Table RVA:  00005054
+  TimeDateStamp:            53484543 -> Fri Apr 11 22:40:51 2014
+  ForwarderChain:           FFFFFFFF
+  DLL Name RVA:             000052E4
+  Import Address Table RVA: 000050D8
+  Ordn  Name
+     4  AddAtomA (Bound to: 6B825A33)
+   337  ExitProcess (Bound to: 6B828244)
+   358  FindAtomA (Bound to: 6B8244FB)
+   430  GetAtomNameA (Bound to: 6B83B7E8)
+   456  GetCommandLineA (Bound to: 6B81DFA9)
+   612  GetModuleHandleA (Bound to: 6B81B756)
+   669  GetProcAddress (Bound to: 6B81A7FD)
+  1345  SetUnhandledExceptionFilter (Bound to: 6B81E14F)
+
+  msvcrt.dll
+  Import Lookup Table RVA:  0000507C
+  TimeDateStamp:            53484543 -> Fri Apr 11 22:40:51 2014
+  ForwarderChain:           FFFFFFFF
+  DLL Name RVA:             00005330
+  Import Address Table RVA: 00005100
+  Ordn  Name
+   163  __getmainargs (Bound to: 10117C0C)
+   206  __p__environ (Bound to: 1011C2A2)
+   208  __p__fmode (Bound to: 101171C4)
+   228  __set_app_type (Bound to: 101171CF)
+   276  _assert (Bound to: 1017FCBD)
+   294  _cexit (Bound to: 10114448)
+   496  _iob (Bound to: 101B4C08)
+   779  _onexit (Bound to: 10115830)
+   844  _setmode (Bound to: 1011A72A)
+  1175  abort (Bound to: 10182B10)
+  1183  atexit (Bound to: 10116A91)
+  1223  free (Bound to: 101099DC)
+  1279  malloc (Bound to: 10109A7A)
+  1319  setlocale (Bound to: 10118507)
+  1321  signal (Bound to: 1011CE7F)
+
+  tcl85.dll
+  Import Lookup Table RVA:  000050C0
+  TimeDateStamp:            53484543 -> Fri Apr 11 22:40:51 2014
+  ForwarderChain:           FFFFFFFF
+  DLL Name RVA:             0000534C
+  Import Address Table RVA: 00005144
+  Ordn  Name
+   191  Tcl_Alloc (Bound to: 707135B0)
+   510  Tcl_Init (Bound to: 707614A0)
+   553  Tcl_Main (Bound to: 7077A308)
+   685  Tcl_SetVar (Bound to: 707AB8A4)
+
+

@@ -1,0 +1,638 @@
+
+
+.JelloSizer {
+    margin: 0px auto;
+    max-width: 0px;
+    padding: 0px;
+    width: 0px;
+}
+
+.JelloWrapper {
+    width: 100%;
+}
+
+/*-------- Start Masthead Control --------*/
+.BrandLogo img {
+    background: url('/platform/masterpages/msdnmagazine2/logo_msdn_magazine.png') no-repeat;
+    height: 23px;
+    width: 60px;
+}
+*html .BrandLogo img {
+    background-image: url('/platform/masterpages/msdnmagazine2/logo_msdn_magazine.gif');
+}
+/*-------- End Masthead Control --------*/
+
+.mainDiv {
+    background: #fff url('/platform/masterpages/msdnmagazine2/bg_body_msdn_magazine.png') repeat-x center top;
+}
+
+.MagazineStyle {
+    padding-bottom: 7px;
+}
+
+.MagazineStyle .ColumnTitle h1 {
+    color: #260859;
+    font-size: 36px;
+    line-height: 56px;
+    margin-bottom: 6px;
+}
+
+.MagazineStyle .FeatureTitle h1 {
+    color: #260859;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 40px;
+    margin-bottom: 6px;
+    padding: 0px;
+}
+
+
+.MagazineStyle .ColumnTitle h2,
+.MagazineStyle .FeatureTitle h2 {
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    font-size: 20px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 29px;
+}
+
+.MagazineStyle h2 {
+    color: #260859;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 3px;
+    padding-bottom: 7px;
+}
+
+.MagazineStyle .ColumnTitle h3 {
+    color: #26252A;
+    font-size: 16px;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+.MagazineStyle .FeatureTitle h3 {
+    color: #26252A;
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+
+.MagazineStyle ul li {
+    color: #26252A;
+    font-weight: normal;
+    font-size: 11px;
+    list-style-type: square;
+}
+
+.coverTD {
+    text-align: center;
+    width: 33%;
+}
+
+.solidLine {
+    border-top-style: solid;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    border-top-width: 1px;
+    border-top-color: #000000;
+}
+
+.featureDiv {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.authorColor {
+    color: #26252A;
+}
+
+.spanCodeChm {
+    margin-right: 5px;
+    margin-bottom: 6px;
+}
+
+.RightMargin12px {
+    margin-right: 12px;
+}
+
+.BottomMargin6px {
+    margin-bottom: 6px;
+}
+
+.columnTable {
+    border: 0px;
+    width: 80%;
+}
+
+.columnCell {
+    margin: 5px;
+    padding: 2px;
+    width: 33%;
+}
+
+.borderCollapse {
+    border: 0px;
+    border-collapse: collapse;
+    padding: 0px;
+    width: 100%;
+}
+
+.borderCollapseWithBorder {
+    border: 1px;
+    border-collapse: collapse;
+    padding: 2px;
+    width: 100%;
+}
+
+.td33 {
+    width: 33%;
+}
+
+.chmHeaderTD {
+    background-color: #dd7c3b;
+    border: 1px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0px;
+    padding: 10px;
+}
+
+.bgff7c22 {
+    background-color: #ff7c22;
+}
+
+.padleft20 {
+    padding-left: 20px;
+}
+
+.figmargin {
+    margin: 5px 0px 5px 0px;
+}
+
+.familiar {
+    background-color: #333333;
+    color: #000000;
+}
+
+.msdnlevel {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.superscript {
+    bottom: 0.5em;
+    font-size: 70%;
+    position: relative;
+}
+
+.subscript {
+    bottom: -0.5em;
+    font-size: 70%;
+    position: relative;
+}
+
+.charttable {
+    border-collapse: collapse;
+    border: 1px solid #C0C0C0;
+    width: 100%;
+}
+
+.charttable th,
+.charttable td {
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    padding: 3px;
+}
+
+.clsBlue {
+    color: blue;
+}
+
+.clsRed {
+    color: red;
+}
+
+.clsGreen {
+    color: green;
+}
+
+.clsInfo,
+.clsSmall {
+    font-size: 90%;
+}
+
+.HeaderLinks {
+    color: #26252A;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.ArticleNormalPara {
+    padding-bottom: 7px;
+}
+
+.ArticleQA {
+}
+
+.ArticleQA:first-letter {
+    color: #cc3300;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+
+.ArticleHeadlineText {
+    font-size: 14px;
+}
+
+.ArticleHeadlineLink {
+    color: #26252A;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.HeaderParagraph {
+    margin-top: 1px;
+    margin-bottom: 12px;
+}
+
+.ArticleTypeTitle {
+    color: #260859;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    font-variant: normal;
+    margin-top: 3px;
+    padding-bottom: 7px;
+    text-transform: none;
+}
+
+.ArticleInlineTitle {
+    color: #26252A;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.ToolboxHeader {
+    background-color: #323e58;
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    padding: 2px;
+    text-transform: none;
+}
+
+.ArticleTypeTitleHeader {
+    color: #260859;
+    font-size: 18px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    margin-top: 3px;
+    text-transform: uppercase;
+}
+
+.ColumnHeadlineLink {
+    color: #000;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    padding-top: 4px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.ColumnNavList li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+.HeaderIssueTitle {
+    color: #26252A;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 34px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    vertical-align: top;
+}
+
+.HeaderDescription {
+    color: #26252A;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.ArticleListingContainer li {
+    color: #26252A;
+    list-style-type: square;
+    margin-bottom: 5px;
+}
+
+.FeatureSmallHeadWithLogo {
+    background: url('/Platform/MasterPages/MsdnMagazine/smalllogo.png') no-repeat right top;
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    padding-top: 55px;
+    text-decoration: none;
+}
+
+.FeatureSmallHead {
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    padding-top: 35px;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+
+.FeatureSmallHeadNoLogo {
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    padding-top: 35px;
+    padding-bottom: 24px;
+    text-decoration: none;
+}
+
+.FeatureHeadline {
+    color: #260859;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 36px;
+    margin-bottom: 6px;
+    text-transform: none;
+}
+
+.FeatureByLine {
+    color: #26252A;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+}
+
+.CodeExplorerBox {
+    background-color: #ffffff;
+    border-left: #008080 1px solid;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin: 20px 0px 0px;
+    padding-top: 3px;
+}
+
+
+.FeatureAtAGlance {
+    color: #26252A;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 18px;
+    text-transform: uppercase;
+}
+
+.FeatureAtAGlance li {
+    color: #26252A;
+    list-style-type: square;
+    margin-bottom: 5px;
+}
+
+.SidebarList {
+    color: #260859;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 18px;
+}
+
+
+.SidebarList li {
+    color: #260859;
+    list-style-type: square;
+    margin-bottom: 3px;
+    text-decoration: none;
+}
+
+.SidebarList li a {
+    text-decoration: none;
+}
+
+.SidebarList li a:hover {
+    text-decoration: underline;
+}
+
+LI.ListingBullet,
+.ListingBullet {
+    color: #26252A;
+    font-size: 14px;
+    font-weight: normal;
+    list-style-type: square;
+}
+
+.SidebarHeadline {
+    color: #260859;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.SidebarContainer {
+    border-top: solid 12px #260859;
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    margin: 20px 0px 20px 10px;
+    padding: 10px 50px 10px 10px;
+}
+
+.SidebarContainer .ArticleNormalPara {
+    color: #260859;
+}
+
+/* NEW STUFF */
+
+.ArticleImageSpacer {
+    padding-top: 15px;
+    width: 700px;
+}
+
+.ArticleImageSpacer img {
+    width: expression(this.width > 600 ? "600px": this.width);
+}
+
+.ArticleImageCaptionText {
+    color: #26252A;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.ColumnSmallHead {
+    color: #260859;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 36px;
+    margin-bottom: 6px;
+    text-transform: none;
+}
+
+.ColumnTypeTitle {
+    border-bottom: solid 12px #260859;
+    color: #260859;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    padding-top: 29px;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+
+.ContentSeparator {
+    border: solid 2px #008080;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.ColumnTypeSubTitle {
+    color: #260859;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 36px;
+    margin-bottom: 6px;
+    text-transform: none;
+}
+
+.ColumnByLine {
+    color: #26252A;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+
+.CodeDownloadText {
+    color: #26252A;
+    font-size: 14px;
+}
+
+
+.ContentsImageSpacer {
+    float: left;
+    padding-top: 12px;
+    padding-right: 12px;
+}
+
+.CodeExplorerHider {
+    margin: 0px;
+    padding: 0px;
+}
+
+.AuthorBio {
+    color: #26252A;
+    font-size: 14px;
+}
+
+.ContentsTypeTitle {
+    color: #26252A;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.ContentsTypeSubTitle {
+    color: #26252A;
+    font-size: 12px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* machine translation side-by-side view*/
+.sentence {
+}
+
+.alternates {
+    background-color: #CCFFCC;
+}
+
+.sentenceEditing {
+    background-color: #fff374;
+}
+
+.sentenceChanged {
+    color: #006600;
+    background-color: #fff;
+}
+
+.sentenceHighlight,
+.sentenceHighlight * {
+    background-color: #fc9;
+    color: #000;
+}
+/* end side by side */
+
+
+/* hack to fix layout problems in IE6
+   TODO: this should be a class (fix after MtLibrary FI) */
+* html #MtContentArea,
+* html #EnContentArea {
+    height: 1%;
+}
+
+#MtContentArea pre.code,
+#EnContentArea pre.code,
+#MtContentArea .tableSection,
+#EnContentArea .tableSection,
+#MtContentArea .MTPS_CollapsibleSection,
+#EnContentArea .MTPS_CollapsibleSection {
+    overflow: visible; /* IE6 hack to keep code element formatting as intended */
+    word-wrap: normal;
+}
+
+#EnContentArea,
+#MtContentArea {
+    font-size: 11px;
+    width: 100%;
+}
+
+.Stoteaserhidden {
+    display: none;
+}
+

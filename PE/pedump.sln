@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pedump", "pedump.vcproj", "{69C30A4F-1014-4FF7-B724-47B3D03543FD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		Win64 Debug = Win64 Debug
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Debug.ActiveCfg = Debug|Win32
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Debug.Build.0 = Debug|Win32
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Release.ActiveCfg = Release|Win32
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Release.Build.0 = Release|Win32
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Win64 Debug.ActiveCfg = Win64 Debug|Win32
+		{69C30A4F-1014-4FF7-B724-47B3D03543FD}.Win64 Debug.Build.0 = Win64 Debug|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
