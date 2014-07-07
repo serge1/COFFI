@@ -89,12 +89,14 @@ section_flags[] = {
 int main( int argc, char* argv[] )
 {
     if ( argc != 2 ) {
+        std::cout << "Syntax: " << argv[0] << " <file_name>" << std::endl;
         return 1;
     }
 
     coffi c;
 
     if ( !c.load( argv[1] ) ) {
+        std::cout << "File '" << argv[1] << "' is not valid COFF file (or file was not found)" << std::endl;
         return 2;
     }
 
