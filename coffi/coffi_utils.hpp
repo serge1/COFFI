@@ -29,7 +29,7 @@ THE SOFTWARE.
 #define COFFI_GET_ACCESS( TYPE, NAME ) \
     TYPE get_##NAME() const            \
     {                                  \
-    return header.##NAME;              \
+    return header.NAME;                \
     }
 
 #endif // COFFI_UTILS_HPP
