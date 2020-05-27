@@ -101,7 +101,7 @@ namespace COFFI {
             exe_header( 0 ),
             cf_header( 0 ),
             opt_header( 0 ),
-            win_header( 0 ),
+            win_header_( 0 ),
             strings( 0 )
         {
         }
@@ -157,24 +157,24 @@ namespace COFFI {
                 }
 
                 if ( opt_header->get_magic() == OH_MAGIC_PE32PLUS ) {
-                    win_header = new win_header_impl < win_headerPEPlus >;
+                    win_header_ = new win_header_impl < win_headerPEPlus >;
                 }
                 else if ( opt_header->get_magic() == OH_MAGIC_PE32 ||
                           opt_header->get_magic() == OH_MAGIC_PE32ROM ) {
-                    win_header = new win_header_impl < win_headerPE >;
+                    win_header_ = new win_header_impl < win_headerPE >;
                 }
 
-                if ( win_header != 0 ) {
-                    if ( !win_header->load( stream ) ) {
+                if ( win_header_ != 0 ) {
+                    if ( !win_header_->load( stream ) ) {
                         delete opt_header;
                         opt_header = 0;
-                        delete win_header;
-                        win_header = 0;
+                        delete win_header_;
+                        win_header_ = 0;
                         clean();
                         return false;
                     }
 
-                    for ( uint32_t i = 0; i < win_header->get_number_of_rva_and_sizes(); ++i ) {
+                    for ( uint32_t i = 0; i < win_header_->get_number_of_rva_and_sizes(); ++i ) {
                         image_data_directory entry;
                         stream.read( reinterpret_cast<char*>( &entry ), sizeof( entry ) );
                         directory.push_back( entry );
@@ -223,7 +223,7 @@ namespace COFFI {
         //---------------------------------------------------------------------
         win_header* get_win_header()
         {
-            return win_header;
+            return win_header_;
         }
 
         const std::vector<image_data_directory>& get_directory()
@@ -267,9 +267,9 @@ namespace COFFI {
                 opt_header = 0;
             }
 
-            if ( win_header != 0 ) {
-                delete win_header;
-                win_header = 0;
+            if ( win_header_ != 0 ) {
+                delete win_header_;
+                win_header_ = 0;
             }
 
             size_t size = sections_.size();
@@ -391,7 +391,7 @@ namespace COFFI {
         dos_header*                       exe_header;
         coff_header*                      cf_header;
         optional_header*                  opt_header;
-        win_header*                       win_header;
+        win_header*                       win_header_;
         std::vector<image_data_directory> directory;
         std::vector<section*>             sections_;
         std::vector<symbol_ext>           symbols;
