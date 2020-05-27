@@ -309,15 +309,15 @@ namespace COFFI {
             for ( uint32_t i = 0; i < cf_header->get_symbols_count(); ++i ) {
                 symbol_ext s;
 
-                stream.read( reinterpret_cast<char*>( &s.sym ), COFFI_SIZEOF_SYMBOL );
-                if ( stream.gcount() != COFFI_SIZEOF_SYMBOL ) {
+                stream.read( reinterpret_cast<char*>( &s.sym ), sizeof(symbol) );
+                if ( stream.gcount() != sizeof(symbol) ) {
                     return false;
                 }
 
                 for ( uint8_t j = 0; j < s.sym.aux_symbols_number; ++j ) {
                     auxiliary_symbol_record a;
-                    stream.read( reinterpret_cast<char*>( &a.value ), COFFI_SIZEOF_SYMBOL );
-                    if ( stream.gcount() != COFFI_SIZEOF_SYMBOL ) {
+                    stream.read( reinterpret_cast<char*>( &a.value ), sizeof(symbol) );
+                    if ( stream.gcount() != sizeof(symbol) ) {
                         return false;
                     }
                     s.auxs.push_back( a );
@@ -339,14 +339,14 @@ namespace COFFI {
             }
 
             stream.seekg( cf_header->get_symbol_table_offset() +
-                          cf_header->get_symbols_count() * COFFI_SIZEOF_SYMBOL );
+                          cf_header->get_symbols_count() * sizeof(symbol) );
             uint32_t count;
             stream.read( reinterpret_cast<char*>( &count ), sizeof( count ) );
             strings = new char[count];
             stream.seekg( cf_header->get_symbol_table_offset() +
-                          cf_header->get_symbols_count() * COFFI_SIZEOF_SYMBOL );
+                          cf_header->get_symbols_count() * sizeof(symbol) );
             stream.read( strings, count );
-            if ( stream.gcount() != count ) {
+            if ( stream.gcount() != static_cast<std::streamsize>(count) ) {
                 return false;
             }
 

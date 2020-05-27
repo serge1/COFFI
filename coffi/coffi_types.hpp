@@ -190,14 +190,14 @@ namespace COFFI {
         short oem_info;
         short reserved2[10];
         long  pe_sign_location;        // Location of PE format signature
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct msdos_header_rel
     {
         uint16_t offset;
         uint16_t segment;
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct coff_file_header
@@ -211,7 +211,7 @@ namespace COFFI {
         uint16_t optional_header_size;    // Which is required for executable files
         // but not for object files.
         uint16_t flags;                   // The flags that indicate the attributes of the file
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct common_optional_header
@@ -226,7 +226,7 @@ namespace COFFI {
         uint32_t code_base;               // The address that is relative to the image
         // base of the beginning-of-code section 
         uint32_t data_base;               // For PE32 only
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct win_headerPE
@@ -252,7 +252,7 @@ namespace COFFI {
         uint32_t heap_commit_size;
         uint32_t loader_flags;
         uint32_t number_of_rva_and_sizes;
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct win_headerPEPlus
@@ -278,7 +278,7 @@ namespace COFFI {
         uint64_t heap_commit_size;
         uint32_t loader_flags;
         uint32_t number_of_rva_and_sizes;
-    };
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct symbol
@@ -289,14 +289,11 @@ namespace COFFI {
         uint16_t type;
         uint8_t  storage_class;
         uint8_t  aux_symbols_number;
-    };
-
-    // It would be better to use sizeof(symbol), but VS calculates it as 20
-#define COFFI_SIZEOF_SYMBOL 18
+    } __attribute__((packed));
 
     struct auxiliary_symbol_record
     {
-        char value[COFFI_SIZEOF_SYMBOL];
+        char value[sizeof(symbol)];
     };
 
     struct symbol_ext
