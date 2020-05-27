@@ -27,4 +27,6 @@ script:
 - make
 - cd tests; autoreconf -f -i
 - cd tests; ./configure CXXFLAGS=--std=c++11
+- cd tests; make
+- cd tests; ./coffi_test
 - cd tests; make check
