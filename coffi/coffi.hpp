@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include <ios>
 #include <fstream>
 #include <algorithm>
+#include <cstring>
 
 #include <coffi/coffi_types.hpp>
 #include <coffi/coffi_utils.hpp>
