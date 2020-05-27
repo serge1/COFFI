@@ -12,6 +12,7 @@
 [Rr]elease/
 x64/
 build/
+build-*/
 [Bb]in/
 [Oo]bj/
 
@@ -24,8 +25,10 @@ build/
 
 *_i.c
 *_p.c
+*.exe
 *.ilk
 *.meta
+*.o
 *.obj
 *.pch
 *.pdb
@@ -154,3 +157,18 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# =========================
+# autoconf/automake
+# =========================
+
+Makefile
+Makefile.in
+aclocal.m4
+config.status
+configure
+depcomp
+install-sh
+missing
+test-driver
+.deps

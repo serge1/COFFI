@@ -1,7 +1,12 @@
-#define BOOST_TEST_MAIN
-//#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE tcs_test
+#ifdef _MSC_VER
 #define _SCL_SECURE_NO_WARNINGS
+#endif
+
+#define BOOST_TEST_MAIN
+#ifndef _MSC_VER
+#define BOOST_TEST_DYN_LINK
+#endif
+#define BOOST_TEST_MODULE COFFIO_test
 
 #include <boost/test/unit_test.hpp>
 

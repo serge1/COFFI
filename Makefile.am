@@ -1,0 +1,8 @@
+SUBDIRS = example
+
+nobase_include_HEADERS = \
+    coffi/coffi.hpp \
+    coffi/coffi_headers.hpp \
+    coffi/coffi_section.hpp \
+    coffi/coffi_types.hpp \
+    coffi/coffi_utils.hpp
