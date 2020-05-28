@@ -23,6 +23,7 @@ THE SOFTWARE.
 #ifndef COFFI_TYPES_HPP
 #define COFFI_TYPES_HPP
 
+#include <string>
 #include <vector>
 
 namespace COFFI {

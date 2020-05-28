@@ -23,6 +23,8 @@ THE SOFTWARE.
 #ifndef COFFI_UTILS_HPP
 #define COFFI_UTILS_HPP
 
+#include <coffi/coffi_types.hpp>
+
 #define COFFI_GET_ACCESS_DECL( TYPE, NAME ) \
     virtual TYPE get_##NAME() const = 0
 
