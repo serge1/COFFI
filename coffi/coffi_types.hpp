@@ -93,7 +93,7 @@ namespace COFFI {
 #define IMAGE_FILE_MACHINE_SH3DSP    0x01a3  // Hitachi SH3 DSP
 #define IMAGE_FILE_MACHINE_SH4       0x01a6  // Hitachi SH4
 #define IMAGE_FILE_MACHINE_SH5       0x01a8  // Hitachi SH5
-#define IMAGE_FILE_MACHINE_THUMB     0x01c2  // ARM or Thumb( “interworking” )
+#define IMAGE_FILE_MACHINE_THUMB     0x01c2  // ARM or Thumb( "interworking" )
 #define IMAGE_FILE_MACHINE_WCEMIPSV2 0x0169  // MIPS little - endian WCE v2
 
 #define IMAGE_SCN_TYPE_NO_PAD            0x00000008 // The section should not be padded to the next boundary.This flag is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES.This is valid only for object files.
@@ -103,7 +103,7 @@ namespace COFFI {
 #define IMAGE_SCN_LNK_OTHER              0x00000100 // Reserved for future use.
 #define IMAGE_SCN_LNK_INFO               0x00000200 // The section contains comments or other information.The.drectve section has this type.This is valid for object files only.
 #define IMAGE_SCN_LNK_REMOVE             0x00000800 // The section will not become part of the image.This is valid only for object files.
-#define IMAGE_SCN_LNK_COMDAT             0x00001000 // The section contains COMDAT data.For more information, see section 5.5.6, “COMDAT Sections( Object Only ).” This is valid only for object files.
+#define IMAGE_SCN_LNK_COMDAT             0x00001000 // The section contains COMDAT data.For more information, see section 5.5.6, "COMDAT Sections( Object Only )." This is valid only for object files.
 #define IMAGE_SCN_GPREL                  0x00008000 // The section contains data referenced through the global pointer( GP ).
 #define IMAGE_SCN_MEM_PURGEABLE          0x00020000 // Reserved for future use.
 #define IMAGE_SCN_MEM_16BIT              0x00020000 // For ARM machine types, the section contains Thumb code.Reserved for future use with other machine types.
