@@ -64,7 +64,7 @@ namespace COFFI {
     protected:
 
         //---------------------------------------------------------------------
-        virtual bool load( std::istream &stream )
+        bool load( std::istream &stream )
         {
             // Read EXE file signature
             char e_ident0[CI_NIDENT0];
@@ -131,7 +131,7 @@ namespace COFFI {
     protected:
 
         //---------------------------------------------------------------------
-        virtual bool load( std::istream &stream )
+        bool load( std::istream &stream )
         {
             stream.read( reinterpret_cast<char*>( &header ), sizeof( header ) );
             if ( stream.gcount() != sizeof( header ) ) {
@@ -173,7 +173,7 @@ namespace COFFI {
     protected:
 
         //---------------------------------------------------------------------
-        virtual bool load( std::istream &stream )
+        bool load( std::istream &stream )
         {
             std::fill_n( reinterpret_cast<char*>( &header ),
                          sizeof( header ),
@@ -270,7 +270,7 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
     protected:
-        virtual bool load( std::istream&  stream )
+        bool load( std::istream&  stream ) override
         {
             int read_size = sizeof( header );
             std::fill_n( reinterpret_cast<char*>( &header ),

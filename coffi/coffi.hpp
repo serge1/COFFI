@@ -378,7 +378,7 @@ namespace COFFI {
                 return symbols[index];
             }
 
-            symbol_ext sym = {0};
+            symbol_ext sym;
 
             return sym;
         }

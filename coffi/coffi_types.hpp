@@ -290,6 +290,7 @@ namespace COFFI {
         uint16_t type;
         uint8_t  storage_class;
         uint8_t  aux_symbols_number;
+        symbol(): name{0} {}
     } __attribute__((packed));
 
     struct auxiliary_symbol_record
