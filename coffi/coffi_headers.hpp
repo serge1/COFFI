@@ -87,8 +87,8 @@ namespace COFFI {
 
             char e_ident1[CI_NIDENT1];
             stream.seekg( header.pe_sign_location );
-            stream.read( reinterpret_cast<char*>( &e_ident1 ), sizeof( e_ident1 ) );
-            if ( stream.gcount() != sizeof( e_ident1 ) ||
+            stream.read( e_ident1, CI_NIDENT1 );
+            if ( stream.gcount() != CI_NIDENT1 ||
                  e_ident1[CI_MAG2] != PEMAG2 ||
                  e_ident1[CI_MAG3] != PEMAG3 ||
                  e_ident1[CI_MAG4] != PEMAG4 ||

@@ -181,6 +181,20 @@ namespace COFFI {
                     // The machine is recognized, it is a PE file
                     arch_ = COFFI_ARCH_PE;
                 }
+
+                // Try to read a CEVAX header
+                if (arch_ == COFFI_ARCH_NONE) {
+
+                    // Check the target ID
+                    static const std::vector<uint16_t> machines = {
+                        CEVAX_MACHINE_XC4210_LIB,
+                        CEVAX_MACHINE_XC4210_OBJ,
+                    };
+                    if (std::find(machines.begin(), machines.end(), coff_header_->get_machine()) != machines.end())
+                    {
+                        arch_ = COFFI_ARCH_CEVAX;
+                    }
+                }
             }
 
             // Try to read a TI header
@@ -210,7 +224,7 @@ namespace COFFI {
             }
 
             if (arch_ == COFFI_ARCH_NONE) {
-                // The format is not recognized, process it as a PE file
+                // The format is not recognized, default to PE format
                 arch_ = COFFI_ARCH_PE;
                 coff_header_ = new coff_header_impl;
                 stream.seekg( 0 );
@@ -221,7 +235,7 @@ namespace COFFI {
             }
 
             if ( coff_header_->get_optional_header_size() != 0 ) {
-                if (arch_ == COFFI_ARCH_PE) {
+                if ((arch_ == COFFI_ARCH_PE) || (arch_ == COFFI_ARCH_CEVAX)) {
                     optional_header_ = new optional_header_impl;
                 }
                 if (arch_ == COFFI_ARCH_TI) {
@@ -395,11 +409,11 @@ namespace COFFI {
             std::streampos pos = stream.tellg();
             for ( int i = 0; i < coff_header_->get_sections_count(); ++i ) {
                 section* sec;
-                if (arch_ == COFFI_ARCH_PE) {
-                    sec = new section_impl( this, this, this );
+                if ((arch_ == COFFI_ARCH_PE) || (arch_ == COFFI_ARCH_CEVAX)) {
+                    sec = new section_impl( this, this, this, arch_ );
                 }
                 if (arch_ == COFFI_ARCH_TI) {
-                    sec = new section_impl_ti( this, this, this );
+                    sec = new section_impl_ti( this, this, this, arch_ );
                 }
                 sec->load( stream, i * sec->header_sizeof() + pos );
                 sec->set_index( i );
@@ -465,7 +479,7 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
-        virtual std::string string_to_name( const char* str )
+        virtual std::string string_to_name( const char* str ) const
         {
             std::string ret;
 
@@ -483,7 +497,7 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
-        virtual const symbol_ext get_symbol( uint32_t index )
+        virtual const symbol_ext get_symbol( uint32_t index ) const
         {
             if ( index < symbols.size() ) {
                 return symbols[index];

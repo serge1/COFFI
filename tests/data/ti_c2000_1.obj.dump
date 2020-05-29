@@ -1,0 +1,564 @@
+
+OBJECT FILE:  ti_c2000_1.obj
+
+ Object File Information
+
+    File Name:                 ti_c2000_1.obj           
+    Format:                    TI-COFF Version 2        
+    File Type:                 relocatable file         
+    Time Stamp:                Fri May 29 18:51:37 2020 
+    Machine:                   TI C2000                 
+    Machine Endian:            little endian            
+    Entry Point:               0x00000000               
+    Vendor:                    Texas Instruments, Inc.  
+    Producer:                  Assembler                
+    Assembler Version:         18.1.4                   
+    Number of Sections:        24                       
+    File Length:               13462                    
+    Symbol Table File Offset:  0x00002c26               
+    String Table File Offset:  0x00003352               
+    TI-COFF f_flags:           0x00000110               
+    CPU Generation:            C2800                    
+    Control Data Endian:       little endian            
+
+ Section Information
+
+    id name                      load addr  run addr    size align alloc
+    -- ----                      ---------  --------    ---- ----- -----
+     1 $build.attributes         0x00000000 0x00000000  0x2a     1   N  
+     2 .text                     0x00000000 0x00000000  0x30     1   Y  
+     3 .data                     0x00000000 0x00000000   0x0     1   Y  
+     4 .bss                      0x00000000 0x00000000   0x0     1   Y  
+     5 .debug_info               0x00000000 0x00000000 0xb3c     1   N  
+     6 .cinit                    0x00000000 0x00000000   0xa     1   Y  
+     7 .econst                   0x00000000 0x00000000  0x12     2   Y  
+     8 .ebss                     0x00000000 0x00000000 0x204     2   Y  
+     9 .econst:_c_s02            0x00000000 0x00000000   0x6     2   Y  
+    10 .econst:_c_i06            0x00000000 0x00000000  0x11     1   Y  
+    11 .econst:_c_i07            0x00000000 0x00000000  0x11     1   Y  
+    12 .econst:_c_u07            0x00000000 0x00000000  0x11     1   Y  
+    13 .econst:.string:_c_i05    0x00000000 0x00000000  0x11     1   Y  
+    14 .econst:_c_u06            0x00000000 0x00000000  0x11     1   Y  
+    15 .econst:.string:_c_u05    0x00000000 0x00000000  0x11     1   Y  
+    16 .econst:_c_u08            0x00000000 0x00000000  0x22     2   Y  
+    17 .econst:_c_i08            0x00000000 0x00000000  0x22     2   Y  
+    18 .econst:_c_i09            0x00000000 0x00000000  0x44     2   Y  
+    19 .econst:_c_u09            0x00000000 0x00000000  0x44     2   Y  
+    20 .econst:.string           0x00000000 0x00000000 0x357     2   Y  
+    21 .debug_frame              0x00000000 0x00000000  0x3c     4   N  
+    22 .debug_line               0x00000000 0x00000000  0x50     1   N  
+    23 .debug_abbrev             0x00000000 0x00000000 0x10c     1   N  
+    24 .debug_aranges            0x00000000 0x00000000  0x20     1   N  
+
+ Relocation Table 1/1 for Section 2 (".text")
+
+    id type       offset     sym name                     
+    -- ----       ------     --- ----                     
+     0 R_PARTMS16 0x00000002  23 .econst:.string:_c_i05   
+     1 R_PARTLS6  0x00000003  23 .econst:.string:_c_i05   
+     2 R_PARTMS16 0x00000006  17 .econst:_c_i06           
+     3 R_PARTLS6  0x00000007  17 .econst:_c_i06           
+     4 R_PARTMS16 0x0000000a  19 .econst:_c_i07           
+     5 R_PARTLS6  0x0000000b  19 .econst:_c_i07           
+     6 R_PARTMS16 0x0000000e  31 .econst:_c_i08           
+     7 R_PARTLS6  0x0000000f  31 .econst:_c_i08           
+     8 R_PARTMS16 0x00000012  33 .econst:_c_i09           
+     9 R_PARTLS6  0x00000013  33 .econst:_c_i09           
+    10 R_PARTMS16 0x00000016  27 .econst:.string:_c_u05   
+    11 R_PARTLS6  0x00000017  27 .econst:.string:_c_u05   
+    12 R_PARTMS16 0x0000001a  25 .econst:_c_u06           
+    13 R_PARTLS6  0x0000001b  25 .econst:_c_u06           
+    14 R_PARTMS16 0x0000001e  21 .econst:_c_u07           
+    15 R_PARTLS6  0x0000001f  21 .econst:_c_u07           
+    16 R_PARTMS16 0x00000022  29 .econst:_c_u08           
+    17 R_PARTLS6  0x00000023  29 .econst:_c_u08           
+    18 R_PARTMS16 0x00000026  35 .econst:_c_u09           
+    19 R_PARTLS6  0x00000027  35 .econst:_c_u09           
+    20 R_PARTMS16 0x0000002a  15 .econst:_c_s02           
+    21 R_PARTLS6  0x0000002b  15 .econst:_c_s02           
+
+ Relocation Table 1/1 for Section 5 (".debug_info")
+
+     id type            offset     sym name                     
+     -- ----            ------     --- ----                     
+      0 RM_DWARF_LENGTH 0x00000000 N/A                          
+      1 R_RELLONG       0x00000006  43 .debug_abbrev            
+      2 R_RELLONG       0x00000019  39 .debug_line              
+      3 RM_OBJ          0x000000a1  11 .econst                  
+      4 RM_RANGE        0x000000a1 N/A                          
+      5 R_RELLONG       0x000000a4  11 .econst                  
+      6 R_RELLONG       0x000000af  41 .debug_info              
+      7 RM_OBJ          0x000000ba  13 .ebss                    
+      8 RM_RANGE        0x000000ba N/A                          
+      9 R_RELLONG       0x000000bd  13 .ebss                    
+     10 R_RELLONG       0x000000c6  41 .debug_info              
+     11 RM_OBJ          0x000000cf  11 .econst                  
+     12 RM_RANGE        0x000000cf N/A                          
+     13 R_RELLONG       0x000000d2  11 .econst                  
+     14 R_RELLONG       0x000000dd  41 .debug_info              
+     15 RM_OBJ          0x000000e8  11 .econst                  
+     16 RM_RANGE        0x000000e8 N/A                          
+     17 R_RELLONG       0x000000eb  11 .econst                  
+     18 R_RELLONG       0x000000f6  41 .debug_info              
+     19 RM_OBJ          0x00000101  13 .ebss                    
+     20 RM_RANGE        0x00000101 N/A                          
+     21 R_RELLONG       0x00000104  13 .ebss                    
+     22 R_RELLONG       0x0000010d  41 .debug_info              
+     23 RM_OBJ          0x00000116  13 .ebss                    
+     24 RM_RANGE        0x00000116 N/A                          
+     25 R_RELLONG       0x00000119  13 .ebss                    
+     26 R_RELLONG       0x00000122  41 .debug_info              
+     27 RM_OBJ          0x0000012b  13 .ebss                    
+     28 RM_RANGE        0x0000012b N/A                          
+     29 R_RELLONG       0x0000012e  13 .ebss                    
+     30 R_RELLONG       0x00000137  41 .debug_info              
+     31 RM_OBJ          0x00000140  13 .ebss                    
+     32 RM_RANGE        0x00000140 N/A                          
+     33 R_RELLONG       0x00000143  13 .ebss                    
+     34 R_RELLONG       0x0000014c  41 .debug_info              
+     35 RM_OBJ          0x00000155  13 .ebss                    
+     36 RM_RANGE        0x00000155 N/A                          
+     37 R_RELLONG       0x00000158  13 .ebss                    
+     38 R_RELLONG       0x00000161  41 .debug_info              
+     39 RM_OBJ          0x0000016a  13 .ebss                    
+     40 RM_RANGE        0x0000016a N/A                          
+     41 R_RELLONG       0x0000016d  13 .ebss                    
+     42 R_RELLONG       0x00000176  41 .debug_info              
+     43 RM_OBJ          0x0000017f  11 .econst                  
+     44 RM_RANGE        0x0000017f N/A                          
+     45 R_RELLONG       0x00000182  11 .econst                  
+     46 R_RELLONG       0x0000018d  41 .debug_info              
+     47 RM_OBJ          0x00000198  13 .ebss                    
+     48 RM_RANGE        0x00000198 N/A                          
+     49 R_RELLONG       0x0000019b  13 .ebss                    
+     50 R_RELLONG       0x000001a4  41 .debug_info              
+     51 RM_OBJ          0x000001ad  11 .econst                  
+     52 RM_RANGE        0x000001ad N/A                          
+     53 R_RELLONG       0x000001b0  11 .econst                  
+     54 R_RELLONG       0x000001bb  41 .debug_info              
+     55 RM_OBJ          0x000001c6  11 .econst                  
+     56 RM_RANGE        0x000001c6 N/A                          
+     57 R_RELLONG       0x000001c9  11 .econst                  
+     58 R_RELLONG       0x000001d4  41 .debug_info              
+     59 RM_OBJ          0x000001df  13 .ebss                    
+     60 RM_RANGE        0x000001df N/A                          
+     61 R_RELLONG       0x000001e2  13 .ebss                    
+     62 R_RELLONG       0x000001eb  41 .debug_info              
+     63 RM_OBJ          0x000001f4  13 .ebss                    
+     64 RM_RANGE        0x000001f4 N/A                          
+     65 R_RELLONG       0x000001f7  13 .ebss                    
+     66 R_RELLONG       0x00000200  41 .debug_info              
+     67 RM_OBJ          0x00000209  13 .ebss                    
+     68 RM_RANGE        0x00000209 N/A                          
+     69 R_RELLONG       0x0000020c  13 .ebss                    
+     70 R_RELLONG       0x00000215  41 .debug_info              
+     71 RM_OBJ          0x0000021e  11 .econst                  
+     72 RM_RANGE        0x0000021e N/A                          
+     73 R_RELLONG       0x00000221  11 .econst                  
+     74 R_RELLONG       0x0000022a  41 .debug_info              
+     75 RM_OBJ          0x00000233  11 .econst                  
+     76 RM_RANGE        0x00000233 N/A                          
+     77 R_RELLONG       0x00000236  11 .econst                  
+     78 R_RELLONG       0x0000023f  41 .debug_info              
+     79 RM_OBJ          0x00000248  13 .ebss                    
+     80 RM_RANGE        0x00000248 N/A                          
+     81 R_RELLONG       0x0000024b  13 .ebss                    
+     82 R_RELLONG       0x00000254  41 .debug_info              
+     83 RM_OBJ          0x0000025d  13 .ebss                    
+     84 RM_RANGE        0x0000025d N/A                          
+     85 R_RELLONG       0x00000260  13 .ebss                    
+     86 R_RELLONG       0x00000269  41 .debug_info              
+     87 RM_OBJ          0x00000272  13 .ebss                    
+     88 RM_RANGE        0x00000272 N/A                          
+     89 R_RELLONG       0x00000275  13 .ebss                    
+     90 R_RELLONG       0x0000027e  41 .debug_info              
+     91 RM_OBJ          0x00000287  13 .ebss                    
+     92 RM_RANGE        0x00000287 N/A                          
+     93 R_RELLONG       0x0000028a  13 .ebss                    
+     94 R_RELLONG       0x00000293  41 .debug_info              
+     95 RM_OBJ          0x0000029c  13 .ebss                    
+     96 RM_RANGE        0x0000029c N/A                          
+     97 R_RELLONG       0x0000029f  13 .ebss                    
+     98 R_RELLONG       0x000002a8  41 .debug_info              
+     99 RM_OBJ          0x000002b1  13 .ebss                    
+    100 RM_RANGE        0x000002b1 N/A                          
+    101 R_RELLONG       0x000002b4  13 .ebss                    
+    102 R_RELLONG       0x000002bd  41 .debug_info              
+    103 RM_OBJ          0x000002c6  11 .econst                  
+    104 RM_RANGE        0x000002c6 N/A                          
+    105 R_RELLONG       0x000002c9  11 .econst                  
+    106 R_RELLONG       0x000002d4  41 .debug_info              
+    107 RM_OBJ          0x000002df  13 .ebss                    
+    108 RM_RANGE        0x000002df N/A                          
+    109 R_RELLONG       0x000002e2  13 .ebss                    
+    110 R_RELLONG       0x000002ec  41 .debug_info              
+    111 RM_OBJ          0x000002f6  11 .econst                  
+    112 RM_RANGE        0x000002f6 N/A                          
+    113 R_RELLONG       0x000002f9  11 .econst                  
+    114 R_RELLONG       0x00000304  41 .debug_info              
+    115 RM_OBJ          0x0000030f  11 .econst                  
+    116 RM_RANGE        0x0000030f N/A                          
+    117 R_RELLONG       0x00000312  11 .econst                  
+    118 R_RELLONG       0x0000031b  41 .debug_info              
+    119 RM_OBJ          0x00000324  13 .ebss                    
+    120 RM_RANGE        0x00000324 N/A                          
+    121 R_RELLONG       0x00000327  13 .ebss                    
+    122 R_RELLONG       0x00000330  41 .debug_info              
+    123 RM_OBJ          0x00000339  13 .ebss                    
+    124 RM_RANGE        0x00000339 N/A                          
+    125 R_RELLONG       0x0000033c  13 .ebss                    
+    126 R_RELLONG       0x00000345  41 .debug_info              
+    127 RM_OBJ          0x0000034e  13 .ebss                    
+    128 RM_RANGE        0x0000034e N/A                          
+    129 R_RELLONG       0x00000351  13 .ebss                    
+    130 R_RELLONG       0x0000035a  41 .debug_info              
+    131 RM_OBJ          0x00000363  15 .econst:_c_s02           
+    132 RM_RANGE        0x00000363 N/A                          
+    133 R_RELLONG       0x00000366  15 .econst:_c_s02           
+    134 R_RELLONG       0x00000371  41 .debug_info              
+    135 RM_OBJ          0x0000037c  13 .ebss                    
+    136 RM_RANGE        0x0000037c N/A                          
+    137 R_RELLONG       0x0000037f  13 .ebss                    
+    138 R_RELLONG       0x00000388  41 .debug_info              
+    139 RM_OBJ          0x00000391  17 .econst:_c_i06           
+    140 RM_RANGE        0x00000391 N/A                          
+    141 R_RELLONG       0x00000394  17 .econst:_c_i06           
+    142 R_RELLONG       0x0000039f  41 .debug_info              
+    143 RM_OBJ          0x000003aa  19 .econst:_c_i07           
+    144 RM_RANGE        0x000003aa N/A                          
+    145 R_RELLONG       0x000003ad  19 .econst:_c_i07           
+    146 R_RELLONG       0x000003b8  41 .debug_info              
+    147 RM_OBJ          0x000003c3  21 .econst:_c_u07           
+    148 RM_RANGE        0x000003c3 N/A                          
+    149 R_RELLONG       0x000003c6  21 .econst:_c_u07           
+    150 R_RELLONG       0x000003d1  41 .debug_info              
+    151 RM_OBJ          0x000003dc  13 .ebss                    
+    152 RM_RANGE        0x000003dc N/A                          
+    153 R_RELLONG       0x000003df  13 .ebss                    
+    154 R_RELLONG       0x000003e8  41 .debug_info              
+    155 RM_OBJ          0x000003f1  23 .econst:.string:_c_i05   
+    156 RM_RANGE        0x000003f1 N/A                          
+    157 R_RELLONG       0x000003f4  23 .econst:.string:_c_i05   
+    158 R_RELLONG       0x000003ff  41 .debug_info              
+    159 RM_OBJ          0x0000040a  13 .ebss                    
+    160 RM_RANGE        0x0000040a N/A                          
+    161 R_RELLONG       0x0000040d  13 .ebss                    
+    162 R_RELLONG       0x00000416  41 .debug_info              
+    163 RM_OBJ          0x0000041f  13 .ebss                    
+    164 RM_RANGE        0x0000041f N/A                          
+    165 R_RELLONG       0x00000422  13 .ebss                    
+    166 R_RELLONG       0x0000042b  41 .debug_info              
+    167 RM_OBJ          0x00000434  13 .ebss                    
+    168 RM_RANGE        0x00000434 N/A                          
+    169 R_RELLONG       0x00000437  13 .ebss                    
+    170 R_RELLONG       0x00000440  41 .debug_info              
+    171 RM_OBJ          0x00000449  25 .econst:_c_u06           
+    172 RM_RANGE        0x00000449 N/A                          
+    173 R_RELLONG       0x0000044c  25 .econst:_c_u06           
+    174 R_RELLONG       0x00000457  41 .debug_info              
+    175 RM_OBJ          0x00000462  13 .ebss                    
+    176 RM_RANGE        0x00000462 N/A                          
+    177 R_RELLONG       0x00000465  13 .ebss                    
+    178 R_RELLONG       0x0000046e  41 .debug_info              
+    179 RM_OBJ          0x00000477  27 .econst:.string:_c_u05   
+    180 RM_RANGE        0x00000477 N/A                          
+    181 R_RELLONG       0x0000047a  27 .econst:.string:_c_u05   
+    182 R_RELLONG       0x00000485  41 .debug_info              
+    183 RM_OBJ          0x00000490  13 .ebss                    
+    184 RM_RANGE        0x00000490 N/A                          
+    185 R_RELLONG       0x00000493  13 .ebss                    
+    186 R_RELLONG       0x0000049c  41 .debug_info              
+    187 RM_OBJ          0x000004a5  29 .econst:_c_u08           
+    188 RM_RANGE        0x000004a5 N/A                          
+    189 R_RELLONG       0x000004a8  29 .econst:_c_u08           
+    190 R_RELLONG       0x000004b3  41 .debug_info              
+    191 RM_OBJ          0x000004be  13 .ebss                    
+    192 RM_RANGE        0x000004be N/A                          
+    193 R_RELLONG       0x000004c1  13 .ebss                    
+    194 R_RELLONG       0x000004ca  41 .debug_info              
+    195 RM_OBJ          0x000004d3  31 .econst:_c_i08           
+    196 RM_RANGE        0x000004d3 N/A                          
+    197 R_RELLONG       0x000004d6  31 .econst:_c_i08           
+    198 R_RELLONG       0x000004e1  41 .debug_info              
+    199 RM_OBJ          0x000004ec  13 .ebss                    
+    200 RM_RANGE        0x000004ec N/A                          
+    201 R_RELLONG       0x000004ef  13 .ebss                    
+    202 R_RELLONG       0x000004f8  41 .debug_info              
+    203 RM_OBJ          0x00000501  33 .econst:_c_i09           
+    204 RM_RANGE        0x00000501 N/A                          
+    205 R_RELLONG       0x00000504  33 .econst:_c_i09           
+    206 R_RELLONG       0x0000050f  41 .debug_info              
+    207 RM_OBJ          0x0000051a  13 .ebss                    
+    208 RM_RANGE        0x0000051a N/A                          
+    209 R_RELLONG       0x0000051d  13 .ebss                    
+    210 R_RELLONG       0x00000526  41 .debug_info              
+    211 RM_OBJ          0x0000052f  35 .econst:_c_u09           
+    212 RM_RANGE        0x0000052f N/A                          
+    213 R_RELLONG       0x00000532  35 .econst:_c_u09           
+    214 R_RELLONG       0x0000053d  41 .debug_info              
+    215 RM_OBJ          0x00000548  13 .ebss                    
+    216 RM_RANGE        0x00000548 N/A                          
+    217 R_RELLONG       0x0000054b  13 .ebss                    
+    218 R_RELLONG       0x00000554  41 .debug_info              
+    219 R_RELLONG       0x0000055e  41 .debug_info              
+    220 R_RELLONG       0x0000057c  41 .debug_info              
+    221 R_RELLONG       0x00000581  41 .debug_info              
+    222 R_RELLONG       0x0000059b  41 .debug_info              
+    223 R_RELLONG       0x000005c5  41 .debug_info              
+    224 R_RELLONG       0x000005ef  41 .debug_info              
+    225 R_RELLONG       0x00000606  41 .debug_info              
+    226 R_RELLONG       0x00000618  41 .debug_info              
+    227 R_RELLONG       0x00000632  41 .debug_info              
+    228 R_RELLONG       0x00000646  41 .debug_info              
+    229 R_RELLONG       0x0000064b  41 .debug_info              
+    230 R_RELLONG       0x00000650  41 .debug_info              
+    231 R_RELLONG       0x00000655  41 .debug_info              
+    232 R_RELLONG       0x0000066b  41 .debug_info              
+    233 R_RELLONG       0x0000068d  41 .debug_info              
+    234 R_RELLONG       0x000006af  41 .debug_info              
+    235 R_RELLONG       0x000006c9  41 .debug_info              
+    236 R_RELLONG       0x000006d4  41 .debug_info              
+    237 R_RELLONG       0x000006f1  41 .debug_info              
+    238 R_RELLONG       0x00000707  41 .debug_info              
+    239 R_RELLONG       0x00000721  41 .debug_info              
+    240 R_RELLONG       0x0000073b  41 .debug_info              
+    241 R_RELLONG       0x00000778  41 .debug_info              
+    242 R_RELLONG       0x0000077d  41 .debug_info              
+    243 R_RELLONG       0x00000782  41 .debug_info              
+    244 R_RELLONG       0x00000788  41 .debug_info              
+    245 R_RELLONG       0x00000790  41 .debug_info              
+    246 R_RELLONG       0x00000796  41 .debug_info              
+    247 R_RELLONG       0x000007b2  41 .debug_info              
+    248 R_RELLONG       0x000007b7  41 .debug_info              
+    249 R_RELLONG       0x000007bc  41 .debug_info              
+    250 R_RELLONG       0x000007c2  41 .debug_info              
+    251 R_RELLONG       0x000007ca  41 .debug_info              
+    252 R_RELLONG       0x000007d0  41 .debug_info              
+    253 R_RELLONG       0x000007ea  41 .debug_info              
+    254 R_RELLONG       0x000007ef  41 .debug_info              
+    255 R_RELLONG       0x000007f4  41 .debug_info              
+    256 R_RELLONG       0x000007fa  41 .debug_info              
+    257 R_RELLONG       0x00000802  41 .debug_info              
+    258 R_RELLONG       0x00000808  41 .debug_info              
+    259 R_RELLONG       0x00000817  41 .debug_info              
+    260 R_RELLONG       0x0000081c  41 .debug_info              
+    261 R_RELLONG       0x00000821  41 .debug_info              
+    262 R_RELLONG       0x00000827  41 .debug_info              
+    263 R_RELLONG       0x0000082f  41 .debug_info              
+    264 R_RELLONG       0x00000835  41 .debug_info              
+    265 R_RELLONG       0x0000083d  41 .debug_info              
+    266 R_RELLONG       0x00000842  41 .debug_info              
+    267 R_RELLONG       0x00000857  41 .debug_info              
+    268 R_RELLONG       0x0000085c  41 .debug_info              
+    269 R_RELLONG       0x00000861  41 .debug_info              
+    270 R_RELLONG       0x00000867  41 .debug_info              
+    271 R_RELLONG       0x0000086f  41 .debug_info              
+    272 R_RELLONG       0x00000875  41 .debug_info              
+    273 R_RELLONG       0x00000885  41 .debug_info              
+    274 R_RELLONG       0x0000088a  41 .debug_info              
+    275 R_RELLONG       0x0000088f  41 .debug_info              
+    276 R_RELLONG       0x00000895  41 .debug_info              
+    277 R_RELLONG       0x0000089d  41 .debug_info              
+    278 R_RELLONG       0x000008a3  41 .debug_info              
+    279 R_RELLONG       0x000008bc  41 .debug_info              
+    280 R_RELLONG       0x000008c1  41 .debug_info              
+    281 R_RELLONG       0x000008c6  41 .debug_info              
+    282 R_RELLONG       0x000008cc  41 .debug_info              
+    283 R_RELLONG       0x000008d4  41 .debug_info              
+    284 R_RELLONG       0x000008da  41 .debug_info              
+    285 R_RELLONG       0x000008ef  41 .debug_info              
+    286 R_RELLONG       0x000008f4  41 .debug_info              
+    287 R_RELLONG       0x000008f9  41 .debug_info              
+    288 R_RELLONG       0x000008ff  41 .debug_info              
+    289 R_RELLONG       0x00000907  41 .debug_info              
+    290 R_RELLONG       0x0000090d  41 .debug_info              
+    291 R_RELLONG       0x0000092b  41 .debug_info              
+    292 R_RELLONG       0x00000930  41 .debug_info              
+    293 R_RELLONG       0x00000935  41 .debug_info              
+    294 R_RELLONG       0x0000093b  41 .debug_info              
+    295 R_RELLONG       0x00000943  41 .debug_info              
+    296 R_RELLONG       0x00000949  41 .debug_info              
+    297 R_RELLONG       0x0000095a  41 .debug_info              
+    298 R_RELLONG       0x0000095f  41 .debug_info              
+    299 R_RELLONG       0x0000096e  41 .debug_info              
+    300 R_RELLONG       0x00000973  41 .debug_info              
+    301 R_RELLONG       0x00000987  41 .debug_info              
+    302 R_RELLONG       0x0000098c  41 .debug_info              
+    303 R_RELLONG       0x00000991  41 .debug_info              
+    304 R_RELLONG       0x00000996  41 .debug_info              
+    305 R_RELLONG       0x0000099c  41 .debug_info              
+    306 R_RELLONG       0x000009a1  41 .debug_info              
+    307 R_RELLONG       0x000009a7  41 .debug_info              
+    308 R_RELLONG       0x000009af  41 .debug_info              
+    309 R_RELLONG       0x000009b5  41 .debug_info              
+    310 RM_OBJ          0x00000aeb   3 .text                    
+    311 RM_RANGE        0x00000aeb N/A                          
+    312 R_RELLONG       0x00000aec     (internal)               
+    313 R_RELLONG       0x00000af5   3 .text                    
+    314 R_RELLONG       0x00000af9   3 .text                    
+    315 R_RELLONG       0x00000afe  41 .debug_info              
+    316 R_RELLONG       0x00000b2d  41 .debug_info              
+    317 R_RELLONG       0x00000b35   3 .text                    
+
+ Relocation Table 1/1 for Section 6 (".cinit")
+
+    id type     offset     sym name                     
+    -- ----     ------     --- ----                     
+     0 R_ANKPTR 0x00000001  13 .ebss                    
+     1 R_ANKPTR 0x00000003  37 .econst:.string          
+     2 R_ANKPTR 0x00000006  13 .ebss                    
+     3 R_ANKPTR 0x00000008  37 .econst:.string          
+
+ Relocation Table 1/1 for Section 21 (".debug_frame")
+
+    id type      offset     sym name                     
+    -- ----      ------     --- ----                     
+     0 RM_OBJ    0x00000020   3 .text                    
+     1 RM_RANGE  0x00000020 N/A                          
+     2 R_RELLONG 0x00000024     (internal)               
+     3 R_RELLONG 0x00000028   3 .text                    
+
+ Relocation Table 1/1 for Section 22 (".debug_line")
+
+    id type            offset     sym name                     
+    -- ----            ------     --- ----                     
+     0 RM_DWARF_LENGTH 0x00000000 N/A                          
+     1 RM_OBJ          0x0000002d   3 .text                    
+     2 RM_RANGE        0x0000002d N/A                          
+     3 R_RELLONG       0x00000030   3 .text                    
+
+ Relocation Table 1/1 for Section 24 (".debug_aranges")
+
+    id type            offset     sym name                     
+    -- ----            ------     --- ----                     
+     0 RM_DWARF_LENGTH 0x00000000 N/A                          
+     1 R_RELLONG       0x00000006  41 .debug_info              
+     2 RM_OBJ          0x00000010   3 .text                    
+     3 RM_RANGE        0x00000010 N/A                          
+     4 R_RELLONG       0x00000010   3 .text                    
+
+ Build Attributes in "$build.attributes"
+
+    Format Version:  'A'
+
+    <0>  Vendor Name:  "TI" (Texas Instruments, Inc.)
+
+         Tag_File:
+            Attributes:
+             Tag_Producer_Name    Assembler  
+             Tag_Producer_VMajor  19         (Producer Major Version + 1)
+             Tag_Producer_VMinor  2          (Producer Minor Version + 1)
+             Tag_Producer_VPatch  5          (Producer Patch Version + 1)
+             Tag_ISA              2          (C2800)
+             Tag_Memory_Model     2          (large)
+             Tag_Amode            2          (No Amode)
+             Tag_CLA_Mix          2          (only C2000)
+
+ Symbol Table
+
+     id name            value      kind    section         binding type   
+     -- ----            -----      ----    -------         ------- ----   
+      0 {7B59F295-30... 0x00000000 debug   N/A             local   file   
+      1 $C$FSL1         0x00000000 defined .econst:.string local   none   
+      2 $C$FSL2         0x00000008 defined .econst:.string local   none   
+      3 .text           0x00000000 defined .text           local   section
+      5 .data           0x00000000 defined .data           local   section
+      7 .bss            0x00000000 defined .bss            local   section
+      9 .cinit          0x00000000 defined .cinit          local   section
+     11 .econst         0x00000000 defined .econst         local   section
+     13 .ebss           0x00000000 defined .ebss           local   section
+     15 .econst:_c_s02  0x00000000 defined .econst:_c_s02  local   section
+     17 .econst:_c_i06  0x00000000 defined .econst:_c_i06  local   section
+     19 .econst:_c_i07  0x00000000 defined .econst:_c_i07  local   section
+     21 .econst:_c_u07  0x00000000 defined .econst:_c_u07  local   section
+     23 .econst:.str... 0x00000000 defined .econst:.str... local   section
+     25 .econst:_c_u06  0x00000000 defined .econst:_c_u06  local   section
+     27 .econst:.str... 0x00000000 defined .econst:.str... local   section
+     29 .econst:_c_u08  0x00000000 defined .econst:_c_u08  local   section
+     31 .econst:_c_i08  0x00000000 defined .econst:_c_i08  local   section
+     33 .econst:_c_i09  0x00000000 defined .econst:_c_i09  local   section
+     35 .econst:_c_u09  0x00000000 defined .econst:_c_u09  local   section
+     37 .econst:.string 0x00000000 defined .econst:.string local   section
+     39 .debug_line     0x00000000 defined .debug_line     local   section
+     41 .debug_info     0x00000000 defined .debug_info     local   section
+     43 .debug_abbrev   0x00000000 defined .debug_abbrev   local   section
+     45 .debug_aranges  0x00000000 defined .debug_aranges  local   section
+     47 _j09            0x0000001a defined .ebss           global  object 
+     48 _j04            0x00000014 defined .ebss           global  object 
+     49 _j03            0x00000007 defined .ebss           global  object 
+     50 _j02            0x00000009 defined .ebss           global  object 
+     51 _j01            0x0000000a defined .ebss           global  object 
+     52 _main           0x00000000 defined .text           global  object 
+     53 _c_u01          0x00000001 defined .econst         global  object 
+     54 _c_u03          0x00000000 defined .econst         global  object 
+     55 _c_u02          0x00000002 defined .econst         global  object 
+     56 _c_u05          0x00000000 defined .econst:.str... global  object 
+     57 _c_u04          0x0000000a defined .econst         global  object 
+     58 _c_u07          0x00000000 defined .econst:_c_u07  global  object 
+     59 _c_u06          0x00000000 defined .econst:_c_u06  global  object 
+     60 _c_u09          0x00000000 defined .econst:_c_u09  global  object 
+     61 _c_u08          0x00000000 defined .econst:_c_u08  global  object 
+     62 _info           0x00000018 defined .ebss           global  object 
+     63 _i09            0x00000140 defined .ebss           global  object 
+     64 _i08            0x000000c0 defined .ebss           global  object 
+     65 _i07            0x0000002c defined .ebss           global  object 
+     66 _i06            0x00000040 defined .ebss           global  object 
+     67 _i05            0x00000091 defined .ebss           global  object 
+     68 _i04            0x00000016 defined .ebss           global  object 
+     69 _i03            0x00000002 defined .ebss           global  object 
+     70 _i02            0x00000005 defined .ebss           global  object 
+     71 _i01            0x00000004 defined .ebss           global  object 
+     72 _e02            0x00000008 defined .ebss           global  object 
+     73 _e01            0x00000001 defined .ebss           global  object 
+     74 _c_i01          0x00000003 defined .econst         global  object 
+     75 _c_i03          0x00000004 defined .econst         global  object 
+     76 _c_i02          0x00000005 defined .econst         global  object 
+     77 _c_i05          0x00000000 defined .econst:.str... global  object 
+     78 _c_i04          0x0000000c defined .econst         global  object 
+     79 _c_i07          0x00000000 defined .econst:_c_i07  global  object 
+     80 _c_i06          0x00000000 defined .econst:_c_i06  global  object 
+     81 _c_i09          0x00000000 defined .econst:_c_i09  global  object 
+     82 _c_i08          0x00000000 defined .econst:_c_i08  global  object 
+     83 _s02            0x00000026 defined .ebss           global  object 
+     84 _s01            0x00000022 defined .ebss           global  object 
+     85 _h03            0x0000001e defined .ebss           global  object 
+     86 _h02            0x00000012 defined .ebss           global  object 
+     87 _h01            0x0000000c defined .ebss           global  object 
+     88 _c_s02          0x00000000 defined .econst:_c_s02  global  object 
+     89 _str            0x00000010 defined .ebss           global  object 
+     90 _g03            0x0000000e defined .econst         global  object 
+     91 _g02            0x00000006 defined .econst         global  object 
+     92 _g01            0x00000008 defined .econst         global  object 
+     93 _u09            0x000001c0 defined .ebss           global  object 
+     94 _u08            0x00000100 defined .ebss           global  object 
+     95 _u07            0x00000062 defined .ebss           global  object 
+     96 _u06            0x00000051 defined .ebss           global  object 
+     97 _u05            0x00000080 defined .ebss           global  object 
+     98 _u04            0x0000000e defined .ebss           global  object 
+     99 _u03            0x00000000 defined .ebss           global  object 
+    100 _u02            0x00000006 defined .ebss           global  object 
+    101 _u01            0x00000003 defined .ebss           global  object 
+
+ String Table
+
+    offset  string                                  
+    ------  ------                                  
+         4  "{7B59F295-3030-4813-8466-600627BDA2FC}"
+        43  ".econst:_c_s02"                        
+        58  ".econst:_c_i06"                        
+        73  ".econst:_c_i07"                        
+        88  ".econst:_c_u07"                        
+       103  ".econst:.string:_c_i05"                
+       126  ".econst:_c_u06"                        
+       141  ".econst:.string:_c_u05"                
+       164  ".econst:_c_u08"                        
+       179  ".econst:_c_i08"                        
+       194  ".econst:_c_i09"                        
+       209  ".econst:_c_u09"                        
+       224  ".econst:.string"                       
+       240  ".debug_line"                           
+       252  ".debug_info"                           
+       264  ".debug_abbrev"                         
+       278  ".debug_aranges"                        
+       293  "$build.attributes"                     
+       311  ".debug_frame"                          

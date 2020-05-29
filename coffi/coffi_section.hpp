@@ -33,28 +33,51 @@ namespace COFFI {
     //------------------------------------------------------------------------------
     class relocation
     {
-        template<class T> friend class section_impl_tmpl;
-
     public:
         //------------------------------------------------------------------------------
-        virtual ~relocation()
-        {
-        };
 
         COFFI_GET_ACCESS( uint32_t, virtual_address );
-        COFFI_GET_ACCESS( uint16_t, type );
+        COFFI_GET_ACCESS( uint32_t, type );
 
-        virtual const std::string get_symbol() const
+        const std::string get_symbol() const
         {
             return symbol;
         }
 
+        void load(std::istream& stream, const string_to_name_provider *stn_, const symbol_provider *sym_, coffi_arch_t arch)
+        {
+            std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
+
+            switch (arch) {
+            case COFFI_ARCH_CEVAX:
+                stream.read( (char*)&( header ), sizeof( header ) );
+                break;
+            case COFFI_ARCH_TI: {
+                rel_entry_ti h;
+                stream.read( (char*)&( h ), sizeof( h ) );
+                header.virtual_address = h.virtual_address;
+                header.symbol_table_index = h.symbol_table_index;
+                header.type = h.type;
+                break;
+            }
+            default: {
+                rel_entry h;
+                stream.read( (char*)&( h ), sizeof( h ) );
+                header.virtual_address = h.virtual_address;
+                header.symbol_table_index = h.symbol_table_index;
+                header.type = h.type;
+                break;
+            }}
+
+            symbol = stn_->string_to_name(
+                sym_->get_symbol( header.symbol_table_index ).sym.name );
+        }
+
     protected:
         //------------------------------------------------------------------------------
-        rel_entry header;
+        rel_entry_cevax header;
         std::string symbol;
     };
-
 
     //------------------------------------------------------------------------------
     class section
@@ -77,6 +100,7 @@ namespace COFFI {
         COFFI_GET_ACCESS_DECL( uint32_t, reloc_count );
         COFFI_GET_ACCESS_DECL( uint32_t, line_num_count );
         COFFI_GET_ACCESS_DECL( uint32_t, flags );
+        COFFI_GET_ACCESS_DECL( uint16_t, page_number );
         COFFI_GET_ACCESS_DECL( std::string, name );
         COFFI_GET_ACCESS_DECL( const char*, data );
 
@@ -99,7 +123,7 @@ namespace COFFI {
     {
     public:
         //------------------------------------------------------------------------------
-        section_impl_tmpl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add )
+        section_impl_tmpl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch )
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
             data = 0;
@@ -107,6 +131,7 @@ namespace COFFI {
             stn_ = stn;
             sym_ = sym;
             add_ = add;
+            arch_ = arch;
         }
 
         //------------------------------------------------------------------------------
@@ -185,9 +210,7 @@ namespace COFFI {
                 stream.seekg( header.reloc_offset );
                 for ( uint16_t i = 0; i < header.reloc_count; ++i ) {
                     relocation rel;
-                    stream.read( (char*)&( rel.header ), sizeof( rel.header ) );
-                    rel.symbol = stn_->string_to_name(
-                        sym_->get_symbol( rel.header.symbol_table_index ).sym.name );
+                    rel.load(stream, stn_, sym_, arch_);
                     relocations.push_back( rel );
                 }
             }
@@ -203,6 +226,7 @@ namespace COFFI {
         string_to_name_provider* stn_;
         symbol_provider*         sym_;
         address_provider*        add_;
+        coffi_arch_t             arch_;
 
         std::vector<relocation> relocations;
     };
@@ -212,8 +236,8 @@ namespace COFFI {
     {
         friend class coffi;
     public:
-        section_impl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add ):
-            section_impl_tmpl{stn, sym, add} {}
+        section_impl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch ):
+            section_impl_tmpl{stn, sym, add, arch} {}
 
         COFFI_GET_ACCESS( uint32_t, virtual_size );
 
@@ -242,8 +266,8 @@ namespace COFFI {
     {
         friend class coffi;
     public:
-        section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, address_provider *add ):
-            section_impl_tmpl{stn, sym, add} {}
+        section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch ):
+            section_impl_tmpl{stn, sym, add, arch} {}
 
         COFFI_GET_ACCESS( uint32_t, physical_address );
         COFFI_GET_ACCESS( uint16_t, reserved );

@@ -5,6 +5,9 @@ const char *info =
     "    cl2000 ti_c2000_1.c                                                                       "
     "For ti_c2000_1.out:                                                                           "
     "    cl2000 -z ti_c2000_1.obj -o ti_c2000_1.out                                                "
+    "For the dumps:                                                                                "
+    "    ofd2000 ti_c2000_1.obj > ti_c2000_1.obj.dump                                              "
+    "    ofd2000 ti_c2000_1.out > ti_c2000_1.out.dump                                              "
     ;                                                                                             
 
 const char      c_i01 = -42;

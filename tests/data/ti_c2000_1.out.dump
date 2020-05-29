@@ -1,0 +1,178 @@
+
+OBJECT FILE:  ti_c2000_1.out
+
+ Object File Information
+
+    File Name:                 ti_c2000_1.out                            
+    Format:                    TI-COFF Version 2                         
+    File Type:                 executable file                           
+    Time Stamp:                Fri May 29 18:51:41 2020                  
+    Machine:                   TI C2000                                  
+    Machine Endian:            little endian                             
+    Entry Point:               0x00000000                                
+    Vendor:                    Texas Instruments, Inc.                   
+    Producer:                  Linker                                    
+    Linker Version:            18.1.4                                    
+    Number of Sections:        13                                        
+    File Length:               8213                                      
+    Symbol Table File Offset:  0x000017bf                                
+    String Table File Offset:  0x00001eeb                                
+    TI-COFF f_flags:           0x00001113                                
+    TI-COFF f_flag:            F_RELFLG (relocation info stripped)       
+    TI-COFF f_flag:            F_SYMMERGE (debug type information merged)
+    CPU Generation:            C2800                                     
+    Control Data Endian:       little endian                             
+    Start of .text Section:    0x00000040                                
+    Start of .data Section:    0x00000040                                
+    Size of .text Section:     0                                         
+    Size of .data Section:     0                                         
+    Size of .bss Section:      0                                         
+
+ Section Information
+
+    id name                      page load addr  run addr    size align alloc
+    -- ----                      ---- ---------  --------    ---- ----- -----
+     1 $build.attributes            0 0x00000000 0x00000000  0x27     1   N  
+     2 .text                        0 0x00000040 0x00000040   0x0     1   Y  
+     3 .data                        0 0x00000040 0x00000040   0x0     1   Y  
+     4 .bss                         1 0x00000000 0x00000000   0x0     1   Y  
+     5 .ppdata                      0 0x00000000 0x00000000   0x0     1   N  
+     6 .debug_info                  0 0x00000000 0x00000000 0xa5b     1   N  
+     7 .cinit                       0 0x000003aa 0x000003aa   0xa     1   Y  
+     8 .econst                      0 0x00000040 0x00000040 0x36a     2   Y  
+     9 .ebss                        1 0x00000000 0x00000000 0x204     2   Y  
+    10 .debug_line                  0 0x00000000 0x00000000  0x30     1   N  
+    11 .debug_abbrev                0 0x00000000 0x00000000  0xd7     1   N  
+    12 .debug_pubnames              0 0x00000000 0x00000000 0x18d     1   N  
+    13 .debug_pubtypes              0 0x00000000 0x00000000 0x11f     1   N  
+
+ Build Attributes in "$build.attributes"
+
+    Format Version:  'A'
+
+    <0>  Vendor Name:  "TI" (Texas Instruments, Inc.)
+
+         Tag_File:
+            Attributes:
+             Tag_Producer_Name    Linker  
+             Tag_Producer_VMajor  19      (Producer Major Version + 1)
+             Tag_Producer_VMinor  2       (Producer Minor Version + 1)
+             Tag_Producer_VPatch  5       (Producer Patch Version + 1)
+             Tag_ISA              2       (C2800)
+             Tag_Memory_Model     2       (large)
+             Tag_Amode            2       (No Amode)
+             Tag_CLA_Mix          2       (only C2000)
+
+ Symbol Table
+
+     id name            value      kind     section         binding type   
+     -- ----            -----      ----     -------         ------- ----   
+      0 .text           0x00000040 defined  .text           local   section
+      2 .data           0x00000040 defined  .data           local   section
+      4 .bss            0x00000000 defined  .bss            local   section
+      6 .ppdata         0x00000000 defined  .ppdata         local   section
+      8 .debug_info     0x00000000 defined  .debug_info     local   section
+     10 .cinit          0x000003aa defined  .cinit          local   section
+     12 .econst         0x00000040 defined  .econst         local   section
+     14 .ebss           0x00000000 defined  .ebss           local   section
+     16 .debug_line     0x00000000 defined  .debug_line     local   section
+     18 {7B59F295-30... 0x00000000 debug    N/A             local   file   
+     19 $C$FSL1         0x00000040 defined  .econst         local   none   
+     20 $C$FSL2         0x00000048 defined  .econst         local   none   
+     21 .cinit          0x000003aa defined  .cinit          local   section
+     23 .econst         0x00000398 defined  .econst         local   section
+     25 .ebss           0x00000000 defined  .ebss           local   section
+     27 .econst:.string 0x00000040 defined  .econst         local   section
+     29 .debug_line     0x00000000 defined  .debug_line     local   section
+     31 .debug_info     0x00000000 defined  .debug_info     local   section
+     33 .debug_pubnames 0x00000000 defined  .debug_pubnames local   section
+     35 .debug_pubtypes 0x00000000 defined  .debug_pubtypes local   section
+     37 cinit           0x000003aa defined  .cinit          global  object 
+     38 ___cinit__      0x000003aa defined  .cinit          global  object 
+     39 pinit           0xffffffff absolute N/A             global  none   
+     40 ___pinit__      0xffffffff absolute N/A             global  none   
+     41 binit           0xffffffff absolute N/A             global  none   
+     42 ___binit__      0xffffffff absolute N/A             global  none   
+     43 ___c_args__     0xffffffff absolute N/A             global  none   
+     44 .text           0x00000040 defined  .text           global  object 
+     45 ___text__       0x00000040 defined  .text           global  object 
+     46 etext           0x00000040 defined  .text           global  object 
+     47 ___etext__      0x00000040 defined  .text           global  object 
+     48 .data           0x00000040 defined  .data           global  object 
+     49 ___data__       0x00000040 defined  .data           global  object 
+     50 edata           0x00000040 defined  .data           global  object 
+     51 ___edata__      0x00000040 defined  .data           global  object 
+     52 .bss            0x00000000 defined  .bss            global  object 
+     53 ___bss__        0x00000000 defined  .bss            global  object 
+     54 end             0x00000000 defined  .bss            global  object 
+     55 ___end__        0x00000000 defined  .bss            global  object 
+     56 ___TI_pprof_... 0xffffffff absolute N/A             global  none   
+     57 ___TI_prof_d... 0xffffffff absolute N/A             global  none   
+     58 ___TI_prof_d... 0xffffffff absolute N/A             global  none   
+     59 _j09            0x0000001a defined  .ebss           global  object 
+     60 _j04            0x00000014 defined  .ebss           global  object 
+     61 _j03            0x00000007 defined  .ebss           global  object 
+     62 _j02            0x00000009 defined  .ebss           global  object 
+     63 _j01            0x0000000a defined  .ebss           global  object 
+     64 _c_u01          0x00000399 defined  .econst         global  object 
+     65 _c_u03          0x00000398 defined  .econst         global  object 
+     66 _c_u02          0x0000039a defined  .econst         global  object 
+     67 _c_u04          0x000003a2 defined  .econst         global  object 
+     68 _info           0x00000018 defined  .ebss           global  object 
+     69 _i09            0x00000140 defined  .ebss           global  object 
+     70 _i08            0x000000c0 defined  .ebss           global  object 
+     71 _i07            0x0000002c defined  .ebss           global  object 
+     72 _i06            0x00000040 defined  .ebss           global  object 
+     73 _i05            0x00000091 defined  .ebss           global  object 
+     74 _i04            0x00000016 defined  .ebss           global  object 
+     75 _i03            0x00000002 defined  .ebss           global  object 
+     76 _i02            0x00000005 defined  .ebss           global  object 
+     77 _i01            0x00000004 defined  .ebss           global  object 
+     78 _e02            0x00000008 defined  .ebss           global  object 
+     79 _e01            0x00000001 defined  .ebss           global  object 
+     80 _c_i01          0x0000039b defined  .econst         global  object 
+     81 _c_i03          0x0000039c defined  .econst         global  object 
+     82 _c_i02          0x0000039d defined  .econst         global  object 
+     83 _c_i04          0x000003a4 defined  .econst         global  object 
+     84 _s02            0x00000026 defined  .ebss           global  object 
+     85 _s01            0x00000022 defined  .ebss           global  object 
+     86 _h03            0x0000001e defined  .ebss           global  object 
+     87 _h02            0x00000012 defined  .ebss           global  object 
+     88 _h01            0x0000000c defined  .ebss           global  object 
+     89 _str            0x00000010 defined  .ebss           global  object 
+     90 _g03            0x000003a6 defined  .econst         global  object 
+     91 _g02            0x0000039e defined  .econst         global  object 
+     92 _g01            0x000003a0 defined  .econst         global  object 
+     93 _u09            0x000001c0 defined  .ebss           global  object 
+     94 _u08            0x00000100 defined  .ebss           global  object 
+     95 _u07            0x00000062 defined  .ebss           global  object 
+     96 _u06            0x00000051 defined  .ebss           global  object 
+     97 _u05            0x00000080 defined  .ebss           global  object 
+     98 _u04            0x0000000e defined  .ebss           global  object 
+     99 _u03            0x00000000 defined  .ebss           global  object 
+    100 _u02            0x00000006 defined  .ebss           global  object 
+    101 _u01            0x00000003 defined  .ebss           global  object 
+
+ String Table
+
+    offset  string                                  
+    ------  ------                                  
+         4  ".debug_info"                           
+        16  ".debug_line"                           
+        28  "{7B59F295-3030-4813-8466-600627BDA2FC}"
+        67  ".econst:.string"                       
+        83  ".debug_pubnames"                       
+        99  ".debug_pubtypes"                       
+       115  "___cinit__"                            
+       126  "___pinit__"                            
+       137  "___binit__"                            
+       148  "___c_args__"                           
+       160  "___text__"                             
+       170  "___etext__"                            
+       181  "___data__"                             
+       191  "___edata__"                            
+       202  "___TI_pprof_out_hndl"                  
+       223  "___TI_prof_data_start"                 
+       245  "___TI_prof_data_size"                  
+       266  "$build.attributes"                     
+       284  ".debug_abbrev"                         

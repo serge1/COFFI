@@ -135,10 +135,9 @@ namespace COFFI {
 
 #define COFFI_NAME_SIZE 8
 
-/* See Texas Instruments documentation spraao8
- */
+// See Texas Instruments documentation spraao8
 
-// File Header Flags
+// Texas Instruments File Header Flags
 #define F_RELFLG 0x0001
 #define F_EXEC 0x0002
 #define F_LNNO 0x0004
@@ -147,7 +146,7 @@ namespace COFFI {
 #define F_BIG 0x0200
 #define F_SYMMERGE 0x1000
 
-// Section Header Flags
+// Texas Instruments Section Header Flags
 #define STYP_REG 0x00000000
 #define STYP_DSECT 0x00000001
 #define STYP_NOLOAD 0x00000002
@@ -163,7 +162,7 @@ namespace COFFI {
 #define STYP_VECTOR 0x00008000
 #define STYP_PADDED 0x00010000
 
-// Magic Number
+// Texas Instruments Magic Number
 #define TMS470          0x0097
 #define TMS320C5400     0x0098
 #define TMS320C6000     0x0099
@@ -172,13 +171,155 @@ namespace COFFI {
 #define MSP430          0x00A0
 #define TMS320C5500plus 0x00A1
 
+// Texas Instruments Generic Relocation Types (rel_entry.type)
+#define RE_ADD             0x4000 // Addition (+)
+#define RE_SUB             0x4001 // Subtraction (-)
+#define RE_NEG             0x4002 // Negate (-)
+#define RE_MPY             0x4003 // Multiplication (*)
+#define RE_DIV             0x4004 // Division (/)
+#define RE_MOD             0x4005 // Modulus (%)
+#define RE_SR              0x4006 // Logical shift right (unsigned >>)
+#define RE_ASR             0x4007 // Arithmetic shift right (signed >>)
+#define RE_SL              0x4008 // Shift left (<<)
+#define RE_AND             0x4009 // And (&)
+#define RE_OR              0x400A // Or (|)
+#define RE_XOR             0x400B // Exclusive Or (^)
+#define RE_NOTB            0x400C // Not (~)
+#define RE_ULDFLD          0x400D // Unsigned relocation field load
+#define RE_SLDFLD          0x400E // Signed relocation field load
+#define RE_USTFLD          0x400F // Unsigned relocation field store
+#define RE_SSTFLD          0x4010 // Signed relocation field store
+#define RE_PUSH            0x4011 // Push symbol on the stack
+#define RE_PUSHSK          0x4012 // Push signed constant on the stack
+#define RE_PUSHUK          0x4013 // Push unsigned constant on the stack
+#define RE_PUSHPC          0x4014 // Push current section PC on the stack
+#define RE_DUP             0x4015 // Duplicate top-of-stack and 0xpus // a copy
+#define RE_XSTFLD          0x4016 // Relocation field store, signedness is irrelevant
+#define RE_PUSHSV          0xC011 // Push symbol: SEGVALUE flag is set
+
+// Texas Instruments C6000 Relocation Types (rel_entry.type)
+#define R_C60_ABS          0x0000 // No relocation
+#define R_C60_RELBYTE      0x000F // 8-bit direct reference to symbol's address
+#define R_C60_RELWORD      0x0010 // 16-bit direct reference to symbol's address
+#define R_C60_RELLONG      0x0011 // 32-bit direct reference to symbol's address
+#define R_C60_BASE         0x0050 // Data page pointer-based offset
+#define R_C60_DIR15        0x0051 // Load or store long displacement
+#define R_C60_PCR21        0x0052 // 21-bit packet, PC relative
+#define R_C60_PCR10        0x0053 // 10-bit Packet PC Relative (BDEC, BPOS)
+#define R_C60_LO16         0x0054 // MVK instruction low half register
+#define R_C60_HI16         0x0055 // MVKH or MVKLH 0xhig // half register
+#define R_C60_SECT         0x0056 // Section-based offset
+#define R_C60_S16          0x0057 // Signed 16-bit offset for MVK
+#define R_C60_PCR7         0x0070 // 7-bit Packet PC Relative (ADDKPC)
+#define R_C60_PCR12        0x0071 // 12-bit Packet PC Relative (BNOP)
+
+// Texas Instruments C2800 Relocation Types (rel_entry.type)
+#define R_C28_ABS          0x0000 // No relocation
+#define R_C28_RELBYTE      0x000F // 8-bit direct reference to symbol's address
+#define R_C28_RELWORD      0x0010 // 16-bit direct reference to symbol's address
+#define R_C28_RELLONG      0x0011 // 32-bit direct reference to symbol's address
+#define R_C28_PARTLS7      0x0028 // 7-bit offset of a 22-bit address
+#define R_C28_PARTLS6      0x005D // 6-bit offset of a 22-bit address
+#define R_C28_PARTMID10    0x005E // Middle 10 bits of a 22-bit address
+#define R_C28_REL22        0x005F // 22-bit direct reference to a symbol's address
+#define R_C28_PARTMS6      0x0060 // Upper 6 bits of an 22-bit address
+#define R_C28_PARTMS16     0x0061 // Upper 16 bits of an 22-bit address
+#define R_C28_PCR16        0x0062 // PC relative 16-bit address
+#define R_C28_PCR8         0x0063 // PC relative 8-bit address
+#define R_C28_PTR          0x0064 // 22-bit pointer
+#define R_C28_HI16         0x0065 // High 16 bits of address data
+#define R_C28_LOPTR        0x0066 // Pointer to low 64K
+#define R_C28_NWORD        0x0067 // 16-bit negated relocation
+#define R_C28_NBYTE        0x0068 // 8-bit negated relocation
+#define R_C28_HIBYTE       0x0069 // High 8 bits of a 16-bit data
+#define R_C28_RELS13       0x006A // Signed 13-bit value relocated as a 16-bit value
+
+// Texas Instruments C5400 Relocation Types (rel_entry.type)
+#define R_C54_ABS          0x0000 // No relocation
+#define R_C54_REL24        0x0005 // 24-bit reference to symbol's address
+#define R_C54_RELBYTE      0x0017 // 8-bit direct reference to symbol's address
+#define R_C54_RELWORD      0x0020 // 16-bit direct reference to symbol's address
+#define R_C54_RELLONG      0x0021 // 32-bit direct reference to symbol's address
+#define R_C54_PARTLS7      0x0028 // 7 LSBs of an address
+#define R_C54_PARTMS9      0x0029 // 9 MSBs of an address
+#define R_C54_REL13        0x002A // 13-bit direct reference to symbol's address
+
+// Texas Instruments C5500 Relocation Types (rel_entry.type)
+#define R_C55_ABS          0x0000 // No relocation
+#define R_C55_REL24        0x0005 // 24-bit direct reference to symbol's address
+#define R_C55_RELBYTE      0x0017 // 8-bit direct reference to symbol's address
+#define R_C55_RELWORD      0x0020 // 16-bit direct reference to symbol's address
+#define R_C55_RELLONG      0x0021 // 32-bit direct reference to symbol's address
+#define R_C55_LD3_DMA      0x0170 // 7 MSBs of a byte, unsigned; used in DMA address
+#define R_C55_LD3_MDP      0x0172 // 7 bits spanning 2 bytes, unsigned; used as MDP register value
+#define R_C55_LD3_PDP      0x0173 // 9 bits spanning 2 bytes, unsigned; used as PDP register value
+#define R_C55_LD3_REL23    0x0174 // 23-bit unsigned value in 24-bit field
+#define R_C55_LD3_k8       0x0210 // 8-bit unsigned direct reference
+#define R_C55_LD3_k16      0x0211 // 16-bit unsigned direct reference
+#define R_C55_LD3_K8       0x0212 // 8-bit signed direct reference
+#define R_C55_LD3_K16      0x0213 // 16-bit signed direct reference
+#define R_C55_LD3_I8       0x0214 // 8-bit unsigned PC-relative reference
+#define R_C55_LD3_I16      0x0215 // 16-bit unsigned PC-relative reference
+#define R_C55_LD3_L8       0x0216 // 8-bit signed PC-relative reference
+#define R_C55_LD3_L16      0x0217 // 16-bit signed PC-relative reference
+#define R_C55_LD3_k4       0x0220 // Unsigned 4-bit shift immediate
+#define R_C55_LD3_k5       0x0221 // Unsigned 5-bit shift immediate
+#define R_C55_LD3_K5       0x0222 // Signed 5-bit shift immediate
+#define R_C55_LD3_k6       0x0223 // Unsigned 6-bit shift immediate
+#define R_C55_LD3_k12      0x0224 // Unigned 12-bit shift immediate
+
+// Texas Instruments MSP430 Relocation Types (rel_entry.type)
+#define R_MSP430_RELLONG   0x0011 // 32-bit direct reference to symbol's address
+#define R_MSP430_PCR23H    0x0016 // 23-bit PC-relative reference to a symbol's address, in halfwords (divided by 2)
+#define R_MSP430_PCR24W    0x0017 // 24-bit PC-relative reference to a symbol's address, in words (divided by 4)
+
+// Texas Instruments Symbol Storage Classes
+#define C_NULL      0 // No storage class
+#define C_AUTO      1 // Reserved
+#define C_EXT       2 // External definition
+#define C_STAT      3 // Static
+#define C_REG       4 // Reserved
+#define C_EXTREF    5 // External reference
+#define C_LABEL     6 // Label
+#define C_ULABEL    7 // Undefined label
+#define C_MOS       8 // Reserved
+#define C_ARG       9 // Reserved
+#define C_STRTAG   10 // Reserved
+#define C_MOU      11 // Reserved
+#define C_UNTAG    12 // Reserved
+#define C_TPDEF    13 // Reserved
+#define C_USTATIC  14 // Undefined static
+#define C_ENTAG    15 // Reserved
+#define C_MOE      16 // Reserved
+#define C_REGPARM  17 // Reserved
+#define C_FIELD    18 // Reserved
+#define C_UEXT     19 // Tentative external definition
+#define C_STATLAB  20 // Static load time label
+#define C_EXTLAB   21 // External load time label
+#define C_VARARG   27 // Last declared parameter of a function with a variable number of arguments
+#define C_BLOCK   100 // Reserved
+#define C_FCN     101 // Reserved
+#define C_EOS     102 // Reserved
+#define C_FILE    103 // Reserved
+#define C_LINE    104 // Used only by utility programs
+
+
+// CEVA-X architecture
+// Could not find any documentation
+// Reverse-engineered some values from the binary files
+
+#define CEVAX_MACHINE_XC4210_LIB 0xDCA6
+#define CEVAX_MACHINE_XC4210_OBJ 0x8CA6
+
 // Architectures supported by COFFI
 typedef enum coffi_arch_t {
-    COFFI_ARCH_NONE = 0,
+    COFFI_ARCH_NONE  = 0,
     // Windows portable executable
-    COFFI_ARCH_PE   = 1,
+    COFFI_ARCH_PE    = 1,
     // Texas Instruments
-    COFFI_ARCH_TI   = 2,
+    COFFI_ARCH_TI    = 2,
+    // CEVA-X
+    COFFI_ARCH_CEVAX = 3,
 } coffi_arch_t;
 
     //------------------------------------------------------------------------------
@@ -232,11 +373,11 @@ typedef enum coffi_arch_t {
         // in the file
         uint16_t overlay_number;       // Overlay number. Normally zero, meaning
         // that it's the main program
-        short reserved1[4];
-        short oem_id;
-        short oem_info;
-        short reserved2[10];
-        long  pe_sign_location;        // Location of PE format signature
+        uint16_t reserved1[4];
+        uint16_t oem_id;
+        uint16_t oem_info;
+        uint16_t reserved2[10];
+        int32_t  pe_sign_location;     // Location of PE format signature
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
@@ -418,14 +559,14 @@ typedef enum coffi_arch_t {
     class string_to_name_provider
     {
     public:
-        virtual std::string string_to_name( const char* str ) = 0;
+        virtual std::string string_to_name( const char* str ) const = 0;
     };
 
     //------------------------------------------------------------------------------
     class symbol_provider
     {
     public:
-        virtual const symbol_ext get_symbol( uint32_t index ) = 0;
+        virtual const symbol_ext get_symbol( uint32_t index ) const = 0;
     };
 
     //------------------------------------------------------------------------------
@@ -442,7 +583,22 @@ typedef enum coffi_arch_t {
         uint32_t virtual_address;
         uint32_t symbol_table_index;
         uint16_t type;
-    };
+    } __attribute__((packed));
+
+    struct rel_entry_ti
+    {
+        uint32_t virtual_address;
+        uint32_t symbol_table_index;
+        uint16_t reserved;
+        uint16_t type;
+    } __attribute__((packed));
+
+    struct rel_entry_cevax
+    {
+        uint32_t virtual_address;
+        uint32_t symbol_table_index;
+        uint32_t type;
+    } __attribute__((packed));
 }
 
 #endif // COFFI_TYPES_HPP
