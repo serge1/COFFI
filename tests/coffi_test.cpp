@@ -354,3 +354,110 @@ BOOST_AUTO_TEST_CASE( load_sections_tclsh_exe )
     BOOST_CHECK_EQUAL( c.get_sections()[4]->get_name(), ".idata" );
     BOOST_CHECK_EQUAL( c.get_sections()[5]->get_name(), ".rsrc" );
 }
+
+
+//------------------------------------------------------------------------------
+BOOST_AUTO_TEST_CASE( load_ti_c2000_exe )
+{
+    coffi c;
+
+    BOOST_REQUIRE_EQUAL( c.load( "data/ti_c2000_1.out" ), true );
+    BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_header()->get_target_id(), TMS320C2800 );
+    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
+    BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
+    for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
+        BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
+    }
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), "$build.attributes" );
+    BOOST_CHECK_EQUAL( c.get_sections()[1]->get_name(), ".text" );
+    BOOST_CHECK_EQUAL( c.get_sections()[2]->get_name(), ".data" );
+    BOOST_CHECK_EQUAL( c.get_sections()[3]->get_name(), ".bss" );
+    BOOST_CHECK_EQUAL( c.get_sections()[4]->get_name(), ".ppdata" );
+    BOOST_CHECK_EQUAL( c.get_sections()[5]->get_name(), ".debug_info" );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_name(), ".cinit" );
+    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_name(), ".econst" );
+    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_name(), ".ebss" );
+    BOOST_CHECK_EQUAL( c.get_sections()[9]->get_name(), ".debug_line" );
+    BOOST_CHECK_EQUAL( c.get_sections()[10]->get_name(), ".debug_abbrev" );
+    BOOST_CHECK_EQUAL( c.get_sections()[11]->get_name(), ".debug_pubnames" );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_name(), ".debug_pubtypes" );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[1]->get_virtual_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[2]->get_virtual_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[3]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[4]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[5]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_virtual_address(), 656 );
+    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_virtual_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[9]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[10]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[11]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_virtual_address(), 0 );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[1]->get_physical_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[2]->get_physical_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[3]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[4]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[5]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_physical_address(), 656 );
+    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_physical_address(), 64 );
+    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[9]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[10]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[11]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_physical_address(), 0 );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_data_size(), 39 );
+    BOOST_CHECK_EQUAL( c.get_sections()[1]->get_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[2]->get_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[3]->get_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[4]->get_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[5]->get_data_size(), 2651 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_data_size(), 10 );
+    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_data_size(), 592 );
+    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_data_size(), 516 );
+    BOOST_CHECK_EQUAL( c.get_sections()[9]->get_data_size(), 48 );
+    BOOST_CHECK_EQUAL( c.get_sections()[10]->get_data_size(), 215 );
+    BOOST_CHECK_EQUAL( c.get_sections()[11]->get_data_size(), 397 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_data_size(), 287 );
+}
+
+
+//------------------------------------------------------------------------------
+BOOST_AUTO_TEST_CASE( load_ti_c2000_obj )
+{
+    coffi c;
+
+    BOOST_REQUIRE_EQUAL( c.load( "data/ti_c2000_1.out" ), true );
+    BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
+    BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_header()->get_target_id(), TMS320C2800 );
+    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
+    BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
+    for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
+        BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
+    }
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), "$build.attributes" );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_name(), ".cinit" );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_name(), ".debug_pubtypes" );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_virtual_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_virtual_address(), 656 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_virtual_address(), 0 );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_physical_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_physical_address(), 656 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_physical_address(), 0 );
+
+    BOOST_CHECK_EQUAL( c.get_sections()[0]->get_data_size(), 39 );
+    BOOST_CHECK_EQUAL( c.get_sections()[5]->get_data_size(), 2651 );
+    BOOST_CHECK_EQUAL( c.get_sections()[12]->get_data_size(), 287 );
+}

@@ -5,3 +5,4 @@ Adhering to ISO C++, it compiles on a wide variety of architectures and compiler
 As the COFF binary format standard is extended or violated in many implementations,
 this library only supports a very small subset of the COFF implementations:
   - Windows portable executable format
+  - Texas Instruments COFF

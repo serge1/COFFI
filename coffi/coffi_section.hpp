@@ -33,7 +33,7 @@ namespace COFFI {
     //------------------------------------------------------------------------------
     class relocation
     {
-        friend class section_impl;
+        template<class T> friend class section_impl_tmpl;
 
     public:
         //------------------------------------------------------------------------------
@@ -60,7 +60,6 @@ namespace COFFI {
     class section
     {
         friend class coffi;
-
     public:
         //------------------------------------------------------------------------------
         virtual ~section()
@@ -69,18 +68,23 @@ namespace COFFI {
 
         COFFI_GET_ACCESS_DECL( uint32_t, index );
         COFFI_GET_ACCESS_DECL( uint32_t, virtual_size );
+        COFFI_GET_ACCESS_DECL( uint32_t, physical_address );
         COFFI_GET_ACCESS_DECL( uint32_t, virtual_address );
         COFFI_GET_ACCESS_DECL( uint32_t, data_size );
         COFFI_GET_ACCESS_DECL( uint32_t, data_offset );
         COFFI_GET_ACCESS_DECL( uint32_t, reloc_offset );
         COFFI_GET_ACCESS_DECL( uint32_t, line_num_offset );
-        COFFI_GET_ACCESS_DECL( uint16_t, reloc_count );
-        COFFI_GET_ACCESS_DECL( uint16_t, line_num_count );
+        COFFI_GET_ACCESS_DECL( uint32_t, reloc_count );
+        COFFI_GET_ACCESS_DECL( uint32_t, line_num_count );
         COFFI_GET_ACCESS_DECL( uint32_t, flags );
         COFFI_GET_ACCESS_DECL( std::string, name );
         COFFI_GET_ACCESS_DECL( const char*, data );
 
         virtual const std::vector<relocation>& get_relocations() = 0;
+
+        virtual uint32_t get_alignment() const = 0;
+
+        virtual size_t header_sizeof() const = 0;
 
     protected:
         //------------------------------------------------------------------------------
@@ -90,35 +94,36 @@ namespace COFFI {
     };
 
 
-    class section_impl : public section
+    template < class T >
+    class section_impl_tmpl : public section
     {
     public:
         //------------------------------------------------------------------------------
-        section_impl( string_to_name_provider* stn, symbol_provider* sym )
+        section_impl_tmpl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add )
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
             data = 0;
             data_size = 0;
             stn_ = stn;
             sym_ = sym;
+            add_ = add;
         }
 
         //------------------------------------------------------------------------------
-        ~section_impl()
+        ~section_impl_tmpl()
         {
             delete[] data;
         }
 
         //------------------------------------------------------------------------------
         // Section info functions
-        COFFI_GET_ACCESS( uint32_t, virtual_size );
         COFFI_GET_ACCESS( uint32_t, virtual_address );
         COFFI_GET_ACCESS( uint32_t, data_size );
         COFFI_GET_ACCESS( uint32_t, data_offset );
         COFFI_GET_ACCESS( uint32_t, reloc_offset );
         COFFI_GET_ACCESS( uint32_t, line_num_offset );
-        COFFI_GET_ACCESS( uint16_t, reloc_count );
-        COFFI_GET_ACCESS( uint16_t, line_num_count );
+        COFFI_GET_ACCESS( uint32_t, reloc_count );
+        COFFI_GET_ACCESS( uint32_t, line_num_count );
         COFFI_GET_ACCESS( uint32_t, flags );
 
         //------------------------------------------------------------------------------
@@ -145,6 +150,12 @@ namespace COFFI {
             return relocations;
         }
 
+        //------------------------------------------------------------------------------
+        virtual size_t header_sizeof() const
+        {
+            return sizeof(T);
+        }
+
     protected:
         //------------------------------------------------------------------------------
         void set_index( uint32_t value )
@@ -160,7 +171,7 @@ namespace COFFI {
             stream.seekg( header_offset );
             stream.read( reinterpret_cast<char*>( &header ), sizeof( header ) );
 
-            data_size = header.data_size;
+            data_size = header.data_size * add_->get_addressable_unit();
             data = new char[data_size];
             if ( 0 != data_size ) {
                 stream.seekg( header.data_offset );
@@ -182,17 +193,71 @@ namespace COFFI {
             }
         }
 
-    private:
+    protected:
         //------------------------------------------------------------------------------
-        section_header           header;
+        T                        header;
         uint32_t                 index;
         std::string              name;
         char*                    data;
         uint32_t                 data_size;
         string_to_name_provider* stn_;
         symbol_provider*         sym_;
+        address_provider*        add_;
 
         std::vector<relocation> relocations;
+    };
+
+
+    class section_impl : public section_impl_tmpl<section_header>
+    {
+        friend class coffi;
+    public:
+        section_impl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add ):
+            section_impl_tmpl{stn, sym, add} {}
+
+        COFFI_GET_ACCESS( uint32_t, virtual_size );
+
+        uint32_t get_physical_address() const
+        {
+            throw std::runtime_error("The section header physical_address field is not applicable to this COFF version");
+        }
+
+        uint16_t get_reserved() const
+        {
+            throw std::runtime_error("The section header reserved field is not applicable to this COFF version");
+        }
+
+        uint16_t get_page_number() const
+        {
+            throw std::runtime_error("The section header page_number field is not applicable to this COFF version");
+        }
+
+        uint32_t get_alignment() const
+        {
+            return 1;
+        }
+    };
+
+    class section_impl_ti : public section_impl_tmpl<section_header_ti>
+    {
+        friend class coffi;
+    public:
+        section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, address_provider *add ):
+            section_impl_tmpl{stn, sym, add} {}
+
+        COFFI_GET_ACCESS( uint32_t, physical_address );
+        COFFI_GET_ACCESS( uint16_t, reserved );
+        COFFI_GET_ACCESS( uint16_t, page_number );
+
+        uint32_t get_virtual_size() const
+        {
+            throw std::runtime_error("The section header virtual_size field is not applicable to this COFF version");
+        }
+
+        uint32_t get_alignment() const
+        {
+            return 1 << ((get_flags() >> 8) & 0xF);
+        }
     };
 
 } // namespace COFFI

@@ -135,6 +135,52 @@ namespace COFFI {
 
 #define COFFI_NAME_SIZE 8
 
+/* See Texas Instruments documentation spraao8
+ */
+
+// File Header Flags
+#define F_RELFLG 0x0001
+#define F_EXEC 0x0002
+#define F_LNNO 0x0004
+#define F_LSYMS 0x0008
+#define F_LITTLE 0x0100
+#define F_BIG 0x0200
+#define F_SYMMERGE 0x1000
+
+// Section Header Flags
+#define STYP_REG 0x00000000
+#define STYP_DSECT 0x00000001
+#define STYP_NOLOAD 0x00000002
+#define STYP_GROUP 0x00000004
+#define STYP_PAD 0x00000008
+#define STYP_COPY 0x00000010
+#define STYP_TEXT 0x00000020
+#define STYP_DATA 0x00000040
+#define STYP_BSS 0x00000080
+#define STYP_BLOCK 0x00001000
+#define STYP_PASS 0x00002000
+#define STYP_CLINK 0x00004000
+#define STYP_VECTOR 0x00008000
+#define STYP_PADDED 0x00010000
+
+// Magic Number
+#define TMS470          0x0097
+#define TMS320C5400     0x0098
+#define TMS320C6000     0x0099
+#define TMS320C5500     0x009C
+#define TMS320C2800     0x009D
+#define MSP430          0x00A0
+#define TMS320C5500plus 0x00A1
+
+// Architectures supported by COFFI
+typedef enum coffi_arch_t {
+    COFFI_ARCH_NONE = 0,
+    // Windows portable executable
+    COFFI_ARCH_PE   = 1,
+    // Texas Instruments
+    COFFI_ARCH_TI   = 2,
+} coffi_arch_t;
+
     //------------------------------------------------------------------------------
     struct msdos_header
     {
@@ -214,6 +260,20 @@ namespace COFFI {
         uint16_t flags;                   // The flags that indicate the attributes of the file
     } __attribute__((packed));
 
+    struct coff_file_header_ti
+    {
+        uint16_t version;                 // Indicates version of COFF file structure
+        uint16_t sections_count;          // The size of the section table
+        uint32_t time_data_stamp;         // A C run-time time_t value
+        uint32_t symbol_table_offset;     // The file offset of the COFF symbol table,
+        // or zero if no COFF symbol table is present
+        uint32_t symbols_count;           // The number of entries in the symbol table
+        uint16_t optional_header_size;    // Which is required for executable files
+        // but not for object files.
+        uint16_t flags;                   // The flags that indicate the attributes of the file
+        uint16_t target_id;               // Magic number indicates the file can be executed in a specific TI system
+    } __attribute__((packed));
+
     //------------------------------------------------------------------------------
     struct common_optional_header
     {
@@ -227,6 +287,18 @@ namespace COFFI {
         uint32_t code_base;               // The address that is relative to the image
         // base of the beginning-of-code section 
         uint32_t data_base;               // For PE32 only
+    } __attribute__((packed));
+	
+    struct common_optional_header_ti
+    {
+        uint16_t magic;                   // State of the image file identifier
+        uint16_t linker_version;          // The linker version number
+        uint32_t code_size;               // The sum of all code sections
+        uint32_t initialized_data_size;   // The sum of all initialized data sections
+        uint32_t uninitialized_data_size; // The sum of all uninitialized data sections
+        uint32_t entry_point_address;     // The address of the entry point relative to the image base
+        uint32_t code_base;               // The address that is relative to the image
+        uint32_t data_base;               //
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
@@ -325,6 +397,22 @@ namespace COFFI {
         uint16_t line_num_count;
         uint32_t flags;
     };
+	
+    struct section_header_ti
+    {
+        char    name[8];
+        uint32_t physical_address;
+        uint32_t virtual_address;
+        uint32_t data_size;
+        uint32_t data_offset;
+        uint32_t reloc_offset;
+        uint32_t line_num_offset;
+        uint32_t reloc_count;
+        uint32_t line_num_count;
+        uint32_t flags;
+        uint16_t reserved;
+        uint16_t page_number;
+    };
 
     //------------------------------------------------------------------------------
     class string_to_name_provider
@@ -338,6 +426,14 @@ namespace COFFI {
     {
     public:
         virtual const symbol_ext get_symbol( uint32_t index ) = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    class address_provider
+    {
+    public:
+        // Auto-detect the addressable unit: are the addresses in bytes or 2-bytes words?
+        virtual int get_addressable_unit() = 0;
     };
 
     //------------------------------------------------------------------------------

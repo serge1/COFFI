@@ -70,15 +70,13 @@ namespace COFFI {
             char e_ident0[CI_NIDENT0];
             stream.read( reinterpret_cast<char*>( &e_ident0 ), sizeof( e_ident0 ) );
             if ( stream.gcount() != sizeof( e_ident0 ) ) {
-                return true;
+                return false;
             }
 
             // Is it EXE file?
             if ( e_ident0[CI_MAG0] != PEMAG0 ||
                  e_ident0[CI_MAG1] != PEMAG1 ) {
-                // It was not EXE file, but it might be OBJ file
-                stream.seekg( 0 );
-                return true;
+                return false;
             }
 
             stream.seekg( 0 );
@@ -112,14 +110,35 @@ namespace COFFI {
     {
         friend class coffi;
     public:
-        //------------------------------------------------------------------------------
-        coff_header()
+        virtual ~coff_header()
+        {
+        };
+
+        COFFI_GET_ACCESS_DECL( uint16_t, version );
+        COFFI_GET_ACCESS_DECL( uint16_t, machine );
+        COFFI_GET_ACCESS_DECL( uint16_t, sections_count );
+        COFFI_GET_ACCESS_DECL( uint32_t, time_data_stamp );
+        COFFI_GET_ACCESS_DECL( uint32_t, symbol_table_offset );
+        COFFI_GET_ACCESS_DECL( uint32_t, symbols_count );
+        COFFI_GET_ACCESS_DECL( uint16_t, optional_header_size );
+        COFFI_GET_ACCESS_DECL( uint16_t, flags );
+        COFFI_GET_ACCESS_DECL( uint16_t, target_id );
+
+        virtual bool load( std::istream &stream ) = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    template< class T >
+    class coff_header_impl_tmpl : public coff_header
+    {
+    public:
+        coff_header_impl_tmpl()
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
         }
 
         //------------------------------------------------------------------------------
-        COFFI_GET_ACCESS( uint16_t, machine );
+
         COFFI_GET_ACCESS( uint16_t, sections_count );
         COFFI_GET_ACCESS( uint32_t, time_data_stamp );
         COFFI_GET_ACCESS( uint32_t, symbol_table_offset );
@@ -128,9 +147,7 @@ namespace COFFI {
         COFFI_GET_ACCESS( uint16_t, flags );
 
         //------------------------------------------------------------------------------
-    protected:
 
-        //---------------------------------------------------------------------
         bool load( std::istream &stream )
         {
             stream.read( reinterpret_cast<char*>( &header ), sizeof( header ) );
@@ -142,23 +159,76 @@ namespace COFFI {
         }
 
         //------------------------------------------------------------------------------
-    private:
-        coff_file_header header;
+    protected:
+        T header;
     };
 
+    //------------------------------------------------------------------------------
+    class coff_header_impl : public coff_header_impl_tmpl<coff_file_header>
+    {
+    public:
+        COFFI_GET_ACCESS( uint16_t, machine );
+
+        uint16_t get_version() const
+        {
+            throw std::runtime_error("The header target_id field is not applicable to this COFF version");
+        }
+
+        uint16_t get_target_id() const
+        {
+            throw std::runtime_error("The header target_id field is not applicable to this COFF version");
+        }
+    };
+
+    //------------------------------------------------------------------------------
+    class coff_header_impl_ti : public coff_header_impl_tmpl<coff_file_header_ti>
+    {
+    public:
+
+        COFFI_GET_ACCESS( uint16_t, version );
+        COFFI_GET_ACCESS( uint16_t, target_id );
+
+        uint16_t get_machine() const
+        {
+            throw std::runtime_error("The header machine field is not applicable to this COFF version");
+        }
+    };
 
     //------------------------------------------------------------------------------
     class optional_header
     {
         friend class coffi;
     public:
-        //------------------------------------------------------------------------------
-        optional_header()
+        virtual ~optional_header()
+        {
+        };
+
+        COFFI_GET_ACCESS_DECL( uint16_t, magic );
+        COFFI_GET_ACCESS_DECL( uint8_t, major_linker_version );
+        COFFI_GET_ACCESS_DECL( uint8_t, minor_linker_version );
+        COFFI_GET_ACCESS_DECL( uint16_t, linker_version );
+        COFFI_GET_ACCESS_DECL( uint32_t, code_size );
+        COFFI_GET_ACCESS_DECL( uint32_t, initialized_data_size );
+        COFFI_GET_ACCESS_DECL( uint32_t, uninitialized_data_size );
+        COFFI_GET_ACCESS_DECL( uint32_t, entry_point_address );
+        COFFI_GET_ACCESS_DECL( uint32_t, code_base );
+        COFFI_GET_ACCESS_DECL( uint32_t, data_base );
+
+        virtual bool load( std::istream &stream ) = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    template< class T >
+    class optional_header_impl_tmpl : public optional_header
+    {
+    public:
+        optional_header_impl_tmpl()
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
         }
 
         //------------------------------------------------------------------------------
+
         COFFI_GET_ACCESS( uint16_t, magic );
         COFFI_GET_ACCESS( uint32_t, code_size );
         COFFI_GET_ACCESS( uint32_t, initialized_data_size );
@@ -166,11 +236,6 @@ namespace COFFI {
         COFFI_GET_ACCESS( uint32_t, entry_point_address );
         COFFI_GET_ACCESS( uint32_t, code_base );
         COFFI_GET_ACCESS( uint32_t, data_base );
-        COFFI_GET_ACCESS( uint8_t, major_linker_version );
-        COFFI_GET_ACCESS( uint8_t, minor_linker_version );
-
-        //------------------------------------------------------------------------------
-    protected:
 
         //---------------------------------------------------------------------
         bool load( std::istream &stream )
@@ -195,11 +260,43 @@ namespace COFFI {
         }
 
         //------------------------------------------------------------------------------
-    private:
-        common_optional_header header;
+
+        T header;
     };
 
+    //------------------------------------------------------------------------------
+    class optional_header_impl : public optional_header_impl_tmpl<common_optional_header>
+    {
+    public:
 
+        COFFI_GET_ACCESS( uint8_t, major_linker_version );
+        COFFI_GET_ACCESS( uint8_t, minor_linker_version );
+
+        uint16_t get_linker_version() const
+        {
+            throw std::runtime_error("The optional header linker_version field is not applicable to this COFF version");
+        }
+    };
+
+    //------------------------------------------------------------------------------
+    class optional_header_impl_ti : public optional_header_impl_tmpl<common_optional_header_ti>
+    {
+    public:
+
+        COFFI_GET_ACCESS( uint16_t, linker_version );
+
+        uint8_t get_major_linker_version() const
+        {
+            throw std::runtime_error("The optional header major_linker_version field is not applicable to this COFF version");
+        }
+
+        uint8_t get_minor_linker_version() const
+        {
+            throw std::runtime_error("The optional header minor_linker_version field is not applicable to this COFF version");
+        }
+    };
+
+    //------------------------------------------------------------------------------
     class win_header
     {
         friend class coffi;
