@@ -1,0 +1,115 @@
+Dump of file data/ti_c2000_1.out
+
+File Header
+  Target ID:                      009D
+  Number of Sections:           000D
+
+  TimeDateStamp:                5ED13D9D
+  PointerToSymbolTable:         000017BF
+  NumberOfSymbols:              00000066
+  SizeOfOptionalHeader:         001C
+  Characteristics:              1113
+
+Optional Header
+  Magic                         0108
+  linker version                18001
+  size of code                  0000
+  size of initialized data      00000000
+  size of uninitialized data    00000000
+  entrypoint RVA                00000000
+  base of code                  00000040
+  base of data                  00000040
+
+Section Table
+  01 $build.attributes PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000002A2  raw data size: 00000027
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  02 .text     PhysAddr: 00000040  VirtAddr:  00000040(page 0)
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000080
+      BSS  align(1)
+
+  03 .data     PhysAddr: 00000040  VirtAddr:  00000040(page 0)
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000080
+      BSS  align(1)
+
+  04 .bss      PhysAddr: 00000000  VirtAddr:  00000000(page 1)
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000080
+      BSS  align(1)
+
+  05 .ppdata   PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000002C9  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  06 .debug_info PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000002C9  raw data size: 00000A5B
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  07 .cinit    PhysAddr: 000003AA  VirtAddr:  000003AA(page 0)
+    raw data offs:   00000D24  raw data size: 0000000A
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000040
+      DATA  align(1)
+
+  08 .econst   PhysAddr: 00000040  VirtAddr:  00000040(page 0)
+    raw data offs:   00000D38  raw data size: 0000036A
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000140
+      DATA  align(2)
+
+  09 .ebss     PhysAddr: 00000000  VirtAddr:  00000000(page 1)
+    raw data offs:   00000000  raw data size: 00000204
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000180
+      BSS  align(2)
+
+  0A .debug_line PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000140C  raw data size: 00000030
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  0B .debug_abbrev PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000143C  raw data size: 000000D7
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  0C .debug_pubnames PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001513  raw data size: 0000018D
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+  0D .debug_pubtypes PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000016A0  raw data size: 0000011F
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000010
+      COPY  align(1)
+
+
