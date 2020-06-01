@@ -258,7 +258,7 @@ namespace COFFI {
 
         uint32_t get_alignment() const
         {
-            return 1;
+            return 1 << ( ( ( get_flags() >> 20) & 0xF ) - 1 );
         }
     };
 
@@ -280,7 +280,7 @@ namespace COFFI {
 
         uint32_t get_alignment() const
         {
-            return 1 << ((get_flags() >> 8) & 0xF);
+            return 1 << ( ( get_flags() >> 8 ) & 0xF );
         }
     };
 
