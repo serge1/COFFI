@@ -24,6 +24,8 @@ THE SOFTWARE.
 
 #include <iostream>
 #include <iomanip>
+#include <map>
+#include <list>
 
 #include <coffi/coffi.hpp>
 
@@ -41,12 +43,13 @@ using namespace COFFI;
 
 
 
-struct section_flags_type
+typedef struct section_flags_type
 {
     uint32_t flag;
     std::string descr;
-}
-section_flags[] = {
+} section_flags_type;
+
+std::list<section_flags_type> section_flags_pe{
     {IMAGE_SCN_TYPE_NO_PAD, "NO_PAD"},
     {IMAGE_SCN_CNT_CODE, "CODE"},
     {IMAGE_SCN_CNT_INITIALIZED_DATA, "INITIALIZED_DATA"},
@@ -84,6 +87,52 @@ section_flags[] = {
     {IMAGE_SCN_LNK_NRELOC_OVFL, "NRELOC_OVFL"},
 };
 
+std::list<section_flags_type> section_flags_ti{
+    {STYP_DSECT, "DSECT"},
+    {STYP_NOLOAD, "NOLOAD"},
+    {STYP_GROUP, "GROUP"},
+    {STYP_PAD, "PAD"},
+    {STYP_COPY, "COPY"},
+    {STYP_TEXT, "TEXT"},
+    {STYP_DATA, "DATA"},
+    {STYP_BSS, "BSS"},
+    {STYP_BLOCK, "BLOCK"},
+    {STYP_PASS, "PASS"},
+    {STYP_CLINK, "CLINK"},
+    {STYP_VECTOR, "VECTOR"},
+    {STYP_PADDED, "PADDED"},
+    // {STYP_ALIGN_1BYTES, "STYP_ALIGN_1BYTES"},
+    // {STYP_ALIGN_2BYTES, "STYP_ALIGN_2BYTES"},
+    // {STYP_ALIGN_4BYTES, "STYP_ALIGN_4BYTES"},
+    // {STYP_ALIGN_8BYTES, "STYP_ALIGN_8BYTES"},
+    // {STYP_ALIGN_16BYTES, "STYP_ALIGN_16BYTES"},
+    // {STYP_ALIGN_32BYTES, "STYP_ALIGN_32BYTES"},
+    // {STYP_ALIGN_64BYTES, "STYP_ALIGN_64BYTES"},
+    // {STYP_ALIGN_128BYTES, "STYP_ALIGN_128BYTES"},
+    // {STYP_ALIGN_256BYTES, "STYP_ALIGN_256BYTES"},
+    // {STYP_ALIGN_512BYTES, "STYP_ALIGN_512BYTES"},
+    // {STYP_ALIGN_1024BYTES, "STYP_ALIGN_1024BYTES"},
+    // {STYP_ALIGN_2048BYTES, "STYP_ALIGN_2048BYTES"},
+    // {STYP_ALIGN_4096BYTES, "STYP_ALIGN_4096BYTES"},
+    // {STYP_ALIGN_8192BYTES, "STYP_ALIGN_8192BYTES"},
+    // {STYP_ALIGN_16384BYTES, "STYP_ALIGN_16384BYTES"},
+    // {STYP_ALIGN_32768BYTES, "STYP_ALIGN_32768BYTES"},
+};
+
+const std::map<coffi_architecture_t, std::list<section_flags_type>*> section_flags_per_architecture = {
+    {COFFI_ARCHITECTURE_NONE, &section_flags_pe},
+    {COFFI_ARCHITECTURE_PE, &section_flags_pe},
+    {COFFI_ARCHITECTURE_CEVAX, &section_flags_pe},
+    {COFFI_ARCHITECTURE_TI, &section_flags_ti},
+};
+
+const std::map<coffi_architecture_t, uint32_t> alignment_mask_per_architecture{
+    {COFFI_ARCHITECTURE_NONE, 0x00F00000},
+    {COFFI_ARCHITECTURE_PE, 0x00F00000},
+    {COFFI_ARCHITECTURE_CEVAX, 0x00F00000},
+    {COFFI_ARCHITECTURE_TI, 0x00000F00},
+};
+
 
 
 int main( int argc, char* argv[] )
@@ -96,7 +145,7 @@ int main( int argc, char* argv[] )
     coffi c;
 
     if ( !c.load( argv[1] ) ) {
-        std::cout << "File '" << argv[1] << "' is not valid COFF file (or file was not found)" << std::endl;
+        std::cout << "File '" << argv[1] << "' is not a valid COFF file (or file was not found)" << std::endl;
         return 2;
     }
 
@@ -108,8 +157,13 @@ int main( int argc, char* argv[] )
     //------------------------------------------------------------------------------
     if ( c.get_header() != 0 ) {
         std::cout << "File Header" << std::endl;
-        std::cout << "  Machine:                      "
-            << I2X( c.get_header()->get_machine(), 4 ) << std::endl;
+        if (c.get_architecture() == COFFI_ARCHITECTURE_TI) {
+            std::cout << "  Target ID:                      "
+                << I2X( c.get_header()->get_target_id(), 4 ) << std::endl;
+        } else {
+            std::cout << "  Machine:                      "
+                << I2X( c.get_header()->get_machine(), 4 ) << std::endl;
+        }
         std::cout << "  Number of Sections:           "
             << I2X( c.get_header()->get_sections_count(), 4 ) << std::endl << std::endl;
         std::cout << "  TimeDateStamp:                "
@@ -132,12 +186,19 @@ int main( int argc, char* argv[] )
         std::cout << "Optional Header" << std::endl;
         std::cout << "  Magic                         "
             << I2X( c.get_opt_header()->get_magic(), 4 ) << std::endl;
-        std::cout << "  linker version                "
-            << std::dec
-            << (int)c.get_opt_header()->get_major_linker_version()
-            << "."
-            << (int)c.get_opt_header()->get_minor_linker_version()
-            << std::endl;
+        if (c.get_architecture() == COFFI_ARCHITECTURE_TI) {
+            std::cout << "  linker version                "
+                << std::dec
+                << (int)c.get_opt_header()->get_linker_version()
+                << std::endl;
+        } else {
+            std::cout << "  linker version                "
+                << std::dec
+                << (int)c.get_opt_header()->get_major_linker_version()
+                << "."
+                << (int)c.get_opt_header()->get_minor_linker_version()
+                << std::endl;
+        }
         std::cout << "  size of code                  "
             << I2X( c.get_opt_header()->get_code_size(), 4 ) << std::endl;
         std::cout << "  size of initialized data      "
@@ -150,6 +211,7 @@ int main( int argc, char* argv[] )
             << I2X( c.get_opt_header()->get_code_base(), 8 ) << std::endl;
         std::cout << "  base of data                  "
             << I2X( c.get_opt_header()->get_data_base(), 8 ) << std::endl;
+        std::cout << std::endl;
     }
 
     //------------------------------------------------------------------------------
@@ -233,14 +295,25 @@ int main( int argc, char* argv[] )
     if ( c.get_sections().size() != 0 ) {
         std::cout << "Section Table" << std::endl;
         for ( uint32_t i = 0; i < c.get_sections().size(); ++i ) {
+            uint32_t virt_size;
+            std::string virt_size_label = "VirtSize: ";
+            std::string memory_page = "";
+            if (c.get_architecture() == COFFI_ARCHITECTURE_TI) {
+                virt_size = c.get_sections()[i]->get_physical_address();
+                virt_size_label = "PhysAddr: ";
+                memory_page = "(page " + std::to_string(c.get_sections()[i]->get_page_number()) + ")";
+            } else {
+                virt_size = c.get_sections()[i]->get_virtual_size();
+            }
             std::cout << "  "
                 << I2X( i + 1, 2 ) << " "
                 << DUMP_STR_FORMAT( 9 )
                 << c.get_sections()[i]->get_name()
                 << " "
-                << "VirtSize: " << I2X( c.get_sections()[i]->get_virtual_size(), 8 )
+                << virt_size_label << I2X( virt_size, 8 )
                 << "  "
                 << "VirtAddr:  " << I2X( c.get_sections()[i]->get_virtual_address(), 8 )
+                << memory_page
                 << std::endl;
             std::cout
                 << "    raw data offs:   "
@@ -263,17 +336,23 @@ int main( int argc, char* argv[] )
                 << std::endl;
             std::cout << "    ";
 
-            for ( int j = 0; j < sizeof( section_flags ) / sizeof( section_flags_type ); ++j ) {
-                if ( !( section_flags[j].flag & 0x00F00000 ) ) {
-                    if ( ( c.get_sections()[i]->get_flags() & section_flags[j].flag ) == section_flags[j].flag ) {
-                        std::cout << "  " << section_flags[j].descr;
+            auto section_flags_list = section_flags_per_architecture.at(c.get_architecture());
+            uint32_t alignment_mask = alignment_mask_per_architecture.at(c.get_architecture());
+            uint32_t flags = c.get_sections()[i]->get_flags();
+            for ( auto section_flags: *section_flags_list) {
+                if ( ( section_flags.flag & alignment_mask ) && ( c.get_architecture() != COFFI_ARCHITECTURE_TI ) ) {
+                    if ( ( flags & alignment_mask ) == section_flags.flag ) {
+                        std::cout << "  " << section_flags.descr;
                     }
                 }
                 else {
-                    if ( ( c.get_sections()[i]->get_flags() & 0x00F00000 ) == section_flags[j].flag ) {
-                        std::cout << "  " << section_flags[j].descr;
+                    if ( ( flags & section_flags.flag ) == section_flags.flag ) {
+                        std::cout << "  " << section_flags.descr;
                     }
                 }
+            }
+            if ( c.get_architecture() == COFFI_ARCHITECTURE_TI ) {
+                std::cout << "  align(" << c.get_sections()[i]->get_alignment() << ")";
             }
             std::cout << std::endl << std::endl;
         }
