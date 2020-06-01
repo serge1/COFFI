@@ -312,15 +312,15 @@ namespace COFFI {
 #define CEVAX_MACHINE_XC4210_OBJ 0x8CA6
 
 // Architectures supported by COFFI
-typedef enum coffi_arch_t {
-    COFFI_ARCH_NONE  = 0,
+typedef enum coffi_architecture_t {
+    COFFI_ARCHITECTURE_NONE  = 0,
     // Windows portable executable
-    COFFI_ARCH_PE    = 1,
+    COFFI_ARCHITECTURE_PE    = 1,
     // Texas Instruments
-    COFFI_ARCH_TI    = 2,
+    COFFI_ARCHITECTURE_TI    = 2,
     // CEVA-X
-    COFFI_ARCH_CEVAX = 3,
-} coffi_arch_t;
+    COFFI_ARCHITECTURE_CEVAX = 3,
+} coffi_architecture_t;
 
     //------------------------------------------------------------------------------
     struct msdos_header
@@ -574,7 +574,15 @@ typedef enum coffi_arch_t {
     {
     public:
         // Auto-detect the addressable unit: are the addresses in bytes or 2-bytes words?
-        virtual int get_addressable_unit() = 0;
+        virtual int get_addressable_unit() const = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    class architecture_provider
+    {
+    public:
+        // Architecture
+        virtual coffi_architecture_t get_architecture() const = 0;
     };
 
     //------------------------------------------------------------------------------
