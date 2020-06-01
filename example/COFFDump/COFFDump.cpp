@@ -88,6 +88,7 @@ std::list<section_flags_type> section_flags_pe{
 };
 
 std::list<section_flags_type> section_flags_ti{
+    // {STYP_REG, "REG"} This flag has value 0, it is not printed in the output
     {STYP_DSECT, "DSECT"},
     {STYP_NOLOAD, "NOLOAD"},
     {STYP_GROUP, "GROUP"},
@@ -101,6 +102,7 @@ std::list<section_flags_type> section_flags_ti{
     {STYP_CLINK, "CLINK"},
     {STYP_VECTOR, "VECTOR"},
     {STYP_PADDED, "PADDED"},
+    // The alignment is processed with get_alignment(), not with flags
     // {STYP_ALIGN_1BYTES, "STYP_ALIGN_1BYTES"},
     // {STYP_ALIGN_2BYTES, "STYP_ALIGN_2BYTES"},
     // {STYP_ALIGN_4BYTES, "STYP_ALIGN_4BYTES"},

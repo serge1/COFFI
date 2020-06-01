@@ -172,6 +172,7 @@ install-sh
 missing
 test-driver
 .deps
+*.trs
 
 # =========================
 # Misc
