@@ -22,7 +22,7 @@ using namespace boost::unit_test;
 //! Return the dump path for a COFF file
 static std::string dump_test_file_name( const char *file_to_dump )
 {
-    return std::string(file_to_dump) + ".dump.bak";
+    return std::string(file_to_dump) + ".dump.log";
 }
 
 //! Return the path for the expected result of the dump for a COFF file
@@ -41,8 +41,13 @@ static int RunCOFFDump( const char *file_to_dump )
     boost::filesystem::path program_dir = p.parent_path();
 
     // Call COFFDump
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
     boost::filesystem::path COFFDump_path = program_dir / ".." / "example" / "COFFDump" / "COFFDump.exe";
+#else
+    boost::filesystem::path COFFDump_path = program_dir / ".." / "example" / "COFFDump" / "COFFDump";
+#endif
     std::string cmd = COFFDump_path.string() + " " + file_to_dump + " > " + dump_test_file_name(file_to_dump);
+    printf("Running: %s\n", cmd.c_str());
     int retval = std::system(cmd.c_str());
     return retval;
 }

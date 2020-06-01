@@ -5,6 +5,6 @@ coffi_test_SOURCES = coffi_test.cpp
 coffi_test_LDADD   = -lboost_unit_test_framework
 
 COFFDump_test_SOURCES = COFFDump_test.cpp
-COFFDump_test_LDADD   = -lboost_unit_test_framework -lboost_filesystem
+COFFDump_test_LDADD   = -lboost_unit_test_framework -lboost_filesystem -lboost_system
 
 TESTS=coffi_test COFFDump_test
