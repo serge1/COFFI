@@ -1,0 +1,73 @@
+Dump of file data/demo.o
+
+File Header
+  Machine:                      8CA6
+  Number of Sections:           0007
+
+  TimeDateStamp:                535E5672
+  PointerToSymbolTable:         00000282
+  NumberOfSymbols:              00000039
+  SizeOfOptionalHeader:         001C
+  Characteristics:              0304
+
+Optional Header
+  Magic                         0A00
+  linker version                2.2
+  size of code                  0000
+  size of initialized data      00000000
+  size of uninitialized data    00000000
+  entrypoint RVA                00000000
+  base of code                  00000000
+  base of data                  00000000
+
+Section Table
+  01 CODE      VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000001
+    
+
+  02 const_data VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000000
+    relocation offs: 0000017A  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000000
+    
+
+  03 .bss      VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000000
+    relocation offs: 00000186  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000000
+    
+
+  04 .data     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000000
+    relocation offs: 00000192  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000200
+      INFO
+
+  05 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000001
+    
+
+  06 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000148  raw data size: 00000032
+    relocation offs: 0000019E  relocations:   00000010
+    line # offs:     0000025E  line #'s:      00000006
+    characteristics: 00000201
+      INFO
+
+  07 .text     VirtSize: 00000032  VirtAddr:  00000000
+    raw data offs:   0000017A  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00000001
+    
+
+

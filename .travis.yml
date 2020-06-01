@@ -19,7 +19,7 @@ before_install:
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install libboost-test-dev
+- sudo apt-get install libboost-test-dev libboost-system-dev libboost-filesystem-dev
 
 script:
 - autoreconf -f -i
@@ -30,4 +30,5 @@ script:
 - ./configure CXXFLAGS=--std=c++11
 - make
 - ./coffi_test
+- ./COFFDump_test
 - make check
