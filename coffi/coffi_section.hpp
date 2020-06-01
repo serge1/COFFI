@@ -44,15 +44,15 @@ namespace COFFI {
             return symbol;
         }
 
-        void load(std::istream& stream, const string_to_name_provider *stn_, const symbol_provider *sym_, coffi_arch_t arch)
+        void load(std::istream& stream, const string_to_name_provider *stn_, const symbol_provider *sym_, const architecture_provider *arch_)
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
 
-            switch (arch) {
-            case COFFI_ARCH_CEVAX:
+            switch (arch_->get_architecture()) {
+            case COFFI_ARCHITECTURE_CEVAX:
                 stream.read( (char*)&( header ), sizeof( header ) );
                 break;
-            case COFFI_ARCH_TI: {
+            case COFFI_ARCHITECTURE_TI: {
                 rel_entry_ti h;
                 stream.read( (char*)&( h ), sizeof( h ) );
                 header.virtual_address = h.virtual_address;
@@ -123,7 +123,7 @@ namespace COFFI {
     {
     public:
         //------------------------------------------------------------------------------
-        section_impl_tmpl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch )
+        section_impl_tmpl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, architecture_provider *arch )
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
             data = 0;
@@ -226,7 +226,7 @@ namespace COFFI {
         string_to_name_provider* stn_;
         symbol_provider*         sym_;
         address_provider*        add_;
-        coffi_arch_t             arch_;
+        architecture_provider*   arch_;
 
         std::vector<relocation> relocations;
     };
@@ -236,7 +236,7 @@ namespace COFFI {
     {
         friend class coffi;
     public:
-        section_impl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch ):
+        section_impl( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, architecture_provider *arch ):
             section_impl_tmpl{stn, sym, add, arch} {}
 
         COFFI_GET_ACCESS( uint32_t, virtual_size );
@@ -266,7 +266,7 @@ namespace COFFI {
     {
         friend class coffi;
     public:
-        section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, coffi_arch_t arch ):
+        section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, address_provider *add, architecture_provider *arch ):
             section_impl_tmpl{stn, sym, add, arch} {}
 
         COFFI_GET_ACCESS( uint32_t, physical_address );

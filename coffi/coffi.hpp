@@ -42,7 +42,7 @@ THE SOFTWARE.
 
 namespace COFFI {
     //-------------------------------------------------------------------------
-    class coffi : public string_to_name_provider, symbol_provider, address_provider
+    class coffi : public string_to_name_provider, symbol_provider, address_provider, architecture_provider
     {
     public:
         friend class Sections;
@@ -102,7 +102,8 @@ namespace COFFI {
             coff_header_( 0 ),
             optional_header_( 0 ),
             win_header_( 0 ),
-            strings( 0 )
+            strings( 0 ),
+            architecture_( COFFI_ARCHITECTURE_NONE )
         {
         }
 
@@ -131,11 +132,11 @@ namespace COFFI {
 
             stream.seekg( 0 );
 
-            arch_ = COFFI_ARCH_NONE;
+            architecture_ = COFFI_ARCHITECTURE_NONE;
             dos_header_ = new dos_header;
             if ( dos_header_->load( stream ) ) {
                 // It iss not EXE
-                arch_ = COFFI_ARCH_PE;
+                architecture_ = COFFI_ARCHITECTURE_PE;
             } else {
                 // It was not EXE file, but it might be a PE OBJ file, or another type of COFF file
                 clean();
@@ -171,7 +172,7 @@ namespace COFFI {
                     IMAGE_FILE_MACHINE_WCEMIPSV2,
                 };
                 if (std::find(machines.begin(), machines.end(), coff_header_->get_machine()) == machines.end()) {
-                    if (arch_ == COFFI_ARCH_PE) {
+                    if (architecture_ == COFFI_ARCHITECTURE_PE) {
                         // The DOS header was detected, but the machine is not recognized
                         // This is an error
                         clean();
@@ -179,11 +180,11 @@ namespace COFFI {
                     }
                 } else {
                     // The machine is recognized, it is a PE file
-                    arch_ = COFFI_ARCH_PE;
+                    architecture_ = COFFI_ARCHITECTURE_PE;
                 }
 
                 // Try to read a CEVAX header
-                if (arch_ == COFFI_ARCH_NONE) {
+                if (architecture_ == COFFI_ARCHITECTURE_NONE) {
 
                     // Check the target ID
                     static const std::vector<uint16_t> machines = {
@@ -192,13 +193,13 @@ namespace COFFI {
                     };
                     if (std::find(machines.begin(), machines.end(), coff_header_->get_machine()) != machines.end())
                     {
-                        arch_ = COFFI_ARCH_CEVAX;
+                        architecture_ = COFFI_ARCHITECTURE_CEVAX;
                     }
                 }
             }
 
             // Try to read a TI header
-            if (arch_ == COFFI_ARCH_NONE) {
+            if (architecture_ == COFFI_ARCHITECTURE_NONE) {
 
                 coff_header_ = new coff_header_impl_ti;
                 stream.seekg( 0 );
@@ -219,13 +220,13 @@ namespace COFFI {
                 };
                 if (std::find(target_ids.begin(), target_ids.end(), coff_header_->get_target_id()) != target_ids.end())
                 {
-                    arch_ = COFFI_ARCH_TI;
+                    architecture_ = COFFI_ARCHITECTURE_TI;
                 }
             }
 
-            if (arch_ == COFFI_ARCH_NONE) {
+            if (architecture_ == COFFI_ARCHITECTURE_NONE) {
                 // The format is not recognized, default to PE format
-                arch_ = COFFI_ARCH_PE;
+                architecture_ = COFFI_ARCHITECTURE_PE;
                 coff_header_ = new coff_header_impl;
                 stream.seekg( 0 );
                 if ( !coff_header_->load( stream ) ) {
@@ -235,10 +236,10 @@ namespace COFFI {
             }
 
             if ( coff_header_->get_optional_header_size() != 0 ) {
-                if ((arch_ == COFFI_ARCH_PE) || (arch_ == COFFI_ARCH_CEVAX)) {
+                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVAX)) {
                     optional_header_ = new optional_header_impl;
                 }
-                if (arch_ == COFFI_ARCH_TI) {
+                if (architecture_ == COFFI_ARCHITECTURE_TI) {
                     optional_header_ = new optional_header_impl_ti;
                 }
 
@@ -247,7 +248,7 @@ namespace COFFI {
                     return false;
                 }
 
-                if (arch_ == COFFI_ARCH_PE) {
+                if (architecture_ == COFFI_ARCHITECTURE_PE) {
                     if ( optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
                         win_header_ = new win_header_impl < win_headerPEPlus >;
                     }
@@ -274,7 +275,7 @@ namespace COFFI {
                     }
                 }
 
-                if (arch_ == COFFI_ARCH_TI) {
+                if (architecture_ == COFFI_ARCHITECTURE_TI) {
                     // No documented optional_header_->get_magic() values
                     // Cannot check anything
                 }
@@ -346,14 +347,14 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
-        int get_addressable_unit()
+        int get_addressable_unit() const
         {
             // returns the char type size in bytes.
             // Some targets have 2-bytes characters, this changes how offsets are computed in the file
             if (coff_header_ == 0) {
                 return 0;
             }
-            if (arch_ == COFFI_ARCH_TI) {
+            if (architecture_ == COFFI_ARCHITECTURE_TI) {
                 switch (coff_header_->get_target_id()) {
                 case TMS320C5400:
                 case TMS320C5500:
@@ -364,6 +365,12 @@ namespace COFFI {
                 }
             }
             return 1;
+        }
+
+        //---------------------------------------------------------------------
+        coffi_architecture_t get_architecture() const
+        {
+            return architecture_;
         }
 
         //---------------------------------------------------------------------
@@ -409,11 +416,11 @@ namespace COFFI {
             std::streampos pos = stream.tellg();
             for ( int i = 0; i < coff_header_->get_sections_count(); ++i ) {
                 section* sec;
-                if ((arch_ == COFFI_ARCH_PE) || (arch_ == COFFI_ARCH_CEVAX)) {
-                    sec = new section_impl( this, this, this, arch_ );
+                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVAX)) {
+                    sec = new section_impl( this, this, this, this );
                 }
-                if (arch_ == COFFI_ARCH_TI) {
-                    sec = new section_impl_ti( this, this, this, arch_ );
+                if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                    sec = new section_impl_ti( this, this, this, this );
                 }
                 sec->load( stream, i * sec->header_sizeof() + pos );
                 sec->set_index( i );
@@ -510,7 +517,6 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
     private:
-        coffi_arch_t                      arch_;
         dos_header*                       dos_header_;
         coff_header*                      coff_header_;
         optional_header*                  optional_header_;
@@ -519,6 +525,7 @@ namespace COFFI {
         std::vector<section*>             sections_;
         std::vector<symbol_ext>           symbols;
         char*                             strings;
+        coffi_architecture_t              architecture_;
     };
 
 } // namespace COFFI
