@@ -19,7 +19,7 @@ before_install:
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install libboost-test-dev libboost-system-dev libboost-filesystem-dev
+- sudo apt-get install libboost-test-dev
 
 script:
 - autoreconf -f -i
