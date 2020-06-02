@@ -102,23 +102,21 @@ std::list<section_flags_type> section_flags_ti{
     {STYP_CLINK, "CLINK"},
     {STYP_VECTOR, "VECTOR"},
     {STYP_PADDED, "PADDED"},
-    // The alignment is processed with get_alignment(), not with flags
-    // {STYP_ALIGN_1BYTES, "STYP_ALIGN_1BYTES"},
-    // {STYP_ALIGN_2BYTES, "STYP_ALIGN_2BYTES"},
-    // {STYP_ALIGN_4BYTES, "STYP_ALIGN_4BYTES"},
-    // {STYP_ALIGN_8BYTES, "STYP_ALIGN_8BYTES"},
-    // {STYP_ALIGN_16BYTES, "STYP_ALIGN_16BYTES"},
-    // {STYP_ALIGN_32BYTES, "STYP_ALIGN_32BYTES"},
-    // {STYP_ALIGN_64BYTES, "STYP_ALIGN_64BYTES"},
-    // {STYP_ALIGN_128BYTES, "STYP_ALIGN_128BYTES"},
-    // {STYP_ALIGN_256BYTES, "STYP_ALIGN_256BYTES"},
-    // {STYP_ALIGN_512BYTES, "STYP_ALIGN_512BYTES"},
-    // {STYP_ALIGN_1024BYTES, "STYP_ALIGN_1024BYTES"},
-    // {STYP_ALIGN_2048BYTES, "STYP_ALIGN_2048BYTES"},
-    // {STYP_ALIGN_4096BYTES, "STYP_ALIGN_4096BYTES"},
-    // {STYP_ALIGN_8192BYTES, "STYP_ALIGN_8192BYTES"},
-    // {STYP_ALIGN_16384BYTES, "STYP_ALIGN_16384BYTES"},
-    // {STYP_ALIGN_32768BYTES, "STYP_ALIGN_32768BYTES"},
+    {STYP_ALIGN_2, "STYP_ALIGN_2"},
+    {STYP_ALIGN_4, "STYP_ALIGN_4"},
+    {STYP_ALIGN_8, "STYP_ALIGN_8"},
+    {STYP_ALIGN_16, "STYP_ALIGN_16"},
+    {STYP_ALIGN_32, "STYP_ALIGN_32"},
+    {STYP_ALIGN_64, "STYP_ALIGN_64"},
+    {STYP_ALIGN_128, "STYP_ALIGN_128"},
+    {STYP_ALIGN_256, "STYP_ALIGN_256"},
+    {STYP_ALIGN_512, "STYP_ALIGN_512"},
+    {STYP_ALIGN_1024, "STYP_ALIGN_1024"},
+    {STYP_ALIGN_2048, "STYP_ALIGN_2048"},
+    {STYP_ALIGN_4096, "STYP_ALIGN_4096"},
+    {STYP_ALIGN_8192, "STYP_ALIGN_8192"},
+    {STYP_ALIGN_16384, "STYP_ALIGN_16384"},
+    {STYP_ALIGN_32768, "STYP_ALIGN_32768"},
 };
 
 const std::map<coffi_architecture_t, std::list<section_flags_type>*> section_flags_per_architecture = {
@@ -342,7 +340,7 @@ int main( int argc, char* argv[] )
             uint32_t alignment_mask = alignment_mask_per_architecture.at(c.get_architecture());
             uint32_t flags = c.get_sections()[i]->get_flags();
             for ( auto section_flags: *section_flags_list) {
-                if ( ( section_flags.flag & alignment_mask ) && ( c.get_architecture() != COFFI_ARCHITECTURE_TI ) ) {
+                if ( ( section_flags.flag & alignment_mask ) ) {
                     if ( ( flags & alignment_mask ) == section_flags.flag ) {
                         std::cout << "  " << section_flags.descr;
                     }
@@ -352,9 +350,6 @@ int main( int argc, char* argv[] )
                         std::cout << "  " << section_flags.descr;
                     }
                 }
-            }
-            if ( c.get_architecture() == COFFI_ARCHITECTURE_TI ) {
-                std::cout << "  align(" << c.get_sections()[i]->get_alignment() << ")";
             }
             std::cout << std::endl << std::endl;
         }

@@ -161,22 +161,21 @@ namespace COFFI {
 #define STYP_CLINK                  0x00004000
 #define STYP_VECTOR                 0x00008000
 #define STYP_PADDED                 0x00010000
-#define STYP_ALIGN_1BYTES           0x00000000
-#define STYP_ALIGN_2BYTES           0x00000100
-#define STYP_ALIGN_4BYTES           0x00000200
-#define STYP_ALIGN_8BYTES           0x00000300
-#define STYP_ALIGN_16BYTES          0x00000400
-#define STYP_ALIGN_32BYTES          0x00000500
-#define STYP_ALIGN_64BYTES          0x00000600
-#define STYP_ALIGN_128BYTES         0x00000700
-#define STYP_ALIGN_256BYTES         0x00000800
-#define STYP_ALIGN_512BYTES         0x00000900
-#define STYP_ALIGN_1024BYTES        0x00000A00
-#define STYP_ALIGN_2048BYTES        0x00000B00
-#define STYP_ALIGN_4096BYTES        0x00000C00
-#define STYP_ALIGN_8192BYTES        0x00000D00
-#define STYP_ALIGN_16384BYTES       0x00000E00
-#define STYP_ALIGN_32768BYTES       0x00000F00
+#define STYP_ALIGN_2                0x00000100
+#define STYP_ALIGN_4                0x00000200
+#define STYP_ALIGN_8                0x00000300
+#define STYP_ALIGN_16               0x00000400
+#define STYP_ALIGN_32               0x00000500
+#define STYP_ALIGN_64               0x00000600
+#define STYP_ALIGN_128              0x00000700
+#define STYP_ALIGN_256              0x00000800
+#define STYP_ALIGN_512              0x00000900
+#define STYP_ALIGN_1024             0x00000A00
+#define STYP_ALIGN_2048             0x00000B00
+#define STYP_ALIGN_4096             0x00000C00
+#define STYP_ALIGN_8192             0x00000D00
+#define STYP_ALIGN_16384            0x00000E00
+#define STYP_ALIGN_32768            0x00000F00
 
 // Texas Instruments Magic Number
 #define TMS470          0x0097
