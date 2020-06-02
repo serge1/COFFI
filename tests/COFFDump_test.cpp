@@ -10,7 +10,6 @@
 
 #include <cstdlib>
 #include <boost/test/unit_test.hpp>
-#include <boost/filesystem.hpp>
 
 #include <coffi/coffi.hpp>
 
@@ -34,19 +33,12 @@ static std::string expexted_dump_file_name( const char *file_to_dump )
 //! Call COFFDump, and return the exit code
 static int RunCOFFDump( const char *file_to_dump )
 {
-
-    // Get the COFFDump path, from this program path
-    const char *program_path = framework::master_test_suite().argv[0];
-    boost::filesystem::path p(program_path);
-    boost::filesystem::path program_dir = p.parent_path();
-
-    // Call COFFDump
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
-    boost::filesystem::path COFFDump_path = program_dir / ".." / "example" / "COFFDump" / "COFFDump.exe";
+    std::string COFFDump_path = "..\\example\\COFFDump\\COFFDump.exe";
 #else
-    boost::filesystem::path COFFDump_path = program_dir / ".." / "example" / "COFFDump" / "COFFDump";
+    std::string COFFDump_path = "../example/COFFDump/COFFDump";
 #endif
-    std::string cmd = COFFDump_path.string() + " " + file_to_dump + " > " + dump_test_file_name(file_to_dump);
+    std::string cmd = COFFDump_path + " " + file_to_dump + " > " + dump_test_file_name(file_to_dump);
     printf("Running: %s\n", cmd.c_str());
     int retval = std::system(cmd.c_str());
     return retval;
