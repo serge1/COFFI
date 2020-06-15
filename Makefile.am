@@ -1,4 +1,4 @@
-SUBDIRS = example
+SUBDIRS = examples
 
 nobase_include_HEADERS = \
     coffi/coffi.hpp \
