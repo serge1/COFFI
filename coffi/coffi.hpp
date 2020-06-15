@@ -66,6 +66,7 @@ namespace COFFI {
         {
             create(COFFI_ARCHITECTURE_PE);
         }
+        coffi(const coffi&) = delete;
 
         //---------------------------------------------------------------------
         ~coffi()
@@ -195,7 +196,7 @@ namespace COFFI {
                 }
             }
 
-            if ( coff_header_->get_optional_header_size() != 0 ) {
+            if ( coff_header_->get_optional_header_size() ) {
                 if (architecture_ == COFFI_ARCHITECTURE_PE) {
                     std::streampos pos = stream.tellg();
                     optional_header_ = new optional_header_impl_pe;
@@ -234,7 +235,7 @@ namespace COFFI {
                         win_header_ = new win_header_impl < win_header_pe >;
                     }
 
-                    if ( win_header_ != 0 ) {
+                    if ( win_header_ ) {
                         if ( !win_header_->load( stream ) ) {
                             delete optional_header_;
                             optional_header_ = 0;
@@ -334,10 +335,10 @@ namespace COFFI {
 
         void create_optional_header()
         {
-            if (dos_header_ != 0) {
+            if (dos_header_) {
                 delete dos_header_;
             }
-            if (optional_header_ != 0) {
+            if (optional_header_) {
                 delete optional_header_;
             }
             if (architecture_ == COFFI_ARCHITECTURE_PE) {
@@ -430,20 +431,20 @@ namespace COFFI {
         {
             return directories_;
         }
-        directory &add_directory(const image_data_directory &rva_and_size)
+        directory *add_directory(const image_data_directory &rva_and_size)
         {
-            directory d(directories_.size());
-            d.set_virtual_address(rva_and_size.virtual_address);
-            d.set_size(rva_and_size.size);
+            directory *d = new directory(directories_.size());
+            d->set_virtual_address(rva_and_size.virtual_address);
+            d->set_size(rva_and_size.size);
             directories_.push_back(d);
-            return *(directories_.end() - 1);
+            return d;
         }
 
         //---------------------------------------------------------------------
         bool is_PE32_plus()
         {
             bool ret = false;
-            if ( optional_header_ != 0 &&
+            if ( optional_header_ &&
                  optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
                 ret = true;
             }
@@ -455,7 +456,7 @@ namespace COFFI {
         {
             // returns the char type size in bytes.
             // Some targets have 2-bytes characters, this changes how offsets are computed in the file
-            if (coff_header_ == 0) {
+            if (!coff_header_) {
                 return 0;
             }
             if (architecture_ == COFFI_ARCHITECTURE_TI) {
@@ -482,35 +483,31 @@ namespace COFFI {
         //---------------------------------------------------------------------
         void clean()
         {
-            if ( dos_header_ != 0 ) {
+            if ( dos_header_ ) {
                 delete dos_header_;
                 dos_header_ = 0;
             }
 
-            if ( coff_header_ != 0 ) {
+            if ( coff_header_ ) {
                 delete coff_header_;
                 coff_header_ = 0;
             }
 
-            if ( optional_header_ != 0 ) {
+            if ( optional_header_ ) {
                 delete optional_header_;
                 optional_header_ = 0;
             }
 
-            if ( win_header_ != 0 ) {
+            if ( win_header_ ) {
                 delete win_header_;
                 win_header_ = 0;
             }
 
             clean_unused_spaces();
 
-            size_t size = sections_.size();
-            for ( size_t i = 0; i < size; ++i ) {
-                delete sections_[i];
-            }
-            sections_.clear();
+            sections_.clean();
 
-            directories_.clear();
+            directories_.clean();
 
             clean_symbols();
             clean_strings();
@@ -519,7 +516,7 @@ namespace COFFI {
         //---------------------------------------------------------------------
         void create_win_header()
         {
-            if (win_header_ != 0) {
+            if (win_header_) {
                 delete win_header_;
             }
             if ( optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
@@ -588,19 +585,19 @@ namespace COFFI {
                             directories_.get_sizeof());
             }
 
-            if ((architecture_ == COFFI_ARCHITECTURE_PE) && (dos_header_ != 0))
+            if ((architecture_ == COFFI_ARCHITECTURE_PE) && dos_header_)
             {
                 dos_header_->save( stream );
             }
 
             coff_header_->save( stream );
 
-            if ( optional_header_ != 0 ) {
+            if ( optional_header_ ) {
                 optional_header_->save( stream );
 
                 if (architecture_ == COFFI_ARCHITECTURE_PE) {
 
-                    if ( win_header_ != 0 ) {
+                    if ( win_header_ ) {
                         win_header_->save( stream );
                         directories_.save( stream );
                     }
@@ -627,7 +624,7 @@ namespace COFFI {
                     sec->save_line_numbers( stream );
                     break;
                 case DATA_PAGE_DIRECTORY:
-                    directories_[dp.index].save_data(stream);
+                    directories_[dp.index]->save_data(stream);
                     break;
                 case DATA_PAGE_UNUSED:
                     stream.write(unused_spaces_[dp.index].data, unused_spaces_[dp.index].size);
@@ -698,7 +695,7 @@ namespace COFFI {
                     data_pages_.push_back(data_page{DATA_PAGE_LINE_NUMBERS, sec->get_line_num_offset(), sec->get_line_numbers_filesize(), sec->get_index()});
                 }
             }
-            for (auto d = directories_.begin(); d != directories_.end(); d++) {
+            for (auto d: directories_) {
                 if (d->get_data_filesize() > 0) {
                     data_pages_.push_back(data_page{DATA_PAGE_DIRECTORY, d->get_virtual_address(), d->get_size(), d->get_index()});
                 }
@@ -775,11 +772,11 @@ namespace COFFI {
                     offset += sec->get_line_numbers_filesize();
                     break;
                 case DATA_PAGE_DIRECTORY:
-                    if (directories_[dp.index].get_data_filesize() > 0) {
-                        if (directories_[dp.index].get_virtual_address() != 0) {
-                            directories_[dp.index].set_virtual_address(offset);
+                    if (directories_[dp.index]->get_data_filesize() > 0) {
+                        if (directories_[dp.index]->get_virtual_address() != 0) {
+                            directories_[dp.index]->set_virtual_address(offset);
                         }
-                        offset += directories_[dp.index].get_data_filesize();
+                        offset += directories_[dp.index]->get_data_filesize();
                     }
                     break;
                 case DATA_PAGE_UNUSED:

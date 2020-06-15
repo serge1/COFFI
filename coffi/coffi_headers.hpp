@@ -109,7 +109,7 @@ namespace COFFI {
 
             stub_size_ = header.pe_sign_location - sizeof( header );
             char *read_stub = new char[stub_size_];
-            if (read_stub == 0) {
+            if (!read_stub) {
                 return false;
             }
             stream.read(read_stub, stub_size_ );
@@ -154,12 +154,12 @@ namespace COFFI {
 
         void set_stub(const char *data, uint32_t size)
         {
-            if (stub_ != 0) {
+            if (stub_) {
                 delete[] stub_;
             }
             stub_size_ = size;
             char *new_stub = new char[stub_size_];
-            if (new_stub == 0) {
+            if (!new_stub) {
                 stub_size_ = 0;
             } else {
                 std::copy(data, data + size, new_stub);
@@ -176,7 +176,7 @@ namespace COFFI {
         //------------------------------------------------------------------------------
         void clean()
         {
-            if (stub_ != 0) {
+            if (stub_) {
                 delete[] stub_;
                 stub_ = 0;
             }

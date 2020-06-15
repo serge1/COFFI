@@ -94,6 +94,7 @@ namespace COFFI {
             sym_ = sym;
             arch_ = arch;
         }
+        section_impl_tmpl(const section_impl_tmpl&) = delete;
 
         //------------------------------------------------------------------------------
         ~section_impl_tmpl()
@@ -141,11 +142,11 @@ namespace COFFI {
         void set_data(const char* data, uint32_t size)
         {
             clean();
-            if (data == 0) {
+            if (!data) {
                 data_reserved_ = 0;
             } else {
                 data_ = new char[size];
-                if (data_ != 0) {
+                if (data_) {
                     data_reserved_ = size;
                     std::copy(data, data + size, data_);
                 } else {
@@ -162,7 +163,7 @@ namespace COFFI {
 
         virtual void append_data(const char *data, uint32_t size)
         {
-            if (data_ == 0) {
+            if (!data_) {
                 set_data(data, size);
             }
             if ( get_data_size() + size <= data_reserved_ ) {
@@ -170,7 +171,7 @@ namespace COFFI {
             } else {
                 uint32_t new_data_size = 2 * (data_reserved_ + size);
                 char *new_data = new char[new_data_size];
-                if (new_data == 0) {
+                if (!new_data) {
                     size = 0;
                 } else {
                     data_reserved_ = new_data_size;
@@ -219,7 +220,7 @@ namespace COFFI {
                 data_reserved_ = get_data_size();
                 if ((get_data_offset() != 0) && ( data_reserved_ != 0 )) {
                     data_ = new char[data_reserved_];
-                    if (data_ == 0) {
+                    if (!data_) {
                         return false;
                     }
                     stream.seekg( get_data_offset() );
@@ -292,7 +293,7 @@ namespace COFFI {
     protected:
         //------------------------------------------------------------------------------
         void clean() {
-            if (data_ != 0) {
+            if (data_) {
                 delete[] data_;
                 data_ = 0;
                 data_reserved_ = 0;
@@ -400,6 +401,18 @@ namespace COFFI {
     class sections: public std::vector<section*>
     {
     public:
+        virtual ~sections()
+        {
+            clean();
+        }
+        void clean()
+        {
+            for (auto sec: *this) {
+                delete sec;
+            }
+            clear();
+        }
+
         //------------------------------------------------------------------------------
         section* operator[](size_t i)
         {

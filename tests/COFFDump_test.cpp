@@ -50,9 +50,17 @@ void check_dumps_equal(const std::string &dump1, const std::string &dump2, bool 
     std::ifstream dump2_file(dump2);
     std::string str2((std::istreambuf_iterator<char>(dump2_file)), std::istreambuf_iterator<char>());
 
-    // Replace the file name in the dumps
+    // Replace the end-of-lines
+    str1 = std::regex_replace(str1, std::regex("(?:\\r\\n|\\r)"), "\\n");
+    str2 = std::regex_replace(str2, std::regex("(?:\\r\\n|\\r)"), "\\n");
+
+    // Replace the file name
     str1 = std::regex_replace(str1, std::regex("Dump of file .*"), "Dump of file ****");
     str2 = std::regex_replace(str2, std::regex("Dump of file .*"), "Dump of file ****");
+
+    // Replace the timestamps
+    str1 = std::regex_replace(str1, std::regex("(TimeDateStamp: *).*"), "\\1 ****");
+    str2 = std::regex_replace(str2, std::regex("(TimeDateStamp: *).*"), "\\1 ****");
 
     if (!compare_checksum) {
         str1 = std::regex_replace(str1, std::regex("(\\n *checksum *)[0-9A-Fa-f]+(\\s*\\n)"), "\\1****\\2");

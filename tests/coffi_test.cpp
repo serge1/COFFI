@@ -135,16 +135,16 @@ BOOST_AUTO_TEST_CASE( load_sections_exe )
     }
 
     BOOST_CHECK_EQUAL( c.get_directories().size(), 16 );
-    BOOST_CHECK_EQUAL( c.get_directories()[1].get_virtual_address(), 0xCFF8 );
-    BOOST_CHECK_EQUAL( c.get_directories()[1].get_size(), 300 );
-    BOOST_CHECK_EQUAL( c.get_directories()[2].get_virtual_address(), 0x14000 );
-    BOOST_CHECK_EQUAL( c.get_directories()[2].get_size(), 127328 );
-    BOOST_CHECK_EQUAL( c.get_directories()[3].get_virtual_address(), 0x13000 );
-    BOOST_CHECK_EQUAL( c.get_directories()[3].get_size(), 1716 );
-    BOOST_CHECK_EQUAL( c.get_directories()[11].get_virtual_address(), 0x2E0 );
-    BOOST_CHECK_EQUAL( c.get_directories()[11].get_size(), 312 );
-    BOOST_CHECK_EQUAL( c.get_directories()[12].get_virtual_address(), 0xC000 );
-    BOOST_CHECK_EQUAL( c.get_directories()[12].get_size(), 2032 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1]->get_virtual_address(), 0xCFF8 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1]->get_size(), 300 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2]->get_virtual_address(), 0x14000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2]->get_size(), 127328 );
+    BOOST_CHECK_EQUAL( c.get_directories()[3]->get_virtual_address(), 0x13000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[3]->get_size(), 1716 );
+    BOOST_CHECK_EQUAL( c.get_directories()[11]->get_virtual_address(), 0x2E0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[11]->get_size(), 312 );
+    BOOST_CHECK_EQUAL( c.get_directories()[12]->get_virtual_address(), 0xC000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[12]->get_size(), 2032 );
 
     BOOST_CHECK_EQUAL( c.get_header()->get_sections_count(), 6 );
     BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), ".text" );
@@ -371,14 +371,14 @@ BOOST_AUTO_TEST_CASE( load_sections_tclsh_exe )
     BOOST_CHECK_EQUAL( c.get_win_header()->get_number_of_rva_and_sizes(), 16 );
 
     BOOST_CHECK_EQUAL( c.get_directories().size(), 16 );
-    BOOST_CHECK_EQUAL( c.get_directories()[1].get_virtual_address(), 0x5000 );
-    BOOST_CHECK_EQUAL( c.get_directories()[1].get_size(), 0x358 );
-    BOOST_CHECK_EQUAL( c.get_directories()[2].get_virtual_address(), 0x6000 );
-    BOOST_CHECK_EQUAL( c.get_directories()[2].get_size(), 0x129C );
-    BOOST_CHECK_EQUAL( c.get_directories()[14].get_virtual_address(), 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directories()[14].get_size(), 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directories()[15].get_virtual_address(), 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directories()[15].get_size(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1]->get_virtual_address(), 0x5000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1]->get_size(), 0x358 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2]->get_virtual_address(), 0x6000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2]->get_size(), 0x129C );
+    BOOST_CHECK_EQUAL( c.get_directories()[14]->get_virtual_address(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[14]->get_size(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[15]->get_virtual_address(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[15]->get_size(), 0x0 );
 
     BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), ".text" );
     BOOST_CHECK_EQUAL( c.get_sections()[1]->get_name(), ".data" );

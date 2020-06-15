@@ -162,7 +162,6 @@ int main( int argc, char* argv[] )
     }
 
     coffi c;
-
     if ( !c.load( argv[1] ) ) {
         std::cout << "File '" << argv[1] << "' is not a valid COFF file (or file was not found)" << std::endl;
         return 2;
@@ -174,7 +173,7 @@ int main( int argc, char* argv[] )
     //------------------------------------------------------------------------------
     // Dump of COFF header
     //------------------------------------------------------------------------------
-    if ( c.get_header() != 0 ) {
+    if ( c.get_header() ) {
         std::cout << "File Header" << std::endl;
         if (c.get_architecture() == COFFI_ARCHITECTURE_TI) {
             std::cout << "  Target ID:                      "
@@ -206,7 +205,7 @@ int main( int argc, char* argv[] )
     //------------------------------------------------------------------------------
     // Dump of COFF optional header
     //------------------------------------------------------------------------------
-    if ( c.get_optional_header() != 0 ) {
+    if ( c.get_optional_header() ) {
         std::cout << "Optional Header" << std::endl;
         std::cout << "  Magic                         "
                   << I2X( c.get_optional_header()->get_magic(), 4 ) << std::endl;
@@ -243,7 +242,7 @@ int main( int argc, char* argv[] )
     //------------------------------------------------------------------------------
     // Dump of COFF Windows specific header
     //------------------------------------------------------------------------------
-    if ( c.get_win_header() != 0 ) {
+    if ( c.get_win_header() ) {
         std::cout << "  image base                    "
                   << I2X( c.get_win_header()->get_image_base(), 16 ) << std::endl;
         std::cout << "  section align                 "
@@ -296,14 +295,14 @@ int main( int argc, char* argv[] )
     //------------------------------------------------------------------------------
     // Dump of Windows data directories
     //------------------------------------------------------------------------------
-    auto dirs = c.get_directories();
-    if ( dirs.size() != 0 ) {
+    const directories &dirs = c.get_directories();
+    if ( dirs.size() > 0 ) {
         std::cout << "Data Directory" << std::endl;
-        for ( uint32_t i = 0; i < dirs.size(); ++i ) {
+        for (auto dir: dirs) {
             std::cout << "  "
-                      << DUMP_STR_FORMAT(24) << directory_names[i]
-                         << "rva: " << I2X( dirs[i].get_virtual_address(), 8 )
-                         << "  size: " << I2X( dirs[i].get_size(), 8 )
+                      << DUMP_STR_FORMAT(24) << directory_names[dir->get_index()]
+                         << "rva: " << I2X( dir->get_virtual_address(), 8 )
+                         << "  size: " << I2X( dir->get_size(), 8 )
                          << std::endl;
         }
         std::cout << std::endl;
@@ -313,7 +312,7 @@ int main( int argc, char* argv[] )
     // Dump of COFF sections
     //------------------------------------------------------------------------------
     uint32_t nb_relocs = 0;
-    if ( c.get_sections().size() != 0 ) {
+    if ( c.get_sections().size() > 0 ) {
         std::cout << "Section Table" << std::endl;
         for (auto sec: c.get_sections()) {
 
@@ -385,7 +384,7 @@ int main( int argc, char* argv[] )
         //------------------------------------------------------------------------------
         // Dump of symbols
         //------------------------------------------------------------------------------
-        if ( c.get_symbols()->size() != 0 ) {
+        if ( c.get_symbols()->size() > 0 ) {
             std::cout << "Symbol Table" << std::endl;
             std::cout << "  #    Value    Type Class Name" << std::endl;
             for (auto sym = c.get_symbols()->begin(); sym != c.get_symbols()->end(); sym++) {
@@ -410,7 +409,7 @@ int main( int argc, char* argv[] )
         //------------------------------------------------------------------------------
         // Dump of relocation entries
         //------------------------------------------------------------------------------
-        if (nb_relocs != 0) {
+        if (nb_relocs > 0) {
             std::cout << "Relocation Entries" << std::endl;
             std::cout << "  Section      Address  Type     Symbol" << std::endl;
             for (auto sec: c.get_sections()) {
@@ -428,12 +427,6 @@ int main( int argc, char* argv[] )
             std::cout << std::endl;
         }
     }
-
-
-    //------------------------------------------------------------------------------
-    // Dump resources
-    //------------------------------------------------------------------------------
-
 
     return 0;
 }

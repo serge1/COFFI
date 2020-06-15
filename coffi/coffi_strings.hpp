@@ -40,6 +40,7 @@ namespace COFFI {
         {
             clean_strings();
         }
+        coffi_strings(const coffi_strings&) = delete;
 
         virtual ~coffi_strings()
         {
@@ -107,7 +108,7 @@ namespace COFFI {
         //---------------------------------------------------------------------
         void clean_strings()
         {
-            if (strings_ != 0) {
+            if (strings_) {
                 delete[] strings_;
             }
             strings_ = new char[4];
@@ -129,7 +130,7 @@ namespace COFFI {
             stream.seekg( strings_offset );
             stream.read(strings_, 4);
             char *new_strings = new char[get_strings_size()];
-            if (new_strings == 0) {
+            if (!new_strings) {
                 return false;
             }
             strings_reserved_ = get_strings_size();
@@ -156,7 +157,7 @@ namespace COFFI {
         {
             std::string ret;
 
-            if ( *(uint32_t*)str == 0 && strings_ != 0 ) {
+            if ( *(uint32_t*)str == 0 && strings_ ) {
                 uint32_t off = *(uint32_t*)( str + sizeof( uint32_t ) );
                 ret = strings_ + off;
             } else if (is_section && str[0] == '/') {
@@ -182,7 +183,7 @@ namespace COFFI {
                 if (get_strings_size() + size > strings_reserved_) {
                     uint32_t new_strings_reserved = 2 * (strings_reserved_ + size);
                     char *new_strings = new char[new_strings_reserved];
-                    if (new_strings == 0) {
+                    if (!new_strings) {
                         offset = 0;
                         size = 0;
                     } else {

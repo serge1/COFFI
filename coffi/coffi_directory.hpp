@@ -37,9 +37,11 @@ namespace COFFI {
     public:
         //------------------------------------------------------------------------------
         directory(uint32_t index):
+            data_{nullptr},
             index_{index}
         {
         }
+        directory(const directory&) = delete;
         virtual ~directory()
         {
             clean();
@@ -63,19 +65,18 @@ namespace COFFI {
         }
         void set_data(const char *data, uint32_t size)
         {
-            if (data == 0) {
-                data_ = 0;
-                set_size(0);
-                return;
-            }
-
             if ((index_ != DIRECTORY_CERTIFICATE_TABLE) && (index_ != DIRECTORY_BOUND_IMPORT)) {
                 return;
             }
 
+            clean();
+            if (!data) {
+                set_size(0);
+                return;
+            }
+
             char *temp_buffer = new char[size];
-            if (temp_buffer == 0) {
-                data_ = 0;
+            if (!temp_buffer) {
                 set_size(0);
                 return;
             }
@@ -140,8 +141,9 @@ namespace COFFI {
         //------------------------------------------------------------------------------
         void clean()
         {
-            if (data_ != 0) {
+            if (data_) {
                 delete[] data_;
+                data_ = nullptr;
             }
         }
 
@@ -151,7 +153,7 @@ namespace COFFI {
         uint32_t index_;
     };
 
-    class directories: public std::vector<directory>
+    class directories: public std::vector<directory*>
     {
     public:
         //------------------------------------------------------------------------------
@@ -159,16 +161,25 @@ namespace COFFI {
             scn_{scn}
         {
         }
+        directories(const directories&) = delete;
         virtual ~directories()
         {
+            clean();
+        }
+        void clean()
+        {
+            for (auto d: *this) {
+                delete d;
+            }
+            clear();
         }
 
         //------------------------------------------------------------------------------
         bool load( std::istream &stream )
         {
             for ( uint32_t i = 0; i < scn_->get_win_header()->get_number_of_rva_and_sizes(); ++i ) {
-                directory d(i);
-                if (!d.load(stream)) {
+                directory *d = new directory(i);
+                if (!d->load(stream)) {
                     return false;
                 }
                 push_back(d);
@@ -179,7 +190,7 @@ namespace COFFI {
         //------------------------------------------------------------------------------
         bool load_data( std::istream &stream )
         {
-            for (auto d = begin(); d != end(); d++) {
+            for (auto d: *this) {
                 if (!d->load_data(stream)) {
                     return false;
                 }
@@ -190,14 +201,14 @@ namespace COFFI {
         //---------------------------------------------------------------------
         void save( std::ostream &stream ) const
         {
-            for (auto d = begin(); d != end(); d++) {
+            for (auto d: *this) {
                 d->save(stream);
             }
         }
         uint32_t get_sizeof() const
         {
             if (size() > 0) {
-                return size() * begin()->get_sizeof();
+                return size() * (*begin())->get_sizeof();
             }
             return 0;
         }
