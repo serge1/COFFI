@@ -23,15 +23,80 @@ THE SOFTWARE.
 #ifndef COFFI_UTILS_HPP
 #define COFFI_UTILS_HPP
 
+#include <stdexcept>
 #include <coffi/coffi_types.hpp>
 
-#define COFFI_GET_ACCESS_DECL( TYPE, NAME ) \
+#define STRINGIFY(NAME) #NAME
+
+#define COFFI_GET_ACCESS_DECL( TYPE, NAME )       \
     virtual TYPE get_##NAME() const = 0
 
-#define COFFI_GET_ACCESS( TYPE, NAME ) \
-    TYPE get_##NAME() const            \
-    {                                  \
-    return header.NAME;                \
+#define COFFI_SET_ACCESS_DECL( TYPE, NAME )       \
+    virtual void set_##NAME( TYPE value ) = 0
+
+#define COFFI_GET_SET_ACCESS_DECL( TYPE, NAME )   \
+    virtual TYPE get_##NAME() const = 0;          \
+    virtual void set_##NAME( TYPE value ) = 0
+
+#define COFFI_GET_ACCESS( TYPE, NAME )      \
+    TYPE get_##NAME() const                 \
+    {                                       \
+        return header.NAME;                 \
+    }
+
+#define COFFI_SET_ACCESS( TYPE, NAME )      \
+    void set_##NAME( TYPE value )           \
+    {                                       \
+        header.NAME = value;                \
+    }
+
+#define COFFI_GET_SET_ACCESS( TYPE, NAME )  \
+    TYPE get_##NAME() const                 \
+    {                                       \
+        return header.NAME;                 \
+    }                                       \
+    void set_##NAME( TYPE value )           \
+    {                                       \
+        header.NAME = value;                \
+    }
+
+#define COFFI_GET_ACCESS_NONE( TYPE, NAME )               \
+    TYPE get_##NAME() const                               \
+    {                                                     \
+        throw std::runtime_error("The header field '"     \
+            STRINGIFY(NAME)                               \
+            "' is not applicable to this COFF version");  \
+    }
+
+#define COFFI_SET_ACCESS_NONE( TYPE, NAME )               \
+    void set_##NAME( TYPE value )                         \
+    {                                                     \
+        throw std::runtime_error("The header field '"     \
+            STRINGIFY(NAME)                               \
+            "' is not applicable to this COFF version");  \
+    }
+
+#define COFFI_GET_SET_ACCESS_NONE( TYPE, NAME )           \
+    TYPE get_##NAME() const                               \
+    {                                                     \
+        throw std::runtime_error("The header field '"     \
+            STRINGIFY(NAME)                               \
+            "' is not applicable to this COFF version");  \
+    }                                                     \
+    void set_##NAME( TYPE )                               \
+    {                                                     \
+        throw std::runtime_error("The header field '"     \
+            STRINGIFY(NAME)                               \
+            "' is not applicable to this COFF version");  \
+    }
+
+#define COFFI_GET_SIZEOF_DECL()             \
+    virtual size_t get_sizeof() const = 0
+
+#define COFFI_GET_SIZEOF()                  \
+    size_t get_sizeof() const               \
+    {                                       \
+        return sizeof(header);              \
     }
 
 #endif // COFFI_UTILS_HPP

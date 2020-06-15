@@ -32,79 +32,39 @@ THE SOFTWARE.
 
 #include <ios>
 #include <fstream>
+#include <sstream>
 #include <algorithm>
 #include <cstring>
+#include <vector>
 
 #include <coffi/coffi_types.hpp>
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_section.hpp>
 #include <coffi/coffi_headers.hpp>
+#include <coffi/coffi_strings.hpp>
+#include <coffi/coffi_symbols.hpp>
+#include <coffi/coffi_directory.hpp>
 
 namespace COFFI {
+
     //-------------------------------------------------------------------------
-    class coffi : public string_to_name_provider, symbol_provider, address_provider, architecture_provider
+    class coffi :
+            public coffi_strings,
+            public coffi_symbols,
+            public virtual sections_provider
     {
     public:
-        friend class Sections;
-        class Sections
-        {
-        public:
-            //------------------------------------------------------------------------------
-            Sections( coffi* parent_ ) :
-                parent( parent_ )
-            {
-            }
-
-            //------------------------------------------------------------------------------
-            size_t size() const
-            {
-                return parent->sections_.size();
-            }
-
-            //------------------------------------------------------------------------------
-            section* operator[]( unsigned int index ) const
-            {
-                section* sec = 0;
-
-                if ( index < parent->sections_.size() ) {
-                    sec = parent->sections_[index];
-                }
-
-                return sec;
-            }
-
-            //------------------------------------------------------------------------------
-            section* operator[]( const std::string& name ) const
-            {
-                section* sec = 0;
-
-                std::vector<section*>::const_iterator it;
-                for ( it = parent->sections_.begin();
-                      it != parent->sections_.end();
-                      ++it ) {
-                    if ( ( *it )->get_name() == name ) {
-                        sec = *it;
-                        break;
-                    }
-                }
-
-                return sec;
-            }
-
-            //------------------------------------------------------------------------------
-        private:
-            coffi* parent;
-        };
-
         //---------------------------------------------------------------------
         coffi() :
-            dos_header_( 0 ),
-            coff_header_( 0 ),
-            optional_header_( 0 ),
-            win_header_( 0 ),
-            strings( 0 ),
-            architecture_( COFFI_ARCHITECTURE_NONE )
+            coffi_strings{},
+            architecture_{COFFI_ARCHITECTURE_NONE},
+            dos_header_{0},
+            coff_header_{0},
+            optional_header_{0},
+            win_header_{0},
+            directories_{this}
         {
+            create(COFFI_ARCHITECTURE_PE);
         }
 
         //---------------------------------------------------------------------
@@ -117,7 +77,7 @@ namespace COFFI {
         bool load( const std::string& file_name )
         {
             std::ifstream stream;
-            stream.open( file_name.c_str(), std::ios::in | std::ios::binary );
+            stream.open( file_name, std::ios::in | std::ios::binary );
             if ( !stream ) {
                 return false;
             }
@@ -183,17 +143,17 @@ namespace COFFI {
                     architecture_ = COFFI_ARCHITECTURE_PE;
                 }
 
-                // Try to read a CEVAX header
+                // Try to read a CEVA header
                 if (architecture_ == COFFI_ARCHITECTURE_NONE) {
 
                     // Check the target ID
                     static const std::vector<uint16_t> machines = {
-                        CEVAX_MACHINE_XC4210_LIB,
-                        CEVAX_MACHINE_XC4210_OBJ,
+                        CEVA_MACHINE_XC4210_LIB,
+                        CEVA_MACHINE_XC4210_OBJ,
                     };
                     if (std::find(machines.begin(), machines.end(), coff_header_->get_machine()) != machines.end())
                     {
-                        architecture_ = COFFI_ARCHITECTURE_CEVAX;
+                        architecture_ = COFFI_ARCHITECTURE_CEVA;
                     }
                 }
             }
@@ -236,25 +196,42 @@ namespace COFFI {
             }
 
             if ( coff_header_->get_optional_header_size() != 0 ) {
-                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVAX)) {
-                    optional_header_ = new optional_header_impl;
-                }
-                if (architecture_ == COFFI_ARCHITECTURE_TI) {
-                    optional_header_ = new optional_header_impl_ti;
-                }
-
-                if ( !optional_header_->load( stream ) ) {
-                    clean();
-                    return false;
+                if (architecture_ == COFFI_ARCHITECTURE_PE) {
+                    std::streampos pos = stream.tellg();
+                    optional_header_ = new optional_header_impl_pe;
+                    if ( !optional_header_->load( stream ) ) {
+                        clean();
+                        return false;
+                    }
+                    if ( optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
+                        delete optional_header_;
+                        stream.seekg( pos );
+                        optional_header_ = new optional_header_impl_pe_plus;
+                        if ( !optional_header_->load( stream ) ) {
+                            clean();
+                            return false;
+                        }
+                    }
+                } else {
+                    if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
+                        optional_header_ = new optional_header_impl_pe;
+                    }
+                    if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                        optional_header_ = new optional_header_impl_ti;
+                    }
+                    if ( !optional_header_->load( stream ) ) {
+                        clean();
+                        return false;
+                    }
                 }
 
                 if (architecture_ == COFFI_ARCHITECTURE_PE) {
                     if ( optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
-                        win_header_ = new win_header_impl < win_headerPEPlus >;
+                        win_header_ = new win_header_impl < win_header_pe_plus >;
                     }
                     else if ( optional_header_->get_magic() == OH_MAGIC_PE32 ||
                               optional_header_->get_magic() == OH_MAGIC_PE32ROM ) {
-                        win_header_ = new win_header_impl < win_headerPE >;
+                        win_header_ = new win_header_impl < win_header_pe >;
                     }
 
                     if ( win_header_ != 0 ) {
@@ -266,12 +243,7 @@ namespace COFFI {
                             clean();
                             return false;
                         }
-
-                        for ( uint32_t i = 0; i < win_header_->get_number_of_rva_and_sizes(); ++i ) {
-                            image_data_directory entry;
-                            stream.read( reinterpret_cast<char*>( &entry ), sizeof( entry ) );
-                            directory.push_back( entry );
-                        }
+                        directories_.load(stream);
                     }
                 }
 
@@ -282,18 +254,23 @@ namespace COFFI {
             }
 
             std::streampos pos = stream.tellg();
-            if ( !load_strings( stream ) ) {
+            if (!load_strings(stream, coff_header_)) {
                 clean();
                 return false;
             }
 
-            if ( !load_symbols( stream ) ) {
+            if ( !load_symbols( stream, coff_header_ ) ) {
                 clean();
                 return false;
             }
+
             stream.seekg( pos );
-
             if ( !load_section_headers( stream ) ) {
+                clean();
+                return false;
+            }
+
+            if ( !directories_.load_data( stream ) ) {
                 clean();
                 return false;
             }
@@ -302,7 +279,91 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        bool save( const std::string& file_name )
+        {
+            std::ofstream stream;
+            stream.open( file_name, std::ios::out | std::ios::binary );
+            if ( !stream ) {
+                return false;
+            }
+
+            return save( stream );
+        }
+
+        //---------------------------------------------------------------------
+        bool save( std::ostream &stream )
+        {
+            if (win_header_) {
+                std::stringstream tmp_stream(std::ios::in | std::ios::out | std::ios::binary);
+                if (!tmp_stream) {
+                    return false;
+                }
+                if (!save_to_stream(tmp_stream)) {
+                    return false;
+                }
+                tmp_stream.seekg(0);
+                return compute_win_header_checksum(tmp_stream, stream);
+            } else {
+                return save_to_stream(stream);
+            }
+            return true;
+        }
+
+        //---------------------------------------------------------------------
+        void create( coffi_architecture_t architecture )
+        {
+            clean();
+
+            architecture_ = architecture;
+
+            if (architecture_ == COFFI_ARCHITECTURE_PE) {
+                coff_header_ = new coff_header_impl;
+                coff_header_->set_machine(IMAGE_FILE_MACHINE_I386);
+            }
+
+            if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
+                coff_header_ = new coff_header_impl;
+                coff_header_->set_machine(CEVA_MACHINE_XC4210_OBJ);
+            }
+
+            if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                coff_header_ = new coff_header_impl_ti;
+                coff_header_->set_target_id(TMS320C2800);
+            }
+        }
+
+        void create_optional_header()
+        {
+            if (dos_header_ != 0) {
+                delete dos_header_;
+            }
+            if (optional_header_ != 0) {
+                delete optional_header_;
+            }
+            if (architecture_ == COFFI_ARCHITECTURE_PE) {
+                dos_header_ = new dos_header;
+                optional_header_ = new optional_header_impl_pe;
+                optional_header_->set_magic(OH_MAGIC_PE32);
+                create_win_header();
+            }
+            if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
+                optional_header_ = new optional_header_impl_pe;
+            }
+            if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                optional_header_ = new optional_header_impl_ti;
+            }
+            coff_header_->set_optional_header_size(
+                        optional_header_->get_sizeof() +
+                        win_header_->get_sizeof() +
+                        directories_.size() * sizeof(image_data_directory));
+        }
+
+        //---------------------------------------------------------------------
         dos_header* get_msdos_header()
+        {
+            return dos_header_;
+        }
+        const dos_header* get_msdos_header() const
         {
             return dos_header_;
         }
@@ -312,9 +373,17 @@ namespace COFFI {
         {
             return coff_header_;
         }
+        const coff_header* get_header() const
+        {
+            return coff_header_;
+        }
 
         //---------------------------------------------------------------------
-        optional_header* get_opt_header()
+        optional_header* get_optional_header()
+        {
+            return optional_header_;
+        }
+        const optional_header* get_optional_header() const
         {
             return optional_header_;
         }
@@ -324,15 +393,50 @@ namespace COFFI {
         {
             return win_header_;
         }
-
-        const std::vector<image_data_directory>& get_directory()
+        const win_header* get_win_header() const
         {
-            return directory;
+            return win_header_;
         }
 
-        const Sections get_sections()
+        //---------------------------------------------------------------------
+        const sections &get_sections() const
         {
-            return Sections( this );
+            return sections_;
+        }
+        sections &get_sections()
+        {
+            return sections_;
+        }
+        section *add_section(const std::string &name)
+        {
+            section *sec;
+            if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                sec = new section_impl_ti{this, this, this};
+            } else {
+                sec = new section_impl{this, this, this};
+            }
+            sec->set_index(sections_.size());
+            sec->set_name(name);
+            sections_.push_back(sec);
+            return sec;
+        }
+
+        //---------------------------------------------------------------------
+        const directories &get_directories() const
+        {
+            return directories_;
+        }
+        directories &get_directories()
+        {
+            return directories_;
+        }
+        directory &add_directory(const image_data_directory &rva_and_size)
+        {
+            directory d(directories_.size());
+            d.set_virtual_address(rva_and_size.virtual_address);
+            d.set_size(rva_and_size.size);
+            directories_.push_back(d);
+            return *(directories_.end() - 1);
         }
 
         //---------------------------------------------------------------------
@@ -398,15 +502,32 @@ namespace COFFI {
                 win_header_ = 0;
             }
 
+            clean_unused_spaces();
+
             size_t size = sections_.size();
             for ( size_t i = 0; i < size; ++i ) {
                 delete sections_[i];
             }
             sections_.clear();
 
-            if ( strings != 0 ) {
-                delete[] strings;
-                strings = 0;
+            directories_.clear();
+
+            clean_symbols();
+            clean_strings();
+        }
+
+        //---------------------------------------------------------------------
+        void create_win_header()
+        {
+            if (win_header_ != 0) {
+                delete win_header_;
+            }
+            if ( optional_header_->get_magic() == OH_MAGIC_PE32PLUS ) {
+                win_header_ = new win_header_impl < win_header_pe_plus >;
+            }
+            else if ( optional_header_->get_magic() == OH_MAGIC_PE32 ||
+                      optional_header_->get_magic() == OH_MAGIC_PE32ROM ) {
+                win_header_ = new win_header_impl < win_header_pe >;
             }
         }
 
@@ -416,13 +537,15 @@ namespace COFFI {
             std::streampos pos = stream.tellg();
             for ( int i = 0; i < coff_header_->get_sections_count(); ++i ) {
                 section* sec;
-                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVAX)) {
-                    sec = new section_impl( this, this, this, this );
+                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVA)) {
+                    sec = new section_impl( this, this, this );
                 }
                 if (architecture_ == COFFI_ARCHITECTURE_TI) {
-                    sec = new section_impl_ti( this, this, this, this );
+                    sec = new section_impl_ti( this, this, this );
                 }
-                sec->load( stream, i * sec->header_sizeof() + pos );
+                if (!(sec->load( stream, i * sec->get_sizeof() + pos ))) {
+                    return false;
+                }
                 sec->set_index( i );
                 sections_.push_back( sec );
             }
@@ -431,101 +554,333 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
-        bool load_symbols( std::istream &stream )
+        bool save_to_stream( std::ostream &stream )
         {
-            if ( coff_header_->get_symbol_table_offset() == 0 ) {
-                return true;
+            // Order all the data pages to be written
+            clean_unused_spaces();
+            populate_data_pages();
+            compute_offsets();
+
+            // Eventually add unused spaces to respect the file alignment
+            populate_data_pages();
+            apply_file_alignment();
+            populate_data_pages();
+            compute_offsets();
+
+            // Compute the header fields
+            coff_header_->set_sections_count(sections_.size());
+            if (symbols_.size() > 0) {
+                coff_header_->set_symbols_count(symbols_.back().get_index() + symbols_.back().get_aux_symbols_number() + 1);
+            } else {
+                coff_header_->set_symbols_count(0);
+            }
+            coff_header_->set_optional_header_size(0);
+            if (optional_header_) {
+                coff_header_->set_optional_header_size(
+                            coff_header_->get_optional_header_size() +
+                            optional_header_->get_sizeof());
+            }
+            if (win_header_) {
+                win_header_->set_number_of_rva_and_sizes(directories_.size());
+                coff_header_->set_optional_header_size(
+                            coff_header_->get_optional_header_size() +
+                            win_header_->get_sizeof() +
+                            directories_.get_sizeof());
             }
 
-            stream.seekg( coff_header_->get_symbol_table_offset() );
-            for ( uint32_t i = 0; i < coff_header_->get_symbols_count(); ++i ) {
-                symbol_ext s;
+            if ((architecture_ == COFFI_ARCHITECTURE_PE) && (dos_header_ != 0))
+            {
+                dos_header_->save( stream );
+            }
 
-                stream.read( reinterpret_cast<char*>( &s.sym ), sizeof(symbol) );
-                if ( stream.gcount() != sizeof(symbol) ) {
-                    return false;
-                }
+            coff_header_->save( stream );
 
-                for ( uint8_t j = 0; j < s.sym.aux_symbols_number; ++j ) {
-                    auxiliary_symbol_record a;
-                    stream.read( reinterpret_cast<char*>( &a.value ), sizeof(symbol) );
-                    if ( stream.gcount() != sizeof(symbol) ) {
-                        return false;
+            if ( optional_header_ != 0 ) {
+                optional_header_->save( stream );
+
+                if (architecture_ == COFFI_ARCHITECTURE_PE) {
+
+                    if ( win_header_ != 0 ) {
+                        win_header_->save( stream );
+                        directories_.save( stream );
                     }
-                    s.auxs.push_back( a );
-                    symbols.push_back( s );
-                    ++i;
                 }
-
-                symbols.push_back( s );
             }
+
+            for (auto sec: sections_ ) {
+                sec->save_header( stream );
+            }
+
+            for (auto dp: data_pages_) {
+                section *sec;
+                switch (dp.type) {
+                case DATA_PAGE_RAW:
+                    sec = sections_[dp.index];
+                    sec->save_data( stream );
+                    break;
+                case DATA_PAGE_RELOCATIONS:
+                    sec = sections_[dp.index];
+                    sec->save_relocations( stream );
+                    break;
+                case DATA_PAGE_LINE_NUMBERS:
+                    sec = sections_[dp.index];
+                    sec->save_line_numbers( stream );
+                    break;
+                case DATA_PAGE_DIRECTORY:
+                    directories_[dp.index].save_data(stream);
+                    break;
+                case DATA_PAGE_UNUSED:
+                    stream.write(unused_spaces_[dp.index].data, unused_spaces_[dp.index].size);
+                    break;
+                }
+            }
+
+            save_symbols( stream );
+
+            save_strings( stream );
 
             return true;
         }
 
         //---------------------------------------------------------------------
-        bool load_strings( std::istream &stream )
+        bool compute_win_header_checksum(std::istream &src, std::ostream &dst)
         {
-            if ( coff_header_->get_symbol_table_offset() == 0 ) {
-                return true;
-            }
-
-            stream.seekg( coff_header_->get_symbol_table_offset() +
-                          coff_header_->get_symbols_count() * sizeof(symbol) );
-            uint32_t count;
-            stream.read( reinterpret_cast<char*>( &count ), sizeof( count ) );
-            strings = new char[count];
-            stream.seekg( coff_header_->get_symbol_table_offset() +
-                          coff_header_->get_symbols_count() * sizeof(symbol) );
-            stream.read( strings, count );
-            if ( stream.gcount() != static_cast<std::streamsize>(count) ) {
+            if (!dos_header_ || !coff_header_ || !optional_header_ || !win_header_) {
                 return false;
             }
 
+            // Get the file size
+            src.seekg(0, std::ios::end);
+            uint32_t file_size = src.tellg();
+            src.seekg(0);
+
+            // Compute the checksum offset
+            uint32_t chk_offset =
+                    dos_header_->get_pe_sign_location() + 4 +
+                    coff_header_->get_sizeof() +
+                    optional_header_->get_sizeof() +
+                    (is_PE32_plus() ? 40 : 36);
+
+            // Copy the file and compute the checksum
+            uint32_t chk = 0;
+            for (uint32_t i = 0; i < file_size; i += 2) {
+                char bytes[2] = {0, 0};
+                src.read(bytes, 2);
+                dst.write(bytes, src.gcount());
+                uint16_t word = *(reinterpret_cast<uint16_t*>(bytes));
+                if ((i >= chk_offset) && (i < chk_offset + 4)) {
+                    word = 0;
+                }
+                chk += word;
+                chk = (chk >> 16) + (chk & 0xffff);
+            }
+            chk = (uint16_t)(((chk >> 16) + chk) & 0xffff);
+            chk += file_size;
+
+            // Update the checksum in the dst stream
+            dst.seekp(chk_offset);
+            dst.write(reinterpret_cast<char*>(&chk), 4);
             return true;
         }
 
         //---------------------------------------------------------------------
-        virtual std::string string_to_name( const char* str ) const
+        void populate_data_pages()
         {
-            std::string ret;
-
-            if ( *(uint32_t*)str == 0 && strings != 0 ) {
-                uint32_t off = *(uint32_t*)( str + sizeof( uint32_t ) );
-                ret = strings + off;
+            data_pages_.clear();
+            for (auto sec: sections_) {
+                if (sec->get_data_offset() > 0 || sec->get_data()) {
+                    data_pages_.push_back(data_page{DATA_PAGE_RAW, sec->get_data_offset(), sec->get_data_size(), sec->get_index()});
+                }
+                if (sec->get_reloc_offset() > 0 || sec->get_reloc_count() > 0) {
+                    data_pages_.push_back(data_page{DATA_PAGE_RELOCATIONS, sec->get_reloc_offset(), sec->get_relocations_filesize(), sec->get_index()});
+                }
+                if ((architecture_ != COFFI_ARCHITECTURE_TI) && (sec->get_line_num_count() > 0)) {
+                    data_pages_.push_back(data_page{DATA_PAGE_LINE_NUMBERS, sec->get_line_num_offset(), sec->get_line_numbers_filesize(), sec->get_index()});
+                }
             }
-            else {
-                char dst[COFFI_NAME_SIZE + 1] = {'\0'};
-                std::strncpy( dst, str, COFFI_NAME_SIZE );
-                ret = std::string( dst );
+            for (auto d = directories_.begin(); d != directories_.end(); d++) {
+                if (d->get_data_filesize() > 0) {
+                    data_pages_.push_back(data_page{DATA_PAGE_DIRECTORY, d->get_virtual_address(), d->get_size(), d->get_index()});
+                }
             }
 
-            return ret;
+            for (uint32_t i = 0; i < unused_spaces_.size(); i++) {
+                data_pages_.push_back(data_page{DATA_PAGE_UNUSED, unused_spaces_[i].offset, unused_spaces_[i].size, i});
+            }
+
+            std::sort(data_pages_.begin(), data_pages_.end(), [](const data_page &a, const data_page &b) {
+                if (a.offset != b.offset) {
+                    return a.offset < b.offset;
+                }
+                if (a.type != b.type) {
+                    return a.type < b.type;
+                }
+                return a.index < b.index;
+            });
         }
 
         //---------------------------------------------------------------------
-        virtual const symbol_ext get_symbol( uint32_t index ) const
+        uint32_t get_header_end_offset()
         {
-            if ( index < symbols.size() ) {
-                return symbols[index];
+            uint32_t offset = 0;
+            if (dos_header_) {
+                offset = dos_header_->get_pe_sign_location();
+                offset += 4;
+            }
+            if (coff_header_) {
+                offset += coff_header_->get_sizeof();
+            }
+            if (optional_header_) {
+                offset += optional_header_->get_sizeof();
+            }
+            if (win_header_) {
+                offset += win_header_->get_sizeof();
+            }
+            offset += directories_.get_sizeof();
+            for (auto sec: sections_ ) {
+                offset += sec->get_sizeof();
+            }
+            return offset;
+        }
+
+        void compute_offsets()
+        {
+            uint32_t offset = get_header_end_offset();
+
+            for (auto dp: data_pages_) {
+                auto sec = sections_[dp.index];
+                switch (dp.type) {
+                case DATA_PAGE_RAW:
+                    if (sec->get_data()) {
+                        sec->set_data_offset(offset);
+                        offset += sec->get_data_size();
+                    } else if (sec->get_data_offset() != 0) {
+                        sec->set_data_offset(offset);
+                    }
+                    break;
+                case DATA_PAGE_RELOCATIONS:
+                    if (sec->get_reloc_count() > 0) {
+                        sec->set_reloc_offset(offset);
+                    } else {
+                        sec->set_reloc_offset(0);
+                    }
+                    offset += sec->get_relocations_filesize();
+                    break;
+                case DATA_PAGE_LINE_NUMBERS:
+                    if (sec->get_line_num_count() > 0) {
+                        sec->set_line_num_offset(offset);
+                    } else {
+                        sec->set_line_num_offset(0);
+                    }
+                    offset += sec->get_line_numbers_filesize();
+                    break;
+                case DATA_PAGE_DIRECTORY:
+                    if (directories_[dp.index].get_data_filesize() > 0) {
+                        if (directories_[dp.index].get_virtual_address() != 0) {
+                            directories_[dp.index].set_virtual_address(offset);
+                        }
+                        offset += directories_[dp.index].get_data_filesize();
+                    }
+                    break;
+                case DATA_PAGE_UNUSED:
+                    offset += unused_spaces_[dp.index].size;
+                    break;
+                }
             }
 
-            symbol_ext sym;
-
-            return sym;
+            if (symbols_.size() == 0) {
+                offset = 0;
+            }
+            coff_header_->set_symbol_table_offset(offset);
         }
 
         //---------------------------------------------------------------------
-    private:
-        dos_header*                       dos_header_;
-        coff_header*                      coff_header_;
-        optional_header*                  optional_header_;
-        win_header*                       win_header_;
-        std::vector<image_data_directory> directory;
-        std::vector<section*>             sections_;
-        std::vector<symbol_ext>           symbols;
-        char*                             strings;
-        coffi_architecture_t              architecture_;
+        void apply_file_alignment()
+        {
+            if (!win_header_) {
+                return;
+            }
+            uint32_t file_alignment = win_header_->get_file_alignment();
+            uint32_t previous_offset = get_header_end_offset();
+            uint32_t previous_size = previous_offset;
+            const data_page *previous_dp = nullptr;
+            for (auto dp = data_pages_.begin(); dp != data_pages_.end(); dp++) {
+                if ((previous_size % file_alignment) != 0) {
+                    uint32_t size = file_alignment - (previous_size % file_alignment);
+                    if (previous_dp && previous_dp->type == DATA_PAGE_RAW) {
+                        // Extend the previous section data
+                        char *padding = new char[size];
+                        if (padding) {
+                            std::memset(padding, 0, size);
+                            sections_[previous_dp->index]->append_data(padding, size);
+                        }
+                    } else {
+                        // Add an unused space
+                        add_unused_space(previous_offset, size);
+                    }
+                }
+                previous_dp = &*dp;
+                previous_size = dp->size;
+                if (dp->offset > 0) {
+                    previous_offset = dp->offset + dp->size;
+                }
+            }
+        }
+
+        //---------------------------------------------------------------------
+        void clean_unused_spaces()
+        {
+            for (auto us: unused_spaces_) {
+                delete[] us.data;
+            }
+            unused_spaces_.clear();
+        }
+
+        void add_unused_space(uint32_t offset, uint32_t size, uint8_t padding_byte = 0)
+        {
+            unused_space us;
+            us.data = new char[size];
+            if (us.data) {
+                std::memset(us.data, padding_byte, size);
+                us.size = size;
+                us.offset = offset;
+                unused_spaces_.push_back(us);
+            }
+        }
+
+        //---------------------------------------------------------------------
+        enum data_page_type {
+            DATA_PAGE_UNUSED,
+            DATA_PAGE_RAW,
+            DATA_PAGE_RELOCATIONS,
+            DATA_PAGE_LINE_NUMBERS,
+            DATA_PAGE_DIRECTORY,
+        };
+
+        struct data_page {
+            data_page_type type;
+            uint32_t offset;
+            uint32_t size;
+            // Section index, directory index, index in unused_spaces_
+            uint32_t index;
+        };
+
+        struct unused_space{
+            uint32_t offset;
+            uint32_t size;
+            char *data;
+        };
+
+        //---------------------------------------------------------------------
+        coffi_architecture_t      architecture_;
+        dos_header*               dos_header_;
+        coff_header*              coff_header_;
+        optional_header*          optional_header_;
+        win_header*               win_header_;
+        directories               directories_;
+        sections                  sections_;
+        std::vector<unused_space> unused_spaces_;
+        std::vector<data_page>    data_pages_;
     };
 
 } // namespace COFFI

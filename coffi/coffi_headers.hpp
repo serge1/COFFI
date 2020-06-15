@@ -33,39 +33,61 @@ namespace COFFI {
     //------------------------------------------------------------------------------
     class dos_header
     {
-        friend class coffi;
     public:
         //------------------------------------------------------------------------------
         dos_header()
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
+            static const uint8_t default_stub[] = {
+                0x0E, 0x1F, 0xBA, 0x0E, 0x00, 0xB4, 0x09, 0xCD, 0x21, 0xB8, 0x01, 0x4C, 0xCD, 0x21, 0x54, 0x68,
+                0x69, 0x73, 0x20, 0x70, 0x72, 0x6F, 0x67, 0x72, 0x61, 0x6D, 0x20, 0x63, 0x61, 0x6E, 0x6E, 0x6F,
+                0x74, 0x20, 0x62, 0x65, 0x20, 0x72, 0x75, 0x6E, 0x20, 0x69, 0x6E, 0x20, 0x44, 0x4F, 0x53, 0x20,
+                0x6D, 0x6F, 0x64, 0x65, 0x2E, 0x0D, 0x0D, 0x0A, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,                
+            };
+            stub_ = 0;
+            stub_size_ = 0;
+            std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
+            set_stub(reinterpret_cast<const char*>(default_stub), sizeof(default_stub));
+            set_signature('M' + ('Z' << 8));
+            set_bytes_in_last_block(144);
+            set_blocks_in_file(3);
+            set_header_paragraphs(4);
+            set_max_extra_paragraphs(65535);
+            set_sp(184);
+            set_reloc_table_offset(64);
+            set_pe_sign_location(sizeof(msdos_header) + get_stub_size());
+        }
+        virtual ~dos_header()
+        {
+            clean();
         }
 
         //------------------------------------------------------------------------------
-        COFFI_GET_ACCESS( uint16_t, signature );
-        COFFI_GET_ACCESS( uint16_t, bytes_in_last_block );
-        COFFI_GET_ACCESS( uint16_t, blocks_in_file );
-        COFFI_GET_ACCESS( uint16_t, num_relocs );
-        COFFI_GET_ACCESS( uint16_t, header_paragraphs );
-        COFFI_GET_ACCESS( uint16_t, min_extra_paragraphs );
-        COFFI_GET_ACCESS( uint16_t, max_extra_paragraphs );
-        COFFI_GET_ACCESS( uint16_t, ss );
-        COFFI_GET_ACCESS( uint16_t, sp );
-        COFFI_GET_ACCESS( uint16_t, checksum );
-        COFFI_GET_ACCESS( uint16_t, ip );
-        COFFI_GET_ACCESS( uint16_t, cs );
-        COFFI_GET_ACCESS( uint16_t, reloc_table_offset );
-        COFFI_GET_ACCESS( uint16_t, overlay_number );
-        COFFI_GET_ACCESS( short, oem_id );
-        COFFI_GET_ACCESS( short, oem_info );
-        COFFI_GET_ACCESS( long, pe_sign_location );
+        COFFI_GET_SET_ACCESS( uint16_t, signature );
+        COFFI_GET_SET_ACCESS( uint16_t, bytes_in_last_block );
+        COFFI_GET_SET_ACCESS( uint16_t, blocks_in_file );
+        COFFI_GET_SET_ACCESS( uint16_t, num_relocs );
+        COFFI_GET_SET_ACCESS( uint16_t, header_paragraphs );
+        COFFI_GET_SET_ACCESS( uint16_t, min_extra_paragraphs );
+        COFFI_GET_SET_ACCESS( uint16_t, max_extra_paragraphs );
+        COFFI_GET_SET_ACCESS( uint16_t, ss );
+        COFFI_GET_SET_ACCESS( uint16_t, sp );
+        COFFI_GET_SET_ACCESS( uint16_t, checksum );
+        COFFI_GET_SET_ACCESS( uint16_t, ip );
+        COFFI_GET_SET_ACCESS( uint16_t, cs );
+        COFFI_GET_SET_ACCESS( uint16_t, reloc_table_offset );
+        COFFI_GET_SET_ACCESS( uint16_t, overlay_number );
+        COFFI_GET_SET_ACCESS( uint16_t, oem_id );
+        COFFI_GET_SET_ACCESS( uint16_t, oem_info );
+        COFFI_GET_SET_ACCESS( int32_t, pe_sign_location );
+
+        COFFI_GET_SIZEOF();
 
         //------------------------------------------------------------------------------
-    protected:
-
-        //---------------------------------------------------------------------
         bool load( std::istream &stream )
         {
+            clean();
+
             // Read EXE file signature
             char e_ident0[CI_NIDENT0];
             stream.read( reinterpret_cast<char*>( &e_ident0 ), sizeof( e_ident0 ) );
@@ -85,8 +107,18 @@ namespace COFFI {
                 return false;
             }
 
+            stub_size_ = header.pe_sign_location - sizeof( header );
+            char *read_stub = new char[stub_size_];
+            if (read_stub == 0) {
+                return false;
+            }
+            stream.read(read_stub, stub_size_ );
+            stub_ = read_stub;
+            if ( stream.gcount() != stub_size_ ) {
+                return false;
+            }
+
             char e_ident1[CI_NIDENT1];
-            stream.seekg( header.pe_sign_location );
             stream.read( e_ident1, CI_NIDENT1 );
             if ( stream.gcount() != CI_NIDENT1 ||
                  e_ident1[CI_MAG2] != PEMAG2 ||
@@ -100,31 +132,85 @@ namespace COFFI {
         }
 
         //------------------------------------------------------------------------------
+        void save( std::ostream &stream )
+        {
+            stream.write( reinterpret_cast<char*>( &header ), sizeof( header ) );
+            stream.write( stub_, stub_size_ );
+            stream.put( PEMAG2 );
+            stream.put( PEMAG3 );
+            stream.put( PEMAG4 );
+            stream.put( PEMAG5 );
+        }
+
+        //------------------------------------------------------------------------------
+        virtual const char* get_stub() const
+        {
+            return stub_;
+        }
+        virtual uint32_t get_stub_size() const
+        {
+            return stub_size_;
+        }
+
+        void set_stub(const char *data, uint32_t size)
+        {
+            if (stub_ != 0) {
+                delete[] stub_;
+            }
+            stub_size_ = size;
+            char *new_stub = new char[stub_size_];
+            if (new_stub == 0) {
+                stub_size_ = 0;
+            } else {
+                std::copy(data, data + size, new_stub);
+            }
+            stub_ = new_stub;
+        }
+        void set_stub(const std::string &data)
+        {
+            set_stub(data.c_str(), data.size());
+        }
+
+        //------------------------------------------------------------------------------
     private:
+        //------------------------------------------------------------------------------
+        void clean()
+        {
+            if (stub_ != 0) {
+                delete[] stub_;
+                stub_ = 0;
+            }
+        }
+
+        //------------------------------------------------------------------------------
         msdos_header header;
+        const char *stub_;
+        int stub_size_;
     };
 
 
     //------------------------------------------------------------------------------
     class coff_header
     {
-        friend class coffi;
     public:
         virtual ~coff_header()
         {
-        };
+        }
 
-        COFFI_GET_ACCESS_DECL( uint16_t, version );
-        COFFI_GET_ACCESS_DECL( uint16_t, machine );
-        COFFI_GET_ACCESS_DECL( uint16_t, sections_count );
-        COFFI_GET_ACCESS_DECL( uint32_t, time_data_stamp );
-        COFFI_GET_ACCESS_DECL( uint32_t, symbol_table_offset );
-        COFFI_GET_ACCESS_DECL( uint32_t, symbols_count );
-        COFFI_GET_ACCESS_DECL( uint16_t, optional_header_size );
-        COFFI_GET_ACCESS_DECL( uint16_t, flags );
-        COFFI_GET_ACCESS_DECL( uint16_t, target_id );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, machine );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, sections_count );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, time_data_stamp );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, symbol_table_offset );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, symbols_count );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, optional_header_size );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, flags );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, target_id );
+
+        COFFI_GET_SIZEOF_DECL();
 
         virtual bool load( std::istream &stream ) = 0;
+        virtual void save( std::ostream &stream ) = 0;
     };
 
     //------------------------------------------------------------------------------
@@ -139,12 +225,14 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
 
-        COFFI_GET_ACCESS( uint16_t, sections_count );
-        COFFI_GET_ACCESS( uint32_t, time_data_stamp );
-        COFFI_GET_ACCESS( uint32_t, symbol_table_offset );
-        COFFI_GET_ACCESS( uint32_t, symbols_count );
-        COFFI_GET_ACCESS( uint16_t, optional_header_size );
-        COFFI_GET_ACCESS( uint16_t, flags );
+        COFFI_GET_SET_ACCESS( uint16_t, sections_count );
+        COFFI_GET_SET_ACCESS( uint32_t, time_data_stamp );
+        COFFI_GET_SET_ACCESS( uint32_t, symbol_table_offset );
+        COFFI_GET_SET_ACCESS( uint32_t, symbols_count );
+        COFFI_GET_SET_ACCESS( uint16_t, optional_header_size );
+        COFFI_GET_SET_ACCESS( uint16_t, flags );
+
+        COFFI_GET_SIZEOF();
 
         //------------------------------------------------------------------------------
 
@@ -159,6 +247,12 @@ namespace COFFI {
         }
 
         //------------------------------------------------------------------------------
+        void save( std::ostream &stream )
+        {
+            stream.write( reinterpret_cast<char*>( &header ), sizeof( header ) );
+        }
+
+        //------------------------------------------------------------------------------
     protected:
         T header;
     };
@@ -167,54 +261,43 @@ namespace COFFI {
     class coff_header_impl : public coff_header_impl_tmpl<coff_file_header>
     {
     public:
-        COFFI_GET_ACCESS( uint16_t, machine );
-
-        uint16_t get_version() const
-        {
-            throw std::runtime_error("The header target_id field is not applicable to this COFF version");
-        }
-
-        uint16_t get_target_id() const
-        {
-            throw std::runtime_error("The header target_id field is not applicable to this COFF version");
-        }
+        COFFI_GET_SET_ACCESS( uint16_t, machine );
+        COFFI_GET_SET_ACCESS_NONE( uint16_t, version );
+        COFFI_GET_SET_ACCESS_NONE( uint16_t, target_id );
     };
 
     //------------------------------------------------------------------------------
     class coff_header_impl_ti : public coff_header_impl_tmpl<coff_file_header_ti>
     {
     public:
-
-        COFFI_GET_ACCESS( uint16_t, version );
-        COFFI_GET_ACCESS( uint16_t, target_id );
-
-        uint16_t get_machine() const
-        {
-            throw std::runtime_error("The header machine field is not applicable to this COFF version");
-        }
+        COFFI_GET_SET_ACCESS( uint16_t, version );
+        COFFI_GET_SET_ACCESS( uint16_t, target_id );
+        COFFI_GET_SET_ACCESS_NONE( uint16_t, machine );
     };
 
     //------------------------------------------------------------------------------
     class optional_header
     {
-        friend class coffi;
     public:
         virtual ~optional_header()
         {
         };
 
-        COFFI_GET_ACCESS_DECL( uint16_t, magic );
-        COFFI_GET_ACCESS_DECL( uint8_t, major_linker_version );
-        COFFI_GET_ACCESS_DECL( uint8_t, minor_linker_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, linker_version );
-        COFFI_GET_ACCESS_DECL( uint32_t, code_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, initialized_data_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, uninitialized_data_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, entry_point_address );
-        COFFI_GET_ACCESS_DECL( uint32_t, code_base );
-        COFFI_GET_ACCESS_DECL( uint32_t, data_base );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, magic );
+        COFFI_GET_SET_ACCESS_DECL( uint8_t, major_linker_version );
+        COFFI_GET_SET_ACCESS_DECL( uint8_t, minor_linker_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, linker_version );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, code_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, initialized_data_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, uninitialized_data_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, entry_point_address );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, code_base );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, data_base );
+
+        COFFI_GET_SIZEOF_DECL();
 
         virtual bool load( std::istream &stream ) = 0;
+        virtual void save( std::ostream &stream ) = 0;
     };
 
     //------------------------------------------------------------------------------
@@ -229,13 +312,14 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
 
-        COFFI_GET_ACCESS( uint16_t, magic );
-        COFFI_GET_ACCESS( uint32_t, code_size );
-        COFFI_GET_ACCESS( uint32_t, initialized_data_size );
-        COFFI_GET_ACCESS( uint32_t, uninitialized_data_size );
-        COFFI_GET_ACCESS( uint32_t, entry_point_address );
-        COFFI_GET_ACCESS( uint32_t, code_base );
-        COFFI_GET_ACCESS( uint32_t, data_base );
+        COFFI_GET_SET_ACCESS( uint16_t, magic );
+        COFFI_GET_SET_ACCESS( uint32_t, code_size );
+        COFFI_GET_SET_ACCESS( uint32_t, initialized_data_size );
+        COFFI_GET_SET_ACCESS( uint32_t, uninitialized_data_size );
+        COFFI_GET_SET_ACCESS( uint32_t, entry_point_address );
+        COFFI_GET_SET_ACCESS( uint32_t, code_base );
+
+        COFFI_GET_SIZEOF();
 
         //---------------------------------------------------------------------
         bool load( std::istream &stream )
@@ -247,88 +331,83 @@ namespace COFFI {
             if ( stream.gcount() != sizeof( header ) ) {
                 return false;
             }
-
-            // Check magic number and decide whether we are PE32 or PE32+ format
-            if ( header.magic == OH_MAGIC_PE32PLUS ) {
-                // data_base field is not used for PE32+ images
-                header.data_base = 0;
-                stream.seekg( ( -1 ) * ( int )sizeof( header.data_base ),
-                              std::ios_base::cur );
-            }
-
             return true;
         }
 
         //------------------------------------------------------------------------------
+        void save( std::ostream &stream )
+        {
+            stream.write( reinterpret_cast<char*>( &header ), sizeof( header ) );
+        }
 
+        //------------------------------------------------------------------------------
         T header;
     };
 
     //------------------------------------------------------------------------------
-    class optional_header_impl : public optional_header_impl_tmpl<common_optional_header>
+    class optional_header_impl_pe : public optional_header_impl_tmpl<coff_optional_header_pe>
     {
     public:
+        COFFI_GET_SET_ACCESS( uint8_t, major_linker_version );
+        COFFI_GET_SET_ACCESS( uint8_t, minor_linker_version );
+        COFFI_GET_SET_ACCESS_NONE( uint16_t, linker_version );
+        COFFI_GET_SET_ACCESS( uint32_t, data_base );
+    };
 
-        COFFI_GET_ACCESS( uint8_t, major_linker_version );
-        COFFI_GET_ACCESS( uint8_t, minor_linker_version );
-
-        uint16_t get_linker_version() const
-        {
-            throw std::runtime_error("The optional header linker_version field is not applicable to this COFF version");
-        }
+    //------------------------------------------------------------------------------
+    class optional_header_impl_pe_plus : public optional_header_impl_tmpl<coff_optional_header_pe_plus>
+    {
+    public:
+        COFFI_GET_SET_ACCESS( uint8_t, major_linker_version );
+        COFFI_GET_SET_ACCESS( uint8_t, minor_linker_version );
+        COFFI_GET_SET_ACCESS_NONE( uint16_t, linker_version );
+        COFFI_GET_SET_ACCESS_NONE( uint32_t, data_base );
     };
 
     //------------------------------------------------------------------------------
     class optional_header_impl_ti : public optional_header_impl_tmpl<common_optional_header_ti>
     {
     public:
-
-        COFFI_GET_ACCESS( uint16_t, linker_version );
-
-        uint8_t get_major_linker_version() const
-        {
-            throw std::runtime_error("The optional header major_linker_version field is not applicable to this COFF version");
-        }
-
-        uint8_t get_minor_linker_version() const
-        {
-            throw std::runtime_error("The optional header minor_linker_version field is not applicable to this COFF version");
-        }
+        COFFI_GET_SET_ACCESS( uint16_t, linker_version );
+        COFFI_GET_SET_ACCESS_NONE( uint8_t, major_linker_version );
+        COFFI_GET_SET_ACCESS_NONE( uint8_t, minor_linker_version );
+        COFFI_GET_SET_ACCESS( uint32_t, data_base );
     };
 
     //------------------------------------------------------------------------------
     class win_header
     {
-        friend class coffi;
     public:
         virtual ~win_header()
         {
         };
 
-        COFFI_GET_ACCESS_DECL( uint64_t, image_base );
-        COFFI_GET_ACCESS_DECL( uint32_t, section_alignment );
-        COFFI_GET_ACCESS_DECL( uint32_t, file_alignment );
-        COFFI_GET_ACCESS_DECL( uint16_t, major_os_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, minor_os_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, major_image_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, minor_image_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, major_subsystem_version );
-        COFFI_GET_ACCESS_DECL( uint16_t, minor_subsystem_version );
-        COFFI_GET_ACCESS_DECL( uint32_t, win32_version_value );
-        COFFI_GET_ACCESS_DECL( uint32_t, image_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, headers_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, checksum );
-        COFFI_GET_ACCESS_DECL( uint16_t, subsystem );
-        COFFI_GET_ACCESS_DECL( uint16_t, dll_flags );
-        COFFI_GET_ACCESS_DECL( uint64_t, stack_reserve_size );
-        COFFI_GET_ACCESS_DECL( uint64_t, stack_commit_size );
-        COFFI_GET_ACCESS_DECL( uint64_t, heap_reserve_size );
-        COFFI_GET_ACCESS_DECL( uint64_t, heap_commit_size );
-        COFFI_GET_ACCESS_DECL( uint32_t, loader_flags );
-        COFFI_GET_ACCESS_DECL( uint32_t, number_of_rva_and_sizes );
+        COFFI_GET_SET_ACCESS_DECL( uint64_t, image_base );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, section_alignment );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, file_alignment );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, major_os_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, minor_os_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, major_image_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, minor_image_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, major_subsystem_version );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, minor_subsystem_version );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, win32_version_value );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, image_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, headers_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, checksum );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, subsystem );
+        COFFI_GET_SET_ACCESS_DECL( uint16_t, dll_flags );
+        COFFI_GET_SET_ACCESS_DECL( uint64_t, stack_reserve_size );
+        COFFI_GET_SET_ACCESS_DECL( uint64_t, stack_commit_size );
+        COFFI_GET_SET_ACCESS_DECL( uint64_t, heap_reserve_size );
+        COFFI_GET_SET_ACCESS_DECL( uint64_t, heap_commit_size );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, loader_flags );
+        COFFI_GET_SET_ACCESS_DECL( uint32_t, number_of_rva_and_sizes );
 
-    protected:
+        COFFI_GET_SIZEOF_DECL();
+
         virtual bool load( std::istream&  f ) = 0;
+        virtual void save( std::ostream&  f ) = 0;
     };
 
 
@@ -340,33 +419,36 @@ namespace COFFI {
         win_header_impl()
         {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
+            set_image_base(0x00400000);
+            set_file_alignment(512);
         }
 
         //------------------------------------------------------------------------------
-        COFFI_GET_ACCESS( uint64_t, image_base );
-        COFFI_GET_ACCESS( uint32_t, section_alignment );
-        COFFI_GET_ACCESS( uint32_t, file_alignment );
-        COFFI_GET_ACCESS( uint16_t, major_os_version );
-        COFFI_GET_ACCESS( uint16_t, minor_os_version );
-        COFFI_GET_ACCESS( uint16_t, major_image_version );
-        COFFI_GET_ACCESS( uint16_t, minor_image_version );
-        COFFI_GET_ACCESS( uint16_t, major_subsystem_version );
-        COFFI_GET_ACCESS( uint16_t, minor_subsystem_version );
-        COFFI_GET_ACCESS( uint32_t, win32_version_value );
-        COFFI_GET_ACCESS( uint32_t, image_size );
-        COFFI_GET_ACCESS( uint32_t, headers_size );
-        COFFI_GET_ACCESS( uint32_t, checksum );
-        COFFI_GET_ACCESS( uint16_t, subsystem );
-        COFFI_GET_ACCESS( uint16_t, dll_flags );
-        COFFI_GET_ACCESS( uint64_t, stack_reserve_size );
-        COFFI_GET_ACCESS( uint64_t, stack_commit_size );
-        COFFI_GET_ACCESS( uint64_t, heap_reserve_size );
-        COFFI_GET_ACCESS( uint64_t, heap_commit_size );
-        COFFI_GET_ACCESS( uint32_t, loader_flags );
-        COFFI_GET_ACCESS( uint32_t, number_of_rva_and_sizes );
+        COFFI_GET_SET_ACCESS( uint64_t, image_base );
+        COFFI_GET_SET_ACCESS( uint32_t, section_alignment );
+        COFFI_GET_SET_ACCESS( uint32_t, file_alignment );
+        COFFI_GET_SET_ACCESS( uint16_t, major_os_version );
+        COFFI_GET_SET_ACCESS( uint16_t, minor_os_version );
+        COFFI_GET_SET_ACCESS( uint16_t, major_image_version );
+        COFFI_GET_SET_ACCESS( uint16_t, minor_image_version );
+        COFFI_GET_SET_ACCESS( uint16_t, major_subsystem_version );
+        COFFI_GET_SET_ACCESS( uint16_t, minor_subsystem_version );
+        COFFI_GET_SET_ACCESS( uint32_t, win32_version_value );
+        COFFI_GET_SET_ACCESS( uint32_t, image_size );
+        COFFI_GET_SET_ACCESS( uint32_t, headers_size );
+        COFFI_GET_SET_ACCESS( uint32_t, checksum );
+        COFFI_GET_SET_ACCESS( uint16_t, subsystem );
+        COFFI_GET_SET_ACCESS( uint16_t, dll_flags );
+        COFFI_GET_SET_ACCESS( uint64_t, stack_reserve_size );
+        COFFI_GET_SET_ACCESS( uint64_t, stack_commit_size );
+        COFFI_GET_SET_ACCESS( uint64_t, heap_reserve_size );
+        COFFI_GET_SET_ACCESS( uint64_t, heap_commit_size );
+        COFFI_GET_SET_ACCESS( uint32_t, loader_flags );
+        COFFI_GET_SET_ACCESS( uint32_t, number_of_rva_and_sizes );
+
+        COFFI_GET_SIZEOF();
 
         //------------------------------------------------------------------------------
-    protected:
         bool load( std::istream&  stream ) override
         {
             int read_size = sizeof( header );
@@ -380,6 +462,12 @@ namespace COFFI {
 
             return true;
         }
+
+        //------------------------------------------------------------------------------
+        void save( std::ostream &stream )
+        {
+            stream.write( reinterpret_cast<char*>( &header ), sizeof( header ) );
+        }        
 
         //------------------------------------------------------------------------------
     private:

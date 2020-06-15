@@ -50,7 +50,9 @@ namespace COFFI {
 #endif // COFFI_NO_CSTDINT
 #endif // COFFI_NO_OWN_TYPES
 
-    // Identification index
+#define COFFI_NAME_SIZE 8
+
+// Identification index
 #define CI_MAG0    0
 #define CI_MAG1    1
 #define CI_MAG2    0
@@ -60,7 +62,7 @@ namespace COFFI {
 #define CI_NIDENT0 2
 #define CI_NIDENT1 4
 
-    // Magic numbers
+// Magic numbers
 #define PEMAG0 'M'
 #define PEMAG1 'Z'
 #define PEMAG2 'P'
@@ -68,12 +70,29 @@ namespace COFFI {
 #define PEMAG4   0
 #define PEMAG5   0
 
-    // Magic numbers of optional header
+// Magic numbers of optional header
 #define OH_MAGIC_PE32     0x10B
 #define OH_MAGIC_PE32ROM  0x107
 #define OH_MAGIC_PE32PLUS 0x20B
 
-    // Machine Types
+// PE file characteristics
+#define IMAGE_FILE_RELOCS_STRIPPED         0x0001 // Image only, Windows CE, Windows NT and above. Indicates that the file does not contain base relocations and must therefore be loaded at its preferred base address. If the base address is not available, the loader reports an error. Operating systems running on top of MS-DOS (Win32s™) are generally not able to use the preferred base address and so cannot run these images. However, beginning with version 4.0, Windows will use an application’s preferred base address. The default behavior of the linker is to strip base relocations from EXEs.
+#define IMAGE_FILE_EXECUTABLE_IMAGE        0x0002 // Image only. Indicates that the image file is valid and can be run. If this flag is not set, it generally indicates a linker error.
+#define IMAGE_FILE_LINE_NUMS_STRIPPED      0x0004 // COFF line numbers have been removed.
+#define IMAGE_FILE_LOCAL_SYMS_STRIPPED     0x0008 // COFF symbol table entries for local symbols have been removed
+#define IMAGE_FILE_AGGRESSIVE_WS_TRIM      0x0010 // Aggressively trim working set.
+#define IMAGE_FILE_LARGE_ADDRESS_AWARE     0x0020 // App can handle > 2gb addresses.
+#define IMAGE_FILE_16BIT_MACHINE           0x0040 // Use of this flag is reserved for future use.
+#define IMAGE_FILE_BYTES_REVERSED_LO       0x0080 // Little endian: LSB precedes MSB in memory.
+#define IMAGE_FILE_32BIT_MACHINE           0x0100 // Machine based on 32-bit-word architecture.
+#define IMAGE_FILE_DEBUG_STRIPPED          0x0200 // Debugging information removed from image file.
+#define IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP 0x0400 // If image is on removable media, copy and run from swap file.
+#define IMAGE_FILE_SYSTEM                  0x1000 // The image file is a system file, not a user program.
+#define IMAGE_FILE_DLL                     0x2000 // The image file is a dynamic-link library (DLL). Such files are considered executable files for almost all purposes, although they cannot be directly run.
+#define IMAGE_FILE_UP_SYSTEM_ONLY          0x4000 // File should be run only on a UP machine.
+#define IMAGE_FILE_BYTES_REVERSED_HI       0x8000 //Big endian: MSB precedes LSB in memory.
+
+// PE machine Types
 #define IMAGE_FILE_MACHINE_UNKNOWN   0x0000  // The contents of this field are assumed to be applicable to any machine type
 #define IMAGE_FILE_MACHINE_AM33      0x01d3  // Matsushita AM33
 #define IMAGE_FILE_MACHINE_AMD64     0x8664  // x64
@@ -97,6 +116,7 @@ namespace COFFI {
 #define IMAGE_FILE_MACHINE_THUMB     0x01c2  // ARM or Thumb( "interworking" )
 #define IMAGE_FILE_MACHINE_WCEMIPSV2 0x0169  // MIPS little - endian WCE v2
 
+// PE section flags
 #define IMAGE_SCN_TYPE_NO_PAD            0x00000008 // The section should not be padded to the next boundary.This flag is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES.This is valid only for object files.
 #define IMAGE_SCN_CNT_CODE               0x00000020 // The section contains executable code.
 #define IMAGE_SCN_CNT_INITIALIZED_DATA   0x00000040 // The section contains initialized data.
@@ -133,7 +153,190 @@ namespace COFFI {
 #define IMAGE_SCN_MEM_READ               0x40000000 // The section can be read.
 #define IMAGE_SCN_MEM_WRITE              0x80000000 // The section can be written to.
 
-#define COFFI_NAME_SIZE 8
+// Portable Executable directories index
+#define DIRECTORY_EXPORT_TABLE             0
+#define DIRECTORY_IMPORT_TABLE             1
+#define DIRECTORY_RESOURCE_TABLE           2
+#define DIRECTORY_EXCEPTION_TABLE          3
+#define DIRECTORY_CERTIFICATE_TABLE        4
+#define DIRECTORY_BASE_RELOCATION_TABLE    5
+#define DIRECTORY_DEBUG                    6
+#define DIRECTORY_ARCHITECTURE             7
+#define DIRECTORY_GLOBAL_PTR               8
+#define DIRECTORY_TLS_TABLE                9
+#define DIRECTORY_LOAD_CONFIG_TABLE       10
+#define DIRECTORY_BOUND_IMPORT            11
+#define DIRECTORY_IAT                     12
+#define DIRECTORY_DELAY_IMPORT_DESCRIPTOR 13
+#define DIRECTORY_COMPLUS_RUNTIME_HEADER  14
+#define DIRECTORY_RESERVED                15
+
+// COFF Relocations Type Indicators - Intel 386
+#define IMAGE_REL_I386_ABSOLUTE           0x0000 // This relocation is ignored.
+#define IMAGE_REL_I386_DIR16              0x0001 // Not supported.
+#define IMAGE_REL_I386_REL16              0x0002 // Not supported.
+#define IMAGE_REL_I386_DIR32              0x0006 // The target’s 32-bit virtual address.
+#define IMAGE_REL_I386_DIR32NB            0x0007 // The target’s 32-bit relative virtual address.
+#define IMAGE_REL_I386_SEG12              0x0009 // Not supported.
+#define IMAGE_REL_I386_SECTION            0x000A // The 16-bit-section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_I386_SECREL             0x000B // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_I386_REL32              0x0014 // The 32-bit relative displacement to the target. This supports the x86 relative branch and call instructions.
+
+// COFF Relocations Type Indicators - MIPS Processors
+#define IMAGE_REL_MIPS_ABSOLUTE           0x0000 // This relocation is ignored.
+#define IMAGE_REL_MIPS_REFHALF            0x0001 // The high 16 bits of the target’s 32-bit virtual address.
+#define IMAGE_REL_MIPS_REFWORD            0x0002 // The target’s 32-bit virtual address.
+#define IMAGE_REL_MIPS_JMPADDR            0x0003 // The low 26 bits of the target’s virtual address. This supports the MIPS J and JAL instructions.
+#define IMAGE_REL_MIPS_REFHI              0x0004 // The high 16 bits of the target’s 32-bit virtual address. Used for the first instruction in a two-instruction sequence that loads a full address. This relocation must be immediately followed by a PAIR relocations whose SymbolTableIndex contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_MIPS_REFLO              0x0005 // The low 16 bits of the target’s virtual address.
+#define IMAGE_REL_MIPS_GPREL              0x0006 // 16-bit signed displacement of the target relative to the Global Pointer (GP) register.
+#define IMAGE_REL_MIPS_LITERAL            0x0007 // Same as IMAGE_REL_MIPS_GPREL.
+#define IMAGE_REL_MIPS_SECTION            0x000A // The 16-bit section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_MIPS_SECREL             0x000B // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_MIPS_SECRELLO           0x000C // The low 16 bits of the 32-bit offset of the target from the beginning of its section.
+#define IMAGE_REL_MIPS_SECRELHI           0x000D // The high 16 bits of the 32-bit offset of the target from the beginning of its section. A AIR relocation must immediately follow this on. The SymbolTableIndex of the PAIR relocation contains a signed 16-bit displacement, which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_MIPS_JMPADDR16          0x0010 // The low 26 bits of the target’s virtual address. This supports the MIPS16 JAL instruction.
+#define IMAGE_REL_MIPS_REFWORDNB          0x0022 // The target’s 32-bit relative virtual address.
+#define IMAGE_REL_MIPS_PAIR               0x0025 // This relocation is only valid when it immediately follows a REFHI or SECRELHI relocation. Its SymbolTableIndex contains a displacement and not an index into the symbol table.
+
+// COFF Relocations Type Indicators - Alpha Processors
+#define IMAGE_REL_ALPHA_ABSOLUTE          0x0000 // This relocation is ignored.
+#define IMAGE_REL_ALPHA_REFLONG           0x0001 // The target’s 32-bit virtual address. This fixup is illegal in a PE32+ image unless the image has been sandboxed by clearing the IMAGE_FILE_LARGE_ADDRESS_AWARE bit in the File Header.
+#define IMAGE_REL_ALPHA_REFQUAD           0x0002 // The target’s 64-bit virtual address.
+#define IMAGE_REL_ALPHA_GPREL32           0x0003 // 32-bit signed displacement of the target relative to the Global Pointer (GP) register.
+#define IMAGE_REL_ALPHA_LITERAL           0x0004 // 16-bit signed displacement of the target relative to the Global Pointer (GP) register.
+#define IMAGE_REL_ALPHA_LITUSE            0x0005 // Reserved for future use.
+#define IMAGE_REL_ALPHA_GPDISP            0x0006 // Reserved for future use.
+#define IMAGE_REL_ALPHA_BRADDR            0x0007 // The 21-bit relative displacement to the target. This supports the Alpha relative branch instructions.
+#define IMAGE_REL_ALPHA_HINT              0x0008 // 14-bit hints to the processor for the target of an Alpha jump instruction.
+#define IMAGE_REL_ALPHA_INLINE_REFLONG    0x0009 // The target’s 32-bit virtual address split into high and low 16-bit parts. Either an ABSOLUTE or MATCH relocation must immediately follow this relocation. The high 16 bits of the target address are stored in the location identified by the INLINE_REFLONG relocation. The low 16 bits are stored four bytes later if the following relocation is of type ABSOLUTE or at a signed displacement given in the SymbolTableIndex if the following relocation is of type MATCH.
+#define IMAGE_REL_ALPHA_REFHI             0x000A // The high 16 bits of the target’s 32-bit virtual address. Used for the first instruction in a two-instruction sequence that loads a full address. This relocation must be immediately followed by a PAIR relocations whose SymbolTableIndex contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_ALPHA_REFLO             0x000B // The low 16 bits of the target’s virtual address.
+#define IMAGE_REL_ALPHA_PAIR              0x000C // This relocation is only valid when it immediately follows a REFHI , REFQ3, REFQ2, or SECRELHI relocation. Its SymbolTableIndex contains a displacement and not an index into the symbol table.
+#define IMAGE_REL_ALPHA_MATCH             0x000D // This relocation is only valid when it immediately follows INLINE_REFLONG relocation. Its SymbolTableIndex contains the displacement in bytes of the location for the matching low address and not an index into the symbol table.
+#define IMAGE_REL_ALPHA_SECTION           0x000E // The 16-bit section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_ALPHA_SECREL            0x000F // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_ALPHA_REFLONGNB         0x0010 // The target’s 32-bit relative virtual address. IMAGE_REL_ALPHA_SECRELLO 0x0011 The low 16 bits of the 32-bit offset of the target from the beginning of its section.
+#define IMAGE_REL_ALPHA_SECRELHI          0x0012 // The high 16 bits of the 32-bit offset of the target from the beginning of its section. A PAIR relocation must immediately follow this on. The SymbolTableIndex of the PAIR relocation contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_ALPHA_REFQ3             0x0013 // The low 16 bits of the high 32 bits of the target’s 64-bit virtual address. This relocation must be immediately followed by a PAIR relocations whose SymbolTableIndex contains a signed 32-bit displacement which is added to the 16 bits taken from the location being relocated. The 16 bits in the relocated location are shifted left by 32 before this addition.
+#define IMAGE_REL_ALPHA_REFQ2             0x0014 // The high 16 bits of the low 32 bits of the target’s 64-bit virtual address. This relocation must be immediately followed by a PAIR relocations whose SymbolTableIndex contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_ALPHA_REFQ1             0x0015 // The low 16 bits of the target’s 64-bit virtual address.
+#define IMAGE_REL_ALPHA_GPRELLO           0x0016 // The low 16 bits of the 32-bit signed displacement of the target relative to the Global Pointer (GP) register.
+#define IMAGE_REL_ALPHA_GPRELHI           0x0017 // The high 16 bits of the 32-bit signed displacement of the target relative to the Global Pointer (GP) register.
+
+// COFF Relocations Type Indicators - IBM PowerPC Processors
+#define IMAGE_REL_PPC_ABSOLUTE            0x0000 // This relocation is ignored.
+#define IMAGE_REL_PPC_ADDR64              0x0001 // The target’s 64-bit virtual address.
+#define IMAGE_REL_PPC_ADDR32              0x0002 // The target’s 32-bit virtual address.
+#define IMAGE_REL_PPC_ADDR24              0x0003 // The low 24 bits of the target’s virtual address. This is only valid when the target symbol is absolute and can be sign extended to its original value.
+#define IMAGE_REL_PPC_ADDR16              0x0004 // The low 16 bits of the target’s virtual address.
+#define IMAGE_REL_PPC_ADDR14              0x0005 // The low 14 bits of the target’s virtual address. This is only valid when the target symbol is absolute and can be sign extended to its original value.
+#define IMAGE_REL_PPC_REL24               0x0006 // A 24-bit PC-relative offset to the symbol’s location.
+#define IMAGE_REL_PPC_REL14               0x0007 // A 14-bit PC-relative offset to the symbol’s location.
+#define IMAGE_REL_PPC_ADDR32NB            0x000A // The target’s 32-bit relative virtual address.
+#define IMAGE_REL_PPC_SECREL              0x000B // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_PPC_SECTION             0x000C // The 16-bit section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_PPC_SECREL16            0x000F // The 16-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_PPC_REFHI               0x0010 // The high 16 bits of the target’s 32-bit virtual address. Used for the first instruction in a two-instruction sequence that loads a full address. This relocation must be immediately followed by a PAIR relocations whose SymbolTableIndex contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_PPC_REFLO               0x0011 // The low 16 bits of the target’s virtual address.
+#define IMAGE_REL_PPC_PAIR                0x0012 // This relocation is only valid when it immediately follows a REFHI or SECRELHI relocation. Its SymbolTableIndex contains a displacement and not an index into the symbol table.
+#define IMAGE_REL_PPC_SECRELLO            0x0013 // The low 16 bits of the 32-bit offset of the target from the beginning of its section.
+#define IMAGE_REL_PPC_SECRELHI            0x0014 // The high 16 bits of the 32-bit offset of the target from the beginning of its section. A PAIR relocation must immediately follow this on. The SymbolTableIndex of the PAIR relocation contains a signed 16-bit displacement which is added to the upper 16 bits taken from the location being relocated.
+#define IMAGE_REL_PPC_GPREL               0x0015 // 16-bit signed displacement of the target relative to the Global Pointer (GP) register.
+
+// COFF Relocations Type Indicators - Hitachi SuperH Processors
+#define IMAGE_REL_SH3_ABSOLUTE            0x0000 // This relocation is ignored.
+#define IMAGE_REL_SH3_DIRECT16            0x0001 // Reference to the 16-bit location that contains the virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT32            0x0002 // The target’s 32-bit virtual address.
+#define IMAGE_REL_SH3_DIRECT8             0x0003 // Reference to the 8-bit location that contains the virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT8_WORD        0x0004 // Reference to the 8-bit instruction that contains the effective 16-bit virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT8_LONG        0x0005 // Reference to the 8-bit instruction that contains the effective 32-bit virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT4             0x0006 // Reference to the 8-bit location whose low 4 bits contain the virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT4_WORD        0x0007 // Reference to the 8-bit instruction whose low 4 bits contain the effective 16-bit virtual address of the target symbol.
+#define IMAGE_REL_SH3_DIRECT4_LONG        0x0008 // Reference to the 8-bit instruction whose low 4 bits contain the effective 32-bit virtual address of the target symbol.
+#define IMAGE_REL_SH3_PCREL8_WORD         0x0009 // Reference to the 8-bit instruction which contains the effective 16-bit relative offset of the target symbol.
+#define IMAGE_REL_SH3_PCREL8_LONG         0x000A // Reference to the 8-bit instruction which contains the effective 32-bit relative offset of the target symbol.
+#define IMAGE_REL_SH3_PCREL12_WORD        0x000B // Reference to the 16-bit instruction whose low 12 bits contain the effective 16-bit relative offset of the target symbol.
+#define IMAGE_REL_SH3_STARTOF_SECTION     0x000C // Reference to a 32-bit location that is the virtual address of the symbol’s section.
+#define IMAGE_REL_SH3_SIZEOF_SECTION      0x000D // Reference to the 32-bit location that is the size of the symbol’s section.
+#define IMAGE_REL_SH3_SECTION             0x000E // The 16-bit section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_SH3_SECREL              0x000F // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+#define IMAGE_REL_SH3_DIRECT32_NB         0x0010 // The target’s 32-bit relative virtual address.
+
+// COFF Relocations Type Indicators - ARM Processors
+#define IMAGE_REL_ARM_ABSOLUTE            0x0000 // This relocation is ignored.
+#define IMAGE_REL_ARM_ADDR32              0x0001 // The target’s 32-bit virtual address.
+#define IMAGE_REL_ARM_ADDR32NB            0x0002 // The target’s 32-bit relative virtual address.
+#define IMAGE_REL_ARM_BRANCH24            0x0003 // The 24-bit relative displacement to the target.
+#define IMAGE_REL_ARM_BRANCH11            0x0004 // Reference to a subroutine call, consisting of two 16-bit instructions with 11-bit offsets.
+#define IMAGE_REL_ARM_SECTION             0x000E // The 16-bit section index of the section containing the target. This is used to support debugging information.
+#define IMAGE_REL_ARM_SECREL              0x000F // The 32-bit offset of the target from the beginning of its section. This is used to support debugging information as well as static thread local storage.
+
+// COFF Symbol Table, Section Number Values (symbol.section_number)
+#define IMAGE_SYM_UNDEFINED  0 // Symbol record is not yet assigned a section. If the value is 0 this indicates a references to an external symbol defined elsewhere. If the value is non-zero this is a common symbol with a size specified by the value.
+#define IMAGE_SYM_ABSOLUTE  -1 // The symbol has an absolute (non-relocatable) value and is not an address.
+#define IMAGE_SYM_DEBUG     -2 // The symbol provides general type or debugging information but does not correspond to a section. Microsoft tools use this setting along with .file records (storage class FILE).
+
+// COFF Symbol Table, Type Representation (symbol.type)
+#define IMAGE_SYM_TYPE_NULL    0 // No type information or unknown base type. Microsoft tools use this setting.
+#define IMAGE_SYM_TYPE_VOID    1 // No valid type; used with void pointers and functions.
+#define IMAGE_SYM_TYPE_CHAR    2 // Character (signed byte).
+#define IMAGE_SYM_TYPE_SHORT   3 // Two-byte signed integer.
+#define IMAGE_SYM_TYPE_INT     4 // Natural integer type (normally four bytes in Windows NT).
+#define IMAGE_SYM_TYPE_LONG    5 // Four-byte signed integer.
+#define IMAGE_SYM_TYPE_FLOAT   6 // Four-byte floating-point number.
+#define IMAGE_SYM_TYPE_DOUBLE  7 // Eight-byte floating-point number.
+#define IMAGE_SYM_TYPE_STRUCT  8 // Structure.
+#define IMAGE_SYM_TYPE_UNION   9 // Union.
+#define IMAGE_SYM_TYPE_ENUM   10 // Enumerated type.
+#define IMAGE_SYM_TYPE_MOE    11 // Member of enumeration (a specific value).
+#define IMAGE_SYM_TYPE_BYTE   12 // Byte; unsigned one-byte integer.
+#define IMAGE_SYM_TYPE_WORD   13 // Word; unsigned two-byte integer.
+#define IMAGE_SYM_TYPE_UINT   14 // Unsigned integer of natural size (normally, four bytes).
+#define IMAGE_SYM_TYPE_DWORD  15 // Unsigned four-byte integer.
+// Microsoft tools use the type field only to indicate whether or not the symbol is a function, so that the only two resulting values are 0x0 and 0x20 for the Type field.
+#define IMAGE_SYM_TYPE_NOT_FUNCTION 0
+#define IMAGE_SYM_TYPE_FUNCTION     0x20
+
+#define IMAGE_SYM_DTYPE_NULL     0 // No derived type; the symbol is a simple scalar variable.
+#define IMAGE_SYM_DTYPE_POINTER  1 // Pointer to base type.
+#define IMAGE_SYM_DTYPE_FUNCTION 2 // Function returning base type.
+#define IMAGE_SYM_DTYPE_ARRAY    3 // Array of base type.
+
+// COFF Symbol Table, Storage Class (symbol.storage_class)
+#define IMAGE_SYM_CLASS_END_OF_FUNCTION   -1 // Special symbol representing end of function, for debugging purposes.
+#define IMAGE_SYM_CLASS_NULL               0 // No storage class assigned.
+#define IMAGE_SYM_CLASS_AUTOMATIC          1 // Automatic (stack) variable. The Value field specifies stack frame offset.
+#define IMAGE_SYM_CLASS_EXTERNAL           2 // Used by Microsoft tools for external symbols. The Value field indicates the size if the section number is IMAGE_SYM_UNDEFINED (0). If the section number is not 0, then the Value field specifies the offset within the section.
+#define IMAGE_SYM_CLASS_STATIC             3 // The Value field specifies the offset of the symbol within the section. If the Value is 0, then the symbol represents a section name.
+#define IMAGE_SYM_CLASS_REGISTER           4 // Register variable. The Value field specifies register number.
+#define IMAGE_SYM_CLASS_EXTERNAL_DEF       5 // Symbol is defined externally.
+#define IMAGE_SYM_CLASS_LABEL              6 // Code label defined within the module. The Value field specifies the offset of the symbol within the section.
+#define IMAGE_SYM_CLASS_UNDEFINED_LABEL    7 // Reference to a code label not defined. IMAGE_SYM_CLASS_MEMBER_OF_STRUCT 8 Structure member. The Value field specifies nth member.
+#define IMAGE_SYM_CLASS_ARGUMENT           9 // Formal argument (parameter)of a function. The Value field specifies nth argument.
+#define IMAGE_SYM_CLASS_STRUCT_TAG        10 // Structure tag-name entry.
+#define IMAGE_SYM_CLASS_MEMBER_OF_UNION   11 // Union member. The Value field specifies nth member.
+#define IMAGE_SYM_CLASS_UNION_TAG         12 // Union tag-name entry.
+#define IMAGE_SYM_CLASS_TYPE_DEFINITION   13 // Typedef entry.
+#define IMAGE_SYM_CLASS_UNDEFINED_STATIC  14 // Static data declaration.
+#define IMAGE_SYM_CLASS_ENUM_TAG          15 // Enumerated type tagname entry.
+#define IMAGE_SYM_CLASS_MEMBER_OF_ENUM    16 // Member of enumeration. Value specifies nth member.
+#define IMAGE_SYM_CLASS_REGISTER_PARAM    17 // Register parameter.
+#define IMAGE_SYM_CLASS_BIT_FIELD         18 // Bit-field reference. Value specifies nth bit in the bit field.
+#define IMAGE_SYM_CLASS_BLOCK            100 // A .bb (beginning of block) or .eb (end of block) record. Value is the relocatable address of the code location.
+#define IMAGE_SYM_CLASS_FUNCTION         101 // Used by Microsoft tools for symbol records that define the extent of a function: begin function (named .bf), end function (.ef), and lines in function (.lf). For .lf records, Value gives the number of source lines in the function. For .ef records, Value gives the size of function code.
+#define IMAGE_SYM_CLASS_END_OF_STRUCT    102 // End of structure entry.
+#define IMAGE_SYM_CLASS_FILE             103 // Used by Microsoft tools, as well as traditional COFF format, for the source-file symbol record. The symbol is followed by auxiliary records that name the file.
+#define IMAGE_SYM_CLASS_SECTION          104 // Definition of a section (Microsoft tools use STATIC storage class instead).
+#define IMAGE_SYM_CLASS_WEAK_EXTERNAL    105 // Weak external
+
+// COMDAT Sections (auxiliary_symbol_record_5.selection)
+#define IMAGE_COMDAT_SELECT_NODUPLICATES 1
+#define IMAGE_COMDAT_SELECT_ANY          2
+#define IMAGE_COMDAT_SELECT_SAME_SIZE    3
+#define IMAGE_COMDAT_SELECT_EXACT_MATCH  4
+#define IMAGE_COMDAT_SELECT_ASSOCIATIVE  5
+#define IMAGE_COMDAT_SELECT_LARGEST      6
 
 // See Texas Instruments documentation spraao8
 
@@ -177,7 +380,7 @@ namespace COFFI {
 #define STYP_ALIGN_16384            0x00000E00
 #define STYP_ALIGN_32768            0x00000F00
 
-// Texas Instruments Magic Number
+// Texas Instruments target ID
 #define TMS470          0x0097
 #define TMS320C5400     0x0098
 #define TMS320C6000     0x0099
@@ -323,8 +526,10 @@ namespace COFFI {
 // Could not find any documentation
 // Reverse-engineered some values from the binary files
 
-#define CEVAX_MACHINE_XC4210_LIB 0xDCA6
-#define CEVAX_MACHINE_XC4210_OBJ 0x8CA6
+#define CEVA_MACHINE_XC4210_LIB 0xDCA6
+#define CEVA_MACHINE_XC4210_OBJ 0x8CA6
+#define CEVA_INVALID_SYMBOL_TABLE_INDEX 0xFFFFFFFF
+#define CEVA_UNINITIALIZED_DATA 0x80
 
 // Architectures supported by COFFI
 typedef enum coffi_architecture_t {
@@ -334,7 +539,7 @@ typedef enum coffi_architecture_t {
     // Texas Instruments
     COFFI_ARCHITECTURE_TI    = 2,
     // CEVA-X
-    COFFI_ARCHITECTURE_CEVAX = 3,
+    COFFI_ARCHITECTURE_CEVA = 3,
 } coffi_architecture_t;
 
     //------------------------------------------------------------------------------
@@ -431,18 +636,29 @@ typedef enum coffi_architecture_t {
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
-    struct common_optional_header
+    struct coff_optional_header_pe
     {
         uint16_t magic;                   // State of the image file identifier
         uint8_t  major_linker_version;    // The linker major version number
         uint8_t  minor_linker_version;    // The linker minor version number
-        uint32_t code_size;               // The sum of all code sections 
+        uint32_t code_size;               // The sum of all code sections
         uint32_t initialized_data_size;   // The sum of all initialized data sections
         uint32_t uninitialized_data_size; // The sum of all uninitialized data sections
-        uint32_t entry_point_address;     // The address of the entry point relative to the image base 
-        uint32_t code_base;               // The address that is relative to the image
-        // base of the beginning-of-code section 
-        uint32_t data_base;               // For PE32 only
+        uint32_t entry_point_address;     // The address of the entry point relative to the image base
+        uint32_t code_base;               // base of the beginning-of-code section
+        uint32_t data_base;               // base of the beginning-of-data section
+    } __attribute__((packed));
+
+    struct coff_optional_header_pe_plus
+    {
+        uint16_t magic;                   // State of the image file identifier
+        uint8_t  major_linker_version;    // The linker major version number
+        uint8_t  minor_linker_version;    // The linker minor version number
+        uint32_t code_size;               // The sum of all code sections
+        uint32_t initialized_data_size;   // The sum of all initialized data sections
+        uint32_t uninitialized_data_size; // The sum of all uninitialized data sections
+        uint32_t entry_point_address;     // The address of the entry point relative to the image base
+        uint32_t code_base;               // base of the beginning-of-code section
     } __attribute__((packed));
 	
     struct common_optional_header_ti
@@ -458,7 +674,7 @@ typedef enum coffi_architecture_t {
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
-    struct win_headerPE
+    struct win_header_pe
     {
         uint32_t image_base;
         uint32_t section_alignment;
@@ -484,7 +700,7 @@ typedef enum coffi_architecture_t {
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
-    struct win_headerPEPlus
+    struct win_header_pe_plus
     {
         uint64_t image_base;
         uint32_t section_alignment;
@@ -510,7 +726,7 @@ typedef enum coffi_architecture_t {
     } __attribute__((packed));
 
     //------------------------------------------------------------------------------
-    struct symbol
+    struct symbol_record
     {
         char     name[8];
         uint32_t value;
@@ -518,19 +734,53 @@ typedef enum coffi_architecture_t {
         uint16_t type;
         uint8_t  storage_class;
         uint8_t  aux_symbols_number;
-        symbol(): name{0} {}
     } __attribute__((packed));
 
     struct auxiliary_symbol_record
     {
-        char value[sizeof(symbol)];
+        char value[sizeof(symbol_record)];
     };
 
-    struct symbol_ext
+    struct auxiliary_symbol_record_1
     {
-        symbol sym;
-        std::vector<auxiliary_symbol_record> auxs;
-    };
+        uint32_t tag_index;
+        uint32_t total_size;
+        uint32_t pointer_to_linenumber;
+        uint32_t pointer_to_next_function;
+        uint16_t unused;
+    } __attribute__((packed));
+
+    struct auxiliary_symbol_record_2
+    {
+        uint32_t unused0;
+        uint16_t linenumber;
+        uint8_t unused1[6];
+        uint32_t pointer_to_next_function;
+        uint16_t unused2;
+    } __attribute__((packed));
+
+    struct auxiliary_symbol_record_3
+    {
+        uint32_t tag_index;
+        uint32_t characteristics;
+        uint8_t unused1[10];
+    } __attribute__((packed));
+
+    struct auxiliary_symbol_record_4
+    {
+        char file_name[18];
+    } __attribute__((packed));
+
+    struct auxiliary_symbol_record_5
+    {
+        uint32_t length;
+        uint16_t number_of_relocations;
+        uint16_t number_of_linenumbers;
+        uint32_t check_sum;
+        uint16_t number;
+        uint8_t selection;
+        uint8_t unused[3];
+    } __attribute__((packed));
 
     //------------------------------------------------------------------------------
     struct image_data_directory
@@ -542,7 +792,7 @@ typedef enum coffi_architecture_t {
     //------------------------------------------------------------------------------
     struct section_header
     {
-        char    name[8];
+        char name[8];
         uint32_t virtual_size;
         uint32_t virtual_address;
         uint32_t data_size;
@@ -556,48 +806,18 @@ typedef enum coffi_architecture_t {
 	
     struct section_header_ti
     {
-        char    name[8];
+        char name[8];
         uint32_t physical_address;
         uint32_t virtual_address;
         uint32_t data_size;
         uint32_t data_offset;
         uint32_t reloc_offset;
-        uint32_t line_num_offset;
+        uint32_t reserved_0;
         uint32_t reloc_count;
         uint32_t line_num_count;
         uint32_t flags;
-        uint16_t reserved;
+        uint16_t reserved_1;
         uint16_t page_number;
-    };
-
-    //------------------------------------------------------------------------------
-    class string_to_name_provider
-    {
-    public:
-        virtual std::string string_to_name( const char* str ) const = 0;
-    };
-
-    //------------------------------------------------------------------------------
-    class symbol_provider
-    {
-    public:
-        virtual const symbol_ext get_symbol( uint32_t index ) const = 0;
-    };
-
-    //------------------------------------------------------------------------------
-    class address_provider
-    {
-    public:
-        // Auto-detect the addressable unit: are the addresses in bytes or 2-bytes words?
-        virtual int get_addressable_unit() const = 0;
-    };
-
-    //------------------------------------------------------------------------------
-    class architecture_provider
-    {
-    public:
-        // Architecture
-        virtual coffi_architecture_t get_architecture() const = 0;
     };
 
     //------------------------------------------------------------------------------
@@ -622,6 +842,66 @@ typedef enum coffi_architecture_t {
         uint32_t symbol_table_index;
         uint32_t type;
     } __attribute__((packed));
+
+    struct rel_entry_generic {
+        uint32_t virtual_address;
+        uint32_t symbol_table_index;
+        uint32_t type;
+        uint16_t reserved;
+    };
+
+    //------------------------------------------------------------------------------
+    class symbol;
+    class string_to_name_provider
+    {
+    public:
+        virtual std::string string_to_name( const char* str ) const = 0;
+        virtual std::string section_string_to_name( const char* str ) const = 0;
+        virtual void name_to_string( const std::string &name, char* str ) = 0;
+        virtual void name_to_section_string( const std::string &name, char* str ) = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    class symbol_provider
+    {
+    public:
+        virtual const symbol *get_symbol( uint32_t index ) const = 0;
+        virtual symbol *get_symbol( uint32_t index ) = 0;
+        virtual symbol *add_symbol( const std::string &name ) = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    struct line_number
+    {
+        uint32_t type;
+        uint16_t line_number;
+    } __attribute__((packed));
+
+    //------------------------------------------------------------------------------
+    class architecture_provider
+    {
+    public:
+        // Architecture
+        virtual coffi_architecture_t get_architecture() const = 0;
+        // Auto-detect the addressable unit: are the addresses in bytes or 2-bytes words?
+        virtual int get_addressable_unit() const = 0;
+    };
+
+    //------------------------------------------------------------------------------
+    class dos_header;
+    class coff_header;
+    class optional_header;
+    class win_header;
+    class sections;
+    class sections_provider: public virtual architecture_provider
+    {
+    public:
+        virtual const dos_header* get_msdos_header() const = 0;
+        virtual const coff_header* get_header() const = 0;
+        virtual const optional_header* get_optional_header() const = 0;
+        virtual const win_header* get_win_header() const = 0;
+        virtual const sections &get_sections() const = 0;
+    };
 }
 
 #endif // COFFI_TYPES_HPP
