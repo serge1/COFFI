@@ -29,6 +29,5 @@ script:
 - autoreconf -f -i
 - ./configure CXXFLAGS=--std=c++11
 - make
-- ./coffi_test
-- ./COFFDump_test
+- ./coffio_test
 - make check

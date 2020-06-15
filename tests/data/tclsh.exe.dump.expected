@@ -1,0 +1,102 @@
+Dump of file data/tclsh.exe
+
+File Header
+  Machine:                      014C
+  Number of Sections:           0006
+
+  TimeDateStamp:                53484543 (2014-04-11 21:40:51)
+  PointerToSymbolTable:         00000000
+  NumberOfSymbols:              00000000
+  SizeOfOptionalHeader:         00E0
+  Characteristics:              030F
+
+Optional Header
+  Magic                         010B
+  linker version                2.56
+  size of code                  0A00
+  size of initialized data      00002600
+  size of uninitialized data    00000200
+  entrypoint RVA                00001280
+  base of code                  00001000
+  base of data                  00002000
+
+  image base                    0000000000400000
+  section align                 00001000
+  file align                    00000200
+  required OS version           4.0
+  image version                 1.0
+  subsystem version             4.0
+  Win32 Version                 0
+  size of image                 00008000
+  size of headers               00000400
+  checksum                      00003146
+  Subsystem                     0003
+  DLL flags                     0000
+  stack reserve size            0000000000200000
+  stack commit size             0000000000001000
+  heap reserve size             0000000000100000
+  heap commit size              0000000000001000
+  RVAs & sizes                  00000010
+
+Data Directory
+  EXPORT_TABLE            rva: 00000000  size: 00000000
+  IMPORT_TABLE            rva: 00005000  size: 00000358
+  RESOURCE_TABLE          rva: 00006000  size: 0000129C
+  EXCEPTION_TABLE         rva: 00000000  size: 00000000
+  CERTIFICATE_TABLE       rva: 00000000  size: 00000000
+  BASE_RELOCATION_TABLE   rva: 00000000  size: 00000000
+  DEBUG                   rva: 00000000  size: 00000000
+  ARCHITECTURE            rva: 00000000  size: 00000000
+  GLOBAL_PTR              rva: 00000000  size: 00000000
+  TLS_TABLE               rva: 00000000  size: 00000000
+  LOAD_CONFIG_TABLE       rva: 00000000  size: 00000000
+  BOUND_IMPORT            rva: 00000000  size: 00000000
+  IAT                     rva: 00000000  size: 00000000
+  DELAY_IMPORT_DESCRIPTOR rva: 00000000  size: 00000000
+  COMPLUS_RUNTIME_HEADER  rva: 00000000  size: 00000000
+  RESERVED                rva: 00000000  size: 00000000
+
+Section Table
+  000 .text     VirtSize: 000009E4  VirtAddr:  00001000
+    raw data offs:   00000400  raw data size: 00000A00
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60500060
+      CODE INITIALIZED_DATA EXECUTE READ ALIGN_16BYTES
+
+  001 .data     VirtSize: 00000010  VirtAddr:  00002000
+    raw data offs:   00000E00  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0300040
+      INITIALIZED_DATA READ WRITE ALIGN_4BYTES
+
+  002 .rdata    VirtSize: 000001A0  VirtAddr:  00003000
+    raw data offs:   00001000  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40600040
+      INITIALIZED_DATA READ ALIGN_32BYTES
+
+  003 .bss      VirtSize: 00000054  VirtAddr:  00004000
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0400080
+      UNINITIALIZED_DATA READ WRITE ALIGN_8BYTES
+
+  004 .idata    VirtSize: 00000358  VirtAddr:  00005000
+    raw data offs:   00001200  raw data size: 00000400
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA READ ALIGN_4BYTES
+
+  005 .rsrc     VirtSize: 0000129C  VirtAddr:  00006000
+    raw data offs:   00001600  raw data size: 00001400
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0300040
+      INITIALIZED_DATA READ WRITE ALIGN_4BYTES
+
+

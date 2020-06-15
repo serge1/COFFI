@@ -1,0 +1,1453 @@
+Dump of file data/anobj.o
+
+File Header
+  Machine:                      014C
+  Number of Sections:           0061
+
+  TimeDateStamp:                53836A56 (2014-05-26 18:22:46)
+  PointerToSymbolTable:         0000F961
+  NumberOfSymbols:              000001A4
+  SizeOfOptionalHeader:         0000
+  Characteristics:              0000
+
+Section Table
+  000 .drectve  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   00000F3C  raw data size: 0000036B
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00100A00
+      INFO REMOVE ALIGN_1BYTES
+
+  001 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   000012A7  raw data size: 0000B5B4
+    relocation offs: 0000C85B  relocations:   00000016
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42100040
+      INITIALIZED_DATA DISCARDABLE READ ALIGN_1BYTES
+
+  002 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C937  raw data size: 0000000F
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  003 .data     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C946  raw data size: 00000004
+    relocation offs: 0000C94A  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0300040
+      INITIALIZED_DATA READ WRITE ALIGN_4BYTES
+
+  004 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C954  raw data size: 00000001
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40101040
+      INITIALIZED_DATA READ COMDAT ALIGN_1BYTES
+
+  005 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C955  raw data size: 00000001
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40101040
+      INITIALIZED_DATA READ COMDAT ALIGN_1BYTES
+
+  006 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C956  raw data size: 00000001
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40101040
+      INITIALIZED_DATA READ COMDAT ALIGN_1BYTES
+
+  007 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C957  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  008 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C95B  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  009 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C95F  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00A .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C963  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00B .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C967  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00C .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C96B  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00D .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C96F  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00E .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C973  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  00F .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C977  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  010 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C97B  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  011 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C97F  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  012 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C983  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  013 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C987  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  014 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C98B  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  015 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C98F  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  016 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C993  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  017 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C997  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  018 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C99B  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  019 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C99F  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01A .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9A3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01B .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9A7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01C .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9AB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01D .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9AF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01E .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9B3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  01F .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9B7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  020 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9BB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  021 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9BF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  022 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9C3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  023 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9C7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  024 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9CB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  025 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9CF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  026 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9D3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  027 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9D7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  028 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9DB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  029 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9DF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02A .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9E3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02B .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9E7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02C .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9EB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02D .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9EF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02E .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9F3  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  02F .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9F7  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  030 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9FB  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  031 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000C9FF  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  032 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CA03  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  033 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CA07  raw data size: 0000009F
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA READ ALIGN_4BYTES
+
+  034 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CAA6  raw data size: 00000058
+    relocation offs: 0000CAFE  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  035 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CB12  raw data size: 0000012C
+    relocation offs: 0000CC3E  relocations:   00000007
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  036 .rtc$TMZ  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CC84  raw data size: 00000004
+    relocation offs: 0000CC88  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  037 .rtc$IMZ  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CC92  raw data size: 00000004
+    relocation offs: 0000CC96  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  038 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CCA0  raw data size: 00000030
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  039 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CCD0  raw data size: 00000104
+    relocation offs: 0000CDD4  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  03A .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CE06  raw data size: 00000099
+    relocation offs: 0000CE9F  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  03B .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CEA9  raw data size: 000000D8
+    relocation offs: 0000CF81  relocations:   00000003
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  03C .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CF9F  raw data size: 00000018
+    relocation offs: 0000CFB7  relocations:   00000006
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  03D .rdata$r  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000CFF3  raw data size: 00000014
+    relocation offs: 0000D007  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  03E .data     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D01B  raw data size: 00000017
+    relocation offs: 0000D032  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0301040
+      INITIALIZED_DATA READ WRITE COMDAT ALIGN_4BYTES
+
+  03F .rdata$r  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D03C  raw data size: 00000010
+    relocation offs: 0000D04C  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  040 .rdata$r  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D056  raw data size: 00000005
+    relocation offs: 0000D05B  relocations:   00000001
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  041 .rdata$r  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D065  raw data size: 0000001C
+    relocation offs: 0000D081  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  042 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D095  raw data size: 000000AC
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  043 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D141  raw data size: 00000104
+    relocation offs: 0000D245  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  044 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D277  raw data size: 00000065
+    relocation offs: 0000D2DC  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  045 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D2F0  raw data size: 00000120
+    relocation offs: 0000D410  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  046 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D442  raw data size: 00000001
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40101040
+      INITIALIZED_DATA READ COMDAT ALIGN_1BYTES
+
+  047 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D443  raw data size: 00000116
+    relocation offs: 0000D559  relocations:   00000010
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  048 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D5F9  raw data size: 00000244
+    relocation offs: 0000D83D  relocations:   00000017
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  049 .text$x   VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D923  raw data size: 00000030
+    relocation offs: 0000D953  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  04A .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D985  raw data size: 00000019
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  04B .xdata$x  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D99E  raw data size: 0000002C
+    relocation offs: 0000D9CA  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  04C .sxdata   VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D9DE  raw data size: 00000008
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 00300200
+      INFO ALIGN_4BYTES
+
+  04D .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000D9E6  raw data size: 000007BF
+    relocation offs: 0000E1A5  relocations:   00000054
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  04E .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000E4ED  raw data size: 0000064C
+    relocation offs: 0000EB39  relocations:   0000005D
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  04F .text$x   VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000EEDB  raw data size: 00000033
+    relocation offs: 0000EF0E  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  050 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000EF40  raw data size: 00000018
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  051 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000EF58  raw data size: 0000003B
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  052 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000EF93  raw data size: 00000020
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  053 .rdata    VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000EFB3  raw data size: 0000009E
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40401040
+      INITIALIZED_DATA READ COMDAT ALIGN_8BYTES
+
+  054 .data     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F051  raw data size: 00000004
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0301040
+      INITIALIZED_DATA READ WRITE COMDAT ALIGN_4BYTES
+
+  055 .xdata$x  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F055  raw data size: 0000002C
+    relocation offs: 0000F081  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40301040
+      INITIALIZED_DATA READ COMDAT ALIGN_4BYTES
+
+  056 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F095  raw data size: 0000006A
+    relocation offs: 0000F0FF  relocations:   00000003
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  057 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F11D  raw data size: 0000012C
+    relocation offs: 0000F249  relocations:   00000007
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  058 .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F28F  raw data size: 00000030
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  059 .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F2BF  raw data size: 00000104
+    relocation offs: 0000F3C3  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  05A .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F3F5  raw data size: 0000007D
+    relocation offs: 0000F472  relocations:   00000003
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  05B .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F490  raw data size: 000000F0
+    relocation offs: 0000F580  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  05C .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F5B2  raw data size: 00000071
+    relocation offs: 0000F623  relocations:   00000002
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  05D .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F637  raw data size: 00000110
+    relocation offs: 0000F747  relocations:   00000005
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  05E .text     VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F779  raw data size: 00000058
+    relocation offs: 0000F7D1  relocations:   00000003
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60501020
+      CODE EXECUTE READ COMDAT ALIGN_16BYTES
+
+  05F .debug$S  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F7EF  raw data size: 000000DC
+    relocation offs: 0000F8CB  relocations:   00000003
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42101040
+      INITIALIZED_DATA DISCARDABLE READ COMDAT ALIGN_1BYTES
+
+  060 .debug$T  VirtSize: 00000000  VirtAddr:  00000000
+    raw data offs:   0000F8E9  raw data size: 00000078
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 42100040
+      INITIALIZED_DATA DISCARDABLE READ ALIGN_1BYTES
+
+
+Symbol Table
+  #    Value    Type Class Name
+  0000 00847809 0000 03    @comp.id
+  0001 00000001 0000 03    @feat.00
+  0002 00000000 0000 03    .drectve
+  AUX  6B 03 00 00 00 00 00 00 A1 C0 3A 66 00 00 00 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0005 00000000 0000 03    .debug$S
+  AUX  B4 B5 00 00 16 00 00 00 00 00 00 00 00 00 00 00 00 00
+  AUX  23 ED A3 77 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0008 00000000 0000 03    .rdata
+  AUX  0F 00 00 00 00 00 00 00 89 22 73 4F 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  000B 00000000 0000 02    ??_C@_0P@GHFPNOJB@bad?5allocation?$AA@
+  000C 00000000 0000 03    .data
+  AUX  04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+  AUX  71 47 79 A6 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  000F 00000000 0000 03    __bad_alloc_Message
+  0010 00000000 0000 03    .rdata
+  AUX  01 00 00 00 00 00 00 00 96 30 07 77 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0013 00000000 0000 02    ?_Value@?$_Is_swap_move@U_Swap_move_tag@std@@@std@@2_NB
+  0014 00000000 0000 03    .rdata
+  AUX  01 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0017 00000000 0000 02    ?value@?$integral_constant@_N$0A@@tr1@std@@2_NB
+  0018 00000000 0000 03    .rdata
+  AUX  01 00 00 00 00 00 00 00 96 30 07 77 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  001B 00000000 0000 02    ?value@?$integral_constant@_N$00@tr1@std@@2_NB
+  001C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 65 67 BC B8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  001F 00000000 0000 02    ?collate@?$_Locbase@H@std@@2HB
+  0020 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 8B C8 09 AA 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0023 00000000 0000 02    ?ctype@?$_Locbase@H@std@@2HB
+  0024 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 57 97 62 8F 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0027 00000000 0000 02    ?monetary@?$_Locbase@H@std@@2HB
+  0028 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 EF 28 B4 C5 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  002B 00000000 0000 02    ?numeric@?$_Locbase@H@std@@2HB
+  002C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 9F 57 19 50 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  002F 00000000 0000 02    ?time@?$_Locbase@H@std@@2HB
+  0030 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3E AF 32 A0 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0033 00000000 0000 02    ?messages@?$_Locbase@H@std@@2HB
+  0034 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 F7 E8 48 A8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0037 00000000 0000 02    ?all@?$_Locbase@H@std@@2HB
+  0038 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  003B 00000000 0000 02    ?none@?$_Locbase@H@std@@2HB
+  003C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 65 67 BC B8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  003F 00000000 0000 02    ?skipws@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0040 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 8B C8 09 AA 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0043 00000000 0000 02    ?unitbuf@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0044 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 57 97 62 8F 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0047 00000000 0000 02    ?uppercase@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0048 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 EF 28 B4 C5 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  004B 00000000 0000 02    ?showbase@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  004C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 9F 57 19 50 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  004F 00000000 0000 02    ?showpoint@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0050 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3E AF 32 A0 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0053 00000000 0000 02    ?showpos@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0054 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3D 58 14 9B 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0057 00000000 0000 02    ?left@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0058 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3B B6 59 ED 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  005B 00000000 0000 02    ?right@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  005C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 37 6A C2 01 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  005F 00000000 0000 02    ?internal@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0060 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 6E D4 84 03 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0063 00000000 0000 02    ?dec@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0064 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 DC A8 09 07 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0067 00000000 0000 02    ?oct@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0068 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 B8 51 13 0E 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  006B 00000000 0000 02    ?hex@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  006C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 70 A3 26 1C 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  006F 00000000 0000 02    ?scientific@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0070 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 E0 46 4D 38 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0073 00000000 0000 02    ?fixed@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0074 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 90 E5 6B 24 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0077 00000000 0000 02    ?hexfloat@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0078 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 C0 8D 9A 70 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  007B 00000000 0000 02    ?boolalpha@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  007C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 80 1B 35 E1 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  007F 00000000 0000 02    ?_Stdio@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0080 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 31 84 8F 77 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0083 00000000 0000 02    ?adjustfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0084 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 0A 2D 9E 0A 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0087 00000000 0000 02    ?basefield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  0088 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 90 E5 6B 24 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  008B 00000000 0000 02    ?floatfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+  008C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  008F 00000000 0000 02    ?goodbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+  0090 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 65 67 BC B8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0093 00000000 0000 02    ?eofbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+  0094 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 8B C8 09 AA 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0097 00000000 0000 02    ?failbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+  0098 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 57 97 62 8F 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  009B 00000000 0000 02    ?badbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+  009C 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 9F 57 19 50 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  009F 00000000 0000 02    ?_Hardfail@?$_Iosb@H@std@@2W4_Iostate@12@B
+  00A0 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 65 67 BC B8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00A3 00000000 0000 02    ?in@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00A4 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 8B C8 09 AA 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00A7 00000000 0000 02    ?out@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00A8 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 57 97 62 8F 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00AB 00000000 0000 02    ?ate@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00AC 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 EF 28 B4 C5 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00AF 00000000 0000 02    ?app@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00B0 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 9F 57 19 50 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00B3 00000000 0000 02    ?trunc@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00B4 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3D 58 14 9B 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00B7 00000000 0000 02    ?_Nocreate@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00B8 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3B B6 59 ED 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00BB 00000000 0000 02    ?_Noreplace@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00BC 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 3E AF 32 A0 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00BF 00000000 0000 02    ?binary@?$_Iosb@H@std@@2W4_Openmode@12@B
+  00C0 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00C3 00000000 0000 02    ?beg@?$_Iosb@H@std@@2W4_Seekdir@12@B
+  00C4 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 65 67 BC B8 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00C7 00000000 0000 02    ?cur@?$_Iosb@H@std@@2W4_Seekdir@12@B
+  00C8 00000000 0000 03    .rdata
+  AUX  04 00 00 00 00 00 00 00 8B C8 09 AA 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00CB 00000000 0000 02    ?end@?$_Iosb@H@std@@2W4_Seekdir@12@B
+  00CC 00000000 0000 03    .rdata
+  AUX  9F 00 00 00 00 00 00 00 A4 55 84 4E 00 00 00 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00CF 00000000 0000 03    _DBLibName_TL3
+  00D0 0000000C 0000 03    _DBLibName_TL410
+  00D1 00000018 0000 03    _DBLibName_TL420_rtl_112
+  00D2 0000002C 0000 03    _DBLibName_TL411
+  00D3 00000038 0000 03    _DBLibName_X
+  00D4 00000044 0000 03    _DBLibName_1_1
+  00D5 00000054 0000 03    _DBLibName_XC
+  00D6 00000064 0000 03    _DBLibName_XC323
+  00D7 00000078 0000 03    _DBLibName_XC4210
+  00D8 0000008C 0000 03    _DBLibName_XC4500
+  00D9 00000000 0000 03    .text
+  AUX  58 00 00 00 02 00 00 00 95 63 FC 87 00 00 02 00 00 00
+  AUX  E4 2F 36 FE 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00DC 00000000 0000 03    .debug$S
+  AUX  2C 01 00 00 07 00 00 00 00 00 00 00 35 00 05 00 00 00
+  AUX  89 76 F0 77 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00DF 00000000 0020 02    ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  00E0 00000000 0020 02    __RTC_CheckEsp
+  00E1 00000000 0000 03    .rtc$TMZ
+  AUX  04 00 00 00 01 00 00 00 00 00 00 00 35 00 05 00 00 00
+  AUX  CC 11 2E 4C 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00E4 00000000 0000 03    __RTC_Shutdown.rtc$TMZ
+  00E5 00000000 0020 02    __RTC_Shutdown
+  00E6 00000000 0000 03    .rtc$IMZ
+  AUX  04 00 00 00 01 00 00 00 00 00 00 00 35 00 05 00 00 00
+  AUX  9E 7A 90 5D 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00E9 00000000 0000 03    __RTC_InitBase.rtc$IMZ
+  00EA 00000000 0020 02    __RTC_InitBase
+  00EB 00000000 0000 03    .text
+  AUX  30 00 00 00 00 00 00 00 C6 81 AB AD 00 00 02 00 00 00
+  AUX  2B 7B 13 F0 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00EE 00000000 0000 03    .debug$S
+  AUX  04 01 00 00 05 00 00 00 00 00 00 00 39 00 05 00 00 00
+  AUX  1A 2E 4A BF 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00F1 00000000 0020 02    ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  00F2 00000000 0000 03    .text
+  AUX  99 00 00 00 01 00 00 00 53 AC 0E 44 00 00 02 00 00 00
+  AUX  A5 FA BA 8C 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00F5 00000000 0000 03    .debug$S
+  AUX  D8 00 00 00 03 00 00 00 00 00 00 00 3B 00 05 00 00 00
+  AUX  BB 6B 5F 24 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00F8 00000000 0020 02    ??0DBLoader@@QAE@ABV0@@Z
+  00F9 00000000 0000 03    .rdata
+  AUX  18 00 00 00 06 00 00 00 00 00 00 00 00 00 06 00 00 00
+  AUX  85 26 7F 64 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00FC 00000004 0000 02    ??_7DBLoader@@6B@
+  00FD 00000000 0000 03    .rdata$r
+  AUX  14 00 00 00 02 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  77 1F 01 2E 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0100 00000000 0000 02    ??_R4DBLoader@@6B@
+  0101 00000000 0000 03    .data
+  AUX  17 00 00 00 01 00 00 00 6D C6 B9 48 00 00 02 00 00 00
+  AUX  C1 D9 0F D9 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0104 00000000 0000 02    ??_R0?AVDBLoader@@@8
+  0105 00000000 0000 02    ??_7type_info@@6B@
+  0106 00000000 0000 03    .rdata$r
+  AUX  10 00 00 00 01 00 00 00 9E 00 AA CC 00 00 02 00 00 00
+  AUX  07 53 67 2C 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0109 00000000 0000 02    ??_R3DBLoader@@8
+  010A 00000000 0000 03    .rdata$r
+  AUX  05 00 00 00 01 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  1E B9 C4 D2 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  010D 00000000 0000 02    ??_R2DBLoader@@8
+  010E 00000000 0000 03    .rdata$r
+  AUX  1C 00 00 00 02 00 00 00 47 76 D9 3A 00 00 02 00 00 00
+  AUX  58 EB D7 BA 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0111 00000000 0000 02    ??_R1A@?0A@EA@DBLoader@@8
+  0112 00000000 0000 03    .text
+  AUX  AC 00 00 00 00 00 00 00 3A 2F 6E 92 00 00 02 00 00 00
+  AUX  CC E8 0D 22 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0115 00000000 0000 03    .debug$S
+  AUX  04 01 00 00 05 00 00 00 00 00 00 00 43 00 05 00 00 00
+  AUX  FB A0 C4 D5 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0118 00000000 0020 02    ??4DBLoader@@QAEAAV0@ABV0@@Z
+  0119 00000000 0000 03    .text
+  AUX  65 00 00 00 02 00 00 00 57 37 66 C6 00 00 01 00 00 00
+  AUX  5D 66 A2 86 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  011C 00000000 0000 03    .debug$S
+  AUX  20 01 00 00 05 00 00 00 00 00 00 00 45 00 05 00 00 00
+  AUX  C6 39 42 2F 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  011F 00000000 0020 02    ??0DBLoader@@QAE@XZ
+  0120 00000000 0000 03    .rdata
+  AUX  01 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0123 00000000 0000 02    ??_C@_00CNPNBAHC@?$AA@
+  0124 00000000 0000 03    .text
+  AUX  16 01 00 00 10 00 00 00 D9 29 98 16 00 00 01 00 00 00
+  AUX  BD 0E E0 61 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0127 00000000 0000 03    .debug$S
+  AUX  44 02 00 00 17 00 00 00 00 00 00 00 48 00 05 00 00 00
+  AUX  1C 71 3B 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  012A 00000000 0020 02    ??1DBLoader@@QAE@XZ
+  012B 00000000 0000 03    .text$x
+  AUX  30 00 00 00 05 00 00 00 8F 73 B9 83 48 00 05 00 00 00
+  AUX  EA 39 1B 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  012E 00000000 0020 03    __unwindfunclet$??1DBLoader@@QAE@XZ$0
+  012F 0000010C 0000 03    $LN6
+  0130 00000100 0000 03    $LN8
+  0131 000000F8 0000 03    $LN9
+  0132 00000000 0020 02    ??1LibraryLoader@@UAE@XZ
+  0133 00000000 0020 02    ?freeCevaLibrary@LibraryLoader@@UAE_NPAUHINSTANCE__@@@Z
+  0134 00000000 0020 02    ??0LibraryLoader@@QAE@XZ
+  0135 00000000 0000 02    __imp__GetProcAddress@8
+  0136 00000000 0000 03    .rdata
+  AUX  19 00 00 00 00 00 00 00 BE 0E 68 3D 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0139 00000000 0000 02    ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+  013A 00000000 0000 02    ___security_cookie
+  013B 00000008 0020 03    __ehhandler$??1DBLoader@@QAE@XZ
+  013C 00000000 0020 02    ___CxxFrameHandler3
+  013D 00000000 0000 03    .xdata$x
+  AUX  2C 00 00 00 02 00 00 00 EC E1 F7 A7 48 00 05 00 00 00
+  AUX  12 4D 5F 5C 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0140 00000008 0000 03    __ehfuncinfo$??1DBLoader@@QAE@XZ
+  0141 00000000 0000 03    __unwindtable$??1DBLoader@@QAE@XZ
+  0142 00000000 0020 02    @__security_check_cookie@4
+  0143 00000000 0020 02    @_RTC_CheckStackVars@8
+  0144 00000000 0000 03    .sxdata
+  AUX  08 00 00 00 00 00 00 00 63 19 4F 9B 00 00 00 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0147 00000000 0000 03    .text
+  AUX  BF 07 00 00 54 00 00 00 B7 D8 F4 5A 00 00 01 00 00 00
+  AUX  BC 6E 8A 86 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  014A 00000000 0000 03    .debug$S
+  AUX  4C 06 00 00 5D 00 00 00 00 00 00 00 4E 00 05 00 00 00
+  AUX  51 7D C3 AA 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  014D 00000000 0020 02    ?loadDB@DBLoader@@UAEXXZ
+  014E 00000000 0000 03    .text$x
+  AUX  33 00 00 00 05 00 00 00 A3 C8 52 8A 4E 00 05 00 00 00
+  AUX  B6 76 29 D3 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0151 00000000 0020 03    __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+  0152 000007A4 0000 03    $LN50
+  0153 000007AE 0000 03    $LN49
+  0154 0000078C 0000 03    $LN52
+  0155 00000784 0000 03    $LN53
+  0156 00000000 0000 03    .rdata
+  AUX  18 00 00 00 00 00 00 00 FC 3C 7A 07 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0159 00000000 0000 02    ??_C@_0BI@FLEEAJCD@CreateObjectofDBInfoApi?$AA@
+  015A 00000000 0000 02    __imp__exit
+  015B 00000000 0000 02    __imp__printf
+  015C 00000000 0000 02    __imp__sprintf_s
+  015D 00000000 0000 03    .rdata
+  AUX  3B 00 00 00 00 00 00 00 18 A0 E4 19 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0160 00000000 0000 02    ??_C@_0DL@CANODCEH@Failed?5loading?5?8?$CFs?8?0?5make?5sure?5i@
+  0161 00000000 0020 02    ?loadCevaLibrary@LibraryLoader@@UAEPAUHINSTANCE__@@PBD@Z
+  0162 00000000 0000 02    __imp__LoadLibraryA@4
+  0163 00000000 0000 02    __imp__FreeLibrary@4
+  0164 00000000 0020 02    _strcmp
+  0165 000007B5 0000 03    $LN43
+  0166 00000000 0020 02    ??0LibraryLoader@@QAE@PBD@Z
+  0167 00000000 0000 02    __imp___wassert
+  0168 00000000 0000 03    .rdata
+  AUX  20 00 00 00 00 00 00 00 12 C8 FE 91 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  016B 00000000 0000 02    ??_C@_1CA@HHALGCEA@?$AAm?$AA_?$AAp?$AAC?$AAo?$AAr?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?$AA@
+  016C 00000000 0000 03    .rdata
+  AUX  9E 00 00 00 00 00 00 00 AC B6 31 6E 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  016F 00000000 0000 02    ??_C@_1JO@IGHLHLLG@?$AAc?$AA?3?$AA?2?$AAw?$AAo?$AAr?$AAk?$AA?2?$AAs?$AAe?$AAr?$AAg?$AAe?$AAl?$AA?2?$AAc?$AAe?$AAv?$AAa?$AA_?$AAd?$AAe?$AAv?$AA?2?$AAs?$AAd?$AAt?$AA?2?$AAd?$AAe?$AAb?$AAu@
+  0170 00000000 0000 03    .data
+  AUX  04 00 00 00 00 00 00 00 DF A8 4D 1E 00 00 02 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0173 00000000 0000 02    ?__LINE__Var@?1??loadDB@DBLoader@@UAEXXZ@4JA
+  0174 0000000B 0020 03    __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  0175 00000000 0000 03    .xdata$x
+  AUX  2C 00 00 00 02 00 00 00 EC E1 F7 A7 4E 00 05 00 00 00
+  AUX  02 D2 84 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0178 00000008 0000 03    __ehfuncinfo$?loadDB@DBLoader@@UAEXXZ
+  0179 00000000 0000 03    __unwindtable$?loadDB@DBLoader@@UAEXXZ
+  017A 00000000 0020 02    __RTC_UninitUse
+  017B 00000000 0000 03    .text
+  AUX  6A 00 00 00 03 00 00 00 29 51 D4 F7 00 00 01 00 00 00
+  AUX  79 F5 6D 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  017E 00000000 0000 03    .debug$S
+  AUX  2C 01 00 00 07 00 00 00 00 00 00 00 57 00 05 00 00 00
+  AUX  7A 0A 48 7D 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0181 00000000 0020 02    ?setXtendName@DBLoader@@UAEXPBD@Z
+  0182 00000000 0000 02    __imp__memcpy_s
+  0183 00000000 0000 03    .text
+  AUX  30 00 00 00 00 00 00 00 56 F0 92 A4 00 00 01 00 00 00
+  AUX  77 12 07 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0186 00000000 0000 03    .debug$S
+  AUX  04 01 00 00 05 00 00 00 00 00 00 00 59 00 05 00 00 00
+  AUX  7E AF 7E B0 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0189 00000000 0020 02    ?getXtendName@DBLoader@@UAEPBDXZ
+  018A 00000000 0000 03    .text
+  AUX  7D 00 00 00 03 00 00 00 28 19 16 CF 00 00 01 00 00 00
+  AUX  C5 4B 3D 49 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  018D 00000000 0000 03    .debug$S
+  AUX  F0 00 00 00 05 00 00 00 00 00 00 00 5B 00 05 00 00 00
+  AUX  44 BB E1 95 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0190 00000000 0020 02    _createObjectofDBLoader
+  0191 00000000 0020 02    ??2@YAPAXI@Z
+  0192 00000000 0000 03    .text
+  AUX  71 00 00 00 02 00 00 00 4C 0C 32 81 00 00 01 00 00 00
+  AUX  E9 C1 50 EF 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0195 00000000 0000 03    .debug$S
+  AUX  10 01 00 00 05 00 00 00 00 00 00 00 5D 00 05 00 00 00
+  AUX  F1 31 E8 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0198 00000000 0020 02    _destroyObjectofDBLoader
+  0199 00000000 0000 03    .text
+  AUX  58 00 00 00 03 00 00 00 2F 1F FA 8C 00 00 02 00 00 00
+  AUX  2E 23 29 8C 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  019C 00000000 0000 03    .debug$S
+  AUX  DC 00 00 00 03 00 00 00 00 00 00 00 5F 00 05 00 00 00
+  AUX  5B 27 A7 55 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  019F 00000000 0020 02    ??_GDBLoader@@QAEPAXI@Z
+  01A0 00000000 0020 02    ??3@YAXPAX@Z
+  01A1 00000000 0000 03    .debug$T
+  AUX  78 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+Relocation Entries
+  Section      Address  Type     Symbol
+  001 .debug$S 00000C2E 0000000B __bad_alloc_Message
+  001 .debug$S 00000C32 0000000A __bad_alloc_Message
+  001 .debug$S 000017E4 0000000B _DBLibName_TL3
+  001 .debug$S 000017E8 0000000A _DBLibName_TL3
+  001 .debug$S 00001800 0000000B _DBLibName_TL410
+  001 .debug$S 00001804 0000000A _DBLibName_TL410
+  001 .debug$S 0000181E 0000000B _DBLibName_TL420_rtl_112
+  001 .debug$S 00001822 0000000A _DBLibName_TL420_rtl_112
+  001 .debug$S 0000185B 0000000B _DBLibName_TL411
+  001 .debug$S 0000185F 0000000A _DBLibName_TL411
+  001 .debug$S 00001890 0000000B _DBLibName_X
+  001 .debug$S 00001894 0000000A _DBLibName_X
+  001 .debug$S 000018C3 0000000B _DBLibName_1_1
+  001 .debug$S 000018C7 0000000A _DBLibName_1_1
+  001 .debug$S 000018DF 0000000B _DBLibName_XC
+  001 .debug$S 000018E3 0000000A _DBLibName_XC
+  001 .debug$S 0000190E 0000000B _DBLibName_XC323
+  001 .debug$S 00001912 0000000A _DBLibName_XC323
+  001 .debug$S 00001969 0000000B _DBLibName_XC4210
+  001 .debug$S 0000196D 0000000A _DBLibName_XC4210
+  001 .debug$S 0000199E 0000000B _DBLibName_XC4500
+  001 .debug$S 000019A2 0000000A _DBLibName_XC4500
+  003 .data    00000000 00000006 ??_C@_0P@GHFPNOJB@bad?5allocation?$AA@
+  034 .text    0000003E 00000014 __RTC_CheckEsp
+  034 .text    0000004E 00000014 __RTC_CheckEsp
+  035 .debug$S 0000000C 00000007 ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 00000078 0000000B ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 0000007C 0000000A ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 000000DC 0000000B ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 000000E0 0000000A ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 000000F4 0000000B ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  035 .debug$S 000000F8 0000000A ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  036 .rtc$TMZ 00000000 00000006 __RTC_Shutdown
+  037 .rtc$IMZ 00000000 00000006 __RTC_InitBase
+  039 .debug$S 0000000C 00000007 ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  039 .debug$S 00000078 0000000B ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  039 .debug$S 0000007C 0000000A ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  039 .debug$S 000000D4 0000000B ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  039 .debug$S 000000D8 0000000A ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  03A .text    00000028 00000006 ??_7DBLoader@@6B@
+  03B .debug$S 0000000C 00000007 ??0DBLoader@@QAE@ABV0@@Z
+  03B .debug$S 00000078 0000000B ??0DBLoader@@QAE@ABV0@@Z
+  03B .debug$S 0000007C 0000000A ??0DBLoader@@QAE@ABV0@@Z
+  03C .rdata   00000000 00000006 ??_R4DBLoader@@6B@
+  03C .rdata   00000004 00000006 ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+  03C .rdata   00000008 00000006 ?loadDB@DBLoader@@UAEXXZ
+  03C .rdata   0000000C 00000006 ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+  03C .rdata   00000010 00000006 ?setXtendName@DBLoader@@UAEXPBD@Z
+  03C .rdata   00000014 00000006 ?getXtendName@DBLoader@@UAEPBDXZ
+  03D .rdata$r 0000000C 00000006 ??_R0?AVDBLoader@@@8
+  03D .rdata$r 00000010 00000006 ??_R3DBLoader@@8
+  03E .data    00000000 00000006 ??_7type_info@@6B@
+  03F .rdata$r 0000000C 00000006 ??_R2DBLoader@@8
+  040 .rdata$r 00000000 00000006 ??_R1A@?0A@EA@DBLoader@@8
+  041 .rdata$r 00000000 00000006 ??_R0?AVDBLoader@@@8
+  041 .rdata$r 00000018 00000006 ??_R3DBLoader@@8
+  043 .debug$S 0000000C 00000007 ??4DBLoader@@QAEAAV0@ABV0@@Z
+  043 .debug$S 00000078 0000000B ??4DBLoader@@QAEAAV0@ABV0@@Z
+  043 .debug$S 0000007C 0000000A ??4DBLoader@@QAEAAV0@ABV0@@Z
+  043 .debug$S 000000E5 0000000B ??4DBLoader@@QAEAAV0@ABV0@@Z
+  043 .debug$S 000000E9 0000000A ??4DBLoader@@QAEAAV0@ABV0@@Z
+  044 .text    00000028 00000006 ??_7DBLoader@@6B@
+  044 .text    0000003C 00000006 ??_C@_00CNPNBAHC@?$AA@
+  045 .debug$S 0000000C 00000007 ??0DBLoader@@QAE@XZ
+  045 .debug$S 00000078 0000000B ??0DBLoader@@QAE@XZ
+  045 .debug$S 0000007C 0000000A ??0DBLoader@@QAE@XZ
+  045 .debug$S 000000D0 0000000B ??0DBLoader@@QAE@XZ
+  045 .debug$S 000000D4 0000000A ??0DBLoader@@QAE@XZ
+  047 .text    00000006 00000006 __ehhandler$??1DBLoader@@QAE@XZ
+  047 .text    0000002F 00000006 ___security_cookie
+  047 .text    0000004A 00000006 ??_7DBLoader@@6B@
+  047 .text    0000005A 00000006 ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+  047 .text    00000067 00000006 __imp__GetProcAddress@8
+  047 .text    0000006E 00000014 __RTC_CheckEsp
+  047 .text    0000008D 00000014 __RTC_CheckEsp
+  047 .text    00000095 00000014 ??0LibraryLoader@@QAE@XZ
+  047 .text    000000AB 00000014 ?freeCevaLibrary@LibraryLoader@@UAE_NPAUHINSTANCE__@@@Z
+  047 .text    000000BA 00000014 ??1LibraryLoader@@UAE@XZ
+  047 .text    000000C4 00000006 $LN9
+  047 .text    000000C9 00000014 @_RTC_CheckStackVars@8
+  047 .text    000000E3 00000014 @__security_check_cookie@4
+  047 .text    000000F0 00000014 __RTC_CheckEsp
+  047 .text    000000FC 00000006 $LN8
+  047 .text    00000108 00000006 $LN6
+  048 .debug$S 0000000C 00000007 ??1DBLoader@@QAE@XZ
+  048 .debug$S 0000005C 0000000B __ehhandler$??1DBLoader@@QAE@XZ
+  048 .debug$S 00000060 0000000A __ehhandler$??1DBLoader@@QAE@XZ
+  048 .debug$S 00000087 0000000B __unwindfunclet$??1DBLoader@@QAE@XZ$0
+  048 .debug$S 0000008B 0000000A __unwindfunclet$??1DBLoader@@QAE@XZ$0
+  048 .debug$S 000000DC 0000000B ??1DBLoader@@QAE@XZ
+  048 .debug$S 000000E0 0000000A ??1DBLoader@@QAE@XZ
+  048 .debug$S 0000010B 0000000B __ehhandler$??1DBLoader@@QAE@XZ
+  048 .debug$S 0000010F 0000000A __ehhandler$??1DBLoader@@QAE@XZ
+  048 .debug$S 00000135 0000000B $LN6
+  048 .debug$S 00000139 0000000A $LN6
+  048 .debug$S 00000144 0000000B $LN8
+  048 .debug$S 00000148 0000000A $LN8
+  048 .debug$S 00000153 0000000B $LN9
+  048 .debug$S 00000157 0000000A $LN9
+  048 .debug$S 0000017B 0000000B ??1DBLoader@@QAE@XZ
+  048 .debug$S 0000017F 0000000A ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001BB 0000000B ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001BF 0000000A ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001CB 0000000B ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001CF 0000000A ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001E4 0000000B ??1DBLoader@@QAE@XZ
+  048 .debug$S 000001E8 0000000A ??1DBLoader@@QAE@XZ
+  049 .text$x  00000004 00000014 ??1LibraryLoader@@UAE@XZ
+  049 .text$x  00000018 00000014 @__security_check_cookie@4
+  049 .text$x  00000022 00000014 @__security_check_cookie@4
+  049 .text$x  00000027 00000006 __ehfuncinfo$??1DBLoader@@QAE@XZ
+  049 .text$x  0000002C 00000014 ___CxxFrameHandler3
+  04B .xdata$x 00000004 00000006 __unwindfunclet$??1DBLoader@@QAE@XZ$0
+  04B .xdata$x 00000010 00000006 __unwindtable$??1DBLoader@@QAE@XZ
+  04D .text    00000006 00000006 __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  04D .text    0000002F 00000006 ___security_cookie
+  04D .text    00000057 00000006 ?__LINE__Var@?1??loadDB@DBLoader@@UAEXXZ@4JA
+  04D .text    00000062 00000006 ??_C@_1JO@IGHLHLLG@?$AAc?$AA?3?$AA?2?$AAw?$AAo?$AAr?$AAk?$AA?2?$AAs?$AAe?$AAr?$AAg?$AAe?$AAl?$AA?2?$AAc?$AAe?$AAv?$AAa?$AA_?$AAd?$AAe?$AAv?$AA?2?$AAs?$AAd?$AAt?$AA?2?$AAd?$AAe?$AAb?$AAu@
+  04D .text    00000067 00000006 ??_C@_1CA@HHALGCEA@?$AAm?$AA_?$AAp?$AAC?$AAo?$AAr?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?$AA@
+  04D .text    0000006D 00000006 __imp___wassert
+  04D .text    00000077 00000014 __RTC_CheckEsp
+  04D .text    00000095 00000014 __RTC_CheckEsp
+  04D .text    000000A1 00000014 ??0LibraryLoader@@QAE@PBD@Z
+  04D .text    000000C8 00000014 __RTC_CheckEsp
+  04D .text    000000E0 00000006 _DBLibName_TL3
+  04D .text    00000105 00000014 __RTC_CheckEsp
+  04D .text    00000130 00000014 __RTC_CheckEsp
+  04D .text    00000157 00000014 __RTC_CheckEsp
+  04D .text    00000184 00000014 __RTC_CheckEsp
+  04D .text    000001AD 00000014 __RTC_CheckEsp
+  04D .text    000001D6 00000014 __RTC_CheckEsp
+  04D .text    000001EE 00000006 _DBLibName_TL420_rtl_112
+  04D .text    00000201 00000006 _DBLibName_TL410
+  04D .text    00000223 00000014 __RTC_CheckEsp
+  04D .text    0000024A 00000014 __RTC_CheckEsp
+  04D .text    00000262 00000006 _DBLibName_TL411
+  04D .text    00000287 00000014 __RTC_CheckEsp
+  04D .text    000002AE 00000014 __RTC_CheckEsp
+  04D .text    000002D5 00000014 __RTC_CheckEsp
+  04D .text    000002ED 00000006 _DBLibName_XC
+  04D .text    00000312 00000014 __RTC_CheckEsp
+  04D .text    0000032A 00000006 _DBLibName_XC323
+  04D .text    0000034F 00000014 __RTC_CheckEsp
+  04D .text    00000376 00000014 __RTC_CheckEsp
+  04D .text    0000039D 00000014 __RTC_CheckEsp
+  04D .text    000003C4 00000014 __RTC_CheckEsp
+  04D .text    000003DC 00000006 _DBLibName_XC4210
+  04D .text    00000401 00000014 __RTC_CheckEsp
+  04D .text    00000419 00000006 _DBLibName_XC4500
+  04D .text    0000043D 00000014 __RTC_CheckEsp
+  04D .text    00000455 00000006 _DBLibName_1_1
+  04D .text    00000468 00000006 _DBLibName_X
+  04D .text    00000476 00000006 $LN43
+  04D .text    0000047B 00000014 __RTC_UninitUse
+  04D .text    00000491 00000014 _strcmp
+  04D .text    000004C9 00000006 ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+  04D .text    000004D6 00000006 __imp__GetProcAddress@8
+  04D .text    000004DD 00000014 __RTC_CheckEsp
+  04D .text    00000505 00000014 __RTC_CheckEsp
+  04D .text    00000513 00000006 $LN43
+  04D .text    00000518 00000014 __RTC_UninitUse
+  04D .text    0000052E 00000014 _strcmp
+  04D .text    00000544 00000006 __imp__FreeLibrary@4
+  04D .text    0000054B 00000014 __RTC_CheckEsp
+  04D .text    00000559 00000006 $LN43
+  04D .text    0000055E 00000014 __RTC_UninitUse
+  04D .text    00000570 00000006 __imp__LoadLibraryA@4
+  04D .text    00000577 00000014 __RTC_CheckEsp
+  04D .text    0000058B 00000006 $LN43
+  04D .text    00000590 00000014 __RTC_UninitUse
+  04D .text    000005A5 00000014 ?loadCevaLibrary@LibraryLoader@@UAEPAUHINSTANCE__@@PBD@Z
+  04D .text    000005B9 00000006 $LN43
+  04D .text    000005BE 00000014 __RTC_UninitUse
+  04D .text    000005E4 00000006 $LN43
+  04D .text    000005E9 00000014 __RTC_UninitUse
+  04D .text    000005FA 00000006 ??_C@_0DL@CANODCEH@Failed?5loading?5?8?$CFs?8?0?5make?5sure?5i@
+  04D .text    0000060C 00000006 __imp__sprintf_s
+  04D .text    00000616 00000014 __RTC_CheckEsp
+  04D .text    00000625 00000006 __imp__printf
+  04D .text    0000062F 00000014 __RTC_CheckEsp
+  04D .text    00000639 00000006 __imp__exit
+  04D .text    00000640 00000014 __RTC_CheckEsp
+  04D .text    00000647 00000006 ??_C@_0BI@FLEEAJCD@CreateObjectofDBInfoApi?$AA@
+  04D .text    00000654 00000006 __imp__GetProcAddress@8
+  04D .text    0000065B 00000014 __RTC_CheckEsp
+  04D .text    00000680 00000014 __RTC_CheckEsp
+  04D .text    000006A1 00000014 __RTC_CheckEsp
+  04D .text    000006C5 00000014 __RTC_CheckEsp
+  04D .text    000006FD 00000014 __RTC_CheckEsp
+  04D .text    00000731 00000014 __RTC_CheckEsp
+  04D .text    00000743 00000014 ??1LibraryLoader@@UAE@XZ
+  04D .text    0000074D 00000006 $LN53
+  04D .text    00000752 00000014 @_RTC_CheckStackVars@8
+  04D .text    0000076C 00000014 @__security_check_cookie@4
+  04D .text    00000779 00000014 __RTC_CheckEsp
+  04D .text    00000788 00000006 $LN52
+  04D .text    00000794 00000006 $LN49
+  04D .text    000007A0 00000006 $LN50
+  04E .debug$S 0000000C 00000007 ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000005C 0000000B __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000060 0000000A __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000008C 0000000B __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+  04E .debug$S 00000090 0000000A __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+  04E .debug$S 000000E8 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000000EC 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000114 0000000B __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000118 0000000A __ehhandler$?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000013E 0000000B $LN43
+  04E .debug$S 00000142 0000000A $LN43
+  04E .debug$S 0000014D 0000000B $LN49
+  04E .debug$S 00000151 0000000A $LN49
+  04E .debug$S 0000015C 0000000B $LN50
+  04E .debug$S 00000160 0000000A $LN50
+  04E .debug$S 0000016B 0000000B $LN52
+  04E .debug$S 0000016F 0000000A $LN52
+  04E .debug$S 0000017A 0000000B $LN53
+  04E .debug$S 0000017E 0000000A $LN53
+  04E .debug$S 000001E1 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000001E5 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000022B 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000022F 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000259 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000025D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000269 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000026D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000279 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000027D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000289 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000028D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000299 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000029D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002A9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002AD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002B9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002BD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002C9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002CD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002D9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002DD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002E9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002ED 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002F9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000002FD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000309 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000030D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000319 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000031D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000329 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000032D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000339 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000033D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000349 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000034D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000359 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000035D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000369 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000036D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000379 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000037D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000389 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000038D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000399 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000039D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003A9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003AD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003B9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003BD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003C9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003CD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003D9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003DD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003E9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003ED 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003F9 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 000003FD 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000409 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000040D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000419 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000041D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000429 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000042D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000439 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000043D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000449 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000044D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000459 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000045D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000469 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 0000046D 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000484 0000000B ?loadDB@DBLoader@@UAEXXZ
+  04E .debug$S 00000488 0000000A ?loadDB@DBLoader@@UAEXXZ
+  04F .text$x  00000007 00000014 ??1LibraryLoader@@UAE@XZ
+  04F .text$x  0000001B 00000014 @__security_check_cookie@4
+  04F .text$x  00000025 00000014 @__security_check_cookie@4
+  04F .text$x  0000002A 00000006 __ehfuncinfo$?loadDB@DBLoader@@UAEXXZ
+  04F .text$x  0000002F 00000014 ___CxxFrameHandler3
+  055 .xdata$x 00000004 00000006 __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+  055 .xdata$x 00000010 00000006 __unwindtable$?loadDB@DBLoader@@UAEXXZ
+  056 .text    0000003C 00000006 __imp__memcpy_s
+  056 .text    00000046 00000014 __RTC_CheckEsp
+  056 .text    00000060 00000014 __RTC_CheckEsp
+  057 .debug$S 0000000C 00000007 ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 00000078 0000000B ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 0000007C 0000000A ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 000000DB 0000000B ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 000000DF 0000000A ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 000000F4 0000000B ?setXtendName@DBLoader@@UAEXPBD@Z
+  057 .debug$S 000000F8 0000000A ?setXtendName@DBLoader@@UAEXPBD@Z
+  059 .debug$S 0000000C 00000007 ?getXtendName@DBLoader@@UAEPBDXZ
+  059 .debug$S 00000078 0000000B ?getXtendName@DBLoader@@UAEPBDXZ
+  059 .debug$S 0000007C 0000000A ?getXtendName@DBLoader@@UAEPBDXZ
+  059 .debug$S 000000D4 0000000B ?getXtendName@DBLoader@@UAEPBDXZ
+  059 .debug$S 000000D8 0000000A ?getXtendName@DBLoader@@UAEPBDXZ
+  05A .text    00000024 00000014 ??2@YAPAXI@Z
+  05A .text    00000041 00000014 ??0DBLoader@@QAE@XZ
+  05A .text    00000075 00000014 __RTC_CheckEsp
+  05B .debug$S 0000000C 00000007 _createObjectofDBLoader
+  05B .debug$S 00000078 0000000B _createObjectofDBLoader
+  05B .debug$S 0000007C 0000000A _createObjectofDBLoader
+  05B .debug$S 000000C0 0000000B _createObjectofDBLoader
+  05B .debug$S 000000C4 0000000A _createObjectofDBLoader
+  05C .text    00000045 00000014 ??_GDBLoader@@QAEPAXI@Z
+  05C .text    00000069 00000014 __RTC_CheckEsp
+  05D .debug$S 0000000C 00000007 _destroyObjectofDBLoader
+  05D .debug$S 00000078 0000000B _destroyObjectofDBLoader
+  05D .debug$S 0000007C 0000000A _destroyObjectofDBLoader
+  05D .debug$S 000000D8 0000000B _destroyObjectofDBLoader
+  05D .debug$S 000000DC 0000000A _destroyObjectofDBLoader
+  05E .text    00000027 00000014 ??1DBLoader@@QAE@XZ
+  05E .text    00000038 00000014 ??3@YAXPAX@Z
+  05E .text    0000004E 00000014 __RTC_CheckEsp
+  05F .debug$S 0000000C 00000007 ??_GDBLoader@@QAEPAXI@Z
+  05F .debug$S 00000078 0000000B ??_GDBLoader@@QAEPAXI@Z
+  05F .debug$S 0000007C 0000000A ??_GDBLoader@@QAEPAXI@Z
+

@@ -1,0 +1,167 @@
+
+tclsh.exe:     format de fichier pei-i386
+tclsh.exe
+architecture: i386, fanions 0x00000102:
+EXEC_P, D_PAGED
+adresse de départ 0x00401280
+
+Characteristics 0x30f
+	relocations stripped
+	executable
+	line numbers stripped
+	symbols stripped
+	32 bit words
+	debugging information removed
+
+Time/Date		Fri Apr 11 21:40:51 2014
+Magic			010b	(PE32)
+MajorLinkerVersion	2
+MinorLinkerVersion	56
+SizeOfCode		00000a00
+SizeOfInitializedData	00002600
+SizeOfUninitializedData	00000200
+AddressOfEntryPoint	00001280
+BaseOfCode		00001000
+BaseOfData		00002000
+ImageBase		00400000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	4
+MinorOSystemVersion	0
+MajorImageVersion	1
+MinorImageVersion	0
+MajorSubsystemVersion	4
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00008000
+SizeOfHeaders		00000400
+CheckSum		00003146
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00000000
+SizeOfStackReserve	00200000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 00005000 00000358 Import Directory [parts of .idata]
+Entry 2 00006000 0000129c Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00000000 00000000 Security Directory
+Entry 5 00000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 00000000 00000000 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 00000000 00000000 Thread Storage Directory [.tls]
+Entry a 00000000 00000000 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 00000000 00000000 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .idata at 0x405000
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 00005000	00005054 53484543 ffffffff 000052e4 000050d8
+
+	DLL Name: KERNEL32.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	5158	    4  AddAtomA	6b825a33
+	5164	  337  ExitProcess	6b828244
+	5172	  358  FindAtomA	6b8244fb
+	517e	  430  GetAtomNameA	6b83b7e8
+	518e	  456  GetCommandLineA	6b81dfa9
+	51a0	  612  GetModuleHandleA	6b81b756
+	51b4	  669  GetProcAddress	6b81a7fd
+	51c6	 1345  SetUnhandledExceptionFilter	6b81e14f
+
+ 00005014	0000507c 53484543 ffffffff 00005330 00005100
+
+	DLL Name: msvcrt.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	51e4	  163  __getmainargs	10117c0c
+	51f4	  206  __p__environ	1011c2a2
+	5204	  208  __p__fmode	101171c4
+	5212	  228  __set_app_type	101171cf
+	5224	  276  _assert	1017fcbd
+	522e	  294  _cexit	10114448
+	5238	  496  _iob	101b4c08
+	5240	  779  _onexit	10115830
+	524a	  844  _setmode	1011a72a
+	5256	 1175  abort	10182b10
+	525e	 1183  atexit	10116a91
+	5268	 1223  free	101099dc
+	5270	 1279  malloc	10109a7a
+	527a	 1319  setlocale	10118507
+	5286	 1321  signal	1011ce7f
+
+ 00005028	000050c0 53484543 ffffffff 0000534c 00005144
+
+	DLL Name: tcl85.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	5290	  191  Tcl_Alloc	707135b0
+	529c	  510  Tcl_Init	707614a0
+	52a8	  553  Tcl_Main	7077a308
+	52b4	  685  Tcl_SetVar	707ab8a4
+
+ 0000503c	00000000 00000000 00000000 00000000 00000000
+
+The .rsrc Resource Directory section:
+000  Type Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 3
+010   Entry: ID: 0x000003, Value: 0x80000028
+028    Name Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 4
+038     Entry: ID: 0x000001, Value: 0x80000058
+058      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+068       Entry: ID: 0x000409, Value: 0x000124
+124        Leaf: Addr: 0x006184, Size: 0x0002e8, Codepage: 0
+040     Entry: ID: 0x000002, Value: 0x80000070
+070      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+080       Entry: ID: 0x000409, Value: 0x000134
+134        Leaf: Addr: 0x00646c, Size: 0x000130, Codepage: 0
+048     Entry: ID: 0x000003, Value: 0x80000088
+088      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+098       Entry: ID: 0x000409, Value: 0x000144
+144        Leaf: Addr: 0x00659c, Size: 0x000128, Codepage: 0
+050     Entry: ID: 0x000004, Value: 0x800000a0
+0a0      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+0b0       Entry: ID: 0x000409, Value: 0x000154
+154        Leaf: Addr: 0x0066c4, Size: 0x0008a8, Codepage: 0
+018   Entry: ID: 0x00000e, Value: 0x800000b8
+0b8    Name Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 1, IDs: 0
+0c8     Entry: name: [val: 80000118 len 5]: TCLSH, Value: 0x800000d0
+0d0      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+0e0       Entry: ID: 0x000409, Value: 0x000164
+164        Leaf: Addr: 0x006f6c, Size: 0x00003e, Codepage: 0
+020   Entry: ID: 0x000010, Value: 0x800000e8
+0e8    Name Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+0f8     Entry: ID: 0x000001, Value: 0x80000100
+100      Language Table: Char: 0, Time: 50a2e8c6, Ver: 0/0, Num Names: 0, IDs: 1
+110       Entry: ID: 0x000409, Value: 0x000174
+174        Leaf: Addr: 0x006fac, Size: 0x0002f0, Codepage: 0
+ String table starts at offset: 0x118
+ Resources start at offset: 0x184
+
+Sections :
+Idx Name          Taille    VMA       LMA       Off fich  Algn
+  0 .text         000009e4  00401000  00401000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, DATA
+  1 .data         00000010  00402000  00402000  00000e00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .rdata        000001a0  00403000  00403000  00001000  2**5
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .bss          00000054  00404000  00404000  00000000  2**3
+                  ALLOC
+  4 .idata        00000358  00405000  00405000  00001200  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  5 .rsrc         0000129c  00406000  00406000  00001600  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+SYMBOL TABLE:
+aucun symbole
+
+

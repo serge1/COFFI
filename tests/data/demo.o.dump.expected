@@ -4,7 +4,7 @@ File Header
   Machine:                      8CA6
   Number of Sections:           0007
 
-  TimeDateStamp:                535E5672
+  TimeDateStamp:                535E5672 (2014-04-28 15:24:02)
   PointerToSymbolTable:         00000282
   NumberOfSymbols:              00000039
   SizeOfOptionalHeader:         001C
@@ -21,53 +21,135 @@ Optional Header
   base of data                  00000000
 
 Section Table
-  01 CODE      VirtSize: 00000000  VirtAddr:  00000000
+  000 CODE      VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000000
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000001
-    
+     
 
-  02 const_data VirtSize: 00000000  VirtAddr:  00000000
+  001 const_data VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000000
     relocation offs: 0000017A  relocations:   00000001
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000000
-    
+     
 
-  03 .bss      VirtSize: 00000000  VirtAddr:  00000000
+  002 .bss      VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000000
     relocation offs: 00000186  relocations:   00000001
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000000
-    
+     
 
-  04 .data     VirtSize: 00000000  VirtAddr:  00000000
+  003 .data     VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000000
     relocation offs: 00000192  relocations:   00000001
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000200
       INFO
 
-  05 .text     VirtSize: 00000000  VirtAddr:  00000000
+  004 .text     VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000000
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000001
-    
+     
 
-  06 .text     VirtSize: 00000000  VirtAddr:  00000000
+  005 .text     VirtSize: 00000000  VirtAddr:  00000000
     raw data offs:   00000148  raw data size: 00000032
     relocation offs: 0000019E  relocations:   00000010
     line # offs:     0000025E  line #'s:      00000006
     characteristics: 00000201
       INFO
 
-  07 .text     VirtSize: 00000032  VirtAddr:  00000000
+  006 .text     VirtSize: 00000032  VirtAddr:  00000000
     raw data offs:   0000017A  raw data size: 00000000
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 00000001
-    
+     
 
+
+Symbol Table
+  #    Value    Type Class Name
+  0000 00000020 0002 67    .file
+  AUX  2E 2E 5C 64 65 6D 6F 2E 63 00 00 00 00 00 00 00 00 00
+  0002 00000000 0011 13    const_data
+  0003 00000000 0000 00    _align_@@@_0
+  0004 00000000 0011 13    .bss
+  0005 00000000 0000 00    _align_@@@_1
+  0006 00000000 0011 13    .data
+  0007 00000000 0000 00    _align_@@@_2
+  0008 00000000 0009 8C    _fake_vec_t_u
+  AUX  00 00 00 00 00 00 40 00 00 00 00 00 14 00 00 00 00 00
+  000A 00000000 0035 8B    _I32
+  AUX  00 00 00 00 00 00 40 00 10 00 00 00 00 00 00 00 00 00
+  000C 00000000 0033 8B    _I16
+  AUX  00 00 00 00 00 00 40 00 20 00 00 00 00 00 00 00 00 00
+  000E 00000000 0032 8B    _I8
+  AUX  00 00 00 00 00 00 40 00 40 00 00 00 00 00 00 00 00 00
+  0010 00000000 8038 8B    _I64
+  AUX  00 00 00 00 00 00 40 00 08 00 00 00 18 00 00 00 00 00
+  0012 00000040 0000 E6    .eos
+  AUX  08 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00
+  0014 00000000 0009 8C    _fake_vec_out_u
+  AUX  00 00 00 00 00 00 80 00 00 00 00 00 00 00 00 00 00 00
+  0016 00000000 8036 8B    _I40
+  AUX  00 00 00 00 00 00 80 00 10 00 00 00 00 00 00 00 00 00
+  0018 00000000 803A 8B    _I20
+  AUX  00 00 00 00 00 00 40 00 20 00 00 00 1A 00 00 00 00 00
+  001A 00000000 0009 8B    _V
+  AUX  08 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00
+  001C 00000080 0000 E6    .eos
+  AUX  14 00 00 00 00 00 80 00 00 00 00 00 00 00 00 00 00 00
+  001E 00000000 0011 13    .text
+  001F 00000000 0011 13    .text
+  0020 00000000 0002 67    .file
+  AUX  2E 2E 5C 64 65 6D 6F 2E 63 00 00 00 00 00 00 00 00 00
+  0022 00000000 0000 02    _main
+  0023 00000000 0024 82    _main
+  AUX  26 00 00 00 32 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0025 00000000 0000 00    _inline_@@@__0_
+  0026 00000000 0000 E5    .bf
+  AUX  2F 00 00 00 0F 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0028 00000004 000F 81    ____RET_ADDRESS
+  0029 00000000 0004 81    ____OLD_FRAME
+  002A FFFFFFFC 0005 81    _i
+  002B 00000000 0000 62    func_start_@@@_3_main
+  002C 00000000 0000 00    BB1_main
+  002D 00000010 0000 00    _inline_@@@__1_
+  002E 00000010 0000 00    Lt_0_1
+  002F 00000010 0000 E4    .bb
+  AUX  00 00 00 00 05 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0031 00000024 0000 E4    .eb
+  AUX  00 00 00 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0033 00000024 0000 00    Lt_0_2
+  0034 00000032 0000 63    func_end_@@@_3_main
+  0035 00000032 0000 E5    .ef
+  AUX  00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0037 00000032 0000 FF    _main
+  0038 00000000 0011 13    .text
+
+Relocation Entries
+  Section      Address  Type     Symbol
+  001 const_data 00000000 00000240 _align_@@@_0
+  002 .bss     00000000 00000240 _align_@@@_1
+  003 .data    00000000 00000240 _align_@@@_2
+  005 .text    00000023 0000001A _main
+  005 .text    00000000 00000241 _inline_@@@__0_
+  005 .text    00000010 00000241 _inline_@@@__1_
+  005 .text    00000010 00108948 _inline_@@@__1_
+  005 .text    0000001C 00000043  
+  005 .text    00000023 04408782 Lt_0_1
+  005 .text    00000022 044400BA Lt_0_1
+  005 .text    00000021 044280BA Lt_0_1
+  005 .text    0000001C 044000BA Lt_0_1
+  005 .text    0000001F 044400BA Lt_0_1
+  005 .text    0000001E 044400BA Lt_0_1
+  005 .text    0000001D 044400BA Lt_0_1
+  005 .text    0000001C 044100BA Lt_0_1
+  005 .text    00000024 00000044 Lt_0_1
+  005 .text    00000030 00000043 Lt_0_1
+  005 .text    00000032 00000044 Lt_0_1
 

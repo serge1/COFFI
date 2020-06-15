@@ -1,0 +1,1152 @@
+
+anobj.o:     format de fichier pe-i386
+anobj.o
+architecture: i386, fanions 0x0000003d:
+HAS_RELOC, HAS_LINENO, HAS_DEBUG, HAS_SYMS, HAS_LOCALS
+adresse de départ 0x00000000
+
+Characteristics 0x0
+
+Time/Date		Mon May 26 18:22:46 2014
+Magic			0000
+MajorLinkerVersion	0
+MinorLinkerVersion	0
+SizeOfCode		00000000
+SizeOfInitializedData	00000000
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	00000000
+BaseOfCode		00000000
+BaseOfData		00000000
+ImageBase		00000000
+SectionAlignment	00000000
+FileAlignment		00000000
+MajorOSystemVersion	0
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	0
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00000000
+SizeOfHeaders		00000000
+CheckSum		00000000
+Subsystem		00000000	(unspecified)
+DllCharacteristics	00000000
+SizeOfStackReserve	00000000
+SizeOfStackCommit	00000000
+SizeOfHeapReserve	00000000
+SizeOfHeapCommit	00000000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000000
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 00000000 00000000 Import Directory [parts of .idata]
+Entry 2 00000000 00000000 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00000000 00000000 Security Directory
+Entry 5 00000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 00000000 00000000 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 00000000 00000000 Thread Storage Directory [.tls]
+Entry a 00000000 00000000 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 00000000 00000000 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+Sections :
+Idx Name          Taille    VMA       LMA       Off fich  Algn
+  0 .drectve      0000036b  00000000  00000000  00000f3c  2**0
+                  CONTENTS, READONLY, DEBUGGING, EXCLUDE, NOREAD
+  1 .debug$S      0000b5b4  00000000  00000000  000012a7  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  2 .rdata        0000000f  00000000  00000000  0000c937  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_0P@GHFPNOJB@bad?5allocation?$AA@ 11)
+  3 .data         00000004  00000000  00000000  0000c946  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, DATA
+  4 .rdata        00000001  00000000  00000000  0000c954  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?_Value@?$_Is_swap_move@U_Swap_move_tag@std@@@std@@2_NB 19)
+  5 .rdata        00000001  00000000  00000000  0000c955  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?value@?$integral_constant@_N$0A@@tr1@std@@2_NB 23)
+  6 .rdata        00000001  00000000  00000000  0000c956  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?value@?$integral_constant@_N$00@tr1@std@@2_NB 27)
+  7 .rdata        00000004  00000000  00000000  0000c957  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?collate@?$_Locbase@H@std@@2HB 31)
+  8 .rdata        00000004  00000000  00000000  0000c95b  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?ctype@?$_Locbase@H@std@@2HB 35)
+  9 .rdata        00000004  00000000  00000000  0000c95f  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?monetary@?$_Locbase@H@std@@2HB 39)
+ 10 .rdata        00000004  00000000  00000000  0000c963  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?numeric@?$_Locbase@H@std@@2HB 43)
+ 11 .rdata        00000004  00000000  00000000  0000c967  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?time@?$_Locbase@H@std@@2HB 47)
+ 12 .rdata        00000004  00000000  00000000  0000c96b  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?messages@?$_Locbase@H@std@@2HB 51)
+ 13 .rdata        00000004  00000000  00000000  0000c96f  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?all@?$_Locbase@H@std@@2HB 55)
+ 14 .rdata        00000004  00000000  00000000  0000c973  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?none@?$_Locbase@H@std@@2HB 59)
+ 15 .rdata        00000004  00000000  00000000  0000c977  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?skipws@?$_Iosb@H@std@@2W4_Fmtflags@12@B 63)
+ 16 .rdata        00000004  00000000  00000000  0000c97b  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?unitbuf@?$_Iosb@H@std@@2W4_Fmtflags@12@B 67)
+ 17 .rdata        00000004  00000000  00000000  0000c97f  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?uppercase@?$_Iosb@H@std@@2W4_Fmtflags@12@B 71)
+ 18 .rdata        00000004  00000000  00000000  0000c983  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?showbase@?$_Iosb@H@std@@2W4_Fmtflags@12@B 75)
+ 19 .rdata        00000004  00000000  00000000  0000c987  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?showpoint@?$_Iosb@H@std@@2W4_Fmtflags@12@B 79)
+ 20 .rdata        00000004  00000000  00000000  0000c98b  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?showpos@?$_Iosb@H@std@@2W4_Fmtflags@12@B 83)
+ 21 .rdata        00000004  00000000  00000000  0000c98f  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?left@?$_Iosb@H@std@@2W4_Fmtflags@12@B 87)
+ 22 .rdata        00000004  00000000  00000000  0000c993  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?right@?$_Iosb@H@std@@2W4_Fmtflags@12@B 91)
+ 23 .rdata        00000004  00000000  00000000  0000c997  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?internal@?$_Iosb@H@std@@2W4_Fmtflags@12@B 95)
+ 24 .rdata        00000004  00000000  00000000  0000c99b  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?dec@?$_Iosb@H@std@@2W4_Fmtflags@12@B 99)
+ 25 .rdata        00000004  00000000  00000000  0000c99f  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?oct@?$_Iosb@H@std@@2W4_Fmtflags@12@B 103)
+ 26 .rdata        00000004  00000000  00000000  0000c9a3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?hex@?$_Iosb@H@std@@2W4_Fmtflags@12@B 107)
+ 27 .rdata        00000004  00000000  00000000  0000c9a7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?scientific@?$_Iosb@H@std@@2W4_Fmtflags@12@B 111)
+ 28 .rdata        00000004  00000000  00000000  0000c9ab  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?fixed@?$_Iosb@H@std@@2W4_Fmtflags@12@B 115)
+ 29 .rdata        00000004  00000000  00000000  0000c9af  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?hexfloat@?$_Iosb@H@std@@2W4_Fmtflags@12@B 119)
+ 30 .rdata        00000004  00000000  00000000  0000c9b3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?boolalpha@?$_Iosb@H@std@@2W4_Fmtflags@12@B 123)
+ 31 .rdata        00000004  00000000  00000000  0000c9b7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?_Stdio@?$_Iosb@H@std@@2W4_Fmtflags@12@B 127)
+ 32 .rdata        00000004  00000000  00000000  0000c9bb  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?adjustfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 131)
+ 33 .rdata        00000004  00000000  00000000  0000c9bf  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?basefield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 135)
+ 34 .rdata        00000004  00000000  00000000  0000c9c3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?floatfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 139)
+ 35 .rdata        00000004  00000000  00000000  0000c9c7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?goodbit@?$_Iosb@H@std@@2W4_Iostate@12@B 143)
+ 36 .rdata        00000004  00000000  00000000  0000c9cb  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?eofbit@?$_Iosb@H@std@@2W4_Iostate@12@B 147)
+ 37 .rdata        00000004  00000000  00000000  0000c9cf  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?failbit@?$_Iosb@H@std@@2W4_Iostate@12@B 151)
+ 38 .rdata        00000004  00000000  00000000  0000c9d3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?badbit@?$_Iosb@H@std@@2W4_Iostate@12@B 155)
+ 39 .rdata        00000004  00000000  00000000  0000c9d7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?_Hardfail@?$_Iosb@H@std@@2W4_Iostate@12@B 159)
+ 40 .rdata        00000004  00000000  00000000  0000c9db  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?in@?$_Iosb@H@std@@2W4_Openmode@12@B 163)
+ 41 .rdata        00000004  00000000  00000000  0000c9df  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?out@?$_Iosb@H@std@@2W4_Openmode@12@B 167)
+ 42 .rdata        00000004  00000000  00000000  0000c9e3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?ate@?$_Iosb@H@std@@2W4_Openmode@12@B 171)
+ 43 .rdata        00000004  00000000  00000000  0000c9e7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?app@?$_Iosb@H@std@@2W4_Openmode@12@B 175)
+ 44 .rdata        00000004  00000000  00000000  0000c9eb  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?trunc@?$_Iosb@H@std@@2W4_Openmode@12@B 179)
+ 45 .rdata        00000004  00000000  00000000  0000c9ef  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?_Nocreate@?$_Iosb@H@std@@2W4_Openmode@12@B 183)
+ 46 .rdata        00000004  00000000  00000000  0000c9f3  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?_Noreplace@?$_Iosb@H@std@@2W4_Openmode@12@B 187)
+ 47 .rdata        00000004  00000000  00000000  0000c9f7  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?binary@?$_Iosb@H@std@@2W4_Openmode@12@B 191)
+ 48 .rdata        00000004  00000000  00000000  0000c9fb  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?beg@?$_Iosb@H@std@@2W4_Seekdir@12@B 195)
+ 49 .rdata        00000004  00000000  00000000  0000c9ff  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?cur@?$_Iosb@H@std@@2W4_Seekdir@12@B 199)
+ 50 .rdata        00000004  00000000  00000000  0000ca03  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ?end@?$_Iosb@H@std@@2W4_Seekdir@12@B 203)
+ 51 .rdata        0000009f  00000000  00000000  0000ca07  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 52 .text         00000058  00000000  00000000  0000caa6  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z 223)
+ 53 .debug$S      0000012c  00000000  00000000  0000cb12  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 54 .rtc$TMZ      00000004  00000000  00000000  0000cc84  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 55 .rtc$IMZ      00000004  00000000  00000000  0000cc92  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 56 .text         00000030  00000000  00000000  0000cca0  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ 241)
+ 57 .debug$S      00000104  00000000  00000000  0000ccd0  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 58 .text         00000099  00000000  00000000  0000ce06  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT ??0DBLoader@@QAE@ABV0@@Z 248)
+ 59 .debug$S      000000d8  00000000  00000000  0000cea9  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 60 .rdata        00000018  00000000  00000000  0000cf9f  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_7DBLoader@@6B@ 252)
+ 61 .rdata$r      00000014  00000000  00000000  0000cff3  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+ 62 .data         00000017  00000000  00000000  0000d01b  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, DATA, LINK_ONCE_DISCARD (COMDAT ??_R0?AVDBLoader@@@8 260)
+ 63 .rdata$r      00000010  00000000  00000000  0000d03c  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+ 64 .rdata$r      00000005  00000000  00000000  0000d056  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+ 65 .rdata$r      0000001c  00000000  00000000  0000d065  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+ 66 .text         000000ac  00000000  00000000  0000d095  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT ??4DBLoader@@QAEAAV0@ABV0@@Z 280)
+ 67 .debug$S      00000104  00000000  00000000  0000d141  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 68 .text         00000065  00000000  00000000  0000d277  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 69 .debug$S      00000120  00000000  00000000  0000d2f0  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 70 .rdata        00000001  00000000  00000000  0000d442  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_00CNPNBAHC@?$AA@ 291)
+ 71 .text         00000116  00000000  00000000  0000d443  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 72 .debug$S      00000244  00000000  00000000  0000d5f9  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 73 .text$x       00000030  00000000  00000000  0000d923  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 74 .rdata        00000019  00000000  00000000  0000d985  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@ 313)
+ 75 .xdata$x      0000002c  00000000  00000000  0000d99e  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 76 .sxdata       00000008  00000000  00000000  0000d9de  2**2
+                  CONTENTS, READONLY, DEBUGGING, NOREAD
+ 77 .text         000007bf  00000000  00000000  0000d9e6  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 78 .debug$S      0000064c  00000000  00000000  0000e4ed  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 79 .text$x       00000033  00000000  00000000  0000eedb  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 80 .rdata        00000018  00000000  00000000  0000ef40  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_0BI@FLEEAJCD@CreateObjectofDBInfoApi?$AA@ 345)
+ 81 .rdata        0000003b  00000000  00000000  0000ef58  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_0DL@CANODCEH@Failed?5loading?5?8?$CFs?8?0?5make?5sure?5i@ 352)
+ 82 .rdata        00000020  00000000  00000000  0000ef93  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_1CA@HHALGCEA@?$AAm?$AA_?$AAp?$AAC?$AAo?$AAr?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?$AA@ 363)
+ 83 .rdata        0000009e  00000000  00000000  0000efb3  2**3
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_DISCARD (COMDAT ??_C@_1JO@IGHLHLLG@?$AAc?$AA?3?$AA?2?$AAw?$AAo?$AAr?$AAk?$AA?2?$AAs?$AAe?$AAr?$AAg?$AAe?$AAl?$AA?2?$AAc?$AAe?$AAv?$AAa?$AA_?$AAd?$AAe?$AAv?$AA?2?$AAs?$AAd?$AAt?$AA?2?$AAd?$AAe?$AAb?$AAu@ 367)
+ 84 .data         00000004  00000000  00000000  0000f051  2**2
+                  CONTENTS, ALLOC, LOAD, DATA, LINK_ONCE_DISCARD (COMDAT ?__LINE__Var@?1??loadDB@DBLoader@@UAEXXZ@4JA 371)
+ 85 .xdata$x      0000002c  00000000  00000000  0000f055  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+ 86 .text         0000006a  00000000  00000000  0000f095  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 87 .debug$S      0000012c  00000000  00000000  0000f11d  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 88 .text         00000030  00000000  00000000  0000f28f  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 89 .debug$S      00000104  00000000  00000000  0000f2bf  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 90 .text         0000007d  00000000  00000000  0000f3f5  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 91 .debug$S      000000f0  00000000  00000000  0000f490  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 92 .text         00000071  00000000  00000000  0000f5b2  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 93 .debug$S      00000110  00000000  00000000  0000f637  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 94 .text         00000058  00000000  00000000  0000f779  2**4
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT ??_GDBLoader@@QAEPAXI@Z 415)
+ 95 .debug$S      000000dc  00000000  00000000  0000f7ef  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 96 .debug$T      00000078  00000000  00000000  0000f8e9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+SYMBOL TABLE:
+[  0](sec -1)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00847809 @comp.id
+[  1](sec -1)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000001 @feat.00
+[  2](sec  1)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .drectve
+AUX scnlen 0x36b nreloc 0 nlnno 0 checksum 0x663ac0a1 assoc 0 comdat 0
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[  5](sec  2)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0xb5b4 nreloc 22 nlnno 0
+AUX scnlen 0x77a3ed23 nreloc 0 nlnno 0
+[  8](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0xf nreloc 0 nlnno 0 checksum 0x4f732289 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 11](sec  3)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_0P@GHFPNOJB@bad?5allocation?$AA@
+[ 12](sec  4)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .data
+AUX scnlen 0x4 nreloc 1 nlnno 0
+AUX scnlen 0xa6794771 nreloc 0 nlnno 0
+[ 15](sec  4)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 __bad_alloc_Message
+[ 16](sec  5)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x1 nreloc 0 nlnno 0 checksum 0x77073096 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 19](sec  5)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?_Value@?$_Is_swap_move@U_Swap_move_tag@std@@@std@@2_NB
+[ 20](sec  6)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x1 nreloc 0 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 23](sec  6)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?value@?$integral_constant@_N$0A@@tr1@std@@2_NB
+[ 24](sec  7)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x1 nreloc 0 nlnno 0 checksum 0x77073096 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 27](sec  7)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?value@?$integral_constant@_N$00@tr1@std@@2_NB
+[ 28](sec  8)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xb8bc6765 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 31](sec  8)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?collate@?$_Locbase@H@std@@2HB
+[ 32](sec  9)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xaa09c88b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 35](sec  9)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?ctype@?$_Locbase@H@std@@2HB
+[ 36](sec 10)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x8f629757 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 39](sec 10)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?monetary@?$_Locbase@H@std@@2HB
+[ 40](sec 11)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xc5b428ef assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 43](sec 11)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?numeric@?$_Locbase@H@std@@2HB
+[ 44](sec 12)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x5019579f assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 47](sec 12)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?time@?$_Locbase@H@std@@2HB
+[ 48](sec 13)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xa032af3e assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 51](sec 13)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?messages@?$_Locbase@H@std@@2HB
+[ 52](sec 14)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xa848e8f7 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 55](sec 14)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?all@?$_Locbase@H@std@@2HB
+[ 56](sec 15)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 59](sec 15)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?none@?$_Locbase@H@std@@2HB
+[ 60](sec 16)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xb8bc6765 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 63](sec 16)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?skipws@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 64](sec 17)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xaa09c88b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 67](sec 17)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?unitbuf@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 68](sec 18)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x8f629757 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 71](sec 18)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?uppercase@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 72](sec 19)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xc5b428ef assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 75](sec 19)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?showbase@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 76](sec 20)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x5019579f assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 79](sec 20)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?showpoint@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 80](sec 21)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xa032af3e assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 83](sec 21)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?showpos@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 84](sec 22)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x9b14583d assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 87](sec 22)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?left@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 88](sec 23)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xed59b63b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 91](sec 23)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?right@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 92](sec 24)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x1c26a37 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 95](sec 24)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?internal@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[ 96](sec 25)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x384d46e assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 99](sec 25)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?dec@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[100](sec 26)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x709a8dc assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[103](sec 26)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?oct@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[104](sec 27)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xe1351b8 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[107](sec 27)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?hex@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[108](sec 28)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x1c26a370 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[111](sec 28)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?scientific@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[112](sec 29)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x384d46e0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[115](sec 29)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?fixed@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[116](sec 30)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x246be590 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[119](sec 30)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?hexfloat@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[120](sec 31)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x709a8dc0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[123](sec 31)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?boolalpha@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[124](sec 32)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xe1351b80 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[127](sec 32)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?_Stdio@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[128](sec 33)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x778f8431 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[131](sec 33)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?adjustfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[132](sec 34)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xa9e2d0a assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[135](sec 34)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?basefield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[136](sec 35)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x246be590 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[139](sec 35)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?floatfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B
+[140](sec 36)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[143](sec 36)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?goodbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+[144](sec 37)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xb8bc6765 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[147](sec 37)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?eofbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+[148](sec 38)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xaa09c88b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[151](sec 38)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?failbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+[152](sec 39)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x8f629757 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[155](sec 39)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?badbit@?$_Iosb@H@std@@2W4_Iostate@12@B
+[156](sec 40)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x5019579f assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[159](sec 40)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?_Hardfail@?$_Iosb@H@std@@2W4_Iostate@12@B
+[160](sec 41)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xb8bc6765 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[163](sec 41)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?in@?$_Iosb@H@std@@2W4_Openmode@12@B
+[164](sec 42)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xaa09c88b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[167](sec 42)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?out@?$_Iosb@H@std@@2W4_Openmode@12@B
+[168](sec 43)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x8f629757 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[171](sec 43)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?ate@?$_Iosb@H@std@@2W4_Openmode@12@B
+[172](sec 44)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xc5b428ef assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[175](sec 44)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?app@?$_Iosb@H@std@@2W4_Openmode@12@B
+[176](sec 45)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x5019579f assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[179](sec 45)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?trunc@?$_Iosb@H@std@@2W4_Openmode@12@B
+[180](sec 46)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x9b14583d assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[183](sec 46)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?_Nocreate@?$_Iosb@H@std@@2W4_Openmode@12@B
+[184](sec 47)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xed59b63b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[187](sec 47)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?_Noreplace@?$_Iosb@H@std@@2W4_Openmode@12@B
+[188](sec 48)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xa032af3e assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[191](sec 48)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?binary@?$_Iosb@H@std@@2W4_Openmode@12@B
+[192](sec 49)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[195](sec 49)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?beg@?$_Iosb@H@std@@2W4_Seekdir@12@B
+[196](sec 50)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xb8bc6765 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[199](sec 50)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?cur@?$_Iosb@H@std@@2W4_Seekdir@12@B
+[200](sec 51)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0xaa09c88b assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[203](sec 51)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?end@?$_Iosb@H@std@@2W4_Seekdir@12@B
+[204](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x9f nreloc 0 nlnno 0 checksum 0x4e8455a4 assoc 0 comdat 0
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[207](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 _DBLibName_TL3
+[208](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000c _DBLibName_TL410
+[209](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000018 _DBLibName_TL420_rtl_112
+[210](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000002c _DBLibName_TL411
+[211](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000038 _DBLibName_X
+[212](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000044 _DBLibName_1_1
+[213](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000054 _DBLibName_XC
+[214](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000064 _DBLibName_XC323
+[215](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000078 _DBLibName_XC4210
+[216](sec 52)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000008c _DBLibName_XC4500
+[217](sec 53)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x58 nreloc 2 nlnno 0 checksum 0x87fc6395 assoc 0 comdat 2
+AUX scnlen 0xfe362fe4 nreloc 0 nlnno 0
+[220](sec 54)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x12c nreloc 7 nlnno 0 checksum 0x0 assoc 53 comdat 5
+AUX scnlen 0x77f07689 nreloc 0 nlnno 0
+[223](sec 53)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+[224](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __RTC_CheckEsp
+[225](sec 55)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rtc$TMZ
+AUX scnlen 0x4 nreloc 1 nlnno 0 checksum 0x0 assoc 53 comdat 5
+AUX scnlen 0x4c2e11cc nreloc 0 nlnno 0
+[228](sec 55)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 __RTC_Shutdown.rtc$TMZ
+[229](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __RTC_Shutdown
+[230](sec 56)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rtc$IMZ
+AUX scnlen 0x4 nreloc 1 nlnno 0 checksum 0x0 assoc 53 comdat 5
+AUX scnlen 0x5d907a9e nreloc 0 nlnno 0
+[233](sec 56)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 __RTC_InitBase.rtc$IMZ
+[234](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __RTC_InitBase
+[235](sec 57)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x30 nreloc 0 nlnno 0 checksum 0xadab81c6 assoc 0 comdat 2
+AUX scnlen 0xf0137b2b nreloc 0 nlnno 0
+[238](sec 58)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x104 nreloc 5 nlnno 0 checksum 0x0 assoc 57 comdat 5
+AUX scnlen 0xbf4a2e1a nreloc 0 nlnno 0
+[241](sec 57)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+[242](sec 59)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x99 nreloc 1 nlnno 0 checksum 0x440eac53 assoc 0 comdat 2
+AUX scnlen 0x8cbafaa5 nreloc 0 nlnno 0
+[245](sec 60)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0xd8 nreloc 3 nlnno 0 checksum 0x0 assoc 59 comdat 5
+AUX scnlen 0x245f6bbb nreloc 0 nlnno 0
+[248](sec 59)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??0DBLoader@@QAE@ABV0@@Z
+[249](sec 61)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x18 nreloc 6 nlnno 0 checksum 0x0 assoc 0 comdat 6
+AUX scnlen 0x647f2685 nreloc 0 nlnno 0
+[252](sec 61)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000004 ??_7DBLoader@@6B@
+[253](sec 62)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata$r
+AUX scnlen 0x14 nreloc 2 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x2e011f77 nreloc 0 nlnno 0
+[256](sec 62)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_R4DBLoader@@6B@
+[257](sec 63)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .data
+AUX scnlen 0x17 nreloc 1 nlnno 0 checksum 0x48b9c66d assoc 0 comdat 2
+AUX scnlen 0xd90fd9c1 nreloc 0 nlnno 0
+[260](sec 63)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_R0?AVDBLoader@@@8
+[261](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_7type_info@@6B@
+[262](sec 64)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata$r
+AUX scnlen 0x10 nreloc 1 nlnno 0 checksum 0xccaa009e assoc 0 comdat 2
+AUX scnlen 0x2c675307 nreloc 0 nlnno 0
+[265](sec 64)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_R3DBLoader@@8
+[266](sec 65)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata$r
+AUX scnlen 0x5 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0xd2c4b91e nreloc 0 nlnno 0
+[269](sec 65)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_R2DBLoader@@8
+[270](sec 66)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata$r
+AUX scnlen 0x1c nreloc 2 nlnno 0 checksum 0x3ad97647 assoc 0 comdat 2
+AUX scnlen 0xbad7eb58 nreloc 0 nlnno 0
+[273](sec 66)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_R1A@?0A@EA@DBLoader@@8
+[274](sec 67)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0xac nreloc 0 nlnno 0 checksum 0x926e2f3a assoc 0 comdat 2
+AUX scnlen 0x220de8cc nreloc 0 nlnno 0
+[277](sec 68)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x104 nreloc 5 nlnno 0 checksum 0x0 assoc 67 comdat 5
+AUX scnlen 0xd5c4a0fb nreloc 0 nlnno 0
+[280](sec 67)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??4DBLoader@@QAEAAV0@ABV0@@Z
+[281](sec 69)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x65 nreloc 2 nlnno 0 checksum 0xc6663757 assoc 0 comdat 1
+AUX scnlen 0x86a2665d nreloc 0 nlnno 0
+[284](sec 70)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x120 nreloc 5 nlnno 0 checksum 0x0 assoc 69 comdat 5
+AUX scnlen 0x2f4239c6 nreloc 0 nlnno 0
+[287](sec 69)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??0DBLoader@@QAE@XZ
+[288](sec 71)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x1 nreloc 0 nlnno 0 checksum 0x0 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[291](sec 71)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_00CNPNBAHC@?$AA@
+[292](sec 72)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x116 nreloc 16 nlnno 0 checksum 0x169829d9 assoc 0 comdat 1
+AUX scnlen 0x61e00ebd nreloc 0 nlnno 0
+[295](sec 73)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x244 nreloc 23 nlnno 0 checksum 0x0 assoc 72 comdat 5
+AUX scnlen 0x903b711c nreloc 0 nlnno 0
+[298](sec 72)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??1DBLoader@@QAE@XZ
+[299](sec 74)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text$x
+AUX scnlen 0x30 nreloc 5 nlnno 0 checksum 0x83b9738f assoc 72 comdat 5
+AUX scnlen 0x141b39ea nreloc 0 nlnno 0
+[302](sec 74)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x00000000 __unwindfunclet$??1DBLoader@@QAE@XZ$0
+[303](sec 72)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000010c $LN6
+[304](sec 72)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000100 $LN8
+[305](sec 72)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x000000f8 $LN9
+[306](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??1LibraryLoader@@UAE@XZ
+[307](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?freeCevaLibrary@LibraryLoader@@UAE_NPAUHINSTANCE__@@@Z
+[308](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??0LibraryLoader@@QAE@XZ
+[309](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__GetProcAddress@8
+[310](sec 75)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x19 nreloc 0 nlnno 0 checksum 0x3d680ebe assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[313](sec 75)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+[314](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ___security_cookie
+[315](sec 74)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x00000008 __ehhandler$??1DBLoader@@QAE@XZ
+[316](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ___CxxFrameHandler3
+[317](sec 76)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .xdata$x
+AUX scnlen 0x2c nreloc 2 nlnno 0 checksum 0xa7f7e1ec assoc 72 comdat 5
+AUX scnlen 0x5c5f4d12 nreloc 0 nlnno 0
+[320](sec 76)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000008 __ehfuncinfo$??1DBLoader@@QAE@XZ
+[321](sec 76)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 __unwindtable$??1DBLoader@@QAE@XZ
+[322](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 @__security_check_cookie@4
+[323](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 @_RTC_CheckStackVars@8
+[324](sec 77)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .sxdata
+AUX scnlen 0x8 nreloc 0 nlnno 0 checksum 0x9b4f1963 assoc 0 comdat 0
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[327](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x7bf nreloc 84 nlnno 0 checksum 0x5af4d8b7 assoc 0 comdat 1
+AUX scnlen 0x868a6ebc nreloc 0 nlnno 0
+[330](sec 79)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x64c nreloc 93 nlnno 0 checksum 0x0 assoc 78 comdat 5
+AUX scnlen 0xaac37d51 nreloc 0 nlnno 0
+[333](sec 78)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?loadDB@DBLoader@@UAEXXZ
+[334](sec 80)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text$x
+AUX scnlen 0x33 nreloc 5 nlnno 0 checksum 0x8a52c8a3 assoc 78 comdat 5
+AUX scnlen 0xd32976b6 nreloc 0 nlnno 0
+[337](sec 80)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x00000000 __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+[338](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x000007a4 $LN50
+[339](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x000007ae $LN49
+[340](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000078c $LN52
+[341](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000784 $LN53
+[342](sec 81)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x18 nreloc 0 nlnno 0 checksum 0x77a3cfc assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[345](sec 81)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_0BI@FLEEAJCD@CreateObjectofDBInfoApi?$AA@
+[346](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__exit
+[347](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__printf
+[348](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__sprintf_s
+[349](sec 82)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x3b nreloc 0 nlnno 0 checksum 0x19e4a018 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[352](sec 82)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_0DL@CANODCEH@Failed?5loading?5?8?$CFs?8?0?5make?5sure?5i@
+[353](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?loadCevaLibrary@LibraryLoader@@UAEPAUHINSTANCE__@@PBD@Z
+[354](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__LoadLibraryA@4
+[355](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__FreeLibrary@4
+[356](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 _strcmp
+[357](sec 78)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x000007b5 $LN43
+[358](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??0LibraryLoader@@QAE@PBD@Z
+[359](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp___wassert
+[360](sec 83)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x20 nreloc 0 nlnno 0 checksum 0x91fec812 assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[363](sec 83)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_1CA@HHALGCEA@?$AAm?$AA_?$AAp?$AAC?$AAo?$AAr?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?$AA@
+[364](sec 84)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .rdata
+AUX scnlen 0x9e nreloc 0 nlnno 0 checksum 0x6e31b6ac assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[367](sec 84)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ??_C@_1JO@IGHLHLLG@?$AAc?$AA?3?$AA?2?$AAw?$AAo?$AAr?$AAk?$AA?2?$AAs?$AAe?$AAr?$AAg?$AAe?$AAl?$AA?2?$AAc?$AAe?$AAv?$AAa?$AA_?$AAd?$AAe?$AAv?$AA?2?$AAs?$AAd?$AAt?$AA?2?$AAd?$AAe?$AAb?$AAu@
+[368](sec 85)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0 checksum 0x1e4da8df assoc 0 comdat 2
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[371](sec 85)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 ?__LINE__Var@?1??loadDB@DBLoader@@UAEXXZ@4JA
+[372](sec 80)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x0000000b __ehhandler$?loadDB@DBLoader@@UAEXXZ
+[373](sec 86)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .xdata$x
+AUX scnlen 0x2c nreloc 2 nlnno 0 checksum 0xa7f7e1ec assoc 78 comdat 5
+AUX scnlen 0x2784d202 nreloc 0 nlnno 0
+[376](sec 86)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000008 __ehfuncinfo$?loadDB@DBLoader@@UAEXXZ
+[377](sec 86)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x00000000 __unwindtable$?loadDB@DBLoader@@UAEXXZ
+[378](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __RTC_UninitUse
+[379](sec 87)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x6a nreloc 3 nlnno 0 checksum 0xf7d45129 assoc 0 comdat 1
+AUX scnlen 0x16df579 nreloc 0 nlnno 0
+[382](sec 88)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x12c nreloc 7 nlnno 0 checksum 0x0 assoc 87 comdat 5
+AUX scnlen 0x7d480a7a nreloc 0 nlnno 0
+[385](sec 87)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?setXtendName@DBLoader@@UAEXPBD@Z
+[386](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x00000000 __imp__memcpy_s
+[387](sec 89)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x30 nreloc 0 nlnno 0 checksum 0xa492f056 assoc 0 comdat 1
+AUX scnlen 0xe071277 nreloc 0 nlnno 0
+[390](sec 90)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x104 nreloc 5 nlnno 0 checksum 0x0 assoc 89 comdat 5
+AUX scnlen 0xb07eaf7e nreloc 0 nlnno 0
+[393](sec 89)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ?getXtendName@DBLoader@@UAEPBDXZ
+[394](sec 91)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x7d nreloc 3 nlnno 0 checksum 0xcf161928 assoc 0 comdat 1
+AUX scnlen 0x493d4bc5 nreloc 0 nlnno 0
+[397](sec 92)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0xf0 nreloc 5 nlnno 0 checksum 0x0 assoc 91 comdat 5
+AUX scnlen 0x95e1bb44 nreloc 0 nlnno 0
+[400](sec 91)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 _createObjectofDBLoader
+[401](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??2@YAPAXI@Z
+[402](sec 93)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x71 nreloc 2 nlnno 0 checksum 0x81320c4c assoc 0 comdat 1
+AUX scnlen 0xef50c1e9 nreloc 0 nlnno 0
+[405](sec 94)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0x110 nreloc 5 nlnno 0 checksum 0x0 assoc 93 comdat 5
+AUX scnlen 0x27e831f1 nreloc 0 nlnno 0
+[408](sec 93)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 _destroyObjectofDBLoader
+[409](sec 95)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .text
+AUX scnlen 0x58 nreloc 3 nlnno 0 checksum 0x8cfa1f2f assoc 0 comdat 2
+AUX scnlen 0x8c29232e nreloc 0 nlnno 0
+[412](sec 96)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$S
+AUX scnlen 0xdc nreloc 3 nlnno 0 checksum 0x0 assoc 95 comdat 5
+AUX scnlen 0x55a7275b nreloc 0 nlnno 0
+[415](sec 95)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??_GDBLoader@@QAEPAXI@Z
+[416](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 ??3@YAXPAX@Z
+[417](sec 97)(fl 0x00)(ty   0)(scl   3) (nx 2) 0x00000000 .debug$T
+AUX scnlen 0x78 nreloc 0 nlnno 0
+AUX scnlen 0x0 nreloc 0 nlnno 0
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+00000c2e secrel32          __bad_alloc_Message
+00000c32 10                __bad_alloc_Message
+000017e4 secrel32          _DBLibName_TL3
+000017e8 10                _DBLibName_TL3
+00001800 secrel32          _DBLibName_TL410-0x0000000c
+00001804 10                _DBLibName_TL410-0x0000000c
+0000181e secrel32          _DBLibName_TL420_rtl_112-0x00000018
+00001822 10                _DBLibName_TL420_rtl_112-0x00000018
+0000185b secrel32          _DBLibName_TL411-0x0000002c
+0000185f 10                _DBLibName_TL411-0x0000002c
+00001890 secrel32          _DBLibName_X-0x00000038
+00001894 10                _DBLibName_X-0x00000038
+000018c3 secrel32          _DBLibName_1_1-0x00000044
+000018c7 10                _DBLibName_1_1-0x00000044
+000018df secrel32          _DBLibName_XC-0x00000054
+000018e3 10                _DBLibName_XC-0x00000054
+0000190e secrel32          _DBLibName_XC323-0x00000064
+00001912 10                _DBLibName_XC323-0x00000064
+00001969 secrel32          _DBLibName_XC4210-0x00000078
+0000196d 10                _DBLibName_XC4210-0x00000078
+0000199e secrel32          _DBLibName_XC4500-0x0000008c
+000019a2 10                _DBLibName_XC4500-0x0000008c
+
+
+RELOCATION RECORDS FOR [.data]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             ??_C@_0P@GHFPNOJB@bad?5allocation?$AA@
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+0000003e DISP32            __RTC_CheckEsp
+0000004e DISP32            __RTC_CheckEsp
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+00000078 secrel32          ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+0000007c 10                ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+000000dc secrel32          ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+000000e0 10                ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+000000f4 secrel32          ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+000000f8 10                ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+
+
+RELOCATION RECORDS FOR [.rtc$TMZ]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             __RTC_Shutdown
+
+
+RELOCATION RECORDS FOR [.rtc$IMZ]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             __RTC_InitBase
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+00000078 secrel32          ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+0000007c 10                ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+000000d4 secrel32          ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+000000d8 10                ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000028 dir32             ??_7DBLoader@@6B@-0x00000004
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ??0DBLoader@@QAE@ABV0@@Z
+00000078 secrel32          ??0DBLoader@@QAE@ABV0@@Z
+0000007c 10                ??0DBLoader@@QAE@ABV0@@Z
+
+
+RELOCATION RECORDS FOR [.rdata]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             ??_R4DBLoader@@6B@
+00000004 dir32             ?setCorePointer@DBLoader@@UAEXPAVCore@@@Z
+00000008 dir32             ?loadDB@DBLoader@@UAEXXZ
+0000000c dir32             ?getDBInstance@DBLoader@@UAEPAVDBInfoAPI@@XZ
+00000010 dir32             ?setXtendName@DBLoader@@UAEXPBD@Z
+00000014 dir32             ?getXtendName@DBLoader@@UAEPBDXZ
+
+
+RELOCATION RECORDS FOR [.rdata$r]:
+OFFSET   TYPE              VALUE 
+0000000c dir32             ??_R0?AVDBLoader@@@8
+00000010 dir32             ??_R3DBLoader@@8
+
+
+RELOCATION RECORDS FOR [.data]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             ??_7type_info@@6B@
+
+
+RELOCATION RECORDS FOR [.rdata$r]:
+OFFSET   TYPE              VALUE 
+0000000c dir32             ??_R2DBLoader@@8
+
+
+RELOCATION RECORDS FOR [.rdata$r]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             ??_R1A@?0A@EA@DBLoader@@8
+
+
+RELOCATION RECORDS FOR [.rdata$r]:
+OFFSET   TYPE              VALUE 
+00000000 dir32             ??_R0?AVDBLoader@@@8
+00000018 dir32             ??_R3DBLoader@@8
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ??4DBLoader@@QAEAAV0@ABV0@@Z
+00000078 secrel32          ??4DBLoader@@QAEAAV0@ABV0@@Z
+0000007c 10                ??4DBLoader@@QAEAAV0@ABV0@@Z
+000000e5 secrel32          ??4DBLoader@@QAEAAV0@ABV0@@Z
+000000e9 10                ??4DBLoader@@QAEAAV0@ABV0@@Z
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000028 dir32             ??_7DBLoader@@6B@-0x00000004
+0000003c dir32             ??_C@_00CNPNBAHC@?$AA@
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ??0DBLoader@@QAE@XZ
+00000078 secrel32          ??0DBLoader@@QAE@XZ
+0000007c 10                ??0DBLoader@@QAE@XZ
+000000d0 secrel32          ??0DBLoader@@QAE@XZ
+000000d4 10                ??0DBLoader@@QAE@XZ
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000006 dir32             __ehhandler$??1DBLoader@@QAE@XZ-0x00000008
+0000002f dir32             ___security_cookie
+0000004a dir32             ??_7DBLoader@@6B@-0x00000004
+0000005a dir32             ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+00000067 dir32             __imp__GetProcAddress@8
+0000006e DISP32            __RTC_CheckEsp
+0000008d DISP32            __RTC_CheckEsp
+00000095 DISP32            ??0LibraryLoader@@QAE@XZ
+000000ab DISP32            ?freeCevaLibrary@LibraryLoader@@UAE_NPAUHINSTANCE__@@@Z
+000000ba DISP32            ??1LibraryLoader@@UAE@XZ
+000000c4 dir32             $LN9-0x000000f8
+000000c9 DISP32            @_RTC_CheckStackVars@8
+000000e3 DISP32            @__security_check_cookie@4
+000000f0 DISP32            __RTC_CheckEsp
+000000fc dir32             $LN8-0x00000100
+00000108 dir32             $LN6-0x0000010c
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ??1DBLoader@@QAE@XZ
+0000005c secrel32          __ehhandler$??1DBLoader@@QAE@XZ-0x00000008
+00000060 10                __ehhandler$??1DBLoader@@QAE@XZ-0x00000008
+00000087 secrel32          __unwindfunclet$??1DBLoader@@QAE@XZ$0
+0000008b 10                __unwindfunclet$??1DBLoader@@QAE@XZ$0
+000000dc secrel32          ??1DBLoader@@QAE@XZ
+000000e0 10                ??1DBLoader@@QAE@XZ
+0000010b secrel32          __ehhandler$??1DBLoader@@QAE@XZ-0x00000008
+0000010f 10                __ehhandler$??1DBLoader@@QAE@XZ-0x00000008
+00000135 secrel32          $LN6-0x0000010c
+00000139 10                $LN6-0x0000010c
+00000144 secrel32          $LN8-0x00000100
+00000148 10                $LN8-0x00000100
+00000153 secrel32          $LN9-0x000000f8
+00000157 10                $LN9-0x000000f8
+0000017b secrel32          ??1DBLoader@@QAE@XZ
+0000017f 10                ??1DBLoader@@QAE@XZ
+000001bb secrel32          ??1DBLoader@@QAE@XZ
+000001bf 10                ??1DBLoader@@QAE@XZ
+000001cb secrel32          ??1DBLoader@@QAE@XZ
+000001cf 10                ??1DBLoader@@QAE@XZ
+000001e4 secrel32          ??1DBLoader@@QAE@XZ
+000001e8 10                ??1DBLoader@@QAE@XZ
+
+
+RELOCATION RECORDS FOR [.text$x]:
+OFFSET   TYPE              VALUE 
+00000004 DISP32            ??1LibraryLoader@@UAE@XZ
+00000018 DISP32            @__security_check_cookie@4
+00000022 DISP32            @__security_check_cookie@4
+00000027 dir32             __ehfuncinfo$??1DBLoader@@QAE@XZ-0x00000008
+0000002c DISP32            ___CxxFrameHandler3
+
+
+RELOCATION RECORDS FOR [.xdata$x]:
+OFFSET   TYPE              VALUE 
+00000004 dir32             __unwindfunclet$??1DBLoader@@QAE@XZ$0
+00000010 dir32             __unwindtable$??1DBLoader@@QAE@XZ
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000006 dir32             __ehhandler$?loadDB@DBLoader@@UAEXXZ-0x0000000b
+0000002f dir32             ___security_cookie
+00000057 dir32             ?__LINE__Var@?1??loadDB@DBLoader@@UAEXXZ@4JA
+00000062 dir32             ??_C@_1JO@IGHLHLLG@?$AAc?$AA?3?$AA?2?$AAw?$AAo?$AAr?$AAk?$AA?2?$AAs?$AAe?$AAr?$AAg?$AAe?$AAl?$AA?2?$AAc?$AAe?$AAv?$AAa?$AA_?$AAd?$AAe?$AAv?$AA?2?$AAs?$AAd?$AAt?$AA?2?$AAd?$AAe?$AAb?$AAu@
+00000067 dir32             ??_C@_1CA@HHALGCEA@?$AAm?$AA_?$AAp?$AAC?$AAo?$AAr?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?$AA@
+0000006d dir32             __imp___wassert
+00000077 DISP32            __RTC_CheckEsp
+00000095 DISP32            __RTC_CheckEsp
+000000a1 DISP32            ??0LibraryLoader@@QAE@PBD@Z
+000000c8 DISP32            __RTC_CheckEsp
+000000e0 dir32             _DBLibName_TL3
+00000105 DISP32            __RTC_CheckEsp
+00000130 DISP32            __RTC_CheckEsp
+00000157 DISP32            __RTC_CheckEsp
+00000184 DISP32            __RTC_CheckEsp
+000001ad DISP32            __RTC_CheckEsp
+000001d6 DISP32            __RTC_CheckEsp
+000001ee dir32             _DBLibName_TL420_rtl_112-0x00000018
+00000201 dir32             _DBLibName_TL410-0x0000000c
+00000223 DISP32            __RTC_CheckEsp
+0000024a DISP32            __RTC_CheckEsp
+00000262 dir32             _DBLibName_TL411-0x0000002c
+00000287 DISP32            __RTC_CheckEsp
+000002ae DISP32            __RTC_CheckEsp
+000002d5 DISP32            __RTC_CheckEsp
+000002ed dir32             _DBLibName_XC-0x00000054
+00000312 DISP32            __RTC_CheckEsp
+0000032a dir32             _DBLibName_XC323-0x00000064
+0000034f DISP32            __RTC_CheckEsp
+00000376 DISP32            __RTC_CheckEsp
+0000039d DISP32            __RTC_CheckEsp
+000003c4 DISP32            __RTC_CheckEsp
+000003dc dir32             _DBLibName_XC4210-0x00000078
+00000401 DISP32            __RTC_CheckEsp
+00000419 dir32             _DBLibName_XC4500-0x0000008c
+0000043d DISP32            __RTC_CheckEsp
+00000455 dir32             _DBLibName_1_1-0x00000044
+00000468 dir32             _DBLibName_X-0x00000038
+00000476 dir32             $LN43-0x000007b5
+0000047b DISP32            __RTC_UninitUse
+00000491 DISP32            _strcmp
+000004c9 dir32             ??_C@_0BJ@CLFIPPMO@DestroyObjectofDBInfoApi?$AA@
+000004d6 dir32             __imp__GetProcAddress@8
+000004dd DISP32            __RTC_CheckEsp
+00000505 DISP32            __RTC_CheckEsp
+00000513 dir32             $LN43-0x000007b5
+00000518 DISP32            __RTC_UninitUse
+0000052e DISP32            _strcmp
+00000544 dir32             __imp__FreeLibrary@4
+0000054b DISP32            __RTC_CheckEsp
+00000559 dir32             $LN43-0x000007b5
+0000055e DISP32            __RTC_UninitUse
+00000570 dir32             __imp__LoadLibraryA@4
+00000577 DISP32            __RTC_CheckEsp
+0000058b dir32             $LN43-0x000007b5
+00000590 DISP32            __RTC_UninitUse
+000005a5 DISP32            ?loadCevaLibrary@LibraryLoader@@UAEPAUHINSTANCE__@@PBD@Z
+000005b9 dir32             $LN43-0x000007b5
+000005be DISP32            __RTC_UninitUse
+000005e4 dir32             $LN43-0x000007b5
+000005e9 DISP32            __RTC_UninitUse
+000005fa dir32             ??_C@_0DL@CANODCEH@Failed?5loading?5?8?$CFs?8?0?5make?5sure?5i@
+0000060c dir32             __imp__sprintf_s
+00000616 DISP32            __RTC_CheckEsp
+00000625 dir32             __imp__printf
+0000062f DISP32            __RTC_CheckEsp
+00000639 dir32             __imp__exit
+00000640 DISP32            __RTC_CheckEsp
+00000647 dir32             ??_C@_0BI@FLEEAJCD@CreateObjectofDBInfoApi?$AA@
+00000654 dir32             __imp__GetProcAddress@8
+0000065b DISP32            __RTC_CheckEsp
+00000680 DISP32            __RTC_CheckEsp
+000006a1 DISP32            __RTC_CheckEsp
+000006c5 DISP32            __RTC_CheckEsp
+000006fd DISP32            __RTC_CheckEsp
+00000731 DISP32            __RTC_CheckEsp
+00000743 DISP32            ??1LibraryLoader@@UAE@XZ
+0000074d dir32             $LN53-0x00000784
+00000752 DISP32            @_RTC_CheckStackVars@8
+0000076c DISP32            @__security_check_cookie@4
+00000779 DISP32            __RTC_CheckEsp
+00000788 dir32             $LN52-0x0000078c
+00000794 dir32             $LN49-0x000007ae
+000007a0 dir32             $LN50-0x000007a4
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ?loadDB@DBLoader@@UAEXXZ
+0000005c secrel32          __ehhandler$?loadDB@DBLoader@@UAEXXZ-0x0000000b
+00000060 10                __ehhandler$?loadDB@DBLoader@@UAEXXZ-0x0000000b
+0000008c secrel32          __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+00000090 10                __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+000000e8 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000000ec 10                ?loadDB@DBLoader@@UAEXXZ
+00000114 secrel32          __ehhandler$?loadDB@DBLoader@@UAEXXZ-0x0000000b
+00000118 10                __ehhandler$?loadDB@DBLoader@@UAEXXZ-0x0000000b
+0000013e secrel32          $LN43-0x000007b5
+00000142 10                $LN43-0x000007b5
+0000014d secrel32          $LN49-0x000007ae
+00000151 10                $LN49-0x000007ae
+0000015c secrel32          $LN50-0x000007a4
+00000160 10                $LN50-0x000007a4
+0000016b secrel32          $LN52-0x0000078c
+0000016f 10                $LN52-0x0000078c
+0000017a secrel32          $LN53-0x00000784
+0000017e 10                $LN53-0x00000784
+000001e1 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000001e5 10                ?loadDB@DBLoader@@UAEXXZ
+0000022b secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000022f 10                ?loadDB@DBLoader@@UAEXXZ
+00000259 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000025d 10                ?loadDB@DBLoader@@UAEXXZ
+00000269 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000026d 10                ?loadDB@DBLoader@@UAEXXZ
+00000279 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000027d 10                ?loadDB@DBLoader@@UAEXXZ
+00000289 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000028d 10                ?loadDB@DBLoader@@UAEXXZ
+00000299 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000029d 10                ?loadDB@DBLoader@@UAEXXZ
+000002a9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002ad 10                ?loadDB@DBLoader@@UAEXXZ
+000002b9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002bd 10                ?loadDB@DBLoader@@UAEXXZ
+000002c9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002cd 10                ?loadDB@DBLoader@@UAEXXZ
+000002d9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002dd 10                ?loadDB@DBLoader@@UAEXXZ
+000002e9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002ed 10                ?loadDB@DBLoader@@UAEXXZ
+000002f9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000002fd 10                ?loadDB@DBLoader@@UAEXXZ
+00000309 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000030d 10                ?loadDB@DBLoader@@UAEXXZ
+00000319 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000031d 10                ?loadDB@DBLoader@@UAEXXZ
+00000329 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000032d 10                ?loadDB@DBLoader@@UAEXXZ
+00000339 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000033d 10                ?loadDB@DBLoader@@UAEXXZ
+00000349 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000034d 10                ?loadDB@DBLoader@@UAEXXZ
+00000359 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000035d 10                ?loadDB@DBLoader@@UAEXXZ
+00000369 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000036d 10                ?loadDB@DBLoader@@UAEXXZ
+00000379 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000037d 10                ?loadDB@DBLoader@@UAEXXZ
+00000389 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000038d 10                ?loadDB@DBLoader@@UAEXXZ
+00000399 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000039d 10                ?loadDB@DBLoader@@UAEXXZ
+000003a9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003ad 10                ?loadDB@DBLoader@@UAEXXZ
+000003b9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003bd 10                ?loadDB@DBLoader@@UAEXXZ
+000003c9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003cd 10                ?loadDB@DBLoader@@UAEXXZ
+000003d9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003dd 10                ?loadDB@DBLoader@@UAEXXZ
+000003e9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003ed 10                ?loadDB@DBLoader@@UAEXXZ
+000003f9 secrel32          ?loadDB@DBLoader@@UAEXXZ
+000003fd 10                ?loadDB@DBLoader@@UAEXXZ
+00000409 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000040d 10                ?loadDB@DBLoader@@UAEXXZ
+00000419 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000041d 10                ?loadDB@DBLoader@@UAEXXZ
+00000429 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000042d 10                ?loadDB@DBLoader@@UAEXXZ
+00000439 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000043d 10                ?loadDB@DBLoader@@UAEXXZ
+00000449 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000044d 10                ?loadDB@DBLoader@@UAEXXZ
+00000459 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000045d 10                ?loadDB@DBLoader@@UAEXXZ
+00000469 secrel32          ?loadDB@DBLoader@@UAEXXZ
+0000046d 10                ?loadDB@DBLoader@@UAEXXZ
+00000484 secrel32          ?loadDB@DBLoader@@UAEXXZ
+00000488 10                ?loadDB@DBLoader@@UAEXXZ
+
+
+RELOCATION RECORDS FOR [.text$x]:
+OFFSET   TYPE              VALUE 
+00000007 DISP32            ??1LibraryLoader@@UAE@XZ
+0000001b DISP32            @__security_check_cookie@4
+00000025 DISP32            @__security_check_cookie@4
+0000002a dir32             __ehfuncinfo$?loadDB@DBLoader@@UAEXXZ-0x00000008
+0000002f DISP32            ___CxxFrameHandler3
+
+
+RELOCATION RECORDS FOR [.xdata$x]:
+OFFSET   TYPE              VALUE 
+00000004 dir32             __unwindfunclet$?loadDB@DBLoader@@UAEXXZ$0
+00000010 dir32             __unwindtable$?loadDB@DBLoader@@UAEXXZ
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+0000003c dir32             __imp__memcpy_s
+00000046 DISP32            __RTC_CheckEsp
+00000060 DISP32            __RTC_CheckEsp
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ?setXtendName@DBLoader@@UAEXPBD@Z
+00000078 secrel32          ?setXtendName@DBLoader@@UAEXPBD@Z
+0000007c 10                ?setXtendName@DBLoader@@UAEXPBD@Z
+000000db secrel32          ?setXtendName@DBLoader@@UAEXPBD@Z
+000000df 10                ?setXtendName@DBLoader@@UAEXPBD@Z
+000000f4 secrel32          ?setXtendName@DBLoader@@UAEXPBD@Z
+000000f8 10                ?setXtendName@DBLoader@@UAEXPBD@Z
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ?getXtendName@DBLoader@@UAEPBDXZ
+00000078 secrel32          ?getXtendName@DBLoader@@UAEPBDXZ
+0000007c 10                ?getXtendName@DBLoader@@UAEPBDXZ
+000000d4 secrel32          ?getXtendName@DBLoader@@UAEPBDXZ
+000000d8 10                ?getXtendName@DBLoader@@UAEPBDXZ
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000024 DISP32            ??2@YAPAXI@Z
+00000041 DISP32            ??0DBLoader@@QAE@XZ
+00000075 DISP32            __RTC_CheckEsp
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             _createObjectofDBLoader
+00000078 secrel32          _createObjectofDBLoader
+0000007c 10                _createObjectofDBLoader
+000000c0 secrel32          _createObjectofDBLoader
+000000c4 10                _createObjectofDBLoader
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000045 DISP32            ??_GDBLoader@@QAEPAXI@Z
+00000069 DISP32            __RTC_CheckEsp
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             _destroyObjectofDBLoader
+00000078 secrel32          _destroyObjectofDBLoader
+0000007c 10                _destroyObjectofDBLoader
+000000d8 secrel32          _destroyObjectofDBLoader
+000000dc 10                _destroyObjectofDBLoader
+
+
+RELOCATION RECORDS FOR [.text]:
+OFFSET   TYPE              VALUE 
+00000027 DISP32            ??1DBLoader@@QAE@XZ
+00000038 DISP32            ??3@YAXPAX@Z
+0000004e DISP32            __RTC_CheckEsp
+
+
+RELOCATION RECORDS FOR [.debug$S]:
+OFFSET   TYPE              VALUE 
+0000000c rva32             ??_GDBLoader@@QAEPAXI@Z
+00000078 secrel32          ??_GDBLoader@@QAEPAXI@Z
+0000007c 10                ??_GDBLoader@@QAEPAXI@Z
+
+

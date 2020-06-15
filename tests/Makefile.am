@@ -1,10 +1,7 @@
 AM_CPPFLAGS        = -I$(top_srcdir)/..
-bin_PROGRAMS       = coffi_test COFFDump_test
+bin_PROGRAMS       = coffio_test 
 
-coffi_test_SOURCES = coffi_test.cpp
-coffi_test_LDADD   = -lboost_unit_test_framework
+coffio_test_SOURCES = coffi_test.cpp coffo_test.cpp COFFDump_test.cpp examples_test.cpp 
+coffio_test_LDADD   = -lboost_unit_test_framework
 
-COFFDump_test_SOURCES = COFFDump_test.cpp
-COFFDump_test_LDADD   = -lboost_unit_test_framework
-
-TESTS=coffi_test COFFDump_test
+TESTS = coffio_test

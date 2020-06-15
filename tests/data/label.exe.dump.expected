@@ -1,0 +1,81 @@
+Dump of file data/label.exe
+
+File Header
+  Machine:                      014C
+  Number of Sections:           0003
+
+  TimeDateStamp:                00000000 (1970-01-01 01:00:00)
+  PointerToSymbolTable:         00000000
+  NumberOfSymbols:              00000000
+  SizeOfOptionalHeader:         00E0
+  Characteristics:              0102
+
+Optional Header
+  Magic                         010B
+  linker version                4.0
+  size of code                  0200
+  size of initialized data      00000000
+  size of uninitialized data    00000000
+  entrypoint RVA                00001000
+  base of code                  00001000
+  base of data                  00000000
+
+  image base                    0000000000400000
+  section align                 00001000
+  file align                    00000200
+  required OS version           4.0
+  image version                 0.0
+  subsystem version             4.0
+  Win32 Version                 0
+  size of image                 00004000
+  size of headers               00000200
+  checksum                      00000000
+  Subsystem                     0003
+  DLL flags                     0000
+  stack reserve size            0000000000100000
+  stack commit size             0000000000001000
+  heap reserve size             0000000000100000
+  heap commit size              0000000000001000
+  RVAs & sizes                  00000010
+
+Data Directory
+  EXPORT_TABLE            rva: 00000000  size: 00000000
+  IMPORT_TABLE            rva: 00003000  size: 0000005D
+  RESOURCE_TABLE          rva: 00000000  size: 00000000
+  EXCEPTION_TABLE         rva: 00000000  size: 00000000
+  CERTIFICATE_TABLE       rva: 00000000  size: 00000000
+  BASE_RELOCATION_TABLE   rva: 00000000  size: 00000000
+  DEBUG                   rva: 00000000  size: 00000000
+  ARCHITECTURE            rva: 00000000  size: 00000000
+  GLOBAL_PTR              rva: 00000000  size: 00000000
+  TLS_TABLE               rva: 00000000  size: 00000000
+  LOAD_CONFIG_TABLE       rva: 00000000  size: 00000000
+  BOUND_IMPORT            rva: 00000000  size: 00000000
+  IAT                     rva: 00000000  size: 00000000
+  DELAY_IMPORT_DESCRIPTOR rva: 00000000  size: 00000000
+  COMPLUS_RUNTIME_HEADER  rva: 00000000  size: 00000000
+  RESERVED                rva: 00000000  size: 00000000
+
+Section Table
+  000 .text     VirtSize: 00000033  VirtAddr:  00001000
+    raw data offs:   00000200  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60000060
+      CODE INITIALIZED_DATA EXECUTE READ
+
+  001 .rdata    VirtSize: 00000004  VirtAddr:  00002000
+    raw data offs:   00000400  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40000040
+      INITIALIZED_DATA READ
+
+  002 .idata    VirtSize: 0000005D  VirtAddr:  00003000
+    raw data offs:   00000600  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: C0000040
+      INITIALIZED_DATA READ WRITE
+
+

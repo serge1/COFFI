@@ -57,8 +57,8 @@ BOOST_AUTO_TEST_CASE( load_coff_header )
     BOOST_REQUIRE_EQUAL( c.load( "data/notepad.exe" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_machine(), IMAGE_FILE_MACHINE_AMD64 );
-    BOOST_REQUIRE_NE( c.get_opt_header(), (void*)0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_magic(), OH_MAGIC_PE32PLUS );
+    BOOST_REQUIRE_NE( c.get_optional_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_magic(), OH_MAGIC_PE32PLUS );
 }
 
 
@@ -70,8 +70,8 @@ BOOST_AUTO_TEST_CASE( load_coff_header_dll )
     BOOST_REQUIRE_EQUAL( c.load( "data/espui.dll" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_machine(), IMAGE_FILE_MACHINE_I386 );
-    BOOST_REQUIRE_NE( c.get_opt_header(), (void*)0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_magic(), OH_MAGIC_PE32 );
+    BOOST_REQUIRE_NE( c.get_optional_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_magic(), OH_MAGIC_PE32 );
 }
 
 
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE( load_coff_header_obj )
     BOOST_REQUIRE_EQUAL( c.load( "data/coffi_test.obj" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_machine(), IMAGE_FILE_MACHINE_I386 );
-    BOOST_CHECK_EQUAL( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header(), (void*)0 );
 }
 
 
@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE( load_sections_obj )
     BOOST_REQUIRE_EQUAL( c.load( "data/coffi_test.obj" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_machine(), IMAGE_FILE_MACHINE_I386 );
-    BOOST_CHECK_EQUAL( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
@@ -127,24 +127,24 @@ BOOST_AUTO_TEST_CASE( load_sections_exe )
     BOOST_REQUIRE_EQUAL( c.load( "data/notepad.exe" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_machine(), IMAGE_FILE_MACHINE_AMD64 );
-    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_NE( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_relocations().size(), c.get_sections()[i]->get_reloc_count() );
     }
 
-    BOOST_CHECK_EQUAL( c.get_directory().size(), 16 );
-    BOOST_CHECK_EQUAL( c.get_directory()[1].virtual_address, 0xCFF8 );
-    BOOST_CHECK_EQUAL( c.get_directory()[1].size, 300 );
-    BOOST_CHECK_EQUAL( c.get_directory()[2].virtual_address, 0x14000 );
-    BOOST_CHECK_EQUAL( c.get_directory()[2].size, 127328 );
-    BOOST_CHECK_EQUAL( c.get_directory()[3].virtual_address, 0x13000 );
-    BOOST_CHECK_EQUAL( c.get_directory()[3].size, 1716 );
-    BOOST_CHECK_EQUAL( c.get_directory()[11].virtual_address, 0x2E0 );
-    BOOST_CHECK_EQUAL( c.get_directory()[11].size, 312 );
-    BOOST_CHECK_EQUAL( c.get_directory()[12].virtual_address, 0xC000 );
-    BOOST_CHECK_EQUAL( c.get_directory()[12].size, 2032 );
+    BOOST_CHECK_EQUAL( c.get_directories().size(), 16 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1].get_virtual_address(), 0xCFF8 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1].get_size(), 300 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2].get_virtual_address(), 0x14000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2].get_size(), 127328 );
+    BOOST_CHECK_EQUAL( c.get_directories()[3].get_virtual_address(), 0x13000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[3].get_size(), 1716 );
+    BOOST_CHECK_EQUAL( c.get_directories()[11].get_virtual_address(), 0x2E0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[11].get_size(), 312 );
+    BOOST_CHECK_EQUAL( c.get_directories()[12].get_virtual_address(), 0xC000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[12].get_size(), 2032 );
 
     BOOST_CHECK_EQUAL( c.get_header()->get_sections_count(), 6 );
     BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), ".text" );
@@ -169,14 +169,14 @@ BOOST_AUTO_TEST_CASE( load_sections_a )
     BOOST_CHECK_EQUAL( c.get_header()->get_symbols_count(), 977 );
     BOOST_CHECK_EQUAL( c.get_header()->get_flags(), 0x0304 );
 
-    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_NE( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_magic(), 0xa00 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_code_base(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_code_size(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_data_base(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_initialized_data_size(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_entry_point_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_magic(), 0xa00 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_code_base(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_code_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_data_base(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_initialized_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_entry_point_address(), 0 );
 
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
@@ -224,14 +224,14 @@ BOOST_AUTO_TEST_CASE( load_sections_o )
     BOOST_CHECK_EQUAL( c.get_header()->get_symbols_count(), 57 );
     BOOST_CHECK_EQUAL( c.get_header()->get_flags(), 0x0304 );
 
-    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_NE( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_magic(), 0xa00 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_code_base(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_code_size(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_data_base(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_initialized_data_size(), 0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_entry_point_address(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_magic(), 0xa00 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_code_base(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_code_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_data_base(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_initialized_data_size(), 0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_entry_point_address(), 0 );
 
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_index(), i );
@@ -358,11 +358,11 @@ BOOST_AUTO_TEST_CASE( load_sections_tclsh_exe )
         BOOST_CHECK_EQUAL( c.get_sections()[i]->get_relocations().size(), c.get_sections()[i]->get_reloc_count() );
     }
 
-    BOOST_REQUIRE_NE( c.get_opt_header(), (optional_header*)0x0 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_magic(), 0x010B );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_initialized_data_size(), 0x2600 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_uninitialized_data_size(), 0x200 );
-    BOOST_CHECK_EQUAL( c.get_opt_header()->get_entry_point_address(), 0x1280 );
+    BOOST_REQUIRE_NE( c.get_optional_header(), (optional_header*)0x0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_magic(), 0x010B );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_initialized_data_size(), 0x2600 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_uninitialized_data_size(), 0x200 );
+    BOOST_CHECK_EQUAL( c.get_optional_header()->get_entry_point_address(), 0x1280 );
 
     BOOST_REQUIRE_NE( c.get_win_header(), (const win_header*)0x0 );
     BOOST_CHECK_EQUAL( c.get_win_header()->get_image_base(), 0x400000 );
@@ -370,15 +370,15 @@ BOOST_AUTO_TEST_CASE( load_sections_tclsh_exe )
     BOOST_CHECK_EQUAL( c.get_win_header()->get_heap_commit_size(), 0x1000 );
     BOOST_CHECK_EQUAL( c.get_win_header()->get_number_of_rva_and_sizes(), 16 );
 
-    BOOST_CHECK_EQUAL( c.get_directory().size(), 16 );
-    BOOST_CHECK_EQUAL( c.get_directory()[1].virtual_address, 0x5000 );
-    BOOST_CHECK_EQUAL( c.get_directory()[1].size, 0x358 );
-    BOOST_CHECK_EQUAL( c.get_directory()[2].virtual_address, 0x6000 );
-    BOOST_CHECK_EQUAL( c.get_directory()[2].size, 0x129C );
-    BOOST_CHECK_EQUAL( c.get_directory()[14].virtual_address, 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directory()[14].size, 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directory()[15].virtual_address, 0x0 );
-    BOOST_CHECK_EQUAL( c.get_directory()[15].size, 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories().size(), 16 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1].get_virtual_address(), 0x5000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[1].get_size(), 0x358 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2].get_virtual_address(), 0x6000 );
+    BOOST_CHECK_EQUAL( c.get_directories()[2].get_size(), 0x129C );
+    BOOST_CHECK_EQUAL( c.get_directories()[14].get_virtual_address(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[14].get_size(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[15].get_virtual_address(), 0x0 );
+    BOOST_CHECK_EQUAL( c.get_directories()[15].get_size(), 0x0 );
 
     BOOST_CHECK_EQUAL( c.get_sections()[0]->get_name(), ".text" );
     BOOST_CHECK_EQUAL( c.get_sections()[1]->get_name(), ".data" );
@@ -397,7 +397,7 @@ BOOST_AUTO_TEST_CASE( load_ti_c2000_exe )
     BOOST_REQUIRE_EQUAL( c.load( "data/ti_c2000_1.out" ), true );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_target_id(), TMS320C2800 );
-    BOOST_CHECK_NE( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_NE( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
@@ -454,9 +454,9 @@ BOOST_AUTO_TEST_CASE( load_ti_c2000_exe )
     BOOST_CHECK_EQUAL( c.get_sections()[3]->get_data_size(),    0x0 );
     BOOST_CHECK_EQUAL( c.get_sections()[4]->get_data_size(),    0x0 );
     BOOST_CHECK_EQUAL( c.get_sections()[5]->get_data_size(),  0xA5B );
-    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_data_size(),    0xA );
-    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_data_size(),  0x36A );
-    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_data_size(),  0x204 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_data_size(),   0x14 );
+    BOOST_CHECK_EQUAL( c.get_sections()[7]->get_data_size(),  0x6D4 );
+    BOOST_CHECK_EQUAL( c.get_sections()[8]->get_data_size(),  0x408 );
     BOOST_CHECK_EQUAL( c.get_sections()[9]->get_data_size(),   0x30 );
     BOOST_CHECK_EQUAL( c.get_sections()[10]->get_data_size(),  0xD7 );
     BOOST_CHECK_EQUAL( c.get_sections()[11]->get_data_size(), 0x18D );
@@ -487,7 +487,7 @@ BOOST_AUTO_TEST_CASE( load_ti_c2000_obj )
     BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
     BOOST_REQUIRE_NE( c.get_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_header()->get_target_id(), TMS320C2800 );
-    BOOST_CHECK_EQUAL( c.get_opt_header(), (void*)0 );
+    BOOST_CHECK_EQUAL( c.get_optional_header(), (void*)0 );
     BOOST_CHECK_EQUAL( c.get_addressable_unit(), 2 );
     BOOST_CHECK_EQUAL( c.get_sections().size(), c.get_header()->get_sections_count() );
     for ( int i = 0; i < c.get_header()->get_sections_count(); i++ ) {
@@ -509,7 +509,7 @@ BOOST_AUTO_TEST_CASE( load_ti_c2000_obj )
     BOOST_CHECK_EQUAL( c.get_sections()[23]->get_physical_address(), 0 );
 
     BOOST_CHECK_EQUAL( c.get_sections()[0]->get_data_size(), 0x2A );
-    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_data_size(), 0x12 );
+    BOOST_CHECK_EQUAL( c.get_sections()[6]->get_data_size(), 0x24 );
     BOOST_CHECK_EQUAL( c.get_sections()[23]->get_data_size(), 0x20 );
 
     BOOST_CHECK_EQUAL( c.get_sections()[1]->get_reloc_count(), 22 );

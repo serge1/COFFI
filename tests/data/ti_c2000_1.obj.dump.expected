@@ -1,0 +1,623 @@
+Dump of file data/ti_c2000_1.obj
+
+File Header
+  Target ID:                      009D
+  Number of Sections:           0018
+
+  TimeDateStamp:                5ED13D99 (2020-05-29 18:51:37)
+  PointerToSymbolTable:         00002C26
+  NumberOfSymbols:              00000066
+  SizeOfOptionalHeader:         0000
+  Characteristics:              0110
+
+Section Table
+  000 $build.attributes PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00000496  raw data size: 0000002A
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000010
+      COPY
+
+  001 .text     PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000004C0  raw data size: 00000060
+    relocation offs: 00001B6A  relocations:   00000016
+    characteristics: 00004020
+      TEXT CLINK
+
+  002 .data     PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00000520  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000040
+      DATA
+
+  003 .bss      PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00000000  raw data size: 00000000
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000080
+      BSS
+
+  004 .debug_info PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00000520  raw data size: 00000B3C
+    relocation offs: 00001C72  relocations:   0000013E
+    characteristics: 00000010
+      COPY
+
+  005 .cinit    PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000105C  raw data size: 00000014
+    relocation offs: 00002B5A  relocations:   00000004
+    characteristics: 00000040
+      DATA
+
+  006 .econst   PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001070  raw data size: 00000024
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000140
+      DATA STYP_ALIGN_2
+
+  007 .ebss     PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00000000  raw data size: 00000408
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00001180
+      BSS BLOCK STYP_ALIGN_2
+
+  008 .econst:_c_s02 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001094  raw data size: 0000000C
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004140
+      DATA CLINK STYP_ALIGN_2
+
+  009 .econst:_c_i06 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000010A0  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00A .econst:_c_i07 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000010C2  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00B .econst:_c_u07 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000010E4  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00C .econst:.string:_c_i05 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001106  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00D .econst:_c_u06 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001128  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00E .econst:.string:_c_u05 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000114A  raw data size: 00000022
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004040
+      DATA CLINK
+
+  00F .econst:_c_u08 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000116C  raw data size: 00000044
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004140
+      DATA CLINK STYP_ALIGN_2
+
+  010 .econst:_c_i08 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000011B0  raw data size: 00000044
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004140
+      DATA CLINK STYP_ALIGN_2
+
+  011 .econst:_c_i09 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000011F4  raw data size: 00000088
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004140
+      DATA CLINK STYP_ALIGN_2
+
+  012 .econst:_c_u09 PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   0000127C  raw data size: 00000088
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00004140
+      DATA CLINK STYP_ALIGN_2
+
+  013 .econst:.string PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001304  raw data size: 000006AE
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000140
+      DATA STYP_ALIGN_2
+
+  014 .debug_frame PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000019B2  raw data size: 0000003C
+    relocation offs: 00002B8A  relocations:   00000004
+    characteristics: 00000210
+      COPY STYP_ALIGN_4
+
+  015 .debug_line PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   000019EE  raw data size: 00000050
+    relocation offs: 00002BBA  relocations:   00000004
+    characteristics: 00000010
+      COPY
+
+  016 .debug_abbrev PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001A3E  raw data size: 0000010C
+    relocation offs: 00000000  relocations:   00000000
+    characteristics: 00000010
+      COPY
+
+  017 .debug_aranges PhysAddr: 00000000  VirtAddr:  00000000(page 0)
+    raw data offs:   00001B4A  raw data size: 00000020
+    relocation offs: 00002BEA  relocations:   00000005
+    characteristics: 00000010
+      COPY
+
+
+Symbol Table
+  #    Value    Type Class Name
+  0000 00000000 0000 67    {7B59F295-3030-4813-8466-600627BDA2FC}
+  0001 00000000 0004 06    $C$FSL1
+  0002 00000008 0004 06    $C$FSL2
+  0003 00000000 0000 03    .text
+  AUX  30 00 00 00 16 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0005 00000000 0000 03    .data
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0007 00000000 0000 03    .bss
+  AUX  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0009 00000000 0000 03    .cinit
+  AUX  0A 00 00 00 04 00 00 00 00 00 00 00 00 00 00 00 00 00
+  000B 00000000 0000 03    .econst
+  AUX  12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  000D 00000000 0000 03    .ebss
+  AUX  04 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  000F 00000000 0000 03    .econst:_c_s02
+  AUX  06 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0011 00000000 0000 03    .econst:_c_i06
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0013 00000000 0000 03    .econst:_c_i07
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0015 00000000 0000 03    .econst:_c_u07
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0017 00000000 0000 03    .econst:.string:_c_i05
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0019 00000000 0000 03    .econst:_c_u06
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  001B 00000000 0000 03    .econst:.string:_c_u05
+  AUX  11 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  001D 00000000 0000 03    .econst:_c_u08
+  AUX  22 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  001F 00000000 0000 03    .econst:_c_i08
+  AUX  22 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0021 00000000 0000 03    .econst:_c_i09
+  AUX  44 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0023 00000000 0000 03    .econst:_c_u09
+  AUX  44 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0025 00000000 0000 03    .econst:.string
+  AUX  57 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0027 00000000 0000 03    .debug_line
+  AUX  50 00 00 00 04 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0029 00000000 0000 03    .debug_info
+  AUX  3C 0B 00 00 3E 01 00 00 00 00 00 00 00 00 00 00 00 00
+  002B 00000000 0000 03    .debug_abbrev
+  AUX  0C 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  002D 00000000 0000 03    .debug_aranges
+  AUX  20 00 00 00 05 00 00 00 00 00 00 00 00 00 00 00 00 00
+  002F 0000001A 0004 02    _j09
+  0030 00000014 0004 02    _j04
+  0031 00000007 0004 02    _j03
+  0032 00000009 0004 02    _j02
+  0033 0000000A 0004 02    _j01
+  0034 00000000 0004 02    _main
+  0035 00000001 0004 02    _c_u01
+  0036 00000000 0004 02    _c_u03
+  0037 00000002 0004 02    _c_u02
+  0038 00000000 0004 02    _c_u05
+  0039 0000000A 0004 02    _c_u04
+  003A 00000000 0004 02    _c_u07
+  003B 00000000 0004 02    _c_u06
+  003C 00000000 0004 02    _c_u09
+  003D 00000000 0004 02    _c_u08
+  003E 00000018 0004 02    _info
+  003F 00000140 0004 02    _i09
+  0040 000000C0 0004 02    _i08
+  0041 0000002C 0004 02    _i07
+  0042 00000040 0004 02    _i06
+  0043 00000091 0004 02    _i05
+  0044 00000016 0004 02    _i04
+  0045 00000002 0004 02    _i03
+  0046 00000005 0004 02    _i02
+  0047 00000004 0004 02    _i01
+  0048 00000008 0004 02    _e02
+  0049 00000001 0004 02    _e01
+  004A 00000003 0004 02    _c_i01
+  004B 00000004 0004 02    _c_i03
+  004C 00000005 0004 02    _c_i02
+  004D 00000000 0004 02    _c_i05
+  004E 0000000C 0004 02    _c_i04
+  004F 00000000 0004 02    _c_i07
+  0050 00000000 0004 02    _c_i06
+  0051 00000000 0004 02    _c_i09
+  0052 00000000 0004 02    _c_i08
+  0053 00000026 0004 02    _s02
+  0054 00000022 0004 02    _s01
+  0055 0000001E 0004 02    _h03
+  0056 00000012 0004 02    _h02
+  0057 0000000C 0004 02    _h01
+  0058 00000000 0004 02    _c_s02
+  0059 00000010 0004 02    _str
+  005A 0000000E 0004 02    _g03
+  005B 00000006 0004 02    _g02
+  005C 00000008 0004 02    _g01
+  005D 000001C0 0004 02    _u09
+  005E 00000100 0004 02    _u08
+  005F 00000062 0004 02    _u07
+  0060 00000051 0004 02    _u06
+  0061 00000080 0004 02    _u05
+  0062 0000000E 0004 02    _u04
+  0063 00000000 0004 02    _u03
+  0064 00000006 0004 02    _u02
+  0065 00000003 0004 02    _u01
+
+Relocation Entries
+  Section      Address  Type     Symbol
+  001 .text    00000002 00000061 .econst:.string:_c_i05
+  001 .text    00000003 0000005D .econst:.string:_c_i05
+  001 .text    00000006 00000061 .econst:_c_i06
+  001 .text    00000007 0000005D .econst:_c_i06
+  001 .text    0000000A 00000061 .econst:_c_i07
+  001 .text    0000000B 0000005D .econst:_c_i07
+  001 .text    0000000E 00000061 .econst:_c_i08
+  001 .text    0000000F 0000005D .econst:_c_i08
+  001 .text    00000012 00000061 .econst:_c_i09
+  001 .text    00000013 0000005D .econst:_c_i09
+  001 .text    00000016 00000061 .econst:.string:_c_u05
+  001 .text    00000017 0000005D .econst:.string:_c_u05
+  001 .text    0000001A 00000061 .econst:_c_u06
+  001 .text    0000001B 0000005D .econst:_c_u06
+  001 .text    0000001E 00000061 .econst:_c_u07
+  001 .text    0000001F 0000005D .econst:_c_u07
+  001 .text    00000022 00000061 .econst:_c_u08
+  001 .text    00000023 0000005D .econst:_c_u08
+  001 .text    00000026 00000061 .econst:_c_u09
+  001 .text    00000027 0000005D .econst:_c_u09
+  001 .text    0000002A 00000061 .econst:_c_s02
+  001 .text    0000002B 0000005D .econst:_c_s02
+  004 .debug_info 00000000 00005002  
+  004 .debug_info 00000006 00000011 .debug_abbrev
+  004 .debug_info 00000019 00000011 .debug_line
+  004 .debug_info 000000A1 00005001 .econst
+  004 .debug_info 000000A1 00005000 .econst:_c_u06
+  004 .debug_info 000000A4 00000011 .econst
+  004 .debug_info 000000AF 00000011 .debug_info
+  004 .debug_info 000000BA 00005001 .ebss
+  004 .debug_info 000000BA 00005000 .econst:_c_u07
+  004 .debug_info 000000BD 00000011 .ebss
+  004 .debug_info 000000C6 00000011 .debug_info
+  004 .debug_info 000000CF 00005001 .econst
+  004 .debug_info 000000CF 00005000 .econst:_c_u06
+  004 .debug_info 000000D2 00000011 .econst
+  004 .debug_info 000000DD 00000011 .debug_info
+  004 .debug_info 000000E8 00005001 .econst
+  004 .debug_info 000000E8 00005000 .econst:_c_u06
+  004 .debug_info 000000EB 00000011 .econst
+  004 .debug_info 000000F6 00000011 .debug_info
+  004 .debug_info 00000101 00005001 .ebss
+  004 .debug_info 00000101 00005000 .econst:_c_u07
+  004 .debug_info 00000104 00000011 .ebss
+  004 .debug_info 0000010D 00000011 .debug_info
+  004 .debug_info 00000116 00005001 .ebss
+  004 .debug_info 00000116 00005000 .econst:_c_u07
+  004 .debug_info 00000119 00000011 .ebss
+  004 .debug_info 00000122 00000011 .debug_info
+  004 .debug_info 0000012B 00005001 .ebss
+  004 .debug_info 0000012B 00005000 .econst:_c_u07
+  004 .debug_info 0000012E 00000011 .ebss
+  004 .debug_info 00000137 00000011 .debug_info
+  004 .debug_info 00000140 00005001 .ebss
+  004 .debug_info 00000140 00005000 .econst:_c_u07
+  004 .debug_info 00000143 00000011 .ebss
+  004 .debug_info 0000014C 00000011 .debug_info
+  004 .debug_info 00000155 00005001 .ebss
+  004 .debug_info 00000155 00005000 .econst:_c_u07
+  004 .debug_info 00000158 00000011 .ebss
+  004 .debug_info 00000161 00000011 .debug_info
+  004 .debug_info 0000016A 00005001 .ebss
+  004 .debug_info 0000016A 00005000 .econst:_c_u07
+  004 .debug_info 0000016D 00000011 .ebss
+  004 .debug_info 00000176 00000011 .debug_info
+  004 .debug_info 0000017F 00005001 .econst
+  004 .debug_info 0000017F 00005000 .econst:_c_u06
+  004 .debug_info 00000182 00000011 .econst
+  004 .debug_info 0000018D 00000011 .debug_info
+  004 .debug_info 00000198 00005001 .ebss
+  004 .debug_info 00000198 00005000 .econst:_c_u07
+  004 .debug_info 0000019B 00000011 .ebss
+  004 .debug_info 000001A4 00000011 .debug_info
+  004 .debug_info 000001AD 00005001 .econst
+  004 .debug_info 000001AD 00005000 .econst:_c_u06
+  004 .debug_info 000001B0 00000011 .econst
+  004 .debug_info 000001BB 00000011 .debug_info
+  004 .debug_info 000001C6 00005001 .econst
+  004 .debug_info 000001C6 00005000 .econst:_c_u06
+  004 .debug_info 000001C9 00000011 .econst
+  004 .debug_info 000001D4 00000011 .debug_info
+  004 .debug_info 000001DF 00005001 .ebss
+  004 .debug_info 000001DF 00005000 .econst:_c_u07
+  004 .debug_info 000001E2 00000011 .ebss
+  004 .debug_info 000001EB 00000011 .debug_info
+  004 .debug_info 000001F4 00005001 .ebss
+  004 .debug_info 000001F4 00005000 .econst:_c_u07
+  004 .debug_info 000001F7 00000011 .ebss
+  004 .debug_info 00000200 00000011 .debug_info
+  004 .debug_info 00000209 00005001 .ebss
+  004 .debug_info 00000209 00005000 .econst:_c_u07
+  004 .debug_info 0000020C 00000011 .ebss
+  004 .debug_info 00000215 00000011 .debug_info
+  004 .debug_info 0000021E 00005001 .econst
+  004 .debug_info 0000021E 00005000 .econst:_c_u07
+  004 .debug_info 00000221 00000011 .econst
+  004 .debug_info 0000022A 00000011 .debug_info
+  004 .debug_info 00000233 00005001 .econst
+  004 .debug_info 00000233 00005000 .econst:_c_u07
+  004 .debug_info 00000236 00000011 .econst
+  004 .debug_info 0000023F 00000011 .debug_info
+  004 .debug_info 00000248 00005001 .ebss
+  004 .debug_info 00000248 00005000 .econst:_c_u07
+  004 .debug_info 0000024B 00000011 .ebss
+  004 .debug_info 00000254 00000011 .debug_info
+  004 .debug_info 0000025D 00005001 .ebss
+  004 .debug_info 0000025D 00005000 .econst:_c_u07
+  004 .debug_info 00000260 00000011 .ebss
+  004 .debug_info 00000269 00000011 .debug_info
+  004 .debug_info 00000272 00005001 .ebss
+  004 .debug_info 00000272 00005000 .econst:_c_u07
+  004 .debug_info 00000275 00000011 .ebss
+  004 .debug_info 0000027E 00000011 .debug_info
+  004 .debug_info 00000287 00005001 .ebss
+  004 .debug_info 00000287 00005000 .econst:_c_u07
+  004 .debug_info 0000028A 00000011 .ebss
+  004 .debug_info 00000293 00000011 .debug_info
+  004 .debug_info 0000029C 00005001 .ebss
+  004 .debug_info 0000029C 00005000 .econst:_c_u07
+  004 .debug_info 0000029F 00000011 .ebss
+  004 .debug_info 000002A8 00000011 .debug_info
+  004 .debug_info 000002B1 00005001 .ebss
+  004 .debug_info 000002B1 00005000 .econst:_c_u07
+  004 .debug_info 000002B4 00000011 .ebss
+  004 .debug_info 000002BD 00000011 .debug_info
+  004 .debug_info 000002C6 00005001 .econst
+  004 .debug_info 000002C6 00005000 .econst:_c_u06
+  004 .debug_info 000002C9 00000011 .econst
+  004 .debug_info 000002D4 00000011 .debug_info
+  004 .debug_info 000002DF 00005001 .ebss
+  004 .debug_info 000002DF 00005000 .econst:.string:_c_i05
+  004 .debug_info 000002E2 00000011 .ebss
+  004 .debug_info 000002EC 00000011 .debug_info
+  004 .debug_info 000002F6 00005001 .econst
+  004 .debug_info 000002F6 00005000 .econst:_c_u06
+  004 .debug_info 000002F9 00000011 .econst
+  004 .debug_info 00000304 00000011 .debug_info
+  004 .debug_info 0000030F 00005001 .econst
+  004 .debug_info 0000030F 00005000 .econst:_c_u07
+  004 .debug_info 00000312 00000011 .econst
+  004 .debug_info 0000031B 00000011 .debug_info
+  004 .debug_info 00000324 00005001 .ebss
+  004 .debug_info 00000324 00005000 .econst:_c_u07
+  004 .debug_info 00000327 00000011 .ebss
+  004 .debug_info 00000330 00000011 .debug_info
+  004 .debug_info 00000339 00005001 .ebss
+  004 .debug_info 00000339 00005000 .econst:_c_u07
+  004 .debug_info 0000033C 00000011 .ebss
+  004 .debug_info 00000345 00000011 .debug_info
+  004 .debug_info 0000034E 00005001 .ebss
+  004 .debug_info 0000034E 00005000 .econst:_c_u07
+  004 .debug_info 00000351 00000011 .ebss
+  004 .debug_info 0000035A 00000011 .debug_info
+  004 .debug_info 00000363 00005001 .econst:_c_s02
+  004 .debug_info 00000363 00005000 .econst:_c_u06
+  004 .debug_info 00000366 00000011 .econst:_c_s02
+  004 .debug_info 00000371 00000011 .debug_info
+  004 .debug_info 0000037C 00005001 .ebss
+  004 .debug_info 0000037C 00005000 .econst:_c_u07
+  004 .debug_info 0000037F 00000011 .ebss
+  004 .debug_info 00000388 00000011 .debug_info
+  004 .debug_info 00000391 00005001 .econst:_c_i06
+  004 .debug_info 00000391 00005000 .econst:_c_u06
+  004 .debug_info 00000394 00000011 .econst:_c_i06
+  004 .debug_info 0000039F 00000011 .debug_info
+  004 .debug_info 000003AA 00005001 .econst:_c_i07
+  004 .debug_info 000003AA 00005000 .econst:_c_u06
+  004 .debug_info 000003AD 00000011 .econst:_c_i07
+  004 .debug_info 000003B8 00000011 .debug_info
+  004 .debug_info 000003C3 00005001 .econst:_c_u07
+  004 .debug_info 000003C3 00005000 .econst:_c_u06
+  004 .debug_info 000003C6 00000011 .econst:_c_u07
+  004 .debug_info 000003D1 00000011 .debug_info
+  004 .debug_info 000003DC 00005001 .ebss
+  004 .debug_info 000003DC 00005000 .econst:_c_u07
+  004 .debug_info 000003DF 00000011 .ebss
+  004 .debug_info 000003E8 00000011 .debug_info
+  004 .debug_info 000003F1 00005001 .econst:.string:_c_i05
+  004 .debug_info 000003F1 00005000 .econst:_c_u06
+  004 .debug_info 000003F4 00000011 .econst:.string:_c_i05
+  004 .debug_info 000003FF 00000011 .debug_info
+  004 .debug_info 0000040A 00005001 .ebss
+  004 .debug_info 0000040A 00005000 .econst:_c_u07
+  004 .debug_info 0000040D 00000011 .ebss
+  004 .debug_info 00000416 00000011 .debug_info
+  004 .debug_info 0000041F 00005001 .ebss
+  004 .debug_info 0000041F 00005000 .econst:_c_u07
+  004 .debug_info 00000422 00000011 .ebss
+  004 .debug_info 0000042B 00000011 .debug_info
+  004 .debug_info 00000434 00005001 .ebss
+  004 .debug_info 00000434 00005000 .econst:_c_u07
+  004 .debug_info 00000437 00000011 .ebss
+  004 .debug_info 00000440 00000011 .debug_info
+  004 .debug_info 00000449 00005001 .econst:_c_u06
+  004 .debug_info 00000449 00005000 .econst:_c_u06
+  004 .debug_info 0000044C 00000011 .econst:_c_u06
+  004 .debug_info 00000457 00000011 .debug_info
+  004 .debug_info 00000462 00005001 .ebss
+  004 .debug_info 00000462 00005000 .econst:_c_u07
+  004 .debug_info 00000465 00000011 .ebss
+  004 .debug_info 0000046E 00000011 .debug_info
+  004 .debug_info 00000477 00005001 .econst:.string:_c_u05
+  004 .debug_info 00000477 00005000 .econst:_c_u06
+  004 .debug_info 0000047A 00000011 .econst:.string:_c_u05
+  004 .debug_info 00000485 00000011 .debug_info
+  004 .debug_info 00000490 00005001 .ebss
+  004 .debug_info 00000490 00005000 .econst:_c_u07
+  004 .debug_info 00000493 00000011 .ebss
+  004 .debug_info 0000049C 00000011 .debug_info
+  004 .debug_info 000004A5 00005001 .econst:_c_u08
+  004 .debug_info 000004A5 00005000 .econst:_c_u06
+  004 .debug_info 000004A8 00000011 .econst:_c_u08
+  004 .debug_info 000004B3 00000011 .debug_info
+  004 .debug_info 000004BE 00005001 .ebss
+  004 .debug_info 000004BE 00005000 .econst:_c_u07
+  004 .debug_info 000004C1 00000011 .ebss
+  004 .debug_info 000004CA 00000011 .debug_info
+  004 .debug_info 000004D3 00005001 .econst:_c_i08
+  004 .debug_info 000004D3 00005000 .econst:_c_u06
+  004 .debug_info 000004D6 00000011 .econst:_c_i08
+  004 .debug_info 000004E1 00000011 .debug_info
+  004 .debug_info 000004EC 00005001 .ebss
+  004 .debug_info 000004EC 00005000 .econst:_c_u07
+  004 .debug_info 000004EF 00000011 .ebss
+  004 .debug_info 000004F8 00000011 .debug_info
+  004 .debug_info 00000501 00005001 .econst:_c_i09
+  004 .debug_info 00000501 00005000 .econst:_c_u06
+  004 .debug_info 00000504 00000011 .econst:_c_i09
+  004 .debug_info 0000050F 00000011 .debug_info
+  004 .debug_info 0000051A 00005001 .ebss
+  004 .debug_info 0000051A 00005000 .econst:_c_u07
+  004 .debug_info 0000051D 00000011 .ebss
+  004 .debug_info 00000526 00000011 .debug_info
+  004 .debug_info 0000052F 00005001 .econst:_c_u09
+  004 .debug_info 0000052F 00005000 .econst:_c_u06
+  004 .debug_info 00000532 00000011 .econst:_c_u09
+  004 .debug_info 0000053D 00000011 .debug_info
+  004 .debug_info 00000548 00005001 .ebss
+  004 .debug_info 00000548 00005000 .econst:_c_u07
+  004 .debug_info 0000054B 00000011 .ebss
+  004 .debug_info 00000554 00000011 .debug_info
+  004 .debug_info 0000055E 00000011 .debug_info
+  004 .debug_info 0000057C 00000011 .debug_info
+  004 .debug_info 00000581 00000011 .debug_info
+  004 .debug_info 0000059B 00000011 .debug_info
+  004 .debug_info 000005C5 00000011 .debug_info
+  004 .debug_info 000005EF 00000011 .debug_info
+  004 .debug_info 00000606 00000011 .debug_info
+  004 .debug_info 00000618 00000011 .debug_info
+  004 .debug_info 00000632 00000011 .debug_info
+  004 .debug_info 00000646 00000011 .debug_info
+  004 .debug_info 0000064B 00000011 .debug_info
+  004 .debug_info 00000650 00000011 .debug_info
+  004 .debug_info 00000655 00000011 .debug_info
+  004 .debug_info 0000066B 00000011 .debug_info
+  004 .debug_info 0000068D 00000011 .debug_info
+  004 .debug_info 000006AF 00000011 .debug_info
+  004 .debug_info 000006C9 00000011 .debug_info
+  004 .debug_info 000006D4 00000011 .debug_info
+  004 .debug_info 000006F1 00000011 .debug_info
+  004 .debug_info 00000707 00000011 .debug_info
+  004 .debug_info 00000721 00000011 .debug_info
+  004 .debug_info 0000073B 00000011 .debug_info
+  004 .debug_info 00000778 00000011 .debug_info
+  004 .debug_info 0000077D 00000011 .debug_info
+  004 .debug_info 00000782 00000011 .debug_info
+  004 .debug_info 00000788 00000011 .debug_info
+  004 .debug_info 00000790 00000011 .debug_info
+  004 .debug_info 00000796 00000011 .debug_info
+  004 .debug_info 000007B2 00000011 .debug_info
+  004 .debug_info 000007B7 00000011 .debug_info
+  004 .debug_info 000007BC 00000011 .debug_info
+  004 .debug_info 000007C2 00000011 .debug_info
+  004 .debug_info 000007CA 00000011 .debug_info
+  004 .debug_info 000007D0 00000011 .debug_info
+  004 .debug_info 000007EA 00000011 .debug_info
+  004 .debug_info 000007EF 00000011 .debug_info
+  004 .debug_info 000007F4 00000011 .debug_info
+  004 .debug_info 000007FA 00000011 .debug_info
+  004 .debug_info 00000802 00000011 .debug_info
+  004 .debug_info 00000808 00000011 .debug_info
+  004 .debug_info 00000817 00000011 .debug_info
+  004 .debug_info 0000081C 00000011 .debug_info
+  004 .debug_info 00000821 00000011 .debug_info
+  004 .debug_info 00000827 00000011 .debug_info
+  004 .debug_info 0000082F 00000011 .debug_info
+  004 .debug_info 00000835 00000011 .debug_info
+  004 .debug_info 0000083D 00000011 .debug_info
+  004 .debug_info 00000842 00000011 .debug_info
+  004 .debug_info 00000857 00000011 .debug_info
+  004 .debug_info 0000085C 00000011 .debug_info
+  004 .debug_info 00000861 00000011 .debug_info
+  004 .debug_info 00000867 00000011 .debug_info
+  004 .debug_info 0000086F 00000011 .debug_info
+  004 .debug_info 00000875 00000011 .debug_info
+  004 .debug_info 00000885 00000011 .debug_info
+  004 .debug_info 0000088A 00000011 .debug_info
+  004 .debug_info 0000088F 00000011 .debug_info
+  004 .debug_info 00000895 00000011 .debug_info
+  004 .debug_info 0000089D 00000011 .debug_info
+  004 .debug_info 000008A3 00000011 .debug_info
+  004 .debug_info 000008BC 00000011 .debug_info
+  004 .debug_info 000008C1 00000011 .debug_info
+  004 .debug_info 000008C6 00000011 .debug_info
+  004 .debug_info 000008CC 00000011 .debug_info
+  004 .debug_info 000008D4 00000011 .debug_info
+  004 .debug_info 000008DA 00000011 .debug_info
+  004 .debug_info 000008EF 00000011 .debug_info
+  004 .debug_info 000008F4 00000011 .debug_info
+  004 .debug_info 000008F9 00000011 .debug_info
+  004 .debug_info 000008FF 00000011 .debug_info
+  004 .debug_info 00000907 00000011 .debug_info
+  004 .debug_info 0000090D 00000011 .debug_info
+  004 .debug_info 0000092B 00000011 .debug_info
+  004 .debug_info 00000930 00000011 .debug_info
+  004 .debug_info 00000935 00000011 .debug_info
+  004 .debug_info 0000093B 00000011 .debug_info
+  004 .debug_info 00000943 00000011 .debug_info
+  004 .debug_info 00000949 00000011 .debug_info
+  004 .debug_info 0000095A 00000011 .debug_info
+  004 .debug_info 0000095F 00000011 .debug_info
+  004 .debug_info 0000096E 00000011 .debug_info
+  004 .debug_info 00000973 00000011 .debug_info
+  004 .debug_info 00000987 00000011 .debug_info
+  004 .debug_info 0000098C 00000011 .debug_info
+  004 .debug_info 00000991 00000011 .debug_info
+  004 .debug_info 00000996 00000011 .debug_info
+  004 .debug_info 0000099C 00000011 .debug_info
+  004 .debug_info 000009A1 00000011 .debug_info
+  004 .debug_info 000009A7 00000011 .debug_info
+  004 .debug_info 000009AF 00000011 .debug_info
+  004 .debug_info 000009B5 00000011 .debug_info
+  004 .debug_info 00000AEB 00005001 .text
+  004 .debug_info 00000AEB 00005000 _c_i06
+  004 .debug_info 00000AEC 00000011  
+  004 .debug_info 00000AF5 00000011 .text
+  004 .debug_info 00000AF9 00000011 .text
+  004 .debug_info 00000AFE 00000011 .debug_info
+  004 .debug_info 00000B2D 00000011 .debug_info
+  004 .debug_info 00000B35 00000011 .text
+  005 .cinit   00000001 00000064 .ebss
+  005 .cinit   00000003 00000064 .econst:.string
+  005 .cinit   00000006 00000064 .ebss
+  005 .cinit   00000008 00000064 .econst:.string
+  014 .debug_frame 00000020 00005001 .text
+  014 .debug_frame 00000020 00005000  
+  014 .debug_frame 00000024 00000011  
+  014 .debug_frame 00000028 00000011 .text
+  015 .debug_line 00000000 00005002  
+  015 .debug_line 0000002D 00005001 .text
+  015 .debug_line 0000002D 00005000 .econst:_c_u09
+  015 .debug_line 00000030 00000011 .text
+  017 .debug_aranges 00000000 00005002  
+  017 .debug_aranges 00000006 00000011 .debug_info
+  017 .debug_aranges 00000010 00005001 .text
+  017 .debug_aranges 00000010 00005000  
+  017 .debug_aranges 00000010 00000011 .text
+

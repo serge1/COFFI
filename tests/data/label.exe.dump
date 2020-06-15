@@ -1,0 +1,87 @@
+
+label.exe:     format de fichier pei-i386
+label.exe
+architecture: i386, fanions 0x0000012f:
+HAS_RELOC, EXEC_P, HAS_LINENO, HAS_DEBUG, HAS_LOCALS, D_PAGED
+adresse de départ 0x00401000
+
+Characteristics 0x102
+	executable
+	32 bit words
+
+Time/Date		Thu Jan 01 01:00:00 1970
+Magic			010b	(PE32)
+MajorLinkerVersion	4
+MinorLinkerVersion	0
+SizeOfCode		00000200
+SizeOfInitializedData	00000000
+SizeOfUninitializedData	00000000
+AddressOfEntryPoint	00001000
+BaseOfCode		00001000
+BaseOfData		00000000
+ImageBase		00400000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	4
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	4
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00004000
+SizeOfHeaders		00000200
+CheckSum		00000000
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00000000
+SizeOfStackReserve	00100000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 00003000 0000005d Import Directory [parts of .idata]
+Entry 2 00000000 00000000 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00000000 00000000 Security Directory
+Entry 5 00000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 00000000 00000000 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 00000000 00000000 Thread Storage Directory [.tls]
+Entry a 00000000 00000000 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 00000000 00000000 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .idata at 0x403000
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 00003000	00003028 00000000 00000000 00003052 00003034
+
+	DLL Name: msvcrt.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	3040	    0  exit
+	3048	    0  printf
+
+ 00003014	00000000 00000000 00000000 00000000 00000000
+
+Sections :
+Idx Name          Taille    VMA       LMA       Off fich  Algn
+  0 .text         00000033  00401000  00401000  00000200  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, DATA
+  1 .rdata        00000004  00402000  00402000  00000400  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .idata        0000005d  00403000  00403000  00000600  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+SYMBOL TABLE:
+aucun symbole
+
+

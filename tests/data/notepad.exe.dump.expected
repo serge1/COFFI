@@ -4,7 +4,7 @@ File Header
   Machine:                      8664
   Number of Sections:           0006
 
-  TimeDateStamp:                4A5BC9B3
+  TimeDateStamp:                4A5BC9B3 (2009-07-14 01:56:35)
   PointerToSymbolTable:         00000000
   NumberOfSymbols:              00000000
   SizeOfOptionalHeader:         00F0
@@ -18,9 +18,8 @@ Optional Header
   size of uninitialized data    00000000
   entrypoint RVA                00003570
   base of code                  00001000
-  base of data                  00000000
 
-  image base                    0000000100000000
+  image base                    0000000000000000
   section align                 00001000
   file align                    00000200
   required OS version           6.1
@@ -39,64 +38,64 @@ Optional Header
   RVAs & sizes                  00000010
 
 Data Directory
-  EXPORT           rva: 00000000  size: 00000000
-  IMPORT           rva: 0000CFF8  size: 0000012C
-  RESOURCE         rva: 00014000  size: 0001F160
-  EXCEPTION        rva: 00013000  size: 000006B4
-  SECURITY         rva: 00000000  size: 00000000
-  BASERELOC        rva: 00034000  size: 000000B8
-  DEBUG            rva: 0000B710  size: 00000038
-  ARCHITECTURE     rva: 00000000  size: 00000000
-  GLOBALPTR        rva: 00000000  size: 00000000
-  TLS              rva: 00000000  size: 00000000
-  LOAD_CONFIG      rva: 00000000  size: 00000000
-  BOUND_IMPORT     rva: 000002E0  size: 00000138
-  IAT              rva: 0000C000  size: 000007F0
-  DELAY_IMPORT     rva: 00000000  size: 00000000
-  CLR RUNTIME      rva: 00000000  size: 00000000
-  unused           rva: 00000000  size: 00000000
+  EXPORT_TABLE            rva: 00000000  size: 00000000
+  IMPORT_TABLE            rva: 0000CFF8  size: 0000012C
+  RESOURCE_TABLE          rva: 00014000  size: 0001F160
+  EXCEPTION_TABLE         rva: 00013000  size: 000006B4
+  CERTIFICATE_TABLE       rva: 00000000  size: 00000000
+  BASE_RELOCATION_TABLE   rva: 00034000  size: 000000B8
+  DEBUG                   rva: 0000B710  size: 00000038
+  ARCHITECTURE            rva: 00000000  size: 00000000
+  GLOBAL_PTR              rva: 00000000  size: 00000000
+  TLS_TABLE               rva: 00000000  size: 00000000
+  LOAD_CONFIG_TABLE       rva: 00000000  size: 00000000
+  BOUND_IMPORT            rva: 000002E0  size: 00000138
+  IAT                     rva: 0000C000  size: 000007F0
+  DELAY_IMPORT_DESCRIPTOR rva: 00000000  size: 00000000
+  COMPLUS_RUNTIME_HEADER  rva: 00000000  size: 00000000
+  RESERVED                rva: 00000000  size: 00000000
 
 Section Table
-  01 .text     VirtSize: 0000A770  VirtAddr:  00001000
+  000 .text     VirtSize: 0000A770  VirtAddr:  00001000
     raw data offs:   00000600  raw data size: 0000A800
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 60000020
-      CODE  EXECUTE  READ
+      CODE EXECUTE READ
 
-  02 .rdata    VirtSize: 00003160  VirtAddr:  0000C000
+  001 .rdata    VirtSize: 00003160  VirtAddr:  0000C000
     raw data offs:   0000AE00  raw data size: 00003200
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 40000040
-      INITIALIZED_DATA  READ
+      INITIALIZED_DATA READ
 
-  03 .data     VirtSize: 00002844  VirtAddr:  00010000
+  002 .data     VirtSize: 00002844  VirtAddr:  00010000
     raw data offs:   0000E000  raw data size: 00001800
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: C0000040
-      INITIALIZED_DATA  READ  WRITE
+      INITIALIZED_DATA READ WRITE
 
-  04 .pdata    VirtSize: 000006B4  VirtAddr:  00013000
+  003 .pdata    VirtSize: 000006B4  VirtAddr:  00013000
     raw data offs:   0000F800  raw data size: 00000800
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 40000040
-      INITIALIZED_DATA  READ
+      INITIALIZED_DATA READ
 
-  05 .rsrc     VirtSize: 0001F160  VirtAddr:  00014000
+  004 .rsrc     VirtSize: 0001F160  VirtAddr:  00014000
     raw data offs:   00010000  raw data size: 0001F200
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 40000040
-      INITIALIZED_DATA  READ
+      INITIALIZED_DATA READ
 
-  06 .reloc    VirtSize: 000000B8  VirtAddr:  00034000
+  005 .reloc    VirtSize: 000000B8  VirtAddr:  00034000
     raw data offs:   0002F200  raw data size: 00000200
     relocation offs: 00000000  relocations:   00000000
     line # offs:     00000000  line #'s:      00000000
     characteristics: 42000040
-      INITIALIZED_DATA  DISCARDABLE  READ
+      INITIALIZED_DATA DISCARDABLE READ
 
 
