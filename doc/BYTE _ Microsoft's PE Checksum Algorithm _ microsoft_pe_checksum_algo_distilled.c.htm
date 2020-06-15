@@ -1,0 +1,532 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>BYTE* / Microsoft's PE Checksum Algorithm / microsoft_pe_checksum_algo_distilled.c</title>
+<style type="text/css">
+<!--
+@font-face                  {font-family:'ibmvga9';src:url('/vgacharst/ibmvga9.ttf')}
+body                        {padding-left:9px;padding-top:8px;padding-bottom:8px;padding-right:9px;background-color:#000000;color:#AAAAAA;margin:0px}
+table,th,td,li,ul           {font-family:inherit;font-size:inherit}
+.embedbody                  {font-family:sans-serif;font-size:10pt;background-color:#1D3662;margin:0px;color:#E0E0E0;padding-left:4px;padding-top:3px;padding-bottom:3px;padding-right:4px}
+form                        {margin:0px}
+.root_string                {color:#FFFFFF;background-color:#0000FF}
+.root_comment               {background-color:#AA0000;color:#FFFFFF}
+.root_sectionlink:link      {background-color:#1D3662;color:#55FF55;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;text-decoration:none}
+.root_sectionlink:visited   {background-color:#1D3662;color:#35DF35;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;text-decoration:none}
+.root_sectionlink:active    {color:#FFFFFF;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;text-decoration:none}
+.root_sectionlink:hover     {color:#FFFFFF;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;text-decoration:none}
+.bcppmsglink:link           {color:#AA00AA}
+.bcppmsglink:visited        {color:#575757}
+.bcppmsglink:active         {color:#FFFFFF}
+.bcppmsglink:hover          {color:#000000}
+.tdglyph                    {width:9px;height:16px;white-space:nowrap}
+.tdglyphautohorzbard        {background-image:url('/vgacharst/dhm.png');background-repeat:repeat-x;height:16px}
+.tdglyphautohorzbars        {background-image:url('/vgacharst/shm.png');background-repeat:repeat-x;height:16px}
+.tdglyphautovertbard        {background-image:url('/vgacharst/dvm.png');background-repeat:repeat-y;width:9px}
+.tdglyphautovertbars        {background-image:url('/vgacharst/svm.png');background-repeat:repeat-y;width:9px}
+.tdglyphautohorzscrollbg    {background-image:url('/vgacharst/scrollbg.png');background-repeat:repeat-x;height:16px}
+.tdglyphautovertscrollbg    {background-image:url('/vgacharst/scrollbg.png');background-repeat:repeat-y;width:9px}
+.tdglyphautohorzbars_blk    {background-image:url('/vgacharst/shm_blk.png');background-repeat:repeat-x;height:16px}
+.tdglyphautovertbars_blk    {background-image:url('/vgacharst/svm_blk.png');background-repeat:repeat-y;width:9px}
+.dbxtable                   {background-color:#1D3662;width:100%}
+.dbxtitle                   {background-color:#1D3662;color:#FFFFFF;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt}
+.dbxcontent                 {background-color:#1D3662;color:#8888FF;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;height:100%}
+.sbxtable                   {background-color:#00AAAA;width:100%}
+.sbxtitle                   {background-color:#00AAAA;color:#1D3662;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt}
+.sbxcontent                 {background-color:#00AAAA;color:#1D3662;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;height:100%;word-wrap:break-word}
+.sbx_ddmenutable            {background-color:#AAAAAA;width:100%}
+.sbx_ddmenutitle            {background-color:#AAAAAA;color:#000000;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt}
+.sbx_ddmenucontent          {background-color:#AAAAAA;color:#000000;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;height:100%;word-wrap:break-word}
+.menubar                    {background-color:#AAAAAA;color:#000000;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;white-space:nowrap}
+.menubarhot                 {color:#AA0000;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;white-space:nowrap}
+.menubardisabled            {color:#5A5A5A;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;white-space:nowrap}
+.menubarlink                {text-decoration:none}
+.menubarlink:link           {color:#000000;text-decoration:none}
+.menubarlink:visited        {color:#000000}
+.menubarlink:active         {color:#FFFFFF}
+.menubarlink:hover          {background-color:#00AA00;text-decoration:none}
+.menubarhotlink             {text-decoration:none}
+.menubarhotlink:link        {color:#AA0000;text-decoration:none}
+.menubarhotlink:visited     {color:#AA0000}
+.menubarhotlink:active      {color:#AA0000}
+.menubarhotlink:hover       {background-color:#00AA00;text-decoration:none}
+
+/* drop down menu functionality */
+.ddul                       {list-style:none;margin:0px;padding:0px;position:relative}
+.ddli,.ddlitop              {font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;padding:0px}
+
+/* for some reason menus break under IE when the following inheritance chain is > 2*/
+li.ddlitop  ul.ddul         {display:none;position:absolute;background-color:#AAAAAA;top:1em;left:-0.5em}  /* hide sub-menus */
+
+/* drop-down the <ul> menu upon hover of the <li> item */
+ul.ddul li:hover ul.ddul,   /*ff and all other browsers*/
+li.li_hover_hack ul.ddul     /*ie6 and up*/
+                            {display:block}
+
+
+.navbarcontainer            {padding-left:8px;padding-top:6px;padding-right:32px}
+.textfilecontainer          {padding-left:6px;padding-top:6px;padding-right:32px}
+.rootbackbutton             {font-family:'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;border:outset 4px #A0A0A0;background-color:#25457D}
+.header                     {font-weight:bold;font-size:16pt;color:#7CFF35}
+.subheader                  {font-weight:bold;font-size:14pt;color:#D7D707}
+.tutsubheader               {font-weight:bold;font-size:12pt;color:#D7D707}
+.dateheader                 {font-family:Tahoma, Verdana, Segoe, sans-serif;font-size:10pt;color:#A0A0A0}
+.datecontent                {font-family:Tahoma, Verdana, Segoe, sans-serif;font-size:10pt;color:#D0D0D0}
+.tutcontainer               {font-family:Tahoma, Verdana, Segoe, sans-serif;font-size:12pt}
+
+.noticeheader               {font-weight:bold;font-size:12pt;color:#81E4FF}
+.noticetext                 {font-family:Verdana, Geneva, sans-serif;font-size:11pt;color:#8DADFF}
+.formcaption                {font-weight:bold;font-size:12pt;color:#2EFFE0}
+.lindent                    {padding-left:32px}
+.buildvercell               {padding-left:16px}
+.errortext                  {color:#FF0000}
+
+.jumplink:link              {color:#16FF26}
+.jumplink:visited           {color:#16FF26}
+.jumplink:active            {color:#FFFFFF}
+.jumplink:hover             {background-color:#3C71CD;color:#000000}
+.jumplink                   {text-decoration:none}
+
+.domnavpagelink:link        {color:#FFC508}
+.domnavpagelink:visited     {color:#FFC508}
+.domnavpagelink:active      {color:#FFFFFF}
+.domnavpagelink:hover       {background-color:#FFC508;color:#000000}
+.domnavpagelink             {text-decoration:none;font-family:Verdana, Geneva, sans-serif;font-size:9pt}
+.domnavpagecurpage          {font-family:Verdana, Geneva, sans-serif;font-weight:bold;font-size:9pt;color:#FFDF12}
+.domnavpagetext             {font-family:Verdana, Geneva, sans-serif;font-size:9pt;color:#993F03}
+
+.keywordtbllink_table       {padding-left:6px;padding-right:6px;padding-top:4px;padding-bottom:4px;border:solid 1px #909090}
+.keywordtbllink_sectheader  {font-family:Verdana, Geneva, sans-serif;font-weight:bold;font-size:10pt;color:#30F8FF}
+.keywordtbl                 {padding-left:32px;padding-bottom:24px;padding-top:8px}
+.keywordtbl_sectheader      {font-family:Verdana, Geneva, sans-serif;font-weight:bold;font-size:14pt;color:#7CFF35;background-color:#274A86;width:450px;padding-left:12px;padding-top:6px;padding-bottom:6px}
+.keywordtbl_header          {font-family:Verdana, Geneva, sans-serif;font-weight:bold;font-size:9pt;color:#30F8FF;padding-bottom:2px}
+
+.cmdlinebracket             {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:12pt;font-weight:bold}
+.cmdlinelink                {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:9pt;font-style:italic;text-decoration:none;font-weight:bold}
+.cmdlinelink:link           {color:#E0FFE0}
+.cmdlinelink:visited        {color:#E0FFE0}
+.cmdlinelink:hover          {color:#FFFFFF;background-color:#3360AE}
+
+.disclaimer                 {font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:9pt;color:#A0A0A0}
+.summary                    {font-family:Verdana, Geneva, sans-serif;font-size:10pt;color:#F5F5F5}
+
+.dlc                        {font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:9pt;color:#FFFFFF;white-space:nowrap;padding-right:8px}
+
+.quickcell                  {padding-left:4px;padding-right:4px}
+.quickcellr                 {padding-left:4px;padding-right:4px;text-align:right}
+
+.progversion                {font-family:'Arial Black', 'Arial Bold', Gadget, sans-serif;font-size:11pt;color:#7CFF35}
+.progfileinfo               {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:9pt;color:#FFFFFF}
+.progsummary                {font-family:Verdana, Geneva, sans-serif;font-size:10pt;color:#E0E0E0}
+.progstats                  {font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:9pt;color:#C0C0FF}
+td                          {font-family:Verdana, Geneva, sans-serif;font-size:9pt;color:#A0A0B0}
+th                          {font-family:Verdana, Geneva, sans-serif;font-size:9pt;color:#D0D0F0;font-weight:bold}
+
+.ulmain                     {display:block;list-style-type:disc;margin-top:1em;margin-bottom:1em;margin-left:0;margin-right:0;padding-left:16px}
+
+li                          {font-family:Verdana, Geneva, sans-serif;font-size:inherit;color:#E0E0E0;padding-bottom:6px}
+pre                         {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;color:#F0F0F0}
+.prebg                      {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;color:#F0F0F0;background-color:#12223E;padding-left:6px;padding-bottom:2px;padding-top:4px;padding-right:6px}
+.emailboxpre                {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:11pt;color:#14FF0C;background-color:#172B4E;white-space:pre-wrap;width:800px;padding-left:8px;padding-bottom:6px;padding-top:6px;border:solid 1px #132441}
+.codeboxpre                 {white-space:pre;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:8pt;color:#00FF00;background-color:#101010;padding-left:8px;padding-bottom:6px;border:solid 2px #2B5261}
+.textfile                   {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;color:#FFFFFF;margin:0px}
+.quote                      {font-family:Verdana, Geneva, sans-serif;font-size:9pt;font-style:italic;padding-left:12px;color:#F3FF05}
+.quotedterminal             {font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-style:normal}
+.quotedli                   {font-family:Verdana, Geneva, sans-serif;font-size:9pt;font-style:italic;color:#F3FF05}
+.indentblock                {padding-left:12px}
+
+deletedli                   {font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif}
+
+a:link                      {color:#FFFFFF}
+a:visited                   {color:#909090}
+a:active                    {color:#D0D0FF}
+a:hover                     {color:#FFD0D0}
+
+.codetitle                  {font-family:monospace;font-size:9pt;font-weight:bold;color:#FFFFFF}
+.code                       {font-family:monospace;font-size:9pt;color:#A0FFF0}
+.codesupplink               {font-family:monospace;font-size:9pt;font-style:italic;text-decoration:none}
+.quotetitle                 {font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:9pt;font-weight:bold}
+.hexhilight                 {background-color:#DADA80;color:#0000FF}
+.highlight                  {color:#FFFF00}
+.codehilite                 {color:#FFFF00}
+.tooldesc                   {color:#FFC000;font-size:10pt}
+.aAddr                      {color:#C0C0C0}
+.aOpc                       {color:#808080}
+.aInst                      {color:#00AA00}
+.aOpr                       {color:#FFFF57}
+.aCom                       {color:#D0D0D0;background-color:#800000}
+.aOp                        {color:#A8A8A8}
+.aBrak                      {color:#00A8A8}
+.asmboxpre                  {white-space:pre;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;font-weight:bold;color:#C0C0C0;background-color:#000000;padding-left:6px;padding-right:6px;padding-bottom:4px;padding-top:4px;border:solid 2px #2B5261}
+.asmboxprevga               {white-space:pre;font-family:ibmvga9,'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;font-size:12pt;color:#C0C0C0;background-color:#000000;padding-left:6px;padding-bottom:2px;padding-right:6px;padding-top:4px;border:solid 1px #2B5261}
+.asmboxcontainer            {padding-left:12px}
+.hexdumppre                 {white-space:pre;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;color:#9CE5FF}
+.codepre                    {white-space:pre;font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;font-size:10pt;color:#E0E0E0;background-color:#182848;padding-top:4px;padding-bottom:4px;padding-left:6px;padding-right:6px}
+.codeprebox                 {padding-left:12px}
+
+-->
+</style>
+
+<script language="javascript">
+
+//IE6+ hack - IE doesn't properly handle li:hover and dropdowns are broken unless we convert between css:hover and javascript's mouseover/mouseout
+startList = function()
+{
+    //if browser is IE6 and above
+    if (document.all && document.getElementsByTagName)
+    {
+        var elems = document.getElementsByTagName("li");
+        for (i=0; elems && i<elems.length; ++i)
+        {
+            var node = elems[i];
+            if (-1 != node.className.indexOf("top"))
+            {
+                node.onmouseover=function() { this.className += " li_hover_hack"; }
+                node.onmouseout=function()  { this.className = this.className.replace(" li_hover_hack", ""); }
+            }
+        }
+    }
+}
+window.onload=startList;
+</script>
+</head>
+<body>
+<table class="dbxtable" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td valign="bottom">
+        <table cellspacing="0" cellpadding="0">
+        <tbody><tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dul.png" width="9" height="16"></td></tr>
+        </tbody></table>
+    </td>
+    <td width="100%" valign="bottom">
+        <table width="100%" cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/ob.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><a href="http://bytepointer.com/index.htm"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/but.png" width="9" height="16" border="0"></a></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/cb.png" width="9" height="16"></td>
+            <td class="tdglyphautohorzbard" style="background-position:left bottom" width="100%" valign="bottom">
+                <table cellspacing="0" cellpadding="0" align="center"><tbody><tr><td class="dbxtitle">&nbsp;&lt;-- <a href="http://bytepointer.com/resources/index.htm">Resources Index</a>&nbsp;/&nbsp;Microsoft's PE Checksum Algorithm / microsoft_pe_checksum_algo_distilled.c&nbsp;</td></tr></tbody></table>
+            </td>
+            <td valign="bottom"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="dbxtitle">1</td></tr></tbody></table></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/ob.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/au.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/cb.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="bottom"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+        </tr>
+        </tbody></table>
+    </td>
+    <td valign="bottom">
+        <table cellspacing="0" cellpadding="0">
+        <tbody><tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dur.png" width="9" height="16"></td></tr>
+        </tbody></table>
+    </td>
+</tr>
+<tr>
+    <td valign="top" height="100%">
+        <table height="100%" cellspacing="0" cellpadding="0">
+        <tbody><tr><td class="tdglyphautovertbard" style="background-position:left top" width="100%"></td></tr>
+        </tbody></table>
+    </td>
+    <td valign="top">
+        <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            <td class="dbxcontent">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td width="100%"><div class="embedbody">
+<div class="header">Microsoft's PE Checksum Algorithm / microsoft_pe_checksum_algo_distilled.c</div><br><div class="textfilecontainer">
+<pre class="textfile">//
+// The following code was taken from the publicly released IMAGEHLP SDK tools code from
+// the Windows NT 3.51 Win32 SDK (June 1995) distribution. For convenience and clarity, I
+// made some superficial changes to the code shown here:
+//
+//  -I included [within this file] only the code portions that pertain to the PE checksum
+//   algorithm, associated APIs and other private functions referenced
+//  -some of the more liberal whitespace has been removed (e.g. multiline function arguments
+//   lists, multiline comments collapsed into single line, refactored whitespace and position
+//   of content within function comment headers such as the author info, indentation and
+//   position of some of the blocks of code and individual statements have been altered
+//   for formatting consistency, etc.)
+//  -the code statements themselves are otherwise in their original form
+//  -if you want to compile this file directly, you'll need to make some small changes,
+//   the least of which would be to include "windows.h"
+//
+// This file begins with Microsoft's original copyright header from CHECKSUM.C:
+
+/*++
+
+Copyright (c) 1993  Microsoft Corporation
+
+Module Name:
+
+    checksum.c
+
+Abstract:
+
+    This module implements a function for computing the checksum of an
+    image file. It will also compute the checksum of other files as well.
+
+Author:
+
+    David N. Cutler (davec) 21-Mar-1993
+
+Revision History:
+
+--*/
+
+//
+// ImageNtHeader() - This function returns the address of the NT Header.
+//
+// ARGUMENTS
+//
+//  Base            Supplies the base of the image.
+//
+// RETURN VALUE     Returns the address of the NT Header.
+//
+// FROM "imagehlp/imagedir.c": Steve Wood 18-Aug-1989
+//
+PIMAGE_NT_HEADERS ImageNtHeader(IN PVOID Base)
+{
+    PIMAGE_NT_HEADERS NtHeaders;
+    if (Base != NULL &amp;&amp; Base != (PVOID)-1)
+    {
+        try
+        {
+            if (((PIMAGE_DOS_HEADER)Base)-&gt;e_magic == IMAGE_DOS_SIGNATURE)
+            {
+                NtHeaders = (PIMAGE_NT_HEADERS)((PCHAR)Base + ((PIMAGE_DOS_HEADER)Base)-&gt;e_lfanew);
+                if (NtHeaders-&gt;Signature == IMAGE_NT_SIGNATURE)
+                {
+                    return NtHeaders;
+                }
+            }
+        }
+        except(EXCEPTION_EXECUTE_HANDLER)
+        {
+            return NULL;
+        }
+    }
+    return NULL;
+
+} //ImageNtHeader()
+
+//
+// ChkSum() - Compute a partial checksum on a portion of an imagefile.
+//
+// ARGUMENTS
+//
+//  PartialSum      Supplies the initial checksum value.
+//  Sources         Supplies a pointer to the array of words for which the checksum is computed.
+//  Length          Supplies the length of the array in words.
+//
+// RETURN VALUE     The computed checksum value is returned as the function value.
+//
+// FROM "imagehlp/imagedir.c": Steve Wood 18-Aug-1989
+//
+USHORT ChkSum(ULONG PartialSum, PUSHORT Source, ULONG Length)
+{
+    // Compute the word wise checksum allowing carries to occur into the
+    // high order half of the checksum longword.
+    while (Length--)
+    {
+        PartialSum += *Source++;
+        PartialSum = (PartialSum &gt;&gt; 16) + (PartialSum &amp; 0xffff);
+    }
+
+    //
+    // Fold final carry into a single word result and return the resultant
+    // value.
+    //
+    return (USHORT)(((PartialSum &gt;&gt; 16) + PartialSum) &amp; 0xffff);
+
+} //ChkSum()
+
+//
+// CheckSumMappedFile() - This functions computes the checksum of a mapped file.
+//
+// ARGUMENTS
+//
+//  BaseAddress     Supplies a pointer to the base of the mapped file.
+//  FileLength      Supplies the length of the file in bytes.
+//  HeaderSum       Suppllies a pointer to a variable that receives the checksum from the image
+//                  file, or zero if the file is not an image file.
+//  CheckSum        Supplies a pointer to the variable that receive the computed checksum.
+//
+// RETURN VALUE     None
+//
+// FROM "imagehlp/checksum.c": David N. Cutler 21-Mar-1993
+//
+PIMAGE_NT_HEADERS CheckSumMappedFile(LPVOID BaseAddress, DWORD FileLength, LPDWORD HeaderSum, LPDWORD CheckSum)
+{
+    PUSHORT AdjustSum;
+    PIMAGE_NT_HEADERS NtHeaders;
+    USHORT PartialSum;
+
+    //Compute the checksum of the file and zero the header checksum value.
+    *HeaderSum = 0;
+    PartialSum = ChkSum(0,(PUSHORT)BaseAddress,(FileLength + 1) &gt;&gt; 1);
+
+    // If the file is an image file, then subtract the two checksum words
+    // in the optional header from the computed checksum before adding
+    // the file length, and set the value of the header checksum.
+    try
+    {
+        NtHeaders = ImageNtHeader(BaseAddress);
+    }
+    except(EXCEPTION_EXECUTE_HANDLER)
+    {
+        NtHeaders = NULL;
+    }
+
+    if ((NtHeaders != NULL) &amp;&amp; (NtHeaders != BaseAddress))
+    {
+        *HeaderSum = NtHeaders-&gt;OptionalHeader.CheckSum;
+        AdjustSum = (PUSHORT)(&amp;NtHeaders-&gt;OptionalHeader.CheckSum);
+        PartialSum -= (PartialSum &lt; AdjustSum[0]);
+        PartialSum -= AdjustSum[0];
+        PartialSum -= (PartialSum &lt; AdjustSum[1]);
+        PartialSum -= AdjustSum[1];
+    }
+
+    // Compute the final checksum value as the sum of the paritial checksum
+    // and the file length.
+    *CheckSum = (DWORD)PartialSum + FileLength;
+    return NtHeaders;
+
+} //CheckSumMappedFile()
+
+//
+// MapFileAndCheckSumW() - This functions maps the specified file and computes the checksum of the file.
+//
+// ARGUMENTS
+//  Filename        Supplies a pointer to the name of the file whose checksum is computed.
+//  HeaderSum       Supplies a pointer to a variable that receives the checksum from the image file,
+//                  or zero if the file is not an image file.
+//  CheckSum        Supplies a pointer to the variable that receive the computed checksum.
+//
+// RETURN VALUE     0 if successful, else error number.
+//
+// FROM "imagehlp/checksum.c": David N. Cutler 21-Mar-1993
+//
+DWORD MapFileAndCheckSumW(PWSTR Filename,LPDWORD HeaderSum,LPDWORD CheckSum)
+{
+    HANDLE FileHandle, MappingHandle;
+    LPVOID BaseAddress;
+    DWORD FileLength;
+
+    // Open the file for read access
+    FileHandle = CreateFileW(Filename,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
+    if (FileHandle == INVALID_HANDLE_VALUE)
+    {
+        return CHECKSUM_OPEN_FAILURE;
+    }
+
+    // Create a file mapping, map a view of the file into memory,
+    // and close the file mapping handle.
+    MappingHandle = CreateFileMapping(FileHandle,NULL,PAGE_READONLY,0,0,NULL);
+    if (!MappingHandle)
+    {
+        CloseHandle(FileHandle);
+        return CHECKSUM_MAP_FAILURE;
+    }
+
+    // Map a view of the file
+    BaseAddress = MapViewOfFile(MappingHandle,FILE_MAP_READ,0,0,0);
+    CloseHandle(MappingHandle);
+    if (BaseAddress == NULL)
+    {
+        CloseHandle(FileHandle);
+        return CHECKSUM_MAPVIEW_FAILURE;
+    }
+
+    // Get the length of the file in bytes and compute the checksum.
+    FileLength = GetFileSize(FileHandle,NULL);
+    CheckSumMappedFile(BaseAddress,FileLength,HeaderSum,CheckSum);
+
+    // Unmap the view of the file and close file handle.
+    UnmapViewOfFile(BaseAddress);
+    CloseHandle(FileHandle);
+    return CHECKSUM_SUCCESS;
+
+} //MapFileAndCheckSumW()
+
+//
+// MapFileAndCheckSumA() - This functions maps the specified file and computes the checksum of the file.
+//
+// ARGUMENTS
+//  Filename        Supplies a pointer to the name of the file whose checksum is computed.
+//  HeaderSum       Supplies a pointer to a variable that receives the checksum from the image file,
+//                  or zero if the file is not an image file.
+//  CheckSum        Supplies a pointer to the variable that receive the computed checksum.
+//
+// RETURN VALUE     0 if successful, else error number.
+//
+// FROM "imagehlp/checksum.c": David N. Cutler 21-Mar-1993
+//
+ULONG MapFileAndCheckSumA(LPSTR Filename, LPDWORD HeaderSum, LPDWORD CheckSum)
+{
+    // Convert the file name to unicode and call the unicode version of this function.
+    WCHAR FileNameW[MAX_PATH];
+    if (MultiByteToWideChar(CP_ACP,MB_PRECOMPOSED,Filename,-1,FileNameW,MAX_PATH))
+    {
+        return MapFileAndCheckSumW(FileNameW,HeaderSum,CheckSum);
+    }
+    return CHECKSUM_UNICODE_FAILURE;
+
+} //MapFileAndCheckSumA()
+
+</pre>
+</div>
+</div></td></tr></tbody></table>
+            </td>
+        </tr>
+        </tbody></table>
+    </td>
+    <td valign="top" height="100%">
+        <table height="100%" cellspacing="0" cellpadding="0">
+            <tbody><tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/sau.png" width="9" height="16"></td></tr>
+            <tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/scrollbut.png" width="9" height="16"></td></tr>
+            <tr><td class="tdglyphautovertscrollbg" valign="top" height="100%"></td></tr>
+            <tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/sad.png" width="9" height="16"></td></tr>
+        </tbody></table>
+    </td>
+</tr>
+<tr>
+    <td valign="top">
+        <table cellspacing="0" cellpadding="0">
+        <tbody><tr><td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dll.png" width="9" height="16"></td></tr>
+        </tbody></table>
+    </td>
+    <td valign="top">
+        <table width="100%" cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/burst.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td valign="top"><table cellspacing="0" cellpadding="0"><tbody><tr><td class="dbxtitle">&nbsp;1:1&nbsp;</td></tr></tbody></table></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/dhm.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/sal.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/scrollbut.png" width="9" height="16"></td>
+            <td class="tdglyphautohorzscrollbg" width="100%" valign="top" nowrap="nowrap"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/sar.png" width="9" height="16"></td>
+            <td class="tdglyph" valign="top"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/scrollhm.png" width="9" height="16"></td>
+        </tr>
+        </tbody></table>
+    </td>
+    <td valign="top">
+        <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            <td class="tdglyph"><img src="BYTE%20_%20Microsoft's%20PE%20Checksum%20Algorithm%20_%20microsoft_pe_checksum_algo_distilled.c_files/scrolllr.png" width="9" height="16"></td>
+        </tr>
+        </tbody></table>
+    </td>
+</tr>
+</tbody></table>
+
+
+</body></html>
