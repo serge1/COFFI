@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include "coffio_test.hpp"
-
 //! Return the dump path for a COFF file
 extern std::string dump_test_file_name(const std::string &file_to_dump);
 
@@ -22,5 +20,11 @@ extern void check_dump(const std::string &file, const std::string &expected_dump
 
 //! Test equality of 2 binary files
 extern void check_binaries_equal(const std::string &file1, const std::string &file2);
+
+//! Temporarily suppresse the standard output
+void supress_stdout();
+
+//! Restore the standard output
+void resume_stdout();
 
 #endif //COFFIO_TEST_H

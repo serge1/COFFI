@@ -10,6 +10,20 @@
 using namespace COFFI;
 using namespace boost::unit_test;
 
+std::streambuf *stdout_buf;
+
+void supress_stdout()
+{
+    std::cout.flush();
+    stdout_buf = std::cout.rdbuf();
+    std::cout.rdbuf(nullptr);
+}
+
+void resume_stdout()
+{
+    std::cout.rdbuf(stdout_buf);
+}
+
 //------------------------------------------------------------------------------
 
 #define main main_writer
@@ -52,7 +66,9 @@ BOOST_AUTO_TEST_CASE(anonymizer)
         "data/coffi_test.obj",
         "data/coffi_test.obj.anonymizer.tmp"
     };
+    supress_stdout();
     main_anonymizer(argc, const_cast<char**>(argv));
+    resume_stdout();
     check_dump("data/coffi_test.obj.anonymizer.tmp", "data/coffi_test.obj.anonymizer.dump.expected", false);
 }
 
@@ -69,11 +85,15 @@ BOOST_AUTO_TEST_CASE(tutorial)
         "tutorial",
         "data/tclsh.exe",
     };
+    supress_stdout();
     main_tutorial(argc, const_cast<char**>(argv1));
+    resume_stdout();
 
     const char *argv2[] = {
         "tutorial",
         "data/ti_c2000_1.obj",
     };
+    supress_stdout();
     main_tutorial(argc, const_cast<char**>(argv2));
+    resume_stdout();
 }
