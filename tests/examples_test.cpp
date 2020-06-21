@@ -34,8 +34,8 @@ void resume_stdout()
 
 BOOST_AUTO_TEST_CASE(example_writer)
 {
-    write_the_file_writer("data/answer_mingw32.exe.tmp");
-    check_binaries_equal("data/answer_mingw32.exe.tmp", "data/answer_mingw32.exe.expected");
+    write_the_file_writer("data/hello.exe.tmp");
+    check_binaries_equal("data/hello.exe.tmp", "data/hello.exe.expected");
 }
 
 //------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ BOOST_AUTO_TEST_CASE(example_writer)
 
 BOOST_AUTO_TEST_CASE(example_write_obj)
 {
-    write_the_file_write_obj("data/answer_mingw32.o.tmp");
-    check_binaries_equal("data/answer_mingw32.o.tmp", "data/answer_mingw32.o.expected");
+    write_the_file_write_obj("data/answer.o.tmp");
+    check_binaries_equal("data/answer.o.tmp", "data/answer.o.expected");
 }
 
 //------------------------------------------------------------------------------
