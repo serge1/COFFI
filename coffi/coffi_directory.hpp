@@ -41,7 +41,10 @@ namespace COFFI {
             index_{index}
         {
         }
+
+        // Discard the copy constructor
         directory(const directory&) = delete;
+
         virtual ~directory()
         {
             clean();
@@ -161,7 +164,10 @@ namespace COFFI {
             scn_{scn}
         {
         }
+
+        // Discard the copy constructor
         directories(const directories&) = delete;
+
         virtual ~directories()
         {
             clean();

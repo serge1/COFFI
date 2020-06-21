@@ -40,6 +40,8 @@ namespace COFFI {
         {
             clean_strings();
         }
+
+        // Discard the copy constructor
         coffi_strings(const coffi_strings&) = delete;
 
         virtual ~coffi_strings()
@@ -204,7 +206,8 @@ namespace COFFI {
                     *((uint32_t*)str + 1) = offset;
                 }
             } else {
-                std::strncpy(str, name.c_str(), COFFI_NAME_SIZE);
+                std::fill_n( str, COFFI_NAME_SIZE, '\0' );
+                std::copy(name.begin(), name.end(), str);
             }
         }
 
