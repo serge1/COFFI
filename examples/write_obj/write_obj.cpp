@@ -2,14 +2,16 @@
  * This example shows how to create a PE object file for Windows
  *
  * Instructions:
- * 1. Compile and link this file with the COFFIO library
+ * 1. Compile and link this file with the COFFI library
  *    g++ write_obj.cpp -o writer_obj.exe
  * 2. Execute the result file write_obj.exe
  *    write_obj.exe
- * 3. Link the output file hello.o:
- *    gcc -m32 -s -nostartfiles -nostdlib hello.o -o hello.exe
+ *    It will produce answer.o
+ * 3. Link the output file answer.o, with a test program
+ *    gcc answer.o answer_test.c -o answer.exe
  * 4. Run the result file:
- *    hello.exe
+ *    answer.exe
+ *    It should print "The answer is 42"
  */
 
 #include <string>
@@ -66,7 +68,7 @@ void write_the_file( const std::string &filename )
     auxiliary_symbol_record_4 a1{"answer.c"};
     sym1->get_auxiliary_symbols().push_back(*(auxiliary_symbol_record*)&a1);
 
-    symbol *sym2 = writer.add_symbol("_main");
+    symbol *sym2 = writer.add_symbol("_answer");
     sym2->set_type(IMAGE_SYM_TYPE_FUNCTION);
     sym2->set_storage_class(IMAGE_SYM_CLASS_EXTERNAL);
     sym2->set_section_number(text_sec->get_index() + 1);
@@ -106,14 +108,14 @@ void write_the_file( const std::string &filename )
     auxiliary_symbol_record_5 a6{v_sec->get_data_size(), 0, 0, 0, 0, 0, {0, 0, 0}};
     sym6->get_auxiliary_symbols().push_back(*reinterpret_cast<auxiliary_symbol_record*>(&a6));
 
-    symbol *sym7 = writer.add_symbol("___main");
-    sym7->set_type(IMAGE_SYM_TYPE_FUNCTION);
-    sym7->set_storage_class(IMAGE_SYM_CLASS_EXTERNAL);
-    sym7->set_section_number(IMAGE_SYM_UNDEFINED);
-    sym7->set_aux_symbols_number(0);
-
-    rel_entry_generic r{7, sym7->get_index(), IMAGE_REL_I386_REL32, 0};
-    text_sec->add_relocation_entry(&r);
+    //symbol *sym7 = writer.add_symbol("___main");
+    //sym7->set_type(IMAGE_SYM_TYPE_FUNCTION);
+    //sym7->set_storage_class(IMAGE_SYM_CLASS_EXTERNAL);
+    //sym7->set_section_number(IMAGE_SYM_UNDEFINED);
+    //sym7->set_aux_symbols_number(0);
+    //
+    //rel_entry_generic r{7, sym7->get_index(), IMAGE_REL_I386_REL32, 0};
+    //text_sec->add_relocation_entry(&r);
 
     // Create the object file
     writer.save( filename );
@@ -121,6 +123,6 @@ void write_the_file( const std::string &filename )
 
 int main()
 {
-    write_the_file( "hello.o" );
+    write_the_file( "answer.o" );
     return 0;
 }
