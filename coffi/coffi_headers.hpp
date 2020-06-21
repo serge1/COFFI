@@ -107,15 +107,19 @@ namespace COFFI {
                 return false;
             }
 
-            stub_size_ = header.pe_sign_location - sizeof( header );
-            char *read_stub = new char[stub_size_];
-            if (!read_stub) {
-                return false;
-            }
-            stream.read(read_stub, stub_size_ );
-            stub_ = read_stub;
-            if ( stream.gcount() != stub_size_ ) {
-                return false;
+            if (get_pe_sign_location() > static_cast<int32_t>(sizeof( header ))) {
+                stub_size_ = get_pe_sign_location() - sizeof( header );
+                char *read_stub = new char[stub_size_];
+                if (!read_stub) {
+                    return false;
+                }
+                stream.read(read_stub, stub_size_ );
+                stub_ = read_stub;
+                if ( stream.gcount() != stub_size_ ) {
+                    return false;
+                }
+            } else {
+                stream.seekg( get_pe_sign_location() );
             }
 
             char e_ident1[CI_NIDENT1];
@@ -180,6 +184,7 @@ namespace COFFI {
                 delete[] stub_;
                 stub_ = 0;
             }
+            stub_size_ = 0;
         }
 
         //------------------------------------------------------------------------------
