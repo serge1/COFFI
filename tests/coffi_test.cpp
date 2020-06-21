@@ -522,3 +522,11 @@ BOOST_AUTO_TEST_CASE( load_ti_c2000_obj )
     BOOST_CHECK_EQUAL( c.get_sections()[23]->get_relocations()[4].get_virtual_address(), 0x00000010 );
     BOOST_CHECK_EQUAL( c.get_sections()[23]->get_relocations()[4].get_type(), R_C28_RELLONG );
 }
+
+
+//------------------------------------------------------------------------------
+BOOST_AUTO_TEST_CASE( load_tiny_exe )
+{
+    coffi c;
+    BOOST_REQUIRE_EQUAL( c.load( "data/tiny.exe" ), true );
+}
