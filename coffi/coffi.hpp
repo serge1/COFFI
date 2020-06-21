@@ -28,7 +28,7 @@ THE SOFTWARE.
 #pragma warning(disable:4996)
 //#pragma warning(disable:4355)
 //#pragma warning(disable:4244)
-#endif 
+#endif
 
 #include <ios>
 #include <fstream>
@@ -66,6 +66,8 @@ namespace COFFI {
         {
             create(COFFI_ARCHITECTURE_PE);
         }
+
+        // Discard the copy constructor
         coffi(const coffi&) = delete;
 
         //---------------------------------------------------------------------
@@ -96,10 +98,10 @@ namespace COFFI {
             architecture_ = COFFI_ARCHITECTURE_NONE;
             dos_header_ = new dos_header;
             if ( dos_header_->load( stream ) ) {
-                // It iss not EXE
+                // It is an EXE
                 architecture_ = COFFI_ARCHITECTURE_PE;
             } else {
-                // It was not EXE file, but it might be a PE OBJ file, or another type of COFF file
+                // It is not an EXE file, but it might be a PE OBJ file, or another type of COFF file
                 clean();
                 stream.seekg( 0 );
             }
@@ -186,8 +188,7 @@ namespace COFFI {
             }
 
             if (architecture_ == COFFI_ARCHITECTURE_NONE) {
-                // The format is not recognized, default to PE format
-                architecture_ = COFFI_ARCHITECTURE_PE;
+                // The format is not recognized, default to PE format header
                 coff_header_ = new coff_header_impl;
                 stream.seekg( 0 );
                 if ( !coff_header_->load( stream ) ) {
@@ -214,6 +215,9 @@ namespace COFFI {
                         }
                     }
                 } else {
+                    if (architecture_ == COFFI_ARCHITECTURE_NONE) {
+                        optional_header_ = new optional_header_impl_pe;
+                    }
                     if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
                         optional_header_ = new optional_header_impl_pe;
                     }
@@ -479,6 +483,21 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        void layout()
+        {
+            // Order all the data pages to be written
+            clean_unused_spaces();
+            populate_data_pages();
+            compute_offsets();
+
+            // Eventually add unused spaces to respect the file alignment
+            populate_data_pages();
+            apply_file_alignment();
+            populate_data_pages();
+            compute_offsets();
+        }
+
+        //---------------------------------------------------------------------
     private:
         //---------------------------------------------------------------------
         void clean()
@@ -553,16 +572,8 @@ namespace COFFI {
         //---------------------------------------------------------------------
         bool save_to_stream( std::ostream &stream )
         {
-            // Order all the data pages to be written
-            clean_unused_spaces();
-            populate_data_pages();
-            compute_offsets();
-
-            // Eventually add unused spaces to respect the file alignment
-            populate_data_pages();
-            apply_file_alignment();
-            populate_data_pages();
-            compute_offsets();
+            // Layout the sections and other data pages
+            layout();
 
             // Compute the header fields
             coff_header_->set_sections_count(sections_.size());

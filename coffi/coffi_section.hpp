@@ -94,6 +94,8 @@ namespace COFFI {
             sym_ = sym;
             arch_ = arch;
         }
+
+        // Discard the copy constructor
         section_impl_tmpl(const section_impl_tmpl&) = delete;
 
         //------------------------------------------------------------------------------
@@ -401,10 +403,16 @@ namespace COFFI {
     class sections: public std::vector<section*>
     {
     public:
+        sections() {}
+
+        // Discard the copy constructor
+        sections(const sections&) = delete;
+
         virtual ~sections()
         {
             clean();
         }
+
         void clean()
         {
             for (auto sec: *this) {
