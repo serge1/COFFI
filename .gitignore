@@ -5,6 +5,12 @@
 *.suo
 *.user
 *.sln.docstates
+autom4te.cache
+examples/writer
+examples/write_obj
+examples/tutorial
+examples/anonymizer
+examples/COFFDump
 
 # Build results
 
