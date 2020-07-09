@@ -108,15 +108,6 @@ void write_the_file( const std::string &filename )
     auxiliary_symbol_record_5 a6{v_sec->get_data_size(), 0, 0, 0, 0, 0, {0, 0, 0}};
     sym6->get_auxiliary_symbols().push_back(*reinterpret_cast<auxiliary_symbol_record*>(&a6));
 
-    //symbol *sym7 = writer.add_symbol("___main");
-    //sym7->set_type(IMAGE_SYM_TYPE_FUNCTION);
-    //sym7->set_storage_class(IMAGE_SYM_CLASS_EXTERNAL);
-    //sym7->set_section_number(IMAGE_SYM_UNDEFINED);
-    //sym7->set_aux_symbols_number(0);
-    //
-    //rel_entry_generic r{7, sym7->get_index(), IMAGE_REL_I386_REL32, 0};
-    //text_sec->add_relocation_entry(&r);
-
     // Create the object file
     writer.save( filename );
 }

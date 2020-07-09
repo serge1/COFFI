@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi_strings.hpp 
+ * @brief COFFI library classes for the COFF strings and string table.
+ *
+ * Do not include this file directly. This file is included by coffi.hpp.
+ */
+
 #ifndef COFFI_STRINGS_HPP
 #define COFFI_STRINGS_HPP
 
@@ -41,7 +47,7 @@ namespace COFFI {
             clean_strings();
         }
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         coffi_strings(const coffi_strings&) = delete;
 
         virtual ~coffi_strings()
@@ -66,22 +72,26 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc string_to_name_provider::string_to_name()
         virtual std::string string_to_name( const char* str ) const
         {
             return string_to_name_internal(str, false);
         }
 
+        //! @copydoc string_to_name_provider::section_string_to_name()
         virtual std::string section_string_to_name( const char* str ) const
         {
             return string_to_name_internal(str, true);
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc string_to_name_provider::name_to_string()
         virtual void name_to_string( const std::string &name, char* str )
         {
             return name_to_string_internal(name, str, false);
         }
 
+        //! @copydoc string_to_name_provider::name_to_section_string()
         virtual void name_to_section_string( const std::string &name, char* str )
         {
             return name_to_string_internal(name, str, true);

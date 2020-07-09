@@ -6,7 +6,7 @@
 #ifndef _MSC_VER
 #define BOOST_TEST_DYN_LINK
 #endif
-#define BOOST_TEST_MODULE COFFIO_test
+#define BOOST_TEST_MODULE COFFI_test
 
 #include <boost/test/unit_test.hpp>
 

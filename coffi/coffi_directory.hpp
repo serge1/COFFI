@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi_directory.hpp 
+ * @brief COFFI library classes for the PE data directories.
+ *
+ * Do not include this file directly. This file is included by coffi.hpp.
+ */
+
 #ifndef COFFI_DIRECTORY_HPP
 #define COFFI_DIRECTORY_HPP
 
@@ -32,6 +38,7 @@ THE SOFTWARE.
 
 namespace COFFI {
 
+    //! Class for accessing an image data directory
     class directory
     {
     public:
@@ -42,7 +49,7 @@ namespace COFFI {
         {
         }
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         directory(const directory&) = delete;
 
         virtual ~directory()
@@ -50,11 +57,12 @@ namespace COFFI {
             clean();
         }
         //------------------------------------------------------------------------------
-
+        //! @accessors{directory}
         COFFI_GET_SET_ACCESS(uint32_t, virtual_address);
         COFFI_GET_SET_ACCESS(uint32_t, size);
 
         COFFI_GET_SIZEOF();
+        //! @endaccessors
 
         uint32_t get_index() const
         {
@@ -165,7 +173,7 @@ namespace COFFI {
         {
         }
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         directories(const directories&) = delete;
 
         virtual ~directories()

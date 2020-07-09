@@ -1,3 +1,10 @@
+@mainpage COFFI - Tutorial and User Manual
+<!-- This file is generated from ../mainpage.m.o.d by the script conf.py, DO NOT MODIFY! -->
+<!-- This file is transformed into a *.md file by the conf.py script -->
+
+
+# Introduction
+
 [![Build](https://travis-ci.com/serge1/COFFI.svg?branch=master)](https://travis-ci.com/serge1/COFFI)
 [![Documentation](https://readthedocs.org/projects/coffi/badge)](https://coffi.readthedocs.io/en/latest)
 [![License](https://img.shields.io/github/license/serge1/COFFI)](https://github.com/serge1/COFFI/blob/master/COPYING)
@@ -11,3 +18,14 @@ this library only supports a very small subset of the COFF implementations:
   - Windows portable executable (PE) format
   - Texas Instruments COFF
   - CEVA, Inc COFF
+
+
+
+# Topics
+
+  - @ref copying
+  - @ref get_started
+  - @ref examples
+  - @ref extdoc
+  - @ref api
+  - [**Files**](files.html)

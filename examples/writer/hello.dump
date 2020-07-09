@@ -1,0 +1,88 @@
+Dump of file hello.exe
+
+File Header
+  Machine:                      014C
+  Number of Sections:           0004
+
+  TimeDateStamp:                00000000 (1970-01-01 01:00:00)
+  PointerToSymbolTable:         00000000
+  NumberOfSymbols:              00000000
+  SizeOfOptionalHeader:         00E0
+  Characteristics:              0102
+
+Optional Header
+  Magic                         010B
+  linker version                0.0
+  size of code                  0200
+  size of initialized data      00000400
+  size of uninitialized data    00000000
+  entrypoint RVA                00001000
+  base of code                  00001000
+  base of data                  00002000
+
+  image base                    0000000000400000
+  section align                 00001000
+  file align                    00000200
+  required OS version           4.0
+  image version                 1.0
+  subsystem version             4.0
+  Win32 Version                 0
+  size of image                 00005000
+  size of headers               00000200
+  checksum                      00003B01
+  Subsystem                     0003
+  DLL flags                     0000
+  stack reserve size            0000000000100000
+  stack commit size             0000000000001000
+  heap reserve size             0000000000100000
+  heap commit size              0000000000001000
+  RVAs & sizes                  00000010
+
+Data Directory
+  EXPORT_TABLE            rva: 00000000  size: 00000000
+  IMPORT_TABLE            rva: 00003000  size: 0000009C
+  RESOURCE_TABLE          rva: 00000000  size: 00000000
+  EXCEPTION_TABLE         rva: 00000000  size: 00000000
+  CERTIFICATE_TABLE       rva: 00000000  size: 00000000
+  BASE_RELOCATION_TABLE   rva: 00004000  size: 00000010
+  DEBUG                   rva: 00000000  size: 00000000
+  ARCHITECTURE            rva: 00000000  size: 00000000
+  GLOBAL_PTR              rva: 00000000  size: 00000000
+  TLS_TABLE               rva: 00000000  size: 00000000
+  LOAD_CONFIG_TABLE       rva: 00000000  size: 00000000
+  BOUND_IMPORT            rva: 00000000  size: 00000000
+  IAT                     rva: 0000304C  size: 00000010
+  DELAY_IMPORT_DESCRIPTOR rva: 00000000  size: 00000000
+  COMPLUS_RUNTIME_HEADER  rva: 00000000  size: 00000000
+  RESERVED                rva: 00000000  size: 00000000
+
+Section Table
+  000 .text     VirtSize: 00000027  VirtAddr:  00001000
+    raw data offs:   00000400  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 60300020
+      CODE EXECUTE READ ALIGN_4BYTES
+
+  001 .rdata    VirtSize: 0000000E  VirtAddr:  00002000
+    raw data offs:   00000600  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA READ ALIGN_4BYTES
+
+  002 .idata    VirtSize: 0000009C  VirtAddr:  00003000
+    raw data offs:   00000800  raw data size: 00000200
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA READ ALIGN_4BYTES
+
+  003 .reloc    VirtSize: 00000010  VirtAddr:  00004000
+    raw data offs:   00000A00  raw data size: 00000010
+    relocation offs: 00000000  relocations:   00000000
+    line # offs:     00000000  line #'s:      00000000
+    characteristics: 40300040
+      INITIALIZED_DATA READ ALIGN_4BYTES
+
+

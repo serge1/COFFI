@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi_section.hpp
+ * @brief COFFI library classes for the COFF sections.
+ *
+ * Do not include this file directly. This file is included by coffi.hpp.
+ */
+
 #ifndef COFFI_SECTION_HPP
 #define COFFI_SECTION_HPP
 
@@ -40,6 +46,7 @@ namespace COFFI {
         {
         };
 
+        //! @accessors{section}
         COFFI_GET_SET_ACCESS_DECL( uint32_t, index );
         COFFI_GET_SET_ACCESS_DECL( uint32_t, virtual_size );
         COFFI_GET_SET_ACCESS_DECL( uint32_t, physical_address );
@@ -55,6 +62,7 @@ namespace COFFI {
         COFFI_GET_SET_ACCESS_DECL( uint32_t, alignment );
 
         COFFI_GET_SIZEOF_DECL();
+        //! @endaccessors
 
         virtual const std::string &get_name() const = 0;
         virtual void set_name(const std::string &name) = 0;
@@ -95,7 +103,7 @@ namespace COFFI {
             arch_ = arch;
         }
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         section_impl_tmpl(const section_impl_tmpl&) = delete;
 
         //------------------------------------------------------------------------------
@@ -106,6 +114,8 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
         // Section info functions
+        
+        //! @accessors{section_impl_tmpl}
         COFFI_GET_SET_ACCESS( uint32_t, virtual_address );
         COFFI_GET_SET_ACCESS( uint32_t, data_offset );
         COFFI_GET_SET_ACCESS( uint32_t, reloc_offset );
@@ -114,6 +124,7 @@ namespace COFFI {
         COFFI_GET_SET_ACCESS( uint32_t, flags );
 
         COFFI_GET_SIZEOF();
+        //! @endaccessors
 
         //------------------------------------------------------------------------------
         uint32_t get_index() const
@@ -340,11 +351,13 @@ namespace COFFI {
         section_impl( string_to_name_provider* stn, symbol_provider* sym, architecture_provider *arch ):
             section_impl_tmpl{stn, sym, arch} {}
 
+        //! @accessors{section_impl}
         COFFI_GET_SET_ACCESS( uint32_t, virtual_size );
         COFFI_GET_SET_ACCESS( uint32_t, data_size );
         COFFI_GET_SET_ACCESS_NONE( uint32_t, physical_address );
         COFFI_GET_SET_ACCESS( uint32_t, line_num_offset );
         COFFI_GET_SET_ACCESS_NONE( uint16_t, page_number );
+        //! @endaccessors
 
         uint32_t get_alignment() const
         {
@@ -362,11 +375,12 @@ namespace COFFI {
         section_impl_ti( string_to_name_provider* stn, symbol_provider* sym, architecture_provider *arch ):
             section_impl_tmpl{stn, sym, arch} {}
 
+        //! @accessors{section_impl_ti}
         COFFI_GET_SET_ACCESS_NONE( uint32_t, virtual_size );
         COFFI_GET_SET_ACCESS( uint32_t, physical_address );
         COFFI_GET_SET_ACCESS_NONE( uint32_t, line_num_offset );
         COFFI_GET_SET_ACCESS( uint16_t, page_number );
-
+        //! @endaccessors
 
         uint32_t get_data_size() const
         {
@@ -405,7 +419,7 @@ namespace COFFI {
     public:
         sections() {}
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         sections(const sections&) = delete;
 
         virtual ~sections()
@@ -422,20 +436,32 @@ namespace COFFI {
         }
 
         //------------------------------------------------------------------------------
+        /*! @brief Subscript operator, finds a section by its index
+         * @param[in] i Index of the section
+         * @return A reference to the element at specified location **i**
+         */
         section* operator[](size_t i)
         {
             return std::vector<section*>::operator[](i);
         }
+        /*! @copydoc operator[](size_t)
+         */
         const section* operator[](size_t i) const
         {
             return std::vector<section*>::operator[](i);
         }
 
         //------------------------------------------------------------------------------
+        /*! @brief Subscript operator, finds a section by its symbolic name
+         * @param[in] name Symbolic name of the section
+         * @return A reference to the element with the section symbolic name **name**
+         */
         section* operator[]( const std::string& name )
         {
             return (section*)((const sections *)this)->operator[](name);
         }
+        /*! @copydoc operator[](const std::string&)
+         */
         const section* operator[]( const std::string& name ) const
         {
             for (section *sec: *this) {

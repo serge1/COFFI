@@ -20,6 +20,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi.hpp 
+ * @brief The COFFI library include file
+ *
+ * The only file required to include when using the COFFI library.
+ * It includes the other header files.
+ */
+
 #ifndef COFFI_HPP
 #define COFFI_HPP
 
@@ -45,9 +52,11 @@ THE SOFTWARE.
 #include <coffi/coffi_symbols.hpp>
 #include <coffi/coffi_directory.hpp>
 
+//! COFFI library namespace
 namespace COFFI {
 
     //-------------------------------------------------------------------------
+    //! The COFFI library's main class.
     class coffi :
             public coffi_strings,
             public coffi_symbols,
@@ -67,7 +76,7 @@ namespace COFFI {
             create(COFFI_ARCHITECTURE_PE);
         }
 
-        // Discard the copy constructor
+        //! Discards the copy constructor
         coffi(const coffi&) = delete;
 
         //---------------------------------------------------------------------
@@ -77,6 +86,10 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Initializes the coffi object by loading data from COFF binary file.
+         * @param[in] file_name File path of the file to load.
+         * @return true if the file was processed successfully, false otherwise.
+         */
         bool load( const std::string& file_name )
         {
             std::ifstream stream;
@@ -89,6 +102,12 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief @copybrief load(const std::string&)
+         * 
+         * See load(const std::string&).
+         * 
+         * @param[in] stream File to load, as an opened stream.
+         */
         bool load( std::istream &stream )
         {
             clean();
@@ -284,6 +303,17 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Creates a file in COFF binary format.
+         *
+         * Before saving, performs the following modififications:
+         *   - Layout (see layout()): Compute the alignement, offsets, etc.
+         *   - Compute the headers fields than can be guessed from the data, like:
+         *       - Number of sections, directories, etc.
+         *       - Sizes of headers
+         *
+         * @param[in] file_name File path of the file to create.
+         * @return true if the file has been created successfully, false otherwise.
+         */
         bool save( const std::string& file_name )
         {
             std::ofstream stream;
@@ -296,6 +326,12 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief @copybrief save(const std::string&)
+         *
+         * See save(const std::string&).
+         * 
+         * @param[in] stream File to create, as an opened stream.
+         */
         bool save( std::ostream &stream )
         {
             if (win_header_) {
@@ -315,6 +351,9 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Cleans and/or initializes the coffi object.
+         * @param[in] architecture COFF architecture, see #coffi_architecture_t for the list of supported architectures
+         */
         void create( coffi_architecture_t architecture )
         {
             clean();
@@ -337,7 +376,20 @@ namespace COFFI {
             }
         }
 
-        void create_optional_header()
+        /*! @brief Initializes an optional header for the coffi object.
+         *
+         * The optional header format depends on the architecture:
+         *   - For PE files (#COFFI_ARCHITECTURE_PE), The following headers are created:
+         *       - MS-DOS header: msdos_header
+         *       - COFF optional header: coff_optional_header_pe or optional_header_impl_pe_plus (depending on **magic**)
+         *       - Windows NT header: win_header_pe or win_header_pe_plus (depending on **magic**)
+         *   - For TI files (#COFFI_ARCHITECTURE_TI): see common_optional_header_ti.
+         *   - For CEVA files (#COFFI_ARCHITECTURE_CEVA): see coff_optional_header_pe.
+         *
+         * @param[in] magic Used only for the PE files (#COFFI_ARCHITECTURE_PE):
+         * #OH_MAGIC_PE32 for PE32 format, #OH_MAGIC_PE32PLUS for PE32+ format.
+         */
+        void create_optional_header(uint16_t magic = OH_MAGIC_PE32)
         {
             if (dos_header_) {
                 delete dos_header_;
@@ -347,8 +399,12 @@ namespace COFFI {
             }
             if (architecture_ == COFFI_ARCHITECTURE_PE) {
                 dos_header_ = new dos_header;
-                optional_header_ = new optional_header_impl_pe;
-                optional_header_->set_magic(OH_MAGIC_PE32);
+                if (magic == OH_MAGIC_PE32PLUS) {
+                    optional_header_ = new optional_header_impl_pe_plus;
+                } else {
+                    optional_header_ = new optional_header_impl_pe;
+                }
+                optional_header_->set_magic(magic);
                 create_win_header();
             }
             if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
@@ -364,54 +420,85 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Returns the MS-DOS header
+         * @return nullptr if the MS-DOS header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
+         */
         dos_header* get_msdos_header()
         {
             return dos_header_;
         }
+        /*! @copydoc get_msdos_header()
+         */
         const dos_header* get_msdos_header() const
         {
             return dos_header_;
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Returns the COFF header
+         * @return nullptr if the coffi object is not initialized (see create()), or not loaded (see load()).
+         */
         coff_header* get_header()
         {
             return coff_header_;
         }
+        /*! @copydoc get_header()
+         */
         const coff_header* get_header() const
         {
             return coff_header_;
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Returns the optional COFF header
+         * @return nullptr if the optional COFF header is not initialized (see create_optional_header()), or not loaded (see load()).
+         */
         optional_header* get_optional_header()
         {
             return optional_header_;
         }
+        /*! @copydoc get_optional_header()
+         */
         const optional_header* get_optional_header() const
         {
             return optional_header_;
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Returns the Windows NT header
+         * @return nullptr if the Windows NT header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
+         */
         win_header* get_win_header()
         {
             return win_header_;
         }
+        /*! @copydoc get_win_header()
+         */
         const win_header* get_win_header() const
         {
             return win_header_;
         }
 
         //---------------------------------------------------------------------
-        const sections &get_sections() const
-        {
-            return sections_;
-        }
+        /*! @brief Returns a list of the COFF sections
+         *
+         * @return Empty list if the coffi object is not initialized.
+         */
         sections &get_sections()
         {
             return sections_;
         }
+        /*! @copydoc get_sections()
+         */
+        const sections &get_sections() const
+        {
+            return sections_;
+        }
+        /*! @brief Add a COFF section
+         *
+         * @param[in] name The section name
+         * @return A pointer to the newly created section.
+         */
         section *add_section(const std::string &name)
         {
             section *sec;
@@ -427,14 +514,30 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
-        const directories &get_directories() const
-        {
-            return directories_;
-        }
+        /*! @brief Returns a list of the PE data directories.
+         *
+         * This function is releveant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
+         *
+         * @return Empty list if the PE data directories are not initialized, or not relevant for the architecture.
+         */
         directories &get_directories()
         {
             return directories_;
         }
+        /*! @copydoc get_directories()
+         */
+        const directories &get_directories() const
+        {
+            return directories_;
+        }
+
+        /*! @brief Add a PE data directory.
+         *
+         * This function is releveant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
+         *
+         * @param[in] rva_and_size Relative virtual address (RVA) and size
+         * @return A pointer to the newly created directory.
+         */
         directory *add_directory(const image_data_directory &rva_and_size)
         {
             directory *d = new directory(directories_.size());
@@ -445,6 +548,9 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        /*! @brief PE32+ format check.
+         * @return true if the file is initialized and is a PE file (see #COFFI_ARCHITECTURE_PE), with a magic number indicating a PE32+ file (see #OH_MAGIC_PE32PLUS).
+         */
         bool is_PE32_plus()
         {
             bool ret = false;
@@ -456,10 +562,9 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc architecture_provider::get_addressable_unit()
         int get_addressable_unit() const
         {
-            // returns the char type size in bytes.
-            // Some targets have 2-bytes characters, this changes how offsets are computed in the file
             if (!coff_header_) {
                 return 0;
             }
@@ -477,12 +582,19 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc architecture_provider::get_architecture()
         coffi_architecture_t get_architecture() const
         {
             return architecture_;
         }
 
         //---------------------------------------------------------------------
+        /*! @brief Performs the layout of the file.
+         *
+         * The layout consists in:
+         *   - Compute the sections alignement,
+         *   - Compute the offsets for: sections, directories, relocations, line numbers, string table offset, etc.
+         */
         void layout()
         {
             // Order all the data pages to be written
