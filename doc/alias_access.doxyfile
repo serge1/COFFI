@@ -1,0 +1,3 @@
+ALIASES += \
+    accessors{1}="@name Functions for accessing the underlying COFF file section structure ^^ @anchor group_access_\1 ^^ See the @ref group_access \"macros for accessing the COFF structures fields\". ^^ @{" \
+    endaccessors="@}"

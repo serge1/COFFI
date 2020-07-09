@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi_symbols.hpp
+ * @brief COFFI library classes for the COFF symbols and symbol table.
+ *
+ * Do not include this file directly. This file is included by coffi.hpp.
+ */
+
 #ifndef COFFI_SYMBOLS_HPP
 #define COFFI_SYMBOLS_HPP
 
@@ -40,11 +46,13 @@ namespace COFFI {
             std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
         }
 
+        //! @accessors{symbol}
         COFFI_GET_SET_ACCESS(uint32_t, value);
         COFFI_GET_SET_ACCESS(uint16_t, section_number);
         COFFI_GET_SET_ACCESS(uint16_t, type);
         COFFI_GET_SET_ACCESS(uint8_t, storage_class);
         COFFI_GET_SET_ACCESS(uint8_t, aux_symbols_number);
+        //! @endaccessors
 
         uint32_t get_index() const
         {
@@ -130,10 +138,12 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc symbol_provider::get_symbol(uint32_t)
         virtual symbol *get_symbol( uint32_t index )
         {
             return (symbol*)((const coffi_symbols *)this)->get_symbol(index);
         }
+        //! @copydoc symbol_provider::get_symbol(uint32_t)
         virtual const symbol *get_symbol( uint32_t index ) const
         {
             uint32_t L = 0;
@@ -151,10 +161,12 @@ namespace COFFI {
             return nullptr;
         }
 
+        //! @copydoc symbol_provider::get_symbol(const std::string &)
         virtual symbol *get_symbol( const std::string &name )
         {
             return (symbol*)((const coffi_symbols *)this)->get_symbol(name);
         }
+        //! @copydoc symbol_provider::get_symbol(const std::string &)
         virtual const symbol *get_symbol( const std::string &name ) const
         {
             for (auto s = symbols_.begin(); s != symbols_.end(); s++) {
@@ -176,6 +188,7 @@ namespace COFFI {
         }
 
         //---------------------------------------------------------------------
+        //! @copydoc symbol_provider::add_symbol()
         symbol *add_symbol( const std::string &name )
         {
             uint32_t index = 0;

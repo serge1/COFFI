@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*! @file coffi_relocation.hpp 
+ * @brief COFFI library classes for the COFF relocation entries.
+ *
+ * Do not include this file directly. This file is included by coffi.hpp.
+ */
+
 #ifndef COFFI_RELOCATION_HPP
 #define COFFI_RELOCATION_HPP
 
@@ -42,10 +48,12 @@ namespace COFFI {
             arch_{arch}
         {}
 
+        //! @accessors{relocation}
         COFFI_GET_SET_ACCESS( uint32_t, virtual_address );
         COFFI_GET_ACCESS( uint32_t, symbol_table_index );
         COFFI_GET_SET_ACCESS( uint32_t, type );
         COFFI_GET_SET_ACCESS( uint16_t, reserved );
+        //! @endaccessors
 
         const std::string &get_symbol() const
         {
@@ -77,7 +85,7 @@ namespace COFFI {
                 break;
             }
             case COFFI_ARCHITECTURE_CEVA:
-                rel_entry_cevax h;
+                rel_entry_ceva h;
                 stream.read( (char*)&( h ), sizeof( h ) );
                 header.virtual_address = h.virtual_address;
                 header.symbol_table_index = h.symbol_table_index;
@@ -108,7 +116,7 @@ namespace COFFI {
                 break;
             }
             case COFFI_ARCHITECTURE_CEVA: {
-                rel_entry_cevax h;
+                rel_entry_ceva h;
                 h.virtual_address = header.virtual_address;
                 h.symbol_table_index = header.symbol_table_index;
                 h.type = header.type;
@@ -132,7 +140,7 @@ namespace COFFI {
                 return sizeof(rel_entry_ti);
                 break;
             case COFFI_ARCHITECTURE_CEVA:
-                return sizeof(rel_entry_cevax);
+                return sizeof(rel_entry_ceva);
                 break;
             default:
                 return sizeof(rel_entry);

@@ -1,3 +1,4 @@
+//! [ex_reader_include]
 #include <iostream>
 #include <coffi/coffi.hpp>
 
@@ -5,11 +6,13 @@ using namespace COFFI;
 
 int main( int argc, char** argv )
 {
+//! [ex_reader_include]
     if ( argc != 2 ) {
         std::cout << "Usage: tutorial <coff_file>" << std::endl;
         return 1;
     }
 
+//! [ex_reader_create]
     // Create an coffi reader
     coffi reader;
 
@@ -18,7 +21,9 @@ int main( int argc, char** argv )
         std::cout << "Can't find or process COFF file " << argv[1] << std::endl;
         return 2;
     }
+//! [ex_reader_create]
 
+//! [ex_reader_archi]
     // Print COFF file properties
     std::cout << "COFF file architecture: ";
     switch (reader.get_architecture()) {
@@ -40,8 +45,10 @@ int main( int argc, char** argv )
         std::cout << "Texas Instruments" << std::endl;
         break;
     }
+//! [ex_reader_archi]
 
-    // Print COFF file sections info
+//! [ex_reader_sections]
+    // Print the COFF file sections info
     auto sec_num = reader.get_sections().size();
     std::cout << "Number of sections: " << sec_num << std::endl;
     for (auto sec: reader.get_sections()) {
@@ -51,11 +58,14 @@ int main( int argc, char** argv )
                   << sec->get_data_size()
                   << std::endl;
     }
+//! [ex_reader_sections]
 
+//! [ex_reader_symbols]
     // Print COFF file symbols info
     for (auto sym: *reader.get_symbols()) {
         std::cout << sym.get_index() << " " << sym.get_name() << " " << sym.get_value() << std::endl;
     }
+//! [ex_reader_symbols]
 
     return 0;
 }

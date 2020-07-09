@@ -1,8 +1,8 @@
-COFFIO is a header-only C++ library - installation does not require any (pre)compilation step.
-Just copy 'coffio' folder into standard include directory.
+COFFI is a header-only C++ library - installation does not require any (pre)compilation step.
+Just copy 'coffi' folder into standard include directory.
 
 For example:
-    cp -R coffio /usr/include
+    cp -R coffi /usr/include
 
 Alternatively, it is possible to modify compiler's include search path -
 '-I<dir>' option in GCC; '/I<dir>' in MSVC.
