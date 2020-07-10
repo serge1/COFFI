@@ -347,14 +347,14 @@ def run_doxygen(app):
         sys.stderr.write('doxygen execution failed: %s' % e)
 
 def run_mod(app):
-    '''Replace "replacebyfile" in the *.m.o.d files by the file contents'''
-    for mod in glob.glob('../*.m.o.d'):
+    '''Replace "replacebyfile" in the *.m_o_d files by the file contents'''
+    for mod in glob.glob('../*.m_o_d'):
         txt = open(mod).read()
         for include in re.findall(r'^[ \t]*replacebyfile[ \t]+.*$', txt, re.MULTILINE):
             include_file = re.sub(r'[ \t]*replacebyfile[ \t]+(.*?)[ \t]*', r'\1', include)
             repl = open(os.path.join(os.path.dirname(mod), include_file)).read()
             txt = txt.replace(include, repl)
-        md = mod.replace('.m.o.d', '.md')
+        md = mod.replace('.m_o_d', '.md')
         headerline = '<!-- This file is generated from %s by the script conf.py, DO NOT MODIFY! -->' % mod.replace('\\', '/')
         txt = re.sub(r'^(\s*[\\\\@](?:main)?page .*$)', r'\1\n' + headerline, txt, flags = re.MULTILINE)
         open(md, 'w').write(txt)

@@ -38,6 +38,7 @@ THE SOFTWARE.
 namespace COFFI {
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF section relocation entry.
     class relocation
     {
     public:

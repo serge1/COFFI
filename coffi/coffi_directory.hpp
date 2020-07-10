@@ -164,7 +164,12 @@ namespace COFFI {
         uint32_t index_;
     };
 
-    class directories: public std::vector<directory*>
+
+    /*! @brief List of image data directories
+     *
+     * It is implemented as a vector of @ref directory pointers.
+     */
+    class directories : public std::vector<directory*>
     {
     public:
         //------------------------------------------------------------------------------

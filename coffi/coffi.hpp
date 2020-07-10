@@ -87,6 +87,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Initializes the coffi object by loading data from COFF binary file.
+         *
          * @param[in] file_name File path of the file to load.
          * @return true if the file was processed successfully, false otherwise.
          */
@@ -352,6 +353,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Cleans and/or initializes the coffi object.
+         *
          * @param[in] architecture COFF architecture, see #coffi_architecture_t for the list of supported architectures
          */
         void create( coffi_architecture_t architecture )
@@ -421,6 +423,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Returns the MS-DOS header
+         *
          * @return nullptr if the MS-DOS header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
          */
         dos_header* get_msdos_header()
@@ -436,6 +439,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Returns the COFF header
+         *
          * @return nullptr if the coffi object is not initialized (see create()), or not loaded (see load()).
          */
         coff_header* get_header()
@@ -451,6 +455,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Returns the optional COFF header
+         *
          * @return nullptr if the optional COFF header is not initialized (see create_optional_header()), or not loaded (see load()).
          */
         optional_header* get_optional_header()
@@ -466,6 +471,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief Returns the Windows NT header
+         *
          * @return nullptr if the Windows NT header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
          */
         win_header* get_win_header()
@@ -549,6 +555,7 @@ namespace COFFI {
 
         //---------------------------------------------------------------------
         /*! @brief PE32+ format check.
+         *
          * @return true if the file is initialized and is a PE file (see #COFFI_ARCHITECTURE_PE), with a magic number indicating a PE32+ file (see #OH_MAGIC_PE32PLUS).
          */
         bool is_PE32_plus()
