@@ -22,14 +22,14 @@ void write_the_file( const std::string &filename )
     
     // You can't proceed without this function call!
     writer.create(COFFI_ARCHITECTURE_PE);
-//! [ex_writer_open]
+    //! [ex_writer_open]
 
-//! [ex_writer_optional]
+    //! [ex_writer_optional]
     // Create the optional header (required for images *.exe, *.dll)
     writer.create_optional_header();
-//! [ex_writer_optional]
+    //! [ex_writer_optional]
 
-//! [ex_writer_code]
+    //! [ex_writer_code]
     // Create code section
     section* text_sec = writer.add_section( ".text" );
     char text[] = {
@@ -48,9 +48,9 @@ void write_the_file( const std::string &filename )
     text_sec->set_virtual_address(0x1000);
     text_sec->set_virtual_size(sizeof(text));
     text_sec->set_flags(IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_READ | IMAGE_SCN_CNT_CODE | IMAGE_SCN_ALIGN_4BYTES);
-//! [ex_writer_code]
+    //! [ex_writer_code]
 
-//! [ex_writer_rdata]
+    //! [ex_writer_rdata]
     // Create a .rdata section, with the string
     section* rdata_sec = writer.add_section( ".rdata" );
     char rdata[] = "Hello World!\0";
@@ -58,9 +58,9 @@ void write_the_file( const std::string &filename )
     rdata_sec->set_virtual_address(0x2000);
     rdata_sec->set_virtual_size(sizeof(rdata));
     rdata_sec->set_flags(IMAGE_SCN_MEM_READ | IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_ALIGN_4BYTES);
-//! [ex_writer_rdata]
+    //! [ex_writer_rdata]
 
-//! [ex_writer_idata]
+    //! [ex_writer_idata]
     // Create a .idata section
     section* idata_sec = writer.add_section( ".idata" );
     uint8_t idata[] = {
@@ -119,9 +119,9 @@ void write_the_file( const std::string &filename )
     idata_sec->set_virtual_address(0x3000);
     idata_sec->set_virtual_size(sizeof(idata));
     idata_sec->set_flags(IMAGE_SCN_MEM_READ | IMAGE_SCN_MEM_READ | IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_ALIGN_4BYTES);
-//! [ex_writer_idata]
+    //! [ex_writer_idata]
 
-//! [ex_writer_reloc]
+    //! [ex_writer_reloc]
     // Create a .reloc section
     section* reloc_sec = writer.add_section( ".reloc" );
     uint16_t reloc[] = {
@@ -136,9 +136,9 @@ void write_the_file( const std::string &filename )
     reloc_sec->set_virtual_address(0x4000);
     reloc_sec->set_virtual_size(sizeof(reloc));
     reloc_sec->set_flags(IMAGE_SCN_MEM_READ | IMAGE_SCN_MEM_READ | IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_ALIGN_4BYTES);
-//! [ex_writer_reloc]
+    //! [ex_writer_reloc]
 
-//! [ex_writer_header]
+    //! [ex_writer_header]
     // Set headers properties
     writer.get_header()->set_flags(IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE);
     writer.get_optional_header()->set_code_size(0x200);
@@ -158,9 +158,9 @@ void write_the_file( const std::string &filename )
     writer.get_win_header()->set_stack_commit_size(0x1000);
     writer.get_win_header()->set_heap_reserve_size(0x100000);
     writer.get_win_header()->set_heap_commit_size(0x1000);
-//! [ex_writer_header]
+    //! [ex_writer_header]
 
-//! [ex_writer_directories]
+    //! [ex_writer_directories]
     // Add directories (required for images *.exe, *.dll)
     writer.add_directory(image_data_directory{0, 0}); // Export Directory [.edata (or where ever we found it)]
     writer.add_directory(image_data_directory{idata_sec->get_virtual_address(), idata_sec->get_virtual_size()}); // Import Directory [parts of .idata]
@@ -178,15 +178,15 @@ void write_the_file( const std::string &filename )
     writer.add_directory(image_data_directory{0, 0}); // Delay Import Directory
     writer.add_directory(image_data_directory{0, 0}); // CLR Runtime Header
     writer.add_directory(image_data_directory{0, 0}); // Reserved
-//! [ex_writer_directories]
+    //! [ex_writer_directories]
 
-//! [ex_writer_save]
+    //! [ex_writer_save]
     // Recompute all the offsets in the file
     writer.layout();
 
     // Create the PE file
     writer.save( filename );
-//! [ex_writer_save]
+    //! [ex_writer_save]
 }
 
 int main()

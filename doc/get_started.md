@@ -40,7 +40,7 @@ To get the architecture of the file use:
 @note
 The COFF types, flags and constants are defined in the coffi_types.hpp header file.
 This file is included automatically into the project.
-For example: #OH_MAGIC_PE32, #OH_MAGIC_PE32PLUS constants define values for PE/PE+ formats.
+For example: #OH_MAGIC_PE32, #OH_MAGIC_PE32PLUS constants define values for PE32/PE32+ formats.
 
 COFF binary files might consist of (some items are optional):
   - File headers
@@ -68,9 +68,9 @@ The following code demonstrates how to find out the amount of sections the COFF 
 @snippetlineno tutorial/tutorial.cpp ex_reader_sections
 
 
-@section accessors COFF Section Data Accessors
+@section accessors COFF Data Accessors
 
-To simplify creation and interpretation of specific COFF sections, the COFFI library provides accessor classes.
+To simplify creation and interpretation of specific COFF elements, the COFFI library provides accessor classes.
 
 Currently, the following classes are available:
 

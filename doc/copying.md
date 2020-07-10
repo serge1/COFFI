@@ -1,5 +1,5 @@
 @page copying License
-<!-- This file is generated from ../copying.m.o.d by the script conf.py, DO NOT MODIFY! -->
+<!-- This file is generated from ../copying.m_o_d by the script conf.py, DO NOT MODIFY! -->
 <!-- This file is transformed into a *.md file by the conf.py script -->
 
 

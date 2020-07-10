@@ -1,5 +1,5 @@
 @mainpage COFFI - Tutorial and User Manual
-<!-- This file is generated from ../mainpage.m.o.d by the script conf.py, DO NOT MODIFY! -->
+<!-- This file is generated from ../mainpage.m_o_d by the script conf.py, DO NOT MODIFY! -->
 <!-- This file is transformed into a *.md file by the conf.py script -->
 
 

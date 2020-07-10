@@ -632,7 +632,7 @@ namespace COFFI {
 
 //! @}
 
-//! @brief Architectures supported by COFFI
+//! Architectures supported by COFFI
 typedef enum coffi_architecture_t {
     //! Architecture unknown, or file not initialized.
     COFFI_ARCHITECTURE_NONE  = 0,
@@ -658,31 +658,38 @@ struct msdos_header
     //! 0x4d, 0x5a. This is the "magic number" of an EXE file
     uint16_t signature;
     //! @brief The number of bytes in the last block of the program that are actually used.
+    //!
     //! If this value is zero, that means the entire last block is used (i.e. the effective value is 512)
     uint16_t bytes_in_last_block;
     //! @brief Number of blocks in the file that are part of the EXE file.
+    //!
     //! If [02-03] is non-zero, only that much of the last block is used
     uint16_t blocks_in_file;
     //! Number of relocation entries stored after the header. May be zero
     uint16_t num_relocs;
     //! @brief Number of paragraphs in the header.
+    //!
     //! The program's data begins just after the header, and this field can be used to calculate the appropriate file offset.
     //! The header includes the relocation entries.
     //! Note that some OSs and/or programs may fail if the header is not a multiple of 512 bytes.
     uint16_t header_paragraphs;
     //! @brief Number of paragraphs of additional memory that the program will need.
+    //!
     //! This is the equivalent of the BSS size in a Unix program.
     //! The program can't be loaded if there isn't at least this much memory available to it
     uint16_t min_extra_paragraphs;
     //! @brief Maximum number of paragraphs of additional memory.
+    //!
     //! Normally, the OS reserves all the remaining conventional memory for your program, but you can limit it with this field.
     uint16_t max_extra_paragraphs;
     //! @brief Relative value of the stack segment.
+    //!
     //! This value is added to the segment the program was loaded at, and the result is used to initialize the SS register.
     uint16_t ss;
     //! Initial value of the SP register.
     uint16_t sp;
     //! @brief Word checksum.
+    //!
     //! If set properly, the 16-bit sum of all words in the file should be zero. Usually, this isn't filled in.
     uint16_t checksum;
     //! Initial value of the IP register (entry point).
@@ -781,7 +788,7 @@ struct common_optional_header_ti
 //------------------------------------------------------------------------------
 // Windows NT headers
 
-//! PE Windows NT header
+//! PE32 Windows NT header
 struct win_header_pe
 {
     uint32_t image_base;
@@ -1001,14 +1008,16 @@ class string_to_name_provider
 {
 public:
     //! @brief Converts an 8-bytes symbol short name into a full name, eventually by looking into the strings table.
+    //!
     //! @note Symbol short names that reference the string table start with "\x00\x00\x00\x00".
     virtual std::string string_to_name( const char* str ) const = 0;
     //! @brief Converts an 8-bytes section short name into a full name, eventually by looking into the strings table.
+    //!
     //! @note Section short names that reference the string table start with "/".
     virtual std::string section_string_to_name( const char* str ) const = 0;
-    //! @brief Converts symbol full name into an 8-bytes short name, eventually creating an entry in the strings table.
+    //! Converts symbol full name into an 8-bytes short name, eventually creating an entry in the strings table.
     virtual void name_to_string( const std::string &name, char* str ) = 0;
-    //! @brief Converts section full name into an 8-bytes short name, eventually creating an entry in the strings table.
+    //! Converts section full name into an 8-bytes short name, eventually creating an entry in the strings table.
     virtual void name_to_section_string( const std::string &name, char* str ) = 0;
 };
 
@@ -1026,20 +1035,25 @@ public:
     //! Gets a symbol from its name.
     virtual symbol *get_symbol( const std::string &name ) = 0;
     //! @brief Adds a symbol in the table.
+    //!
     //! Eventually creates an entry in the strings table for the symbol name.
     virtual symbol *add_symbol( const std::string &name ) = 0;
 };
 
 //------------------------------------------------------------------------------
 //! @brief Interface for architecture information
+//!
 //! This interface is implemented by the coffi class.
 class architecture_provider
 {
 public:
     //! @brief Returns the coffi object architecture.
+    //!
     //! @return #COFFI_ARCHITECTURE_NONE if the coffi object is not initialized, or in case of unrecognized architecture when loading a file.
     virtual coffi_architecture_t get_architecture() const = 0;
+    
     //! @brief Returns the character type size in bytes.
+    //!
     //! Auto-detects the addressable unit: are the addresses in bytes or 2-bytes words?
     //! <br>Some targets have 2-bytes characters, this changes how offsets are computed in the file.
     //! @return 1 in most cases (characters are 1 byte), 2 for some specific targets (TMS320 C2000 for example).
@@ -1054,8 +1068,9 @@ class win_header;
 class sections;
 
 //! @brief Interface that gives the headers and sections.
+//!
 //! This interface is implemented by the coffi class.
-class sections_provider: public virtual architecture_provider
+class sections_provider : public virtual architecture_provider
 {
 public:
     //! Returns the MS-DOS header.

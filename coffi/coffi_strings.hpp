@@ -36,6 +36,7 @@ THE SOFTWARE.
 
 namespace COFFI {
     //-------------------------------------------------------------------------
+    //! Class for accessing the strings table.
     class coffi_strings : public virtual string_to_name_provider
     {
     public:

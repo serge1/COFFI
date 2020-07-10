@@ -37,6 +37,7 @@ THE SOFTWARE.
 namespace COFFI {
 
     //------------------------------------------------------------------------------
+    //! Class for accessing the MS-DOS file header
     class dos_header
     {
     public:
@@ -203,6 +204,7 @@ namespace COFFI {
 
 
     //------------------------------------------------------------------------------
+    //! Interface class for accessing the COFF file header, for all the COFF architectures.
     class coff_header
     {
     public:
@@ -229,6 +231,12 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    /*! @brief Template class for accessing a COFF file header, depends on the underlying COFF file header format.
+     *
+     * The template parameter **class T** is one of:
+     *   - coff_file_header:    @copybrief coff_file_header   
+     *   - coff_file_header_ti: @copybrief coff_file_header_ti
+     */
     template< class T >
     class coff_header_impl_tmpl : public coff_header
     {
@@ -274,6 +282,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF file header, for the PE format.
     class coff_header_impl : public coff_header_impl_tmpl<coff_file_header>
     {
     public:
@@ -285,6 +294,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF file header, for the Texas Instruments format.
     class coff_header_impl_ti : public coff_header_impl_tmpl<coff_file_header_ti>
     {
     public:
@@ -296,6 +306,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Interface class for accessing the COFF file optional header, for all the COFF architectures.
     class optional_header
     {
     public:
@@ -323,6 +334,13 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    /*! @brief Template class for accessing a COFF file optional header, depends on the underlying COFF file optional header format.
+     *
+     * The template parameter **class T** is one of:
+     *   - coff_optional_header_pe:      @copybrief coff_optional_header_pe
+     *   - coff_optional_header_pe_plus: @copybrief coff_optional_header_pe_plus
+     *   - common_optional_header_ti:    @copybrief common_optional_header_ti
+     */
     template< class T >
     class optional_header_impl_tmpl : public optional_header
     {
@@ -369,6 +387,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF file optional header, for the PE32 format.
     class optional_header_impl_pe : public optional_header_impl_tmpl<coff_optional_header_pe>
     {
     public:
@@ -381,6 +400,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF file optional header, for the PE32+ format.
     class optional_header_impl_pe_plus : public optional_header_impl_tmpl<coff_optional_header_pe_plus>
     {
     public:
@@ -393,6 +413,7 @@ namespace COFFI {
     };
 
     //------------------------------------------------------------------------------
+    //! Class for accessing a COFF file optional header, for the Texas Instruments format.
     class optional_header_impl_ti : public optional_header_impl_tmpl<common_optional_header_ti>
     {
     public:
@@ -404,7 +425,9 @@ namespace COFFI {
         //! @endaccessors
     };
 
+
     //------------------------------------------------------------------------------
+    //! Interface class for accessing the Windows NT file header, for both the PE32 and PE32+ formats.
     class win_header
     {
     public:
@@ -442,7 +465,13 @@ namespace COFFI {
         virtual void save( std::ostream&  f ) = 0;
     };
 
-
+    //------------------------------------------------------------------------------
+    /*! @brief Template class for accessing a Windows NT file header, depends on the format (PE32 or PE32+).
+     *
+     * The template parameter **class T** is one of:
+     *   - win_header_pe: For the PE32 format
+     *   - win_header_pe_plus: For the PE32+ format
+     */
     template< class T >
     class win_header_impl : public win_header
     {

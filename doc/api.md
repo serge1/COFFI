@@ -2,6 +2,8 @@
 
 @section api_classes Classes
 
+See also @ref accessors.
+
   -     @ref COFFI::coffi                        "coffi":                        @copybrief COFFI::coffi
   - File headers:
       - @ref COFFI::dos_header                   "dos_header":                   @copybrief COFFI::dos_header
@@ -24,11 +26,11 @@
       - @ref COFFI::section_impl_tmpl            "section_impl_tmpl":            @copybrief COFFI::section_impl_tmpl
       - @ref COFFI::section_impl                 "section_impl":                 @copybrief COFFI::section_impl
       - @ref COFFI::section_impl_ti              "section_impl_ti":              @copybrief COFFI::section_impl_ti
+      - @ref COFFI::relocation                   "relocation":                   @copybrief COFFI::relocation
   - Symbols and strings:
       - @ref COFFI::coffi_symbols                "coffi_symbols":                @copybrief COFFI::coffi_symbols
       - @ref COFFI::symbol                       "symbol":                       @copybrief COFFI::symbol
       - @ref COFFI::coffi_strings                "coffi_strings":                @copybrief COFFI::coffi_strings
-      - @ref COFFI::relocation                   "relocation":                   @copybrief COFFI::relocation
 
 
 @section api_interfaces Interfaces

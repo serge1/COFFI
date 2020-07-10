@@ -38,6 +38,7 @@ THE SOFTWARE.
 namespace COFFI {
 
     //------------------------------------------------------------------------------
+    //! Interface class for accessing a COFF section, for all the COFF architectures.
     class section
     {
     public:
@@ -88,6 +89,12 @@ namespace COFFI {
     };
 
 
+    /*! @brief Template class for accessing a COFF section, depends on the underlying section header format.
+     *
+     * The template parameter **class T** is one of:
+     *   - section_header:    @copybrief section_header
+     *   - section_header_ti: @copybrief section_header_ti
+     */
     template < class T >
     class section_impl_tmpl : public section
     {
@@ -345,6 +352,7 @@ namespace COFFI {
     };
 
 
+    //! Class for accessing a COFF section, for the PE format.
     class section_impl : public section_impl_tmpl<section_header>
     {
     public:
@@ -369,6 +377,7 @@ namespace COFFI {
         }
     };
 
+    //! Class for accessing a COFF section, for the Texas Instruments format.
     class section_impl_ti : public section_impl_tmpl<section_header_ti>
     {
     public:
@@ -414,7 +423,13 @@ namespace COFFI {
     };
 
 
-    class sections: public std::vector<section*>
+    /*! @brief List of sections
+     *
+     * It is implemented as a vector of @ref section pointers.
+     * This allows to manage easily all the different section implementations (for every COFF format),
+     * with pointers to their base interface class (@ref section).
+     */
+    class sections : public std::vector<section*>
     {
     public:
         sections() {}
@@ -437,6 +452,7 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
         /*! @brief Subscript operator, finds a section by its index
+         *
          * @param[in] i Index of the section
          * @return A reference to the element at specified location **i**
          */
@@ -453,6 +469,7 @@ namespace COFFI {
 
         //------------------------------------------------------------------------------
         /*! @brief Subscript operator, finds a section by its symbolic name
+         *
          * @param[in] name Symbolic name of the section
          * @return A reference to the element with the section symbolic name **name**
          */

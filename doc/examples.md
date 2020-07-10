@@ -19,12 +19,12 @@ The @ref examples_write_obj is another example covering the creation of relocata
 
 @subsection examples_tutorial examples/tutorial/tutorial.cpp
 
-@include tutorial/tutorial.cpp
+@includelineno tutorial/tutorial.cpp
 
 @subsection examples_writer examples/writer/writer.cpp
 
-@include writer/writer.cpp
+@includelineno writer/writer.cpp
 
 @subsection examples_write_obj examples/write_obj/write_obj.cpp
 
-@include write_obj/write_obj.cpp
+@includelineno write_obj/write_obj.cpp

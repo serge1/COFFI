@@ -37,6 +37,7 @@ THE SOFTWARE.
 namespace COFFI {
 
     //-------------------------------------------------------------------------
+    //! Class for accessing a COFF symbol.
     class symbol
     {
     public:
@@ -120,7 +121,9 @@ namespace COFFI {
         string_to_name_provider* stn_;
     };
 
+
     //-------------------------------------------------------------------------
+    //! Class for accessing the symbol table.
     class coffi_symbols :
             public virtual symbol_provider,
             public virtual string_to_name_provider
