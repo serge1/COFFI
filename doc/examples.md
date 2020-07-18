@@ -1,3 +1,5 @@
+# Tutorial and examples
+
 @page examples Tutorial and examples
 
 @tableofcontents
@@ -5,15 +7,14 @@
 @section examples_intro Presentation
 
 These examples run on a Windows system.
-<br>They are using the COFFI library for the PE format (@ref COFFI::COFFI_ARCHITECTURE_PE "COFFI_ARCHITECTURE_PE").
+
+They are using the COFFI library for the PE format (@ref COFFI::COFFI_ARCHITECTURE_PE "COFFI_ARCHITECTURE_PE").
 
 The @ref examples_tutorial is covered by the @ref reader documentation.
 
 The @ref examples_writer is covered by the @ref writer documentation.
 
 The @ref examples_write_obj is another example covering the creation of relocatable object files.
-
-
 
 @section examples_listings Examples sources listings
 
