@@ -10,6 +10,7 @@ examples/write_obj
 examples/tutorial
 examples/anonymizer
 examples/COFFDump
+tests/coffio_test
 
 # Build results
 [Dd]ebug/
