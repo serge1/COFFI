@@ -251,7 +251,7 @@ namespace COFFI {
             // Read relocations
             if ( get_reloc_count() != 0 ) {
                 stream.seekg( get_reloc_offset() );
-                for ( uint16_t i = 0; i < get_reloc_count(); ++i ) {
+                for ( uint32_t i = 0; i < get_reloc_count(); ++i ) {
                     relocation rel{stn_, sym_, arch_};
                     rel.load(stream);
                     relocations.push_back( rel );
@@ -261,7 +261,7 @@ namespace COFFI {
             // Read line numbers
             if ( get_line_num_count() != 0 ) {
                 stream.seekg( get_line_num_offset() );
-                for ( uint16_t i = 0; i < get_line_num_count(); ++i ) {
+                for ( uint32_t i = 0; i < get_line_num_count(); ++i ) {
                     line_number lnum;
                     stream.read(reinterpret_cast<char*>(&lnum), sizeof(line_number));
                     line_numbers.push_back( lnum );

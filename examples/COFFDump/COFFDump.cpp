@@ -185,12 +185,9 @@ int main( int argc, char* argv[] )
         std::cout << "  Number of Sections:           "
                   << I2X( c.get_header()->get_sections_count(), 4 ) << std::endl << std::endl;
         std::time_t t = c.get_header()->get_time_data_stamp();
-        struct std::tm *tt = std::localtime(&t);
-        char tstring[100];
-        std::strftime(tstring, 100, "%Y-%m-%d %H:%M:%S", tt);
         std::cout << "  TimeDateStamp:                "
                   << I2X( c.get_header()->get_time_data_stamp(), 8 )
-                  << " (" << tstring << ")" << std::endl;
+                  << " (" << ctime(&t) << ")" << std::endl;
         std::cout << "  PointerToSymbolTable:         "
                   << I2X( c.get_header()->get_symbol_table_offset(), 8 ) << std::endl;
         std::cout << "  NumberOfSymbols:              "
