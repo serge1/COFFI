@@ -672,11 +672,17 @@ namespace COFFI {
             std::streampos pos = stream.tellg();
             for ( int i = 0; i < coff_header_->get_sections_count(); ++i ) {
                 section* sec;
-                if ((architecture_ == COFFI_ARCHITECTURE_PE) || (architecture_ == COFFI_ARCHITECTURE_CEVA)) {
+                switch (architecture_) {
+                case COFFI_ARCHITECTURE_PE:
+                case COFFI_ARCHITECTURE_CEVA:
                     sec = new section_impl( this, this, this );
-                }
-                if (architecture_ == COFFI_ARCHITECTURE_TI) {
+                    break;
+                case COFFI_ARCHITECTURE_TI:
                     sec = new section_impl_ti( this, this, this );
+                    break;
+                default:
+                    sec = new section_impl( this, this, this );
+                    break;
                 }
                 if (!(sec->load( stream, i * sec->get_sizeof() + pos ))) {
                     return false;
