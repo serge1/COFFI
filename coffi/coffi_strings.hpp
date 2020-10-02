@@ -174,7 +174,7 @@ namespace COFFI {
                 uint32_t off = *(uint32_t*)( str + sizeof( uint32_t ) );
                 ret = strings_ + off;
             } else if (is_section && str[0] == '/') {
-                int32_t off = std::atol(str);
+                int32_t off = std::atol(str + 1);
                 ret = strings_ + off;
             } else {
                 char dst[COFFI_NAME_SIZE + 1];
