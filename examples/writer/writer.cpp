@@ -16,6 +16,8 @@
 
 using namespace COFFI;
 
+// clang-format off
+
 void write_the_file( const std::string &filename )
 {
     coffi writer;
@@ -115,6 +117,7 @@ void write_the_file( const std::string &filename )
         // RVA = 0x308C
         0x7F, 0x02, 'M', 'e', 's', 's', 'a', 'g', 'e', 'B', 'o', 'x', 'A', 0, 0, 0,
     };
+
     idata_sec->set_data( (char*)idata, sizeof( idata ) );
     idata_sec->set_virtual_address(0x3000);
     idata_sec->set_virtual_size(sizeof(idata));
@@ -188,9 +191,10 @@ void write_the_file( const std::string &filename )
     writer.save( filename );
     //! [ex_writer_save]
 }
+// clang-format on
 
 int main()
 {
-    write_the_file( "hello.exe" );
+    write_the_file("hello.exe");
     return 0;
 }

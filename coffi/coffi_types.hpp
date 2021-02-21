@@ -33,23 +33,24 @@ THE SOFTWARE.
 
 namespace COFFI {
 
-#if !defined(COFFI_NO_OWN_TYPES) && !defined(COFFI_NO_CSTDINT) && !defined(COFFI_NO_INTTYPES) && !defined(DOXYGEN)
+#if !defined(COFFI_NO_OWN_TYPES) && !defined(COFFI_NO_CSTDINT) && \
+    !defined(COFFI_NO_INTTYPES) && !defined(DOXYGEN)
 #include <stdint.h>
 #else
-    typedef unsigned char  uint8_t;
-    typedef signed char    int8_t;
-    typedef uint16_t uint16_t;
-    typedef signed short   int16_t;
+typedef unsigned char    uint8_t;
+typedef signed char      int8_t;
+typedef uint16_t         uint16_t;
+typedef signed short     int16_t;
 #ifdef _MSC_VER
-    typedef unsigned __int32 uint32_t;
-    typedef signed   __int32 int32_t;
-    typedef unsigned __int64 uint64_t;
-    typedef signed   __int64 int64_t;
+typedef unsigned __int32 uint32_t;
+typedef signed __int32   int32_t;
+typedef unsigned __int64 uint64_t;
+typedef signed __int64   int64_t;
 #else
-    typedef unsigned int       uint32_t;
-    typedef signed   int       int32_t;
-    typedef unsigned long long uint64_t;
-    typedef signed   long long int64_t;
+typedef unsigned int       uint32_t;
+typedef signed int         int32_t;
+typedef unsigned long long uint64_t;
+typedef signed long long   int64_t;
 #endif // _MSC_VER
 #endif
 
@@ -79,8 +80,8 @@ namespace COFFI {
 #define PEMAG1 'Z'
 #define PEMAG2 'P'
 #define PEMAG3 'E'
-#define PEMAG4   0
-#define PEMAG5   0
+#define PEMAG4 0
+#define PEMAG5 0
 
 //! @}
 
@@ -92,6 +93,7 @@ namespace COFFI {
 
 //! @}
 
+// clang-format off
 //! @name PE file characteristics
 //! @{
 #define IMAGE_FILE_RELOCS_STRIPPED         0x0001 //!< Image only, Windows CE, Windows NT and above. Indicates that the file does not contain base relocations and must therefore be loaded at its preferred base address. If the base address is not available, the loader reports an error. Operating systems running on top of MS-DOS (Win32s™) are generally not able to use the preferred base address and so cannot run these images. However, beginning with version 4.0, Windows will use an application’s preferred base address. The default behavior of the linker is to strip base relocations from EXEs.
@@ -644,6 +646,7 @@ typedef enum coffi_architecture_t {
     COFFI_ARCHITECTURE_CEVA = 3,
 } coffi_architecture_t;
 
+// clang-format on
 
 //------------------------------------------------------------------------------
 // Packing the structures
@@ -705,7 +708,7 @@ struct msdos_header
     uint16_t oem_info;
     uint16_t reserved2[10];
     //! Location of PE format signature.
-    int32_t  pe_sign_location;
+    int32_t pe_sign_location;
 };
 
 struct msdos_header_rel
@@ -720,26 +723,31 @@ struct msdos_header_rel
 //! PE COFF header
 struct coff_file_header
 {
-    uint16_t machine;                 //!< Identifies the type of target machine
-    uint16_t sections_count;          //!< The size of the section table
-    uint32_t time_data_stamp;         //!< A C run-time time_t value
-    uint32_t symbol_table_offset;     //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
-    uint32_t symbols_count;           //!< The number of entries in the symbol table
-    uint16_t optional_header_size;    //!< Which is required for executable files but not for object files.
-    uint16_t flags;                   //!< The flags that indicate the attributes of the file
+    uint16_t machine;         //!< Identifies the type of target machine
+    uint16_t sections_count;  //!< The size of the section table
+    uint32_t time_data_stamp; //!< A C run-time time_t value
+    uint32_t
+             symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
+    uint32_t symbols_count;       //!< The number of entries in the symbol table
+    uint16_t
+             optional_header_size; //!< Which is required for executable files but not for object files.
+    uint16_t flags; //!< The flags that indicate the attributes of the file
 };
 
 //! Texas Instruments COFF header
 struct coff_file_header_ti
 {
-    uint16_t version;                 //!< Indicates version of COFF file structure
-    uint16_t sections_count;          //!< The size of the section table
-    uint32_t time_data_stamp;         //!< A C run-time time_t value
-    uint32_t symbol_table_offset;     //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
-    uint32_t symbols_count;           //!< The number of entries in the symbol table
-    uint16_t optional_header_size;    //!< Which is required for executable files but not for object files.
-    uint16_t flags;                   //!< The flags that indicate the attributes of the file
-    uint16_t target_id;               //!< Magic number indicates the file can be executed in a specific TI system
+    uint16_t version;         //!< Indicates version of COFF file structure
+    uint16_t sections_count;  //!< The size of the section table
+    uint32_t time_data_stamp; //!< A C run-time time_t value
+    uint32_t
+             symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
+    uint32_t symbols_count;       //!< The number of entries in the symbol table
+    uint16_t
+             optional_header_size; //!< Which is required for executable files but not for object files.
+    uint16_t flags; //!< The flags that indicate the attributes of the file
+    uint16_t
+        target_id; //!< Magic number indicates the file can be executed in a specific TI system
 };
 
 //------------------------------------------------------------------------------
@@ -748,41 +756,50 @@ struct coff_file_header_ti
 //! PE32 COFF optional header
 struct coff_optional_header_pe
 {
-    uint16_t magic;                   //!< State of the image file identifier
-    uint8_t  major_linker_version;    //!< The linker major version number
-    uint8_t  minor_linker_version;    //!< The linker minor version number
-    uint32_t code_size;               //!< The sum of all code sections
-    uint32_t initialized_data_size;   //!< The sum of all initialized data sections
-    uint32_t uninitialized_data_size; //!< The sum of all uninitialized data sections
-    uint32_t entry_point_address;     //!< The address of the entry point relative to the image base
-    uint32_t code_base;               //!< base of the beginning-of-code section
-    uint32_t data_base;               //!< base of the beginning-of-data section
+    uint16_t magic;                //!< State of the image file identifier
+    uint8_t  major_linker_version; //!< The linker major version number
+    uint8_t  minor_linker_version; //!< The linker minor version number
+    uint32_t code_size;            //!< The sum of all code sections
+    uint32_t
+        initialized_data_size; //!< The sum of all initialized data sections
+    uint32_t
+        uninitialized_data_size; //!< The sum of all uninitialized data sections
+    uint32_t
+             entry_point_address; //!< The address of the entry point relative to the image base
+    uint32_t code_base; //!< base of the beginning-of-code section
+    uint32_t data_base; //!< base of the beginning-of-data section
 };
 
 //! PE32+ COFF optional header
 struct coff_optional_header_pe_plus
 {
-    uint16_t magic;                   //!< State of the image file identifier
-    uint8_t  major_linker_version;    //!< The linker major version number
-    uint8_t  minor_linker_version;    //!< The linker minor version number
-    uint32_t code_size;               //!< The sum of all code sections
-    uint32_t initialized_data_size;   //!< The sum of all initialized data sections
-    uint32_t uninitialized_data_size; //!< The sum of all uninitialized data sections
-    uint32_t entry_point_address;     //!< The address of the entry point relative to the image base
-    uint32_t code_base;               //!< base of the beginning-of-code section
+    uint16_t magic;                //!< State of the image file identifier
+    uint8_t  major_linker_version; //!< The linker major version number
+    uint8_t  minor_linker_version; //!< The linker minor version number
+    uint32_t code_size;            //!< The sum of all code sections
+    uint32_t
+        initialized_data_size; //!< The sum of all initialized data sections
+    uint32_t
+        uninitialized_data_size; //!< The sum of all uninitialized data sections
+    uint32_t
+             entry_point_address; //!< The address of the entry point relative to the image base
+    uint32_t code_base; //!< base of the beginning-of-code section
 };
 
 //! Texas Instruments COFF optional header
 struct common_optional_header_ti
 {
-    uint16_t magic;                   //!< State of the image file identifier
-    uint16_t linker_version;          //!< The linker version number
-    uint32_t code_size;               //!< The sum of all code sections
-    uint32_t initialized_data_size;   //!< The sum of all initialized data sections
-    uint32_t uninitialized_data_size; //!< The sum of all uninitialized data sections
-    uint32_t entry_point_address;     //!< The address of the entry point relative to the image base
-    uint32_t code_base;               //!< The address that is relative to the image
-    uint32_t data_base;               //!<
+    uint16_t magic;          //!< State of the image file identifier
+    uint16_t linker_version; //!< The linker version number
+    uint32_t code_size;      //!< The sum of all code sections
+    uint32_t
+        initialized_data_size; //!< The sum of all initialized data sections
+    uint32_t
+        uninitialized_data_size; //!< The sum of all uninitialized data sections
+    uint32_t
+             entry_point_address; //!< The address of the entry point relative to the image base
+    uint32_t code_base; //!< The address that is relative to the image
+    uint32_t data_base; //!<
 };
 
 //------------------------------------------------------------------------------
@@ -875,7 +892,7 @@ struct auxiliary_symbol_record_2
 {
     uint32_t unused0;
     uint16_t linenumber;
-    uint8_t unused1[6];
+    uint8_t  unused1[6];
     uint32_t pointer_to_next_function;
     uint16_t unused2;
 };
@@ -885,7 +902,7 @@ struct auxiliary_symbol_record_3
 {
     uint32_t tag_index;
     uint32_t characteristics;
-    uint8_t unused1[10];
+    uint8_t  unused1[10];
 };
 
 //! PE auxiliary format 4: Files
@@ -902,8 +919,8 @@ struct auxiliary_symbol_record_5
     uint16_t number_of_linenumbers;
     uint32_t check_sum;
     uint16_t number;
-    uint8_t selection;
-    uint8_t unused[3];
+    uint8_t  selection;
+    uint8_t  unused[3];
 };
 
 //------------------------------------------------------------------------------
@@ -920,7 +937,7 @@ struct image_data_directory
 //! PE section header
 struct section_header
 {
-    char name[8];
+    char     name[8];
     uint32_t virtual_size;
     uint32_t virtual_address;
     uint32_t data_size;
@@ -935,7 +952,7 @@ struct section_header
 //! Texas Instruments section header
 struct section_header_ti
 {
-    char name[8];
+    char     name[8];
     uint32_t physical_address;
     uint32_t virtual_address;
     uint32_t data_size;
@@ -996,8 +1013,6 @@ struct line_number
     uint16_t line_number;
 };
 
-
-
 //------------------------------------------------------------------------------
 // Interfaces classes (pure virtual classes)
 //------------------------------------------------------------------------------
@@ -1006,38 +1021,38 @@ class symbol;
 //! Interface for accessing to the string table
 class string_to_name_provider
 {
-public:
+  public:
     //! @brief Converts an 8-bytes symbol short name into a full name, eventually by looking into the strings table.
     //!
     //! @note Symbol short names that reference the string table start with "\x00\x00\x00\x00".
-    virtual std::string string_to_name( const char* str ) const = 0;
+    virtual std::string string_to_name(const char* str) const = 0;
     //! @brief Converts an 8-bytes section short name into a full name, eventually by looking into the strings table.
     //!
     //! @note Section short names that reference the string table start with "/".
-    virtual std::string section_string_to_name( const char* str ) const = 0;
+    virtual std::string section_string_to_name(const char* str) const = 0;
     //! Converts symbol full name into an 8-bytes short name, eventually creating an entry in the strings table.
-    virtual void name_to_string( const std::string &name, char* str ) = 0;
+    virtual void name_to_string(const std::string& name, char* str) = 0;
     //! Converts section full name into an 8-bytes short name, eventually creating an entry in the strings table.
-    virtual void name_to_section_string( const std::string &name, char* str ) = 0;
+    virtual void name_to_section_string(const std::string& name, char* str) = 0;
 };
 
 //------------------------------------------------------------------------------
 //! Interface for accessing to the symbol table
 class symbol_provider
 {
-public:
+  public:
     //! Gets a symbol from its index.
-    virtual const symbol *get_symbol( uint32_t index ) const = 0;
+    virtual const symbol* get_symbol(uint32_t index) const = 0;
     //! Gets a symbol from its index.
-    virtual symbol *get_symbol( uint32_t index ) = 0;
+    virtual symbol* get_symbol(uint32_t index) = 0;
     //! Gets a symbol from its name.
-    virtual const symbol *get_symbol( const std::string &name ) const = 0;
+    virtual const symbol* get_symbol(const std::string& name) const = 0;
     //! Gets a symbol from its name.
-    virtual symbol *get_symbol( const std::string &name ) = 0;
+    virtual symbol* get_symbol(const std::string& name) = 0;
     //! @brief Adds a symbol in the table.
     //!
     //! Eventually creates an entry in the strings table for the symbol name.
-    virtual symbol *add_symbol( const std::string &name ) = 0;
+    virtual symbol* add_symbol(const std::string& name) = 0;
 };
 
 //------------------------------------------------------------------------------
@@ -1046,12 +1061,12 @@ public:
 //! This interface is implemented by the coffi class.
 class architecture_provider
 {
-public:
+  public:
     //! @brief Returns the coffi object architecture.
     //!
     //! @return #COFFI_ARCHITECTURE_NONE if the coffi object is not initialized, or in case of unrecognized architecture when loading a file.
     virtual coffi_architecture_t get_architecture() const = 0;
-    
+
     //! @brief Returns the character type size in bytes.
     //!
     //! Auto-detects the addressable unit: are the addresses in bytes or 2-bytes words?
@@ -1072,7 +1087,7 @@ class sections;
 //! This interface is implemented by the coffi class.
 class sections_provider : public virtual architecture_provider
 {
-public:
+  public:
     //! Returns the MS-DOS header.
     virtual const dos_header* get_msdos_header() const = 0;
     //! Returns the COFF file header.
@@ -1082,11 +1097,10 @@ public:
     //! Returns the Windows NT header.
     virtual const win_header* get_win_header() const = 0;
     //! Returns the sections.
-    virtual const sections &get_sections() const = 0;
+    virtual const sections& get_sections() const = 0;
 };
 
-
-}
+} // namespace COFFI
 
 #pragma pack()
 

@@ -5,7 +5,4 @@
  *     gcc -c -s -fno-asynchronous-unwind-tables answer.c -o answer_example.o
  */
 
-int answer()
-{
-    return 42;
-}
+int answer() { return 42; }

@@ -37,126 +37,136 @@ THE SOFTWARE.
 
 namespace COFFI {
 
+//------------------------------------------------------------------------------
+//! Class for accessing a COFF section relocation entry.
+class relocation
+{
+  public:
     //------------------------------------------------------------------------------
-    //! Class for accessing a COFF section relocation entry.
-    class relocation
+    relocation(const string_to_name_provider* stn,
+               const symbol_provider*         sym,
+               const architecture_provider*   arch)
+        : stn_{stn}, sym_{sym}, arch_{arch}
     {
-    public:
-        //------------------------------------------------------------------------------
-        relocation(const string_to_name_provider *stn, const symbol_provider *sym, const architecture_provider *arch):
-            stn_{stn},
-            sym_{sym},
-            arch_{arch}
-        {}
+    }
 
-        //! @accessors{relocation}
-        COFFI_GET_SET_ACCESS( uint32_t, virtual_address );
-        COFFI_GET_ACCESS( uint32_t, symbol_table_index );
-        COFFI_GET_SET_ACCESS( uint32_t, type );
-        COFFI_GET_SET_ACCESS( uint16_t, reserved );
-        //! @endaccessors
+    //! @accessors{relocation}
+    COFFI_GET_SET_ACCESS(uint32_t, virtual_address);
+    COFFI_GET_ACCESS(uint32_t, symbol_table_index);
+    COFFI_GET_SET_ACCESS(uint32_t, type);
+    COFFI_GET_SET_ACCESS(uint16_t, reserved);
+    //! @endaccessors
 
-        const std::string &get_symbol() const
+    //------------------------------------------------------------------------------
+    const std::string& get_symbol() const { return symbol_name; }
+
+    //------------------------------------------------------------------------------
+    void set_symbol(uint32_t symbol_table_index)
+    {
+        header.symbol_table_index = symbol_table_index;
+        const symbol* sym         = sym_->get_symbol(header.symbol_table_index);
+        symbol_name               = "";
+        if (sym) {
+            symbol_name = sym->get_name();
+        }
+    }
+
+    //------------------------------------------------------------------------------
+    void load(std::istream& stream)
+    {
+        std::fill_n(reinterpret_cast<char*>(&header), sizeof(header), '\0');
+
+        switch (arch_->get_architecture()) {
+        case COFFI_ARCHITECTURE_TI:
         {
-            return symbol_name;
+            rel_entry_ti h;
+            stream.read((char*)&(h), sizeof(h));
+            header.virtual_address    = h.virtual_address;
+            header.symbol_table_index = h.symbol_table_index;
+            header.type               = h.type;
+            header.reserved           = h.reserved;
+            break;
+        }
+        case COFFI_ARCHITECTURE_CEVA:
+            rel_entry_ceva h;
+            stream.read((char*)&(h), sizeof(h));
+            header.virtual_address    = h.virtual_address;
+            header.symbol_table_index = h.symbol_table_index;
+            header.type               = h.type;
+            break;
+        default:
+        {
+            rel_entry h;
+            stream.read((char*)&(h), sizeof(h));
+            header.virtual_address    = h.virtual_address;
+            header.symbol_table_index = h.symbol_table_index;
+            header.type               = h.type;
+            break;
+        }
         }
 
-        void set_symbol(uint32_t symbol_table_index)
+        set_symbol(get_symbol_table_index());
+    }
+
+    //------------------------------------------------------------------------------
+    void save(std::ostream& stream)
+    {
+        switch (arch_->get_architecture()) {
+        case COFFI_ARCHITECTURE_TI:
         {
-            header.symbol_table_index = symbol_table_index;
-            const symbol *sym = sym_->get_symbol( header.symbol_table_index );
-            symbol_name = "";
-            if (sym) {
-                symbol_name = sym->get_name();
-            }
+            rel_entry_ti h;
+            h.virtual_address    = header.virtual_address;
+            h.symbol_table_index = header.symbol_table_index;
+            h.type               = header.type;
+            h.reserved           = header.reserved;
+            stream.write((char*)&(h), sizeof(h));
+            break;
         }
-
-        void load(std::istream& stream)
+        case COFFI_ARCHITECTURE_CEVA:
         {
-            std::fill_n( reinterpret_cast<char*>( &header ), sizeof( header ), '\0' );
-
-            switch (arch_->get_architecture()) {
-            case COFFI_ARCHITECTURE_TI: {
-                rel_entry_ti h;
-                stream.read( (char*)&( h ), sizeof( h ) );
-                header.virtual_address = h.virtual_address;
-                header.symbol_table_index = h.symbol_table_index;
-                header.type = h.type;
-                header.reserved = h.reserved;
-                break;
-            }
-            case COFFI_ARCHITECTURE_CEVA:
-                rel_entry_ceva h;
-                stream.read( (char*)&( h ), sizeof( h ) );
-                header.virtual_address = h.virtual_address;
-                header.symbol_table_index = h.symbol_table_index;
-                header.type = h.type;
-                break;
-            default: {
-                rel_entry h;
-                stream.read( (char*)&( h ), sizeof( h ) );
-                header.virtual_address = h.virtual_address;
-                header.symbol_table_index = h.symbol_table_index;
-                header.type = h.type;
-                break;
-            }}
-
-            set_symbol(get_symbol_table_index());
+            rel_entry_ceva h;
+            h.virtual_address    = header.virtual_address;
+            h.symbol_table_index = header.symbol_table_index;
+            h.type               = header.type;
+            stream.write((char*)&(h), sizeof(h));
+            break;
         }
-
-        void save(std::ostream& stream)
+        default:
         {
-            switch (arch_->get_architecture()) {
-            case COFFI_ARCHITECTURE_TI: {
-                rel_entry_ti h;
-                h.virtual_address = header.virtual_address;
-                h.symbol_table_index = header.symbol_table_index;
-                h.type = header.type;
-                h.reserved = header.reserved;
-                stream.write( (char*)&( h ), sizeof( h ) );
-                break;
-            }
-            case COFFI_ARCHITECTURE_CEVA: {
-                rel_entry_ceva h;
-                h.virtual_address = header.virtual_address;
-                h.symbol_table_index = header.symbol_table_index;
-                h.type = header.type;
-                stream.write( (char*)&( h ), sizeof( h ) );
-                break;
-            }
-            default: {
-                rel_entry h;
-                h.virtual_address = header.virtual_address;
-                h.symbol_table_index = header.symbol_table_index;
-                h.type = header.type;
-                stream.write( (char*)&( h ), sizeof( h ) );
-                break;
-            }}
+            rel_entry h;
+            h.virtual_address    = header.virtual_address;
+            h.symbol_table_index = header.symbol_table_index;
+            h.type               = header.type;
+            stream.write((char*)&(h), sizeof(h));
+            break;
         }
-
-        uint32_t get_sizeof() const
-        {
-            switch (arch_->get_architecture()) {
-            case COFFI_ARCHITECTURE_TI:
-                return sizeof(rel_entry_ti);
-                break;
-            case COFFI_ARCHITECTURE_CEVA:
-                return sizeof(rel_entry_ceva);
-                break;
-            default:
-                return sizeof(rel_entry);
-                break;
-            }
         }
+    }
 
-        //------------------------------------------------------------------------------
-    protected:
-        const string_to_name_provider *stn_;
-        const symbol_provider *sym_;
-        const architecture_provider *arch_;
-        std::string symbol_name;
-        rel_entry_generic header;
-    };
+    //------------------------------------------------------------------------------
+    uint32_t get_sizeof() const
+    {
+        switch (arch_->get_architecture()) {
+        case COFFI_ARCHITECTURE_TI:
+            return sizeof(rel_entry_ti);
+            break;
+        case COFFI_ARCHITECTURE_CEVA:
+            return sizeof(rel_entry_ceva);
+            break;
+        default:
+            return sizeof(rel_entry);
+            break;
+        }
+    }
+
+    //------------------------------------------------------------------------------
+  protected:
+    const string_to_name_provider* stn_;
+    const symbol_provider*         sym_;
+    const architecture_provider*   arch_;
+    std::string                    symbol_name;
+    rel_entry_generic              header;
+};
 
 } // namespace COFFI
 

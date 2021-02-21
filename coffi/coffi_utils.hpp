@@ -48,86 +48,65 @@ THE SOFTWARE.
  */
 
 //! Declares a **get_NAME** function for accessing the **NAME** structure field.
-#define COFFI_GET_ACCESS_DECL( TYPE, NAME )       \
-    virtual TYPE get_##NAME() const = 0
+#define COFFI_GET_ACCESS_DECL(TYPE, NAME) virtual TYPE get_##NAME() const = 0
 
 //! Declares a **set_NAME** function for accessing the **NAME** structure field.
-#define COFFI_SET_ACCESS_DECL( TYPE, NAME )       \
-    virtual void set_##NAME( TYPE value ) = 0
+#define COFFI_SET_ACCESS_DECL(TYPE, NAME) \
+    virtual void set_##NAME(TYPE value) = 0
 
 //! Declares a **get_NAME** and a **set_NAME** functions for accessing the **NAME** structure field.
-#define COFFI_GET_SET_ACCESS_DECL( TYPE, NAME )   \
-    virtual TYPE get_##NAME() const = 0;          \
-    virtual void set_##NAME( TYPE value ) = 0
+#define COFFI_GET_SET_ACCESS_DECL(TYPE, NAME) \
+    virtual TYPE get_##NAME() const     = 0;  \
+    virtual void set_##NAME(TYPE value) = 0
 
 //! Defines a **get_NAME** function for accessing the **NAME** structure field.
-#define COFFI_GET_ACCESS( TYPE, NAME )      \
-    TYPE get_##NAME() const                 \
-    {                                       \
-        return header.NAME;                 \
-    }
+#define COFFI_GET_ACCESS(TYPE, NAME) \
+    TYPE get_##NAME() const { return header.NAME; }
 
 //! Defines a **set_NAME** function for accessing the **NAME** structure field.
-#define COFFI_SET_ACCESS( TYPE, NAME )      \
-    void set_##NAME( TYPE value )           \
-    {                                       \
-        header.NAME = value;                \
-    }
+#define COFFI_SET_ACCESS(TYPE, NAME) \
+    void set_##NAME(TYPE value) { header.NAME = value; }
 
 //! Defines a **get_NAME** and a **set_NAME** functions for accessing the **NAME** structure field.
-#define COFFI_GET_SET_ACCESS( TYPE, NAME )  \
-    TYPE get_##NAME() const                 \
-    {                                       \
-        return header.NAME;                 \
-    }                                       \
-    void set_##NAME( TYPE value )           \
-    {                                       \
-        header.NAME = value;                \
-    }
+#define COFFI_GET_SET_ACCESS(TYPE, NAME)            \
+    TYPE get_##NAME() const { return header.NAME; } \
+    void set_##NAME(TYPE value) { header.NAME = value; }
 
 //! Disables the **get_NAME** function for prohibiting read accesses to the **NAME** structure field.
-#define COFFI_GET_ACCESS_NONE( TYPE, NAME )               \
-    TYPE get_##NAME() const                               \
-    {                                                     \
-        throw std::runtime_error("The header field '"     \
-            STRINGIFY(NAME)                               \
-            "' is not applicable to this COFF version");  \
+#define COFFI_GET_ACCESS_NONE(TYPE, NAME)                        \
+    TYPE get_##NAME() const                                      \
+    {                                                            \
+        throw std::runtime_error("The header field '" STRINGIFY( \
+            NAME) "' is not applicable to this COFF version");   \
     }
 
 //! Disables the **set_NAME** function for prohibiting write accesses to the **NAME** structure field.
-#define COFFI_SET_ACCESS_NONE( TYPE, NAME )               \
-    void set_##NAME( TYPE value )                         \
-    {                                                     \
-        throw std::runtime_error("The header field '"     \
-            STRINGIFY(NAME)                               \
-            "' is not applicable to this COFF version");  \
+#define COFFI_SET_ACCESS_NONE(TYPE, NAME)                        \
+    void set_##NAME(TYPE value)                                  \
+    {                                                            \
+        throw std::runtime_error("The header field '" STRINGIFY( \
+            NAME) "' is not applicable to this COFF version");   \
     }
 
 //! Disables the **get_NAME** and the **set_NAME** function for prohibiting all accesses to the **NAME** structure field.
-#define COFFI_GET_SET_ACCESS_NONE( TYPE, NAME )           \
-    TYPE get_##NAME() const                               \
-    {                                                     \
-        throw std::runtime_error("The header field '"     \
-            STRINGIFY(NAME)                               \
-            "' is not applicable to this COFF version");  \
-    }                                                     \
-    void set_##NAME( TYPE )                               \
-    {                                                     \
-        throw std::runtime_error("The header field '"     \
-            STRINGIFY(NAME)                               \
-            "' is not applicable to this COFF version");  \
+#define COFFI_GET_SET_ACCESS_NONE(TYPE, NAME)                    \
+    TYPE get_##NAME() const                                      \
+    {                                                            \
+        throw std::runtime_error("The header field '" STRINGIFY( \
+            NAME) "' is not applicable to this COFF version");   \
+    }                                                            \
+    void set_##NAME(TYPE)                                        \
+    {                                                            \
+        throw std::runtime_error("The header field '" STRINGIFY( \
+            NAME) "' is not applicable to this COFF version");   \
     }
 
 //! Declares the **get_sizeof** function for returning the size of the COFF file structure.
-#define COFFI_GET_SIZEOF_DECL()             \
-    virtual size_t get_sizeof() const = 0
+#define COFFI_GET_SIZEOF_DECL() virtual size_t get_sizeof() const = 0
 
 //! Defines the **get_sizeof** function for returning the size of the COFF file structure.
-#define COFFI_GET_SIZEOF()                  \
-    size_t get_sizeof() const               \
-    {                                       \
-        return sizeof(header);              \
-    }
+#define COFFI_GET_SIZEOF() \
+    size_t get_sizeof() const { return sizeof(header); }
 
 //! @}
 

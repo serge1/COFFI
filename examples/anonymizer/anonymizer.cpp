@@ -23,8 +23,8 @@ THE SOFTWARE.
 */
 
 #ifdef _MSC_VER
-  #define _SCL_SECURE_NO_WARNINGS
-  #define COFFI_NO_INTTYPES
+#define _SCL_SECURE_NO_WARNINGS
+#define COFFI_NO_INTTYPES
 #endif
 
 #include <string>
@@ -35,42 +35,36 @@ THE SOFTWARE.
 
 using namespace COFFI;
 
-
-bool preserve_name( const std::string& name )
+bool preserve_name(const std::string& name)
 {
-    static std::vector<std::string> names_to_preserve = { ".shstrtab",
-                                                           ".rodata",
-                                                           ".bss",
-                                                           ".data",
-                                                           ".text",
-                                                           ".text_vle" };
+    static std::vector<std::string> names_to_preserve = {
+        ".shstrtab", ".rodata", ".bss", ".data", ".text", ".text_vle"};
 
-    for ( auto s = names_to_preserve.begin(); s != names_to_preserve.end(); ++s )
-        if ( *s == name)
+    for (auto s = names_to_preserve.begin(); s != names_to_preserve.end(); ++s)
+        if (*s == name)
             return true;
     return false;
 }
 
-std::default_random_engine generator(0xe1f);
-std::uniform_int_distribution<int> distribution(0,255);
+std::default_random_engine         generator(0xe1f);
+std::uniform_int_distribution<int> distribution(0, 255);
 
-void randomize_data( section *s )
+void randomize_data(section* s)
 {
     uint32_t size = s->get_data_size();
-    if ( size > 0 ) {
+    if (size > 0) {
         char new_data[size];
-        for (uint32_t i = 0; i < size; ++i ) {
+        for (uint32_t i = 0; i < size; ++i) {
             new_data[i] = distribution(generator);
         }
         s->set_data(new_data, size);
     }
 }
 
-
-std::string generate( int length )
+std::string generate(int length)
 {
     static uint32_t counter = 0;
-    std::string s = std::to_string(counter);
+    std::string     s       = std::to_string(counter);
     while (s.length() < length) {
         s = "s" + s;
     }
@@ -79,21 +73,21 @@ std::string generate( int length )
     return s;
 }
 
-
-void processStringTable(coffi &reader)
+void processStringTable(coffi& reader)
 {
     std::cout << "Info: processing string table section" << std::endl;
-    uint32_t size = reader.get_strings_size();
-    const char *pos_src = reader.get_strings() + 4;
-    const char *pos_end = reader.get_strings() + size;
-    char new_strings[size];
-    char *pos_dst = new_strings + 4;
-    int counter = 0;
+    uint32_t    size    = reader.get_strings_size();
+    const char* pos_src = reader.get_strings() + 4;
+    const char* pos_end = reader.get_strings() + size;
+    char        new_strings[size];
+    char*       pos_dst = new_strings + 4;
+    int         counter = 0;
     while (pos_src < pos_end) {
         auto len = strlen(pos_src);
         if (preserve_name(pos_src)) {
             std::strcpy(pos_dst, pos_src);
-        } else {
+        }
+        else {
             std::strcpy(pos_dst, generate(len).c_str());
         }
         pos_src += len + 1;
@@ -104,29 +98,31 @@ void processStringTable(coffi &reader)
     std::cout << counter << " strings found" << std::endl;
 }
 
-
-int main( int argc, char** argv )
+int main(int argc, char** argv)
 {
     try {
-        if ( argc != 3 ) {
+        if (argc != 3) {
             std::cout << "Usage: anonymizer <file_name> <output_file_name>\n";
             return 1;
         }
 
-        std::string filename = argv[1];
+        std::string filename       = argv[1];
         std::string outputfilename = argv[2];
 
         coffi reader;
 
-        if ( !reader.load( filename ) ) {
-            std::cerr << "File " << filename << " is not found or it is not a COFF file\n";
+        if (!reader.load(filename)) {
+            std::cerr << "File " << filename
+                      << " is not found or it is not a COFF file\n";
             return 1;
         }
 
-        for (auto s: reader.get_sections()) {
-            if ((s->get_flags() & IMAGE_SCN_CNT_CODE) || (s->get_flags() & IMAGE_SCN_CNT_INITIALIZED_DATA)) {
+        for (auto s : reader.get_sections()) {
+            if ((s->get_flags() & IMAGE_SCN_CNT_CODE) ||
+                (s->get_flags() & IMAGE_SCN_CNT_INITIALIZED_DATA)) {
                 randomize_data(s);
-                std::cout << "Sanitized " << s->get_data_size() << " bytes in section" << std::endl;
+                std::cout << "Sanitized " << s->get_data_size()
+                          << " bytes in section" << std::endl;
             }
         }
 
@@ -136,15 +132,17 @@ int main( int argc, char** argv )
 
         processStringTable(reader);
 
-        if ( !reader.save( outputfilename ) ) {
+        if (!reader.save(outputfilename)) {
             std::cerr << "Cannot write in file " << outputfilename << "\n";
             return 1;
         }
 
         return 0;
-    } catch ( const std::string& s ) {
+    }
+    catch (const std::string& s) {
         std::cerr << s << std::endl;
-    } catch ( const char* s ) {
+    }
+    catch (const char* s) {
         std::cerr << s << std::endl;
     }
     return 1;
