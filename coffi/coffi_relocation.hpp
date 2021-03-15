@@ -88,12 +88,14 @@ class relocation
             break;
         }
         case COFFI_ARCHITECTURE_CEVA:
+        {
             rel_entry_ceva h;
             stream.read((char*)&(h), sizeof(h));
             header.virtual_address    = h.virtual_address;
             header.symbol_table_index = h.symbol_table_index;
             header.type               = h.type;
             break;
+        }
         default:
         {
             rel_entry h;
