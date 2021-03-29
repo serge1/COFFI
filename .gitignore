@@ -168,14 +168,6 @@ $RECYCLE.BIN/
 # =========================
 
 Makefile
-Makefile.in
-aclocal.m4
-config.status
-configure
-depcomp
-install-sh
-missing
-test-driver
 .deps
 *.trs
 autom4te.cache
