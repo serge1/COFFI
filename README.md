@@ -1,6 +1,5 @@
 # COFFI
 
-[![Build](https://travis-ci.com/serge1/COFFI.svg?branch=master)](https://travis-ci.com/serge1/COFFI)
 [![Documentation](https://readthedocs.org/projects/coffi/badge)](https://coffi.readthedocs.io/en/latest)
 [![License](https://img.shields.io/github/license/serge1/COFFI)](https://github.com/serge1/COFFI/blob/master/COPYING)
 
