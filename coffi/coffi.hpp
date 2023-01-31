@@ -52,6 +52,15 @@ THE SOFTWARE.
 #include <coffi/coffi_symbols.hpp>
 #include <coffi/coffi_directory.hpp>
 
+#if defined(__has_include) && __has_include(<gsl/narrow>)
+#include <gsl/narrow>
+using gsl::narrow_cast;
+#else
+#ifndef narrow_cast
+#define narrow_cast static_cast
+#endif
+#endif
+
 //! COFFI library namespace
 namespace COFFI {
 
@@ -289,7 +298,7 @@ class coffi : public coffi_strings,
     /*! @brief Creates a file in COFF binary format.
          *
          * Before saving, performs the following modififications:
-         *   - Layout (see layout()): Compute the alignement, offsets, etc.
+         *   - Layout (see layout()): Compute the alignment, offsets, etc.
          *   - Compute the headers fields than can be guessed from the data, like:
          *       - Number of sections, directories, etc.
          *       - Sizes of headers
@@ -401,9 +410,9 @@ class coffi : public coffi_strings,
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
             optional_header_ = new optional_header_impl_ti;
         }
-        coff_header_->set_optional_header_size(
+        coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
             optional_header_->get_sizeof() + win_header_->get_sizeof() +
-            directories_.size() * sizeof(image_data_directory));
+            directories_.size() * sizeof(image_data_directory)));
     }
 
     //---------------------------------------------------------------------
@@ -484,7 +493,7 @@ class coffi : public coffi_strings,
         else {
             sec = new section_impl{this, this, this};
         }
-        sec->set_index(sections_.size());
+        sec->set_index(narrow_cast<uint32_t>(sections_.size()));
         sec->set_name(name);
         sections_.push_back(sec);
         return sec;
@@ -493,7 +502,7 @@ class coffi : public coffi_strings,
     //---------------------------------------------------------------------
     /*! @brief Returns a list of the PE data directories.
          *
-         * This function is releveant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
+         * This function is relevant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
          *
          * @return Empty list if the PE data directories are not initialized, or not relevant for the architecture.
          */
@@ -507,14 +516,15 @@ class coffi : public coffi_strings,
     //---------------------------------------------------------------------
     /*! @brief Add a PE data directory.
          *
-         * This function is releveant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
+         * This function is relevant only for the PE architecture (see #COFFI_ARCHITECTURE_PE).
          *
          * @param[in] rva_and_size Relative virtual address (RVA) and size
          * @return A pointer to the newly created directory.
          */
     directory* add_directory(const image_data_directory& rva_and_size)
     {
-        directory* d = new directory(directories_.size());
+        directory* d =
+            new directory(narrow_cast<uint32_t>(directories_.size()));
         d->set_virtual_address(rva_and_size.virtual_address);
         d->set_size(rva_and_size.size);
         directories_.push_back(d);
@@ -564,7 +574,7 @@ class coffi : public coffi_strings,
     /*! @brief Performs the layout of the file.
          *
          * The layout consists in:
-         *   - Compute the sections alignement,
+         *   - Compute the sections alignment,
          *   - Compute the offsets for: sections, directories, relocations, line numbers, string table offset, etc.
          */
     void layout()
@@ -666,7 +676,8 @@ class coffi : public coffi_strings,
         layout();
 
         // Compute the header fields
-        coff_header_->set_sections_count(sections_.size());
+        coff_header_->set_sections_count(
+            narrow_cast<uint16_t>(sections_.size()));
         if (symbols_.size() > 0) {
             coff_header_->set_symbols_count(
                 symbols_.back().get_index() +
@@ -679,13 +690,14 @@ class coffi : public coffi_strings,
         if (optional_header_) {
             coff_header_->set_optional_header_size(
                 coff_header_->get_optional_header_size() +
-                optional_header_->get_sizeof());
+                narrow_cast<uint16_t>(optional_header_->get_sizeof()));
         }
         if (win_header_) {
-            win_header_->set_number_of_rva_and_sizes(directories_.size());
-            coff_header_->set_optional_header_size(
+            win_header_->set_number_of_rva_and_sizes(
+                narrow_cast<uint32_t>(directories_.size()));
+            coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
                 coff_header_->get_optional_header_size() +
-                win_header_->get_sizeof() + directories_.get_sizeof());
+                win_header_->get_sizeof() + directories_.get_sizeof()));
         }
 
         if ((architecture_ == COFFI_ARCHITECTURE_PE) && dos_header_) {
@@ -752,14 +764,15 @@ class coffi : public coffi_strings,
 
         // Get the file size
         src.seekg(0, std::ios::end);
-        uint32_t file_size = src.tellg();
+        uint32_t file_size = narrow_cast<uint32_t>(src.tellg());
         src.seekg(0);
 
         // Compute the checksum offset
-        uint32_t chk_offset = dos_header_->get_pe_sign_location() + 4 +
-                              coff_header_->get_sizeof() +
-                              optional_header_->get_sizeof() +
-                              (is_PE32_plus() ? 40 : 36);
+        uint32_t chk_offset =
+            dos_header_->get_pe_sign_location() + 4 +
+            narrow_cast<uint32_t>(coff_header_->get_sizeof()) +
+            narrow_cast<uint32_t>(optional_header_->get_sizeof()) +
+            (is_PE32_plus() ? 40 : 36);
 
         // Copy the file and compute the checksum
         uint32_t chk = 0;
@@ -840,17 +853,17 @@ class coffi : public coffi_strings,
             offset += 4;
         }
         if (coff_header_) {
-            offset += coff_header_->get_sizeof();
+            offset += narrow_cast<uint32_t>(coff_header_->get_sizeof());
         }
         if (optional_header_) {
-            offset += optional_header_->get_sizeof();
+            offset += narrow_cast<uint32_t> (optional_header_->get_sizeof());
         }
         if (win_header_) {
-            offset += win_header_->get_sizeof();
+            offset += narrow_cast<uint32_t> (win_header_->get_sizeof());
         }
         offset += directories_.get_sizeof();
         for (auto sec : sections_) {
-            offset += sec->get_sizeof();
+            offset += narrow_cast<uint32_t> (sec->get_sizeof());
         }
         return offset;
     }

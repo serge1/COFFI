@@ -35,6 +35,15 @@ THE SOFTWARE.
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_relocation.hpp>
 
+#if defined(__has_include) && __has_include(<gsl/narrow>)
+#include <gsl/narrow>
+using gsl::narrow_cast;
+#else
+#ifndef narrow_cast
+#define narrow_cast static_cast
+#endif
+#endif
+
 namespace COFFI {
 
 //------------------------------------------------------------------------------
@@ -218,7 +227,7 @@ template <class T> class section_impl_tmpl : public section
         r.set_virtual_address(entry->virtual_address);
         r.set_symbol(entry->symbol_table_index);
         relocations.push_back(r);
-        set_reloc_count(relocations.size());
+        set_reloc_count(narrow_cast<uint32_t>(relocations.size()));
     }
 
     //------------------------------------------------------------------------------
@@ -296,7 +305,7 @@ template <class T> class section_impl_tmpl : public section
     virtual uint32_t get_relocations_filesize()
     {
         relocation rel{stn_, sym_, arch_};
-        return rel.get_sizeof() * relocations.size();
+        return rel.get_sizeof() * narrow_cast<uint32_t>(relocations.size());
     }
 
     //------------------------------------------------------------------------------
@@ -310,7 +319,7 @@ template <class T> class section_impl_tmpl : public section
     //------------------------------------------------------------------------------
     virtual uint32_t get_line_numbers_filesize()
     {
-        return sizeof(line_number) * line_numbers.size();
+        return sizeof(line_number) * narrow_cast<uint32_t>(line_numbers.size());
     }
 
     //------------------------------------------------------------------------------

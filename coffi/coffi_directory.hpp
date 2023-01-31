@@ -36,6 +36,15 @@ THE SOFTWARE.
 #include <coffi/coffi_headers.hpp>
 #include <coffi/coffi_section.hpp>
 
+#if defined(__has_include) && __has_include(<gsl/narrow>)
+#include <gsl/narrow>
+using gsl::narrow_cast;
+#else
+#ifndef narrow_cast
+#define narrow_cast static_cast
+#endif
+#endif
+
 namespace COFFI {
 
 //! Class for accessing an image data directory
@@ -219,7 +228,7 @@ class directories : public std::vector<directory*>
     uint32_t get_sizeof() const
     {
         if (size() > 0) {
-            return size() * (*begin())->get_sizeof();
+            return narrow_cast<uint32_t>(size() * (*begin())->get_sizeof());
         }
         return 0;
     }
