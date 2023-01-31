@@ -200,8 +200,9 @@ class coffi_strings : public virtual string_to_name_provider
             size++;
             uint32_t offset = get_strings_size();
             if (get_strings_size() + size > strings_reserved_) {
-                uint32_t new_strings_reserved = 2 * (strings_reserved_ + size);
-                char*    new_strings          = new char[new_strings_reserved];
+                uint32_t new_strings_reserved =
+                    2 * (strings_reserved_ + narrow_cast<uint32_t>(size));
+                char* new_strings = new char[new_strings_reserved];
                 if (!new_strings) {
                     offset = 0;
                     size   = 0;
@@ -216,7 +217,7 @@ class coffi_strings : public virtual string_to_name_provider
             }
             std::copy(name.c_str(), name.c_str() + size,
                       strings_ + get_strings_size());
-            set_strings_size(get_strings_size() + size);
+            set_strings_size(get_strings_size() + narrow_cast<uint32_t>(size));
             if (is_section) {
                 str[0]        = '/';
                 std::string s = std::to_string(offset);

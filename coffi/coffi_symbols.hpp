@@ -34,6 +34,15 @@ THE SOFTWARE.
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_headers.hpp>
 
+#if defined(__has_include) && __has_include(<gsl/narrow>)
+#include <gsl/narrow>
+using gsl::narrow_cast;
+#else
+#ifndef narrow_cast
+#define narrow_cast static_cast
+#endif
+#endif
+
 namespace COFFI {
 
 //-------------------------------------------------------------------------
@@ -42,7 +51,7 @@ class symbol
 {
   public:
     //---------------------------------------------------------------------
-    symbol(string_to_name_provider* stn) : stn_{stn}
+    symbol(string_to_name_provider* stn) : index_(0), stn_{stn}
     {
         std::fill_n(reinterpret_cast<char*>(&header), sizeof(header), '\0');
     }
@@ -108,7 +117,7 @@ class symbol
     //---------------------------------------------------------------------
     void save(std::ostream& stream)
     {
-        set_aux_symbols_number(auxs.size());
+        set_aux_symbols_number(narrow_cast<uint8_t>(auxs.size()));
         stream.write(reinterpret_cast<char*>(&header), sizeof(header));
         for (auto aux : auxs) {
             stream.write(reinterpret_cast<char*>(&aux), sizeof(symbol_record));
@@ -147,7 +156,7 @@ class coffi_symbols : public virtual symbol_provider,
     virtual const symbol* get_symbol(uint32_t index) const
     {
         uint32_t L = 0;
-        uint32_t R = symbols_.size() - 1;
+        uint32_t R = narrow_cast<uint32_t>(symbols_.size()) - 1;
         while (L <= R) {
             uint32_t m = (L + R) / 2;
             if (symbols_[m].get_index() < index) {
@@ -195,7 +204,8 @@ class coffi_symbols : public virtual symbol_provider,
         uint32_t index = 0;
         if (symbols_.size() > 0) {
             index = (symbols_.end() - 1)->get_index() + 1 +
-                    (symbols_.end() - 1)->get_auxiliary_symbols().size();
+                    narrow_cast<uint32_t>(
+                        (symbols_.end() - 1)->get_auxiliary_symbols().size());
         }
         symbol s{this};
         s.set_index(index);
@@ -223,7 +233,7 @@ class coffi_symbols : public virtual symbol_provider,
                 return false;
             }
             s.set_index(i);
-            i += s.get_auxiliary_symbols().size();
+            i += narrow_cast<uint32_t>(s.get_auxiliary_symbols().size());
             symbols_.push_back(s);
         }
 
@@ -244,7 +254,8 @@ class coffi_symbols : public virtual symbol_provider,
         uint32_t filesize = 0;
         for (auto s : symbols_) {
             filesize +=
-                sizeof(symbol_record) * (1 + s.get_auxiliary_symbols().size());
+                sizeof(symbol_record) *
+                (1 + narrow_cast<uint32_t>(s.get_auxiliary_symbols().size()));
         }
         return filesize;
     }
