@@ -354,7 +354,7 @@ template <class T> class section_impl_tmpl : public section
 
     //------------------------------------------------------------------------------
     T                        header;
-    uint32_t                 index;
+    uint32_t                 index{};
     std::string              name;
     char*                    data_;
     uint32_t                 data_reserved_;
