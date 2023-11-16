@@ -42,6 +42,7 @@ THE SOFTWARE.
 #include <sstream>
 #include <algorithm>
 #include <cstring>
+#include <memory>
 #include <vector>
 
 #include <coffi/coffi_types.hpp>
@@ -646,24 +647,24 @@ class coffi : public coffi_strings,
     {
         std::streampos pos = stream.tellg();
         for (int i = 0; i < coff_header_->get_sections_count(); ++i) {
-            section* sec;
+            std::unique_ptr<section> sec;
             switch (architecture_) {
             case COFFI_ARCHITECTURE_PE:
             case COFFI_ARCHITECTURE_CEVA:
-                sec = new section_impl(this, this, this);
+                sec = std::make_unique<section_impl>(this, this, this);
                 break;
             case COFFI_ARCHITECTURE_TI:
-                sec = new section_impl_ti(this, this, this);
+                sec = std::make_unique<section_impl_ti>(this, this, this);
                 break;
             default:
-                sec = new section_impl(this, this, this);
+                sec = std::make_unique<section_impl>(this, this, this);
                 break;
             }
             if (!(sec->load(stream, i * sec->get_sizeof() + pos))) {
                 return false;
             }
             sec->set_index(i);
-            sections_.push_back(sec);
+            sections_.push_back(sec.release());
         }
 
         return true;

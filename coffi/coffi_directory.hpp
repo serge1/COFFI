@@ -30,6 +30,7 @@ THE SOFTWARE.
 #define COFFI_DIRECTORY_HPP
 
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include <coffi/coffi_utils.hpp>
@@ -163,7 +164,7 @@ class directory
     }
 
   private:
-    image_data_directory header;
+    image_data_directory header{};
     const char*          data_;
     uint32_t             index_;
 };
@@ -196,11 +197,11 @@ class directories : public std::vector<directory*>
     {
         for (uint32_t i = 0;
              i < scn_->get_win_header()->get_number_of_rva_and_sizes(); ++i) {
-            directory* d = new directory(i);
+            std::unique_ptr<directory> d = std::make_unique< directory>(i);
             if (!d->load(stream)) {
                 return false;
             }
-            push_back(d);
+            push_back(d.release());
         }
         return true;
     }

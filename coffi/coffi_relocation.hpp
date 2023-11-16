@@ -167,7 +167,7 @@ class relocation
     const symbol_provider*         sym_;
     const architecture_provider*   arch_;
     std::string                    symbol_name;
-    rel_entry_generic              header;
+    rel_entry_generic              header{};
 };
 
 } // namespace COFFI
