@@ -857,14 +857,14 @@ class coffi : public coffi_strings,
             offset += narrow_cast<uint32_t>(coff_header_->get_sizeof());
         }
         if (optional_header_) {
-            offset += narrow_cast<uint32_t> (optional_header_->get_sizeof());
+            offset += narrow_cast<uint32_t>(optional_header_->get_sizeof());
         }
         if (win_header_) {
-            offset += narrow_cast<uint32_t> (win_header_->get_sizeof());
+            offset += narrow_cast<uint32_t>(win_header_->get_sizeof());
         }
         offset += directories_.get_sizeof();
         for (auto sec : sections_) {
-            offset += narrow_cast<uint32_t> (sec->get_sizeof());
+            offset += narrow_cast<uint32_t>(sec->get_sizeof());
         }
         return offset;
     }

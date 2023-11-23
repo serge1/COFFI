@@ -197,7 +197,7 @@ class directories : public std::vector<directory*>
     {
         for (uint32_t i = 0;
              i < scn_->get_win_header()->get_number_of_rva_and_sizes(); ++i) {
-            std::unique_ptr<directory> d = std::make_unique< directory>(i);
+            std::unique_ptr<directory> d = std::make_unique<directory>(i);
             if (!d->load(stream)) {
                 return false;
             }

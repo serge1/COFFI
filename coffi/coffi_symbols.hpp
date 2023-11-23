@@ -120,7 +120,8 @@ class symbol
         set_aux_symbols_number(narrow_cast<uint8_t>(auxs.size()));
         stream.write(reinterpret_cast<char*>(&header), sizeof(header));
         for (auto const& aux : auxs) {
-            stream.write(reinterpret_cast<char const*>(&aux), sizeof(symbol_record));
+            stream.write(reinterpret_cast<char const*>(&aux),
+                         sizeof(symbol_record));
         }
     }
 

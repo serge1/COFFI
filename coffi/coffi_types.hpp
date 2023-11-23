@@ -37,10 +37,10 @@ namespace COFFI {
     !defined(COFFI_NO_INTTYPES) && !defined(DOXYGEN)
 #include <stdint.h>
 #else
-typedef unsigned char    uint8_t;
-typedef signed char      int8_t;
-typedef uint16_t         uint16_t;
-typedef signed short     int16_t;
+typedef unsigned char uint8_t;
+typedef signed char   int8_t;
+typedef uint16_t      uint16_t;
+typedef signed short  int16_t;
 #ifdef _MSC_VER
 typedef unsigned __int32 uint32_t;
 typedef signed __int32   int32_t;
@@ -727,10 +727,10 @@ struct coff_file_header
     uint16_t sections_count;  //!< The size of the section table
     uint32_t time_data_stamp; //!< A C run-time time_t value
     uint32_t
-             symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
-    uint32_t symbols_count;       //!< The number of entries in the symbol table
+        symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
+    uint32_t symbols_count;  //!< The number of entries in the symbol table
     uint16_t
-             optional_header_size; //!< Which is required for executable files but not for object files.
+        optional_header_size; //!< Which is required for executable files but not for object files.
     uint16_t flags; //!< The flags that indicate the attributes of the file
 };
 
@@ -741,10 +741,10 @@ struct coff_file_header_ti
     uint16_t sections_count;  //!< The size of the section table
     uint32_t time_data_stamp; //!< A C run-time time_t value
     uint32_t
-             symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
-    uint32_t symbols_count;       //!< The number of entries in the symbol table
+        symbol_table_offset; //!< The file offset of the COFF symbol table, or zero if no COFF symbol table is present
+    uint32_t symbols_count;  //!< The number of entries in the symbol table
     uint16_t
-             optional_header_size; //!< Which is required for executable files but not for object files.
+        optional_header_size; //!< Which is required for executable files but not for object files.
     uint16_t flags; //!< The flags that indicate the attributes of the file
     uint16_t
         target_id; //!< Magic number indicates the file can be executed in a specific TI system
@@ -765,7 +765,7 @@ struct coff_optional_header_pe
     uint32_t
         uninitialized_data_size; //!< The sum of all uninitialized data sections
     uint32_t
-             entry_point_address; //!< The address of the entry point relative to the image base
+        entry_point_address; //!< The address of the entry point relative to the image base
     uint32_t code_base; //!< base of the beginning-of-code section
     uint32_t data_base; //!< base of the beginning-of-data section
 };
@@ -782,7 +782,7 @@ struct coff_optional_header_pe_plus
     uint32_t
         uninitialized_data_size; //!< The sum of all uninitialized data sections
     uint32_t
-             entry_point_address; //!< The address of the entry point relative to the image base
+        entry_point_address; //!< The address of the entry point relative to the image base
     uint32_t code_base; //!< base of the beginning-of-code section
 };
 
@@ -797,7 +797,7 @@ struct common_optional_header_ti
     uint32_t
         uninitialized_data_size; //!< The sum of all uninitialized data sections
     uint32_t
-             entry_point_address; //!< The address of the entry point relative to the image base
+        entry_point_address; //!< The address of the entry point relative to the image base
     uint32_t code_base; //!< The address that is relative to the image
     uint32_t data_base; //!<
 };
