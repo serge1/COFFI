@@ -1,0 +1,5 @@
+add_subdirectory(anonymizer)
+add_subdirectory(COFFDump)
+add_subdirectory(tutorial)
+add_subdirectory(write_obj)
+add_subdirectory(writer)
