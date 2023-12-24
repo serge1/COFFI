@@ -67,7 +67,7 @@ project = u'COFFI'
 # release = u'test'
 
 # Get the version from ../../configure.ac
-version = re.sub(r'\".+\"', r'\1', open('../../coffi/coffi_version.hpp').read())
+version = re.sub(r'(\".+\")', r'\1', open('../../coffi/coffi_version.hpp').read())
 release = version
 # Write the version to a doxygen configuration file
 open('../version.doxyfile', 'w').write('PROJECT_NUMBER = "%s"\n' % version)
