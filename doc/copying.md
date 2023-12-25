@@ -1,12 +1,11 @@
-# License
-
 @page copying License
 <!-- This file is generated from ../copying.m_o_d by the script conf.py, DO NOT MODIFY! -->
 <!-- This file is transformed into a *.md file by the conf.py script -->
 
+
 MIT License
 
-Copyright (C) 2001-2011 by Serge Lamikhov-Center
+Copyright (C) 2014-present by Serge Lamikhov-Center
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,3 +24,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
