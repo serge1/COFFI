@@ -15,7 +15,7 @@ It is used as a standalone library - it is not dependant on any other product or
 Adhering to ISO C++ (C++14 and newer), it compiles on a wide variety of architectures and compilers.
 
 As the COFF binary format standard is extended or violated in many implementations,
-this library only supports a subset of COFF implementations, including:
+this library only supports a very small subset of the COFF implementations, including:
 
 - Windows portable executable (PE) format
 - Texas Instruments COFF
