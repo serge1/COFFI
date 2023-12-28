@@ -50,7 +50,7 @@ extensions = [
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'index_'
 
 # General information about the project.
 project = u'COFFI'
