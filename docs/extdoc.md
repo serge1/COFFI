@@ -15,7 +15,7 @@ This page presents some useful external documentation sources, especially specif
 - [An In-Depth Look into the Win32 PE File Format, Part 1](https://bytepointer.com/resources/pietrek_in_depth_look_into_pe_format_pt2.htm) \[[cached PDF version](pe_format_in_depth_look_part2.pdf)\]
 - [The PE Checksum Algorithm](https://bytepointer.com/resources/microsoft_pe_checksum_algo_distilled.htm) \[[cached PDF version](pe_checksum_algorithm.pdf)\]
 - [The `BYTE*` resources](https://bytepointer.com/resources/index.htm)
-- [Tiny PE](http://www.phreedom.org/research/tinype/)\[[cached HTML version](Tiny%20PE.html)]]
+- [Tiny PE](http://www.phreedom.org/research/tinype/) \[[cached HTML version](Tiny%20PE.html)]]
 
 @section extdoc_ti The Texas Instruments COFF format
 

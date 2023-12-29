@@ -1,0 +1,6 @@
+- Thanks to Oliver Schneider who implemented the writer part of the COFFI library. He also wrote the most part of the documentation
+
+- Thanks to Oliver K. Ernst, who is providing step by step instructions for building Doxygen and Sphinx documents
+https://medium.com/@oliver.k.ernst/c-documentation-with-doxygen-cmake-sphinx-breathe-for-those-of-use-who-are-totally-lost-7d555386fe13
+https://medium.com/@oliver.k.ernst/c-documentation-with-doxygen-cmake-sphinx-breathe-for-those-of-use-who-are-totally-lost-part-2-21f4fb1abd9f
+https://medium.com/@oliver.k.ernst/c-documentation-with-doxygen-cmake-sphinx-breathe-for-those-of-use-who-are-totally-lost-part-3-d20549d3b01f

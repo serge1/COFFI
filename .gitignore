@@ -173,6 +173,7 @@ autom4te.cache
 
 doc/html
 doc/xml
+docs/_build
 
 # =========================
 # Misc

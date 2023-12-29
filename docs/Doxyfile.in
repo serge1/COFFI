@@ -38,7 +38,7 @@ PROJECT_NAME           = COFFI
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-@INCLUDE = version.doxyfile
+@INCLUDE = ../docs/version.doxyfile
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = .
+OUTPUT_DIRECTORY       = _build
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -866,12 +866,12 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = ../coffi \
-                         mainpage.md \
-                         copying.md \
-                         get_started.md \
-                         examples.md \
-                         extdoc.md \
-                         api.md
+                         ../docs/mainpage.md \
+                         ../docs/copying.md \
+                         ../docs/get_started.md \
+                         ../docs/examples.md \
+                         ../docs/extdoc.md \
+                         ../docs/api.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -993,7 +993,7 @@ EXCLUDE_SYMBOLS        = build_info
 # command).
 
 EXAMPLE_PATH           = ../examples \
-                         static
+                         ../docs/static
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -1013,7 +1013,7 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = static
+IMAGE_PATH             = ../docs/static
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1069,7 +1069,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = mainpage.md
+USE_MDFILE_AS_MAINPAGE = ../docs/mainpage.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
@@ -1256,7 +1256,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = static/header.html
+HTML_HEADER            = ../docs/static/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1266,7 +1266,7 @@ HTML_HEADER            = static/header.html
 # that doxygen normally uses.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_FOOTER            = static/footer.html
+HTML_FOOTER            = ../docs/static/footer.html
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading style
 # sheet that is used by each HTML page. It can be used to fine-tune the look of
@@ -1291,7 +1291,7 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = static/custom.css
+HTML_EXTRA_STYLESHEET  = ../docs/static/custom.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1301,16 +1301,16 @@ HTML_EXTRA_STYLESHEET  = static/custom.css
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = pecoff_v11.pdf \
-                         peering_inside_pe.pdf \
-                         pe_checksum_algorithm.pdf \
-                         pe_format_in_depth_look_part1.pdf \
-                         pe_format_in_depth_look_part2.pdf \
-                         spraao8.pdf \
-                         static/hello.png \
-                         static/github.png \
-                         static/readthedocs.png \
-                         static/sourceforge.png
+HTML_EXTRA_FILES       = ../docs/external/pecoff_v11.pdf \
+                         ../docs/external/peering_inside_pe.pdf \
+                         ../docs/external/pe_checksum_algorithm.pdf \
+                         ../docs/external/pe_format_in_depth_look_part1.pdf \
+                         ../docs/external/pe_format_in_depth_look_part2.pdf \
+                         ../docs/external/spraao8.pdf \
+                         ../docs/static/hello.png \
+                         ../docs/static/github.png \
+                         ../docs/static/readthedocs.png \
+                         ../docs/static/sourceforge.png
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -2111,7 +2111,7 @@ MAN_LINKS              = NO
 # captures the structure of the code including all documentation.
 # The default value is: NO.
 
-GENERATE_XML           = NO
+GENERATE_XML           = YES
 
 # The XML_OUTPUT tag is used to specify where the XML pages will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
