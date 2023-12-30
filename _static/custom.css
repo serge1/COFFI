@@ -1,0 +1,26 @@
+#projectname {
+	font-size: 200%;
+	font-family: inherit;
+	font-weight: bold;
+	padding: 0;
+}
+
+#projectnumber {
+	font-size: 150%;
+	font-family: inherit;
+	padding: 0;
+}
+
+#projectbrief {
+	font-size: 120%;
+	font-family: inherit;
+	padding: 0;
+}
+
+object {
+    vertical-align: middle;
+}
+
+center > img {
+    border: outset;
+}

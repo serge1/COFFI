@@ -1,0 +1,10 @@
+digraph "optional_header_impl_tmpl&lt; T &gt;"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="optional_header_impl\l_tmpl\< T \>",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Template class for accessing a COFF file optional header, depends on the underlying COFF file optiona..."];
+  Node2 -> Node1 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="optional_header",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$class_c_o_f_f_i_1_1optional__header.html",tooltip="Interface class for accessing the COFF file optional header, for all the COFF architectures."];
+}

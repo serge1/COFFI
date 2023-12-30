@@ -1,0 +1,28 @@
+var class_c_o_f_f_i_1_1coffi =
+[
+    [ "coffi", "class_c_o_f_f_i_1_1coffi.html#a146827e6bf7244e25e4e3e6ba5c8c0a2", null ],
+    [ "add_directory", "class_c_o_f_f_i_1_1coffi.html#a66c39fa1cfecf2b9b2ce7873b32ab5d0", null ],
+    [ "add_section", "class_c_o_f_f_i_1_1coffi.html#a0d054679888f10b60f6919b14784302b", null ],
+    [ "create", "class_c_o_f_f_i_1_1coffi.html#acf0be4cf0f0ebabc02db2045149f59b6", null ],
+    [ "create_optional_header", "class_c_o_f_f_i_1_1coffi.html#aeae1c4afb2ec0bf95dc1502e4d70f7c0", null ],
+    [ "get_addressable_unit", "class_c_o_f_f_i_1_1coffi.html#ab2bbb0eae173007d6702f328310e36cd", null ],
+    [ "get_architecture", "class_c_o_f_f_i_1_1coffi.html#a80222b60c645977bf51659414273af5e", null ],
+    [ "get_directories", "class_c_o_f_f_i_1_1coffi.html#a48d8b1db9d81c06942a94f1c9df5308d", null ],
+    [ "get_directories", "class_c_o_f_f_i_1_1coffi.html#ad50beafb2bcc5b8ef4c26e3c9792d9a6", null ],
+    [ "get_header", "class_c_o_f_f_i_1_1coffi.html#aec5fa3f9fa0bb797f989e4ac51cbea4e", null ],
+    [ "get_header", "class_c_o_f_f_i_1_1coffi.html#a947441f26116ca8da22ef800c57249e1", null ],
+    [ "get_msdos_header", "class_c_o_f_f_i_1_1coffi.html#a6887d98e09b1f35bfa385b15f69707ea", null ],
+    [ "get_msdos_header", "class_c_o_f_f_i_1_1coffi.html#a6dd96675b157ac1fa3cc42dae651248f", null ],
+    [ "get_optional_header", "class_c_o_f_f_i_1_1coffi.html#aa3719ba4b4fd9207840bf16a23c02439", null ],
+    [ "get_optional_header", "class_c_o_f_f_i_1_1coffi.html#aa4544da8e97a5646f90bee1b2e2ee0e4", null ],
+    [ "get_sections", "class_c_o_f_f_i_1_1coffi.html#a7ed35182300cc55f556034a2eb4b9a46", null ],
+    [ "get_sections", "class_c_o_f_f_i_1_1coffi.html#a7e99e4de1a88c1a2125a688f1bea0a94", null ],
+    [ "get_win_header", "class_c_o_f_f_i_1_1coffi.html#aa0e679e6e3669d63ebc181355daef5e7", null ],
+    [ "get_win_header", "class_c_o_f_f_i_1_1coffi.html#ae815cdcb4a9da165f06a0a1c9398bbf8", null ],
+    [ "is_PE32_plus", "class_c_o_f_f_i_1_1coffi.html#a16d13d804e6bdd6d90e6e7c79b17097c", null ],
+    [ "layout", "class_c_o_f_f_i_1_1coffi.html#aeb57d11704c0ddd3ff515aa5b8c8c5a4", null ],
+    [ "load", "class_c_o_f_f_i_1_1coffi.html#a0803929aba84c459035a72939a3c8265", null ],
+    [ "load", "class_c_o_f_f_i_1_1coffi.html#ae05fa40b04a20db745a9bb34c45c87d3", null ],
+    [ "save", "class_c_o_f_f_i_1_1coffi.html#a66e384c8159eb8c27280d0ebfa1eb6ca", null ],
+    [ "save", "class_c_o_f_f_i_1_1coffi.html#a96012c3702e3f2388ef7acf093505f12", null ]
+];
