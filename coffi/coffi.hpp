@@ -671,6 +671,10 @@ class coffi : public coffi_strings,
     }
 
     //---------------------------------------------------------------------
+    static uint32_t alignTo(uint32_t number, uint32_t alignment) {
+        return (number + alignment - 1) & ~(alignment - 1);;
+    }
+
     bool save_to_stream(std::ostream& stream)
     {
         // Layout the sections and other data pages
@@ -692,6 +696,27 @@ class coffi : public coffi_strings,
             coff_header_->set_optional_header_size(
                 coff_header_->get_optional_header_size() +
                 narrow_cast<uint16_t>(optional_header_->get_sizeof()));
+
+            uint32_t size_of_code = 0;
+            uint32_t size_of_initialized_data = 0;
+            uint32_t size_of_uninitialized_data = 0;
+            for (const auto &section : sections_) {
+                const uint32_t flags = section->get_flags();
+                const uint32_t data_size = section->get_data_size();
+                if (flags & IMAGE_SCN_CNT_CODE) {
+                    size_of_code += data_size;
+                }
+                if (flags & IMAGE_SCN_CNT_INITIALIZED_DATA) {
+                    size_of_initialized_data += data_size;
+                }
+                if (flags & IMAGE_SCN_CNT_UNINITIALIZED_DATA) {
+                    size_of_uninitialized_data += data_size;
+                }
+            }
+
+            optional_header_->set_code_size(size_of_code);
+            optional_header_->set_initialized_data_size(size_of_initialized_data);
+            optional_header_->set_uninitialized_data_size(size_of_uninitialized_data);
         }
         if (win_header_) {
             win_header_->set_number_of_rva_and_sizes(
@@ -699,6 +724,29 @@ class coffi : public coffi_strings,
             coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
                 coff_header_->get_optional_header_size() +
                 win_header_->get_sizeof() + directories_.get_sizeof()));
+
+            const uint32_t section_alignment = win_header_->get_section_alignment();
+            const uint32_t file_alignment = win_header_->get_file_alignment();
+
+            uint32_t size_of_headers = dos_header_->get_stub_size() +
+                CI_NIDENT1 +
+                coff_header_->get_sizeof() +
+                coff_header_->get_optional_header_size();
+            for (const auto& section : sections_) {
+              size_of_headers += section->get_sizeof();
+            }
+            size_of_headers = alignTo(size_of_headers, file_alignment);
+
+            uint32_t size_of_image = alignTo(size_of_headers, section_alignment);
+            for (const auto &section : sections_) {
+                const uint32_t virtual_size = section->get_virtual_size();
+                if (virtual_size) {
+                    size_of_image += alignTo(virtual_size, section_alignment);
+                }
+            }
+
+            win_header_->set_image_size(size_of_image);
+            win_header_->set_headers_size(size_of_headers);
         }
 
         if ((architecture_ == COFFI_ARCHITECTURE_PE) && dos_header_) {
