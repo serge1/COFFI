@@ -153,7 +153,7 @@ template <class T> class section_impl_tmpl : public section
     }
 
     //------------------------------------------------------------------------------
-    const char* get_data() const { return data_; }
+    const char* get_data() const { return data_.get(); }
 
     //------------------------------------------------------------------------------
     void set_data(const char* data, uint32_t size)
@@ -163,10 +163,10 @@ template <class T> class section_impl_tmpl : public section
             data_reserved_ = 0;
         }
         else {
-            data_ = new char[size];
+            data_ = std::make_unique<char[]>(size);
             if (data_) {
                 data_reserved_ = size;
-                std::copy(data, data + size, data_);
+                std::copy(data, data + size, data_.get());
             }
             else {
                 data_reserved_ = 0;
@@ -188,20 +188,19 @@ template <class T> class section_impl_tmpl : public section
             set_data(data, size);
         }
         if (get_data_size() + size <= data_reserved_) {
-            std::copy(data, data + size, data_ + get_data_size());
+            std::copy(data, data + size, data_.get() + get_data_size());
         }
         else {
             uint32_t new_data_size = 2 * (data_reserved_ + size);
-            char*    new_data      = new char[new_data_size];
+            std::unique_ptr<char[]> new_data = std::make_unique<char[]>(new_data_size);
             if (!new_data) {
                 size = 0;
             }
             else {
                 data_reserved_ = new_data_size;
-                std::copy(data_, data_ + get_data_size(), new_data);
-                std::copy(data, data + size, new_data + get_data_size());
-                delete[] data_;
-                data_ = new_data;
+                std::copy(data_.get(), data_.get() + get_data_size(), new_data.get());
+                std::copy(data, data + size, new_data.get() + get_data_size());
+                data_ = std::move(new_data);
             }
         }
         set_data_size(get_data_size() + size);
@@ -246,12 +245,12 @@ template <class T> class section_impl_tmpl : public section
         if (!dont) {
             data_reserved_ = get_data_size();
             if ((get_data_offset() != 0) && (data_reserved_ != 0)) {
-                data_ = new char[data_reserved_];
+                data_ = std::make_unique<char[]>(data_reserved_);
                 if (!data_) {
                     return false;
                 }
                 stream.seekg(get_data_offset());
-                stream.read(data_, data_reserved_);
+                stream.read(data_.get(), data_reserved_);
             }
         }
 
@@ -290,7 +289,7 @@ template <class T> class section_impl_tmpl : public section
         if (!data_ || get_data_offset() == 0) {
             return;
         }
-        stream.write(data_, get_data_size());
+        stream.write(data_.get(), get_data_size());
     }
 
     //------------------------------------------------------------------------------
@@ -328,8 +327,7 @@ template <class T> class section_impl_tmpl : public section
     void clean()
     {
         if (data_) {
-            delete[] data_;
-            data_          = 0;
+            data_.reset();
             data_reserved_ = 0;
         }
     }
@@ -356,7 +354,7 @@ template <class T> class section_impl_tmpl : public section
     T                        header;
     uint32_t                 index{};
     std::string              name;
-    char*                    data_;
+    std::unique_ptr<char[]>  data_;
     uint32_t                 data_reserved_;
     string_to_name_provider* stn_;
     symbol_provider*         sym_;

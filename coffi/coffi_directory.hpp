@@ -53,7 +53,7 @@ class directory
 {
   public:
     //------------------------------------------------------------------------------
-    directory(uint32_t index) : data_{nullptr}, index_{index} {}
+    directory(uint32_t index) : data_{}, index_{index} {}
 
     //------------------------------------------------------------------------------
     //! Discards the copy constructor
@@ -71,7 +71,7 @@ class directory
     uint32_t get_index() const { return index_; }
 
     //------------------------------------------------------------------------------
-    const char* get_data() const { return data_; }
+    const char* get_data() const { return data_.get(); }
 
     //------------------------------------------------------------------------------
     void set_data(const char* data, uint32_t size)
@@ -87,13 +87,13 @@ class directory
             return;
         }
 
-        char* temp_buffer = new char[size];
+        std::unique_ptr<char[]> temp_buffer = std::make_unique<char[]>(size);
         if (!temp_buffer) {
             set_size(0);
             return;
         }
-        std::copy(data, data + size, temp_buffer);
-        data_ = temp_buffer;
+        std::copy(data, data + size, temp_buffer.get());
+        data_ = std::move(temp_buffer);
         set_size(size);
     }
 
@@ -126,13 +126,13 @@ class directory
             return true;
         }
         if ((get_size() > 0) && (get_virtual_address() != 0)) {
-            char* temp_buffer = new char[get_size()];
+            std::unique_ptr<char[]> temp_buffer = std::make_unique<char[]>(get_size());
             stream.seekg(get_virtual_address());
-            stream.read(temp_buffer, get_size());
+            stream.read(temp_buffer.get(), get_size());
             if (stream.gcount() != static_cast<int>(get_size())) {
                 return false;
             }
-            data_ = temp_buffer;
+            data_ = std::move(temp_buffer);
         }
         return true;
     }
@@ -150,7 +150,7 @@ class directory
             return;
         }
         if (data_ && get_size() > 0) {
-            stream.write(data_, get_size());
+            stream.write(data_.get(), get_size());
         }
     }
 
@@ -158,15 +158,14 @@ class directory
     void clean()
     {
         if (data_) {
-            delete[] data_;
-            data_ = nullptr;
+            data_.reset();
         }
     }
 
   private:
-    image_data_directory header{};
-    const char*          data_;
-    uint32_t             index_;
+    image_data_directory          header{};
+    std::unique_ptr<const char[]> data_;
+    uint32_t                      index_;
 };
 
 /*! @brief List of image data directories

@@ -75,7 +75,7 @@ class coffi : public coffi_strings,
     //---------------------------------------------------------------------
     coffi()
         : coffi_strings{}, architecture_{COFFI_ARCHITECTURE_NONE},
-          dos_header_{0}, coff_header_{0}, optional_header_{0}, win_header_{0},
+          dos_header_{}, coff_header_{}, optional_header_{}, win_header_{},
           directories_{this}
     {
         create(COFFI_ARCHITECTURE_PE);
@@ -119,7 +119,7 @@ class coffi : public coffi_strings,
         stream.seekg(0);
 
         architecture_ = COFFI_ARCHITECTURE_NONE;
-        dos_header_   = new dos_header;
+        dos_header_   = std::make_unique<dos_header>();
         if (dos_header_->load(stream)) {
             // It is an EXE
             architecture_ = COFFI_ARCHITECTURE_PE;
@@ -131,7 +131,7 @@ class coffi : public coffi_strings,
         }
 
         // Try to read a PE header
-        coff_header_ = new coff_header_impl;
+        coff_header_ = std::make_unique<coff_header_impl>();
         if (coff_header_->load(stream)) {
 
             // Check the machine
@@ -180,7 +180,7 @@ class coffi : public coffi_strings,
         // Try to read a TI header
         if (architecture_ == COFFI_ARCHITECTURE_NONE) {
 
-            coff_header_ = new coff_header_impl_ti;
+            coff_header_ = std::make_unique<coff_header_impl_ti>();
             stream.seekg(0);
             if (!coff_header_->load(stream)) {
                 clean();
@@ -200,7 +200,7 @@ class coffi : public coffi_strings,
 
         if (architecture_ == COFFI_ARCHITECTURE_NONE) {
             // The format is not recognized, default to PE format header
-            coff_header_ = new coff_header_impl;
+            coff_header_ = std::make_unique<coff_header_impl>();
             stream.seekg(0);
             if (!coff_header_->load(stream)) {
                 clean();
@@ -211,15 +211,15 @@ class coffi : public coffi_strings,
         if (coff_header_->get_optional_header_size()) {
             if (architecture_ == COFFI_ARCHITECTURE_PE) {
                 std::streampos pos = stream.tellg();
-                optional_header_   = new optional_header_impl_pe;
+                optional_header_   = std::make_unique<optional_header_impl_pe>();
                 if (!optional_header_->load(stream)) {
                     clean();
                     return false;
                 }
                 if (optional_header_->get_magic() == OH_MAGIC_PE32PLUS) {
-                    delete optional_header_;
+                    optional_header_.reset();
                     stream.seekg(pos);
-                    optional_header_ = new optional_header_impl_pe_plus;
+                    optional_header_ = std::make_unique<optional_header_impl_pe_plus>();
                     if (!optional_header_->load(stream)) {
                         clean();
                         return false;
@@ -228,13 +228,13 @@ class coffi : public coffi_strings,
             }
             else {
                 if (architecture_ == COFFI_ARCHITECTURE_NONE) {
-                    optional_header_ = new optional_header_impl_pe;
+                    optional_header_ = std::make_unique<optional_header_impl_pe>();
                 }
                 if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
-                    optional_header_ = new optional_header_impl_pe;
+                    optional_header_ = std::make_unique<optional_header_impl_pe>();
                 }
                 if (architecture_ == COFFI_ARCHITECTURE_TI) {
-                    optional_header_ = new optional_header_impl_ti;
+                    optional_header_ = std::make_unique<optional_header_impl_ti>();
                 }
                 if (!optional_header_->load(stream)) {
                     clean();
@@ -244,19 +244,17 @@ class coffi : public coffi_strings,
 
             if (architecture_ == COFFI_ARCHITECTURE_PE) {
                 if (optional_header_->get_magic() == OH_MAGIC_PE32PLUS) {
-                    win_header_ = new win_header_impl<win_header_pe_plus>;
+                    win_header_ = std::make_unique<win_header_impl<win_header_pe_plus>>();
                 }
                 else if (optional_header_->get_magic() == OH_MAGIC_PE32 ||
                          optional_header_->get_magic() == OH_MAGIC_PE32ROM) {
-                    win_header_ = new win_header_impl<win_header_pe>;
+                    win_header_ = std::make_unique<win_header_impl<win_header_pe>>();
                 }
 
                 if (win_header_) {
                     if (!win_header_->load(stream)) {
-                        delete optional_header_;
-                        optional_header_ = 0;
-                        delete win_header_;
-                        win_header_ = 0;
+                        optional_header_.reset();
+                        win_header_.reset();
                         clean();
                         return false;
                     }
@@ -271,12 +269,12 @@ class coffi : public coffi_strings,
         }
 
         std::streampos pos = stream.tellg();
-        if (!load_strings(stream, coff_header_)) {
+        if (!load_strings(stream, coff_header_.get())) {
             clean();
             return false;
         }
 
-        if (!load_symbols(stream, coff_header_)) {
+        if (!load_symbols(stream, coff_header_.get())) {
             clean();
             return false;
         }
@@ -357,17 +355,17 @@ class coffi : public coffi_strings,
         architecture_ = architecture;
 
         if (architecture_ == COFFI_ARCHITECTURE_PE) {
-            coff_header_ = new coff_header_impl;
+            coff_header_ = std::make_unique<coff_header_impl>();
             coff_header_->set_machine(IMAGE_FILE_MACHINE_I386);
         }
 
         if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
-            coff_header_ = new coff_header_impl;
+            coff_header_ = std::make_unique<coff_header_impl>();
             coff_header_->set_machine(CEVA_MACHINE_XC4210_OBJ);
         }
 
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
-            coff_header_ = new coff_header_impl_ti;
+            coff_header_ = std::make_unique<coff_header_impl_ti>();
             coff_header_->set_target_id(TMS320C2800);
         }
     }
@@ -389,27 +387,27 @@ class coffi : public coffi_strings,
     void create_optional_header(uint16_t magic = OH_MAGIC_PE32)
     {
         if (dos_header_) {
-            delete dos_header_;
+            dos_header_.reset();
         }
         if (optional_header_) {
-            delete optional_header_;
+            optional_header_.reset();
         }
         if (architecture_ == COFFI_ARCHITECTURE_PE) {
-            dos_header_ = new dos_header;
+            dos_header_ = std::make_unique<dos_header>();
             if (magic == OH_MAGIC_PE32PLUS) {
-                optional_header_ = new optional_header_impl_pe_plus;
+                optional_header_ = std::make_unique<optional_header_impl_pe_plus>();
             }
             else {
-                optional_header_ = new optional_header_impl_pe;
+                optional_header_ = std::make_unique<optional_header_impl_pe>();
             }
             optional_header_->set_magic(magic);
             create_win_header();
         }
         if (architecture_ == COFFI_ARCHITECTURE_CEVA) {
-            optional_header_ = new optional_header_impl_pe;
+            optional_header_ = std::make_unique<optional_header_impl_pe>();
         }
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
-            optional_header_ = new optional_header_impl_ti;
+            optional_header_ = std::make_unique<optional_header_impl_ti>();
         }
         coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
             optional_header_->get_sizeof() + win_header_->get_sizeof() +
@@ -421,38 +419,38 @@ class coffi : public coffi_strings,
          *
          * @return nullptr if the MS-DOS header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
          */
-    dos_header* get_msdos_header() { return dos_header_; }
+    dos_header* get_msdos_header() { return dos_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @copydoc get_msdos_header()
          */
-    const dos_header* get_msdos_header() const { return dos_header_; }
+    const dos_header* get_msdos_header() const { return dos_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @brief Returns the COFF header
          *
          * @return nullptr if the coffi object is not initialized (see create()), or not loaded (see load()).
          */
-    coff_header* get_header() { return coff_header_; }
+    coff_header* get_header() { return coff_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @copydoc get_header()
          */
-    const coff_header* get_header() const { return coff_header_; }
+    const coff_header* get_header() const { return coff_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @brief Returns the optional COFF header
          *
          * @return nullptr if the optional COFF header is not initialized (see create_optional_header()), or not loaded (see load()).
          */
-    optional_header* get_optional_header() { return optional_header_; }
+    optional_header* get_optional_header() { return optional_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @copydoc get_optional_header()
          */
     const optional_header* get_optional_header() const
     {
-        return optional_header_;
+        return optional_header_.get();
     }
 
     //---------------------------------------------------------------------
@@ -460,12 +458,12 @@ class coffi : public coffi_strings,
          *
          * @return nullptr if the Windows NT header is not initialized (see create_optional_header()), or not loaded (see load()), or not relevant for the architecture.
          */
-    win_header* get_win_header() { return win_header_; }
+    win_header* get_win_header() { return win_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @copydoc get_win_header()
          */
-    const win_header* get_win_header() const { return win_header_; }
+    const win_header* get_win_header() const { return win_header_.get(); }
 
     //---------------------------------------------------------------------
     /*! @brief Returns a list of the COFF sections
@@ -598,23 +596,19 @@ class coffi : public coffi_strings,
     void clean()
     {
         if (dos_header_) {
-            delete dos_header_;
-            dos_header_ = 0;
+            dos_header_.reset();
         }
 
         if (coff_header_) {
-            delete coff_header_;
-            coff_header_ = 0;
+            coff_header_.reset();
         }
 
         if (optional_header_) {
-            delete optional_header_;
-            optional_header_ = 0;
+            optional_header_.reset();
         }
 
         if (win_header_) {
-            delete win_header_;
-            win_header_ = 0;
+            win_header_.reset();
         }
 
         clean_unused_spaces();
@@ -631,14 +625,14 @@ class coffi : public coffi_strings,
     void create_win_header()
     {
         if (win_header_) {
-            delete win_header_;
+            win_header_.reset();
         }
         if (optional_header_->get_magic() == OH_MAGIC_PE32PLUS) {
-            win_header_ = new win_header_impl<win_header_pe_plus>;
+            win_header_ = std::make_unique<win_header_impl<win_header_pe_plus>>();
         }
         else if (optional_header_->get_magic() == OH_MAGIC_PE32 ||
                  optional_header_->get_magic() == OH_MAGIC_PE32ROM) {
-            win_header_ = new win_header_impl<win_header_pe>;
+            win_header_ = std::make_unique<win_header_impl<win_header_pe>>();
         }
     }
 
@@ -1060,15 +1054,15 @@ class coffi : public coffi_strings,
     };
 
     //---------------------------------------------------------------------
-    coffi_architecture_t      architecture_;
-    dos_header*               dos_header_;
-    coff_header*              coff_header_;
-    optional_header*          optional_header_;
-    win_header*               win_header_;
-    directories               directories_;
-    sections                  sections_;
-    std::vector<unused_space> unused_spaces_;
-    std::vector<data_page>    data_pages_;
+    coffi_architecture_t             architecture_;
+    std::unique_ptr<dos_header>      dos_header_;
+    std::unique_ptr<coff_header>     coff_header_;
+    std::unique_ptr<optional_header> optional_header_;
+    std::unique_ptr<win_header>      win_header_;
+    directories                      directories_;
+    sections                         sections_;
+    std::vector<unused_space>        unused_spaces_;
+    std::vector<data_page>           data_pages_;
 };
 
 } // namespace COFFI

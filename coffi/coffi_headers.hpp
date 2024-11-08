@@ -126,12 +126,12 @@ class dos_header
 
         if (get_pe_sign_location() > static_cast<int32_t>(sizeof(header))) {
             stub_size_      = get_pe_sign_location() - sizeof(header);
-            char* read_stub = new char[stub_size_];
+            std::unique_ptr<char[]> read_stub = std::make_unique<char[]>(stub_size_);
             if (!read_stub) {
                 return false;
             }
-            stream.read(read_stub, stub_size_);
-            stub_ = read_stub;
+            stream.read(read_stub.get(), stub_size_);
+            stub_ = std::move(read_stub);
             if (stream.gcount() != stub_size_) {
                 return false;
             }
@@ -155,7 +155,7 @@ class dos_header
     void save(std::ostream& stream)
     {
         stream.write(reinterpret_cast<char*>(&header), sizeof(header));
-        stream.write(stub_, stub_size_);
+        stream.write(stub_.get(), stub_size_);
         stream.put(PEMAG2);
         stream.put(PEMAG3);
         stream.put(PEMAG4);
@@ -163,7 +163,7 @@ class dos_header
     }
 
     //------------------------------------------------------------------------------
-    virtual const char* get_stub() const { return stub_; }
+    virtual const char* get_stub() const { return stub_.get(); }
 
     //------------------------------------------------------------------------------
     virtual uint32_t get_stub_size() const { return stub_size_; }
@@ -172,17 +172,17 @@ class dos_header
     void set_stub(const char* data, uint32_t size)
     {
         if (stub_) {
-            delete[] stub_;
+            stub_.reset();
         }
         stub_size_     = size;
-        char* new_stub = new char[stub_size_];
+        std::unique_ptr<char[]> new_stub = std::make_unique<char[]>(stub_size_);
         if (!new_stub) {
             stub_size_ = 0;
         }
         else {
-            std::copy(data, data + size, new_stub);
+            std::copy(data, data + size, new_stub.get());
         }
-        stub_ = new_stub;
+        stub_ = std::move(new_stub);
     }
 
     //------------------------------------------------------------------------------
@@ -197,16 +197,15 @@ class dos_header
     void clean()
     {
         if (stub_) {
-            delete[] stub_;
-            stub_ = 0;
+            stub_.reset();
         }
         stub_size_ = 0;
     }
 
     //------------------------------------------------------------------------------
-    msdos_header header;
-    const char*  stub_;
-    int          stub_size_;
+    msdos_header                  header;
+    std::unique_ptr<const char[]> stub_;
+    int                           stub_size_;
 };
 
 //------------------------------------------------------------------------------
