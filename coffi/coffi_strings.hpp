@@ -41,7 +41,7 @@ class coffi_strings : public virtual string_to_name_provider
 {
   public:
     //---------------------------------------------------------------------
-    coffi_strings() : strings_{0}, strings_reserved_{0} { clean_strings(); }
+    coffi_strings() : strings_{}, strings_reserved_{0} { clean_strings(); }
 
     //---------------------------------------------------------------------
     //! Discards the copy constructor
@@ -51,7 +51,7 @@ class coffi_strings : public virtual string_to_name_provider
     virtual ~coffi_strings()
     {
         clean_strings();
-        delete[] strings_;
+        strings_.reset();
     }
 
     //---------------------------------------------------------------------
@@ -60,7 +60,7 @@ class coffi_strings : public virtual string_to_name_provider
         if (!strings_) {
             return 0;
         }
-        return *reinterpret_cast<uint32_t*>(strings_);
+        return *reinterpret_cast<uint32_t*>(strings_.get());
     }
 
     //---------------------------------------------------------------------
@@ -69,7 +69,7 @@ class coffi_strings : public virtual string_to_name_provider
         if (!strings_) {
             return;
         }
-        *reinterpret_cast<uint32_t*>(strings_) = value;
+        *reinterpret_cast<uint32_t*>(strings_.get()) = value;
     }
 
     //---------------------------------------------------------------------
@@ -101,16 +101,15 @@ class coffi_strings : public virtual string_to_name_provider
     }
 
     //---------------------------------------------------------------------
-    virtual const char* get_strings() const { return strings_; }
+    virtual const char* get_strings() const { return strings_.get(); }
 
     //---------------------------------------------------------------------
     virtual void set_strings(const char* str, uint32_t size)
     {
-        char* new_strings = new char[size];
+        std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(size);
         if (new_strings) {
-            std::copy(str, str + size, new_strings);
-            delete[] strings_;
-            strings_          = new_strings;
+            std::copy(str, str + size, new_strings.get());
+            strings_          = std::move(new_strings);
             strings_reserved_ = size;
             set_strings_size(size);
         }
@@ -122,9 +121,9 @@ class coffi_strings : public virtual string_to_name_provider
     void clean_strings()
     {
         if (strings_) {
-            delete[] strings_;
+            strings_.reset();
         }
-        strings_          = new char[4];
+        strings_          = std::make_unique<char[]>(4);
         strings_reserved_ = 4;
         set_strings_size(4);
     }
@@ -142,20 +141,19 @@ class coffi_strings : public virtual string_to_name_provider
             header->get_symbol_table_offset() +
             header->get_symbols_count() * sizeof(symbol_record);
         stream.seekg(strings_offset);
-        stream.read(strings_, 4);
-        char* new_strings = new char[get_strings_size()];
+        stream.read(strings_.get(), 4);
+        std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(get_strings_size());
         if (!new_strings) {
             return false;
         }
         strings_reserved_ = get_strings_size();
         stream.seekg(strings_offset);
-        stream.read(new_strings, get_strings_size());
+        stream.read(new_strings.get(), get_strings_size());
         if (stream.gcount() !=
             static_cast<std::streamsize>(get_strings_size())) {
             return false;
         }
-        delete[] strings_;
-        strings_ = new_strings;
+        strings_ = std::move(new_strings);
         return true;
     }
 
@@ -163,7 +161,7 @@ class coffi_strings : public virtual string_to_name_provider
     void save_strings(std::ostream& stream) const
     {
         if (strings_ && get_strings_size() > 4) {
-            stream.write(strings_, get_strings_size());
+            stream.write(strings_.get(), get_strings_size());
         }
     }
 
@@ -175,11 +173,11 @@ class coffi_strings : public virtual string_to_name_provider
 
         if (*(uint32_t*)str == 0 && strings_) {
             uint32_t off = *(uint32_t*)(str + sizeof(uint32_t));
-            ret          = strings_ + off;
+            ret          = strings_.get() + off;
         }
         else if (is_section && str[0] == '/') {
             int32_t off = std::atol(str + 1);
-            ret         = strings_ + off;
+            ret         = strings_.get() + off;
         }
         else {
             char dst[COFFI_NAME_SIZE + 1];
@@ -202,21 +200,20 @@ class coffi_strings : public virtual string_to_name_provider
             if (get_strings_size() + size > strings_reserved_) {
                 uint32_t new_strings_reserved =
                     2 * (strings_reserved_ + narrow_cast<uint32_t>(size));
-                char* new_strings = new char[new_strings_reserved];
+                std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(new_strings_reserved);
                 if (!new_strings) {
                     offset = 0;
                     size   = 0;
                 }
                 else {
                     strings_reserved_ = new_strings_reserved;
-                    std::copy(strings_, strings_ + get_strings_size(),
-                              new_strings);
-                    delete[] strings_;
-                    strings_ = new_strings;
+                    std::copy(strings_.get(), strings_.get() + get_strings_size(),
+                              new_strings.get());
+                    strings_ = std::move(new_strings);
                 }
             }
             std::copy(name.c_str(), name.c_str() + size,
-                      strings_ + get_strings_size());
+                      strings_.get() + get_strings_size());
             set_strings_size(get_strings_size() + narrow_cast<uint32_t>(size));
             if (is_section) {
                 str[0]        = '/';
@@ -235,8 +232,8 @@ class coffi_strings : public virtual string_to_name_provider
     }
 
     //---------------------------------------------------------------------
-    char*    strings_;
-    uint32_t strings_reserved_;
+    std::unique_ptr<char[]> strings_;
+    uint32_t                strings_reserved_;
 };
 
 } // namespace COFFI
