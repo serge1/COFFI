@@ -169,29 +169,17 @@ class directory
 };
 
 /*! @brief List of image data directories
-     *
-     * It is implemented as a vector of @ref directory pointers.
-     */
-class directories : public std::vector<directory*>
+ *
+ *  It is implemented as a vector of @ref directory pointers.
+ */
+class directories : public unique_ptr_collection<directory>
 {
   public:
-    //------------------------------------------------------------------------------
-    directories(sections_provider* scn) : scn_{scn} {}
+    explicit directories(sections_provider* scn) : scn_{scn} {}
 
     //! Discards the copy constructor
     directories(const directories&) = delete;
 
-    virtual ~directories() { clean(); }
-
-    void clean()
-    {
-        for (auto d : *this) {
-            delete d;
-        }
-        clear();
-    }
-
-    //------------------------------------------------------------------------------
     bool load(std::istream& stream)
     {
         for (uint32_t i = 0;
@@ -200,42 +188,38 @@ class directories : public std::vector<directory*>
             if (!d->load(stream)) {
                 return false;
             }
-            push_back(d.release());
+            append(std::move(d));
         }
         return true;
     }
 
-    //------------------------------------------------------------------------------
     bool load_data(std::istream& stream)
     {
-        for (auto d : *this) {
-            if (!d->load_data(stream)) {
+        for (auto& d : *this) {
+            if (!d.load_data(stream)) {
                 return false;
             }
         }
         return true;
     }
 
-    //---------------------------------------------------------------------
     void save(std::ostream& stream) const
     {
-        for (auto d : *this) {
-            d->save(stream);
+        for (const auto& d : *this) {
+            d.save(stream);
         }
     }
 
-    //------------------------------------------------------------------------------
     uint32_t get_sizeof() const
     {
-        if (size() > 0) {
-            return narrow_cast<uint32_t>(size() * (*begin())->get_sizeof());
+        if (get_count() > 0) {
+            return narrow_cast<uint32_t>(get_count() * (*begin()).get_sizeof());
         }
+
         return 0;
     }
 
-    //------------------------------------------------------------------------------
   protected:
-    //------------------------------------------------------------------------------
     sections_provider* scn_;
 };
 

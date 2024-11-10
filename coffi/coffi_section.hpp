@@ -457,75 +457,57 @@ class section_impl_ti : public section_impl_tmpl<section_header_ti>
 };
 
 /*! @brief List of sections
-     *
-     * It is implemented as a vector of @ref section pointers.
-     * This allows to manage easily all the different section implementations (for every COFF format),
-     * with pointers to their base interface class (@ref section).
-     */
-//------------------------------------------------------------------------------
-class sections : public std::vector<section*>
+ *
+ *  It is implemented as a vector of @ref section pointers.
+ *  This allows to manage easily all the different section implementations (for every COFF format),
+ *  with pointers to their base interface class (@ref section).
+ */
+class sections : public unique_ptr_collection<section>
 {
   public:
-    //------------------------------------------------------------------------------
-    sections() {}
+    sections() = default;
 
-    //------------------------------------------------------------------------------
     //! Discards the copy constructor
     sections(const sections&) = delete;
 
-    //------------------------------------------------------------------------------
-    virtual ~sections() { clean(); }
+    sections(sections&&) = default;
 
-    //------------------------------------------------------------------------------
-    void clean()
-    {
-        for (auto sec : *this) {
-            delete sec;
-        }
-        clear();
-    }
-
-    //------------------------------------------------------------------------------
     /*! @brief Subscript operator, finds a section by its index
-         *
-         * @param[in] i Index of the section
-         * @return A reference to the element at specified location **i**
-         */
+     *
+     * @param[in] i Index of the section
+     * @return A reference to the element at specified location **i**
+     */
     section* operator[](size_t i)
     {
-        return std::vector<section*>::operator[](i);
+        return items_[i].get();
     }
 
-    //------------------------------------------------------------------------------
-    /*! @copydoc operator[](size_t)
-         */
+    //! @copydoc operator[](size_t)
     const section* operator[](size_t i) const
     {
-        return std::vector<section*>::operator[](i);
+        return items_[i].get();
     }
 
-    //------------------------------------------------------------------------------
     /*! @brief Subscript operator, finds a section by its symbolic name
-         *
-         * @param[in] name Symbolic name of the section
-         * @return A reference to the element with the section symbolic name **name**
-         */
+     *
+     *  @param[in] name Symbolic name of the section
+     *  @return A reference to the element with the section symbolic name **name**
+     */
     section* operator[](const std::string& name)
     {
         return (section*)((const sections*)this)->operator[](name);
     }
 
-    //------------------------------------------------------------------------------
-    /*! @copydoc operator[](const std::string&)
-         */
+    //! @copydoc operator[](const std::string&)
     const section* operator[](const std::string& name) const
     {
-        for (section* sec : *this) {
-            if (sec->get_name() == name) {
-                return sec;
+        for (auto& section : items_) {
+            if (section->get_name() == name) {
+                return section.get();
             }
         }
-        return 0;
+
+        return nullptr;
     }
 };
 
