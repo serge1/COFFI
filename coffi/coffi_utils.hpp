@@ -110,4 +110,131 @@ THE SOFTWARE.
 
 //! @}
 
+template <typename T> class unique_ptr_collection
+{
+  public:
+    class iterator
+    {
+      public:
+        using iterator_category = std::input_iterator_tag;
+        using difference_type   = std::ptrdiff_t;
+        using value_type        = T;
+        using pointer           = value_type*;
+        using reference         = value_type&;
+
+        explicit iterator(
+            typename std::vector<std::unique_ptr<T>>::iterator&& iterator)
+            : iterator_(std::move(iterator))
+        {
+        }
+
+        reference operator*() const { return *iterator_->get(); }
+
+        pointer operator->() { return iterator_->get(); }
+
+        iterator& operator++()
+        {
+            ++iterator_;
+            return *this;
+        }
+
+        iterator operator++(int)
+        {
+            iterator tmp = *this;
+            iterator_++;
+            return tmp;
+        }
+
+        friend bool operator==(const iterator& lhs, const iterator& rhs)
+        {
+            return lhs.iterator_ == rhs.iterator_;
+        }
+
+        friend bool operator!=(const iterator& lhs, const iterator& rhs)
+        {
+            return lhs.iterator_ != rhs.iterator_;
+        }
+
+      private:
+        typename std::vector<std::unique_ptr<T>>::iterator iterator_;
+    };
+
+    class const_iterator
+    {
+      public:
+        using iterator_category = std::input_iterator_tag;
+        using difference_type   = std::ptrdiff_t;
+        using value_type        = T;
+        using pointer           = const value_type*;
+        using reference         = const value_type&;
+
+        explicit const_iterator(
+            typename std::vector<std::unique_ptr<T>>::const_iterator && iterator)
+            : iterator_(std::move(iterator))
+        {
+        }
+
+        reference operator*() const { return *iterator_->get(); }
+
+        pointer operator->() { return iterator_->get(); }
+
+        const_iterator& operator++()
+        {
+            ++iterator_;
+            return *this;
+        }
+
+        const_iterator operator++(int)
+        {
+            iterator tmp = *this;
+            iterator_++;
+            return tmp;
+        }
+
+        friend bool operator==(const const_iterator& lhs, const const_iterator& rhs)
+        {
+            return lhs.iterator_ == rhs.iterator_;
+        }
+
+        friend bool operator!=(const const_iterator& lhs, const const_iterator& rhs)
+        {
+            return lhs.iterator_ != rhs.iterator_;
+        }
+
+      private:
+        typename std::vector<std::unique_ptr<T>>::const_iterator iterator_;
+    };
+
+    T* operator[](size_t i)
+    {
+        return items_[i].get();
+    }
+
+    const T* operator[](size_t i) const
+    {
+        return items_[i].get();
+    }
+
+    void clean() { items_.clear(); }
+
+    [[nodiscard]] size_t get_count() const { return items_.size(); }
+
+    void append(std::unique_ptr<T>&& item)
+    {
+        items_.emplace_back(std::move(item));
+    }
+
+    iterator begin() { return iterator(items_.begin()); }
+    iterator end() { return iterator(items_.end()); }
+
+    const_iterator begin() const { return const_iterator(items_.begin()); }
+    const_iterator end() const { return const_iterator(items_.end()); }
+
+    const_iterator cbegin() const { return begin(); }
+    const_iterator cend() const { return end(); }
+
+  protected:
+    std::vector<std::unique_ptr<T>> items_;
+};
+
 #endif // COFFI_UTILS_HPP

@@ -411,7 +411,7 @@ class coffi : public coffi_strings,
         }
         coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
             optional_header_->get_sizeof() + win_header_->get_sizeof() +
-            directories_.size() * sizeof(image_data_directory)));
+            directories_.get_count() * sizeof(image_data_directory)));
     }
 
     //---------------------------------------------------------------------
@@ -485,17 +485,18 @@ class coffi : public coffi_strings,
          */
     section* add_section(const std::string& name)
     {
-        section* sec;
+        std::unique_ptr<section> sec;
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
-            sec = new section_impl_ti{this, this, this};
+            sec = std::make_unique<section_impl_ti>(this, this, this);
         }
         else {
-            sec = new section_impl{this, this, this};
+            sec = std::make_unique<section_impl>(this, this, this);
         }
-        sec->set_index(narrow_cast<uint32_t>(sections_.size()));
+        sec->set_index(narrow_cast<uint32_t>(sections_.get_count()));
         sec->set_name(name);
-        sections_.push_back(sec);
-        return sec;
+        section* sec_ptr = sec.get();
+        sections_.append(std::move(sec));
+        return sec_ptr;
     }
 
     //---------------------------------------------------------------------
@@ -522,12 +523,13 @@ class coffi : public coffi_strings,
          */
     directory* add_directory(const image_data_directory& rva_and_size)
     {
-        directory* d =
-            new directory(narrow_cast<uint32_t>(directories_.size()));
+        std::unique_ptr<directory> d =
+            std::make_unique<directory>(narrow_cast<uint32_t>(directories_.get_count()));
         d->set_virtual_address(rva_and_size.virtual_address);
         d->set_size(rva_and_size.size);
-        directories_.push_back(d);
-        return d;
+        directory* d_ptr = d.get();
+        directories_.append(std::move(d));
+        return d_ptr;
     }
 
     //---------------------------------------------------------------------
@@ -658,7 +660,7 @@ class coffi : public coffi_strings,
                 return false;
             }
             sec->set_index(i);
-            sections_.push_back(sec.release());
+            sections_.append(std::move(sec));
         }
 
         return true;
@@ -676,7 +678,7 @@ class coffi : public coffi_strings,
 
         // Compute the header fields
         coff_header_->set_sections_count(
-            narrow_cast<uint16_t>(sections_.size()));
+            narrow_cast<uint16_t>(sections_.get_count()));
         if (symbols_.size() > 0) {
             coff_header_->set_symbols_count(
                 symbols_.back().get_index() +
@@ -695,8 +697,8 @@ class coffi : public coffi_strings,
             uint32_t size_of_initialized_data = 0;
             uint32_t size_of_uninitialized_data = 0;
             for (const auto &section : sections_) {
-                const uint32_t flags = section->get_flags();
-                const uint32_t data_size = section->get_data_size();
+                const uint32_t flags = section.get_flags();
+                const uint32_t data_size = section.get_data_size();
                 if (flags & IMAGE_SCN_CNT_CODE) {
                     size_of_code += data_size;
                 }
@@ -714,7 +716,7 @@ class coffi : public coffi_strings,
         }
         if (win_header_) {
             win_header_->set_number_of_rva_and_sizes(
-                narrow_cast<uint32_t>(directories_.size()));
+                narrow_cast<uint32_t>(directories_.get_count()));
             coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
                 coff_header_->get_optional_header_size() +
                 win_header_->get_sizeof() + directories_.get_sizeof()));
@@ -727,13 +729,13 @@ class coffi : public coffi_strings,
                 coff_header_->get_sizeof() +
                 coff_header_->get_optional_header_size();
             for (const auto& section : sections_) {
-              size_of_headers += section->get_sizeof();
+              size_of_headers += section.get_sizeof();
             }
             size_of_headers = alignTo(size_of_headers, file_alignment);
 
             uint32_t size_of_image = alignTo(size_of_headers, section_alignment);
             for (const auto &section : sections_) {
-                const uint32_t virtual_size = section->get_virtual_size();
+                const uint32_t virtual_size = section.get_virtual_size();
                 if (virtual_size) {
                     size_of_image += alignTo(virtual_size, section_alignment);
                 }
@@ -761,8 +763,8 @@ class coffi : public coffi_strings,
             }
         }
 
-        for (auto sec : sections_) {
-            sec->save_header(stream);
+        for (auto &sec : sections_) {
+            sec.save_header(stream);
         }
 
         for (auto dp : data_pages_) {
@@ -784,7 +786,7 @@ class coffi : public coffi_strings,
                 directories_[dp.index]->save_data(stream);
                 break;
             case DATA_PAGE_UNUSED:
-                stream.write(unused_spaces_[dp.index].data,
+                stream.write(unused_spaces_[dp.index].data.get(),
                              unused_spaces_[dp.index].size);
                 break;
             }
@@ -843,29 +845,29 @@ class coffi : public coffi_strings,
     void populate_data_pages()
     {
         data_pages_.clear();
-        for (auto sec : sections_) {
-            if (sec->get_data_offset() > 0 || sec->get_data()) {
+        for (auto &sec : sections_) {
+            if (sec.get_data_offset() > 0 || sec.get_data()) {
                 data_pages_.push_back(
-                    data_page{DATA_PAGE_RAW, sec->get_data_offset(),
-                              sec->get_data_size(), sec->get_index()});
+                    data_page{DATA_PAGE_RAW, sec.get_data_offset(),
+                              sec.get_data_size(), sec.get_index()});
             }
-            if (sec->get_reloc_offset() > 0 || sec->get_reloc_count() > 0) {
+            if (sec.get_reloc_offset() > 0 || sec.get_reloc_count() > 0) {
                 data_pages_.push_back(data_page{
-                    DATA_PAGE_RELOCATIONS, sec->get_reloc_offset(),
-                    sec->get_relocations_filesize(), sec->get_index()});
+                    DATA_PAGE_RELOCATIONS, sec.get_reloc_offset(),
+                    sec.get_relocations_filesize(), sec.get_index()});
             }
             if ((architecture_ != COFFI_ARCHITECTURE_TI) &&
-                (sec->get_line_num_count() > 0)) {
+                (sec.get_line_num_count() > 0)) {
                 data_pages_.push_back(data_page{
-                    DATA_PAGE_LINE_NUMBERS, sec->get_line_num_offset(),
-                    sec->get_line_numbers_filesize(), sec->get_index()});
+                    DATA_PAGE_LINE_NUMBERS, sec.get_line_num_offset(),
+                    sec.get_line_numbers_filesize(), sec.get_index()});
             }
         }
-        for (auto d : directories_) {
-            if (d->get_data_filesize() > 0) {
+        for (auto& d : directories_) {
+            if (d.get_data_filesize() > 0) {
                 data_pages_.push_back(data_page{DATA_PAGE_DIRECTORY,
-                                                d->get_virtual_address(),
-                                                d->get_size(), d->get_index()});
+                                                d.get_virtual_address(),
+                                                d.get_size(), d.get_index()});
             }
         }
 
@@ -905,8 +907,8 @@ class coffi : public coffi_strings,
             offset += narrow_cast<uint32_t>(win_header_->get_sizeof());
         }
         offset += directories_.get_sizeof();
-        for (auto sec : sections_) {
-            offset += narrow_cast<uint32_t>(sec->get_sizeof());
+        for (auto &sec : sections_) {
+            offset += narrow_cast<uint32_t>(sec.get_sizeof());
         }
         return offset;
     }
@@ -982,10 +984,10 @@ class coffi : public coffi_strings,
                     file_alignment - (previous_size % file_alignment);
                 if (previous_dp && previous_dp->type == DATA_PAGE_RAW) {
                     // Extend the previous section data
-                    char* padding = new char[size];
+                    std::unique_ptr<char[]> padding = std::make_unique<char[]>(size);
                     if (padding) {
-                        std::memset(padding, 0, size);
-                        sections_[previous_dp->index]->append_data(padding,
+                        std::memset(padding.get(), 0, size);
+                        sections_[previous_dp->index]->append_data(padding.get(),
                                                                    size);
                     }
                 }
@@ -1005,8 +1007,8 @@ class coffi : public coffi_strings,
     //---------------------------------------------------------------------
     void clean_unused_spaces()
     {
-        for (auto us : unused_spaces_) {
-            delete[] us.data;
+        for (auto& us : unused_spaces_) {
+            us.data.reset();
         }
         unused_spaces_.clear();
     }
@@ -1016,12 +1018,12 @@ class coffi : public coffi_strings,
     add_unused_space(uint32_t offset, uint32_t size, uint8_t padding_byte = 0)
     {
         unused_space us;
-        us.data = new char[size];
+        us.data = std::make_unique<char[]>(size);
         if (us.data) {
-            std::memset(us.data, padding_byte, size);
+            std::memset(us.data.get(), padding_byte, size);
             us.size   = size;
             us.offset = offset;
-            unused_spaces_.push_back(us);
+            unused_spaces_.emplace_back(std::move(us));
         }
     }
 
@@ -1050,7 +1052,7 @@ class coffi : public coffi_strings,
     {
         uint32_t offset;
         uint32_t size;
-        char*    data;
+        std::unique_ptr<char[]> data;
     };
 
     //---------------------------------------------------------------------
