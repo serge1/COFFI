@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <iostream>
+#include <new>
 
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_relocation.hpp>
@@ -163,7 +164,7 @@ template <class T> class section_impl_tmpl : public section
             data_reserved_ = 0;
         }
         else {
-            data_ = std::make_unique<char[]>(size);
+            data_.reset(new(std::nothrow) char[size]());
             if (data_) {
                 data_reserved_ = size;
                 std::copy(data, data + size, data_.get());
@@ -186,13 +187,14 @@ template <class T> class section_impl_tmpl : public section
     {
         if (!data_) {
             set_data(data, size);
+            return;
         }
         if (get_data_size() + size <= data_reserved_) {
             std::copy(data, data + size, data_.get() + get_data_size());
         }
         else {
             uint32_t new_data_size = 2 * (data_reserved_ + size);
-            std::unique_ptr<char[]> new_data = std::make_unique<char[]>(new_data_size);
+            std::unique_ptr<char[]> new_data(new(std::nothrow) char[new_data_size]());
             if (!new_data) {
                 size = 0;
             }
@@ -245,7 +247,7 @@ template <class T> class section_impl_tmpl : public section
         if (!dont) {
             data_reserved_ = get_data_size();
             if ((get_data_offset() != 0) && (data_reserved_ != 0)) {
-                data_ = std::make_unique<char[]>(data_reserved_);
+                data_.reset(new(std::nothrow) char[data_reserved_]());
                 if (!data_) {
                     return false;
                 }
@@ -295,7 +297,7 @@ template <class T> class section_impl_tmpl : public section
     //------------------------------------------------------------------------------
     virtual void save_relocations(std::ostream& stream)
     {
-        for (auto entry : relocations) {
+        for (auto& entry : relocations) {
             entry.save(stream);
         }
     }
@@ -304,21 +306,23 @@ template <class T> class section_impl_tmpl : public section
     virtual uint32_t get_relocations_filesize()
     {
         relocation rel{stn_, sym_, arch_};
-        return rel.get_sizeof() * narrow_cast<uint32_t>(relocations.size());
+        return narrow_cast<uint32_t>(rel.get_sizeof()) *
+               narrow_cast<uint32_t>(relocations.size());
     }
 
     //------------------------------------------------------------------------------
     virtual void save_line_numbers(std::ostream& stream)
     {
-        for (auto lnum : line_numbers) {
-            stream.write(reinterpret_cast<char*>(&lnum), sizeof(line_number));
+        for (const auto& lnum : line_numbers) {
+            stream.write(reinterpret_cast<const char*>(&lnum), sizeof(line_number));
         }
     }
 
     //------------------------------------------------------------------------------
     virtual uint32_t get_line_numbers_filesize()
     {
-        return sizeof(line_number) * narrow_cast<uint32_t>(line_numbers.size());
+        return narrow_cast<uint32_t>(sizeof(line_number)) *
+               narrow_cast<uint32_t>(line_numbers.size());
     }
 
     //------------------------------------------------------------------------------
@@ -388,7 +392,11 @@ class section_impl : public section_impl_tmpl<section_header>
     //------------------------------------------------------------------------------
     uint32_t get_alignment() const
     {
-        return 1 << (((get_flags() >> 20) & 0xF) - 1);
+        uint32_t align_nibble = (get_flags() >> 20) & 0xF;
+        if (align_nibble == 0) {
+            return 1;
+        }
+        return 1u << (align_nibble - 1);
     }
 
     //------------------------------------------------------------------------------

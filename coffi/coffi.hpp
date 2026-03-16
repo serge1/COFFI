@@ -33,6 +33,12 @@ THE SOFTWARE.
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
+// C4250: 'coffi' inherits 'coffi_strings::method' via dominance.
+// This is expected and correct — coffi uses diamond virtual inheritance
+// (coffi_strings and coffi_symbols both virtually inherit
+// string_to_name_provider). The dominant path through coffi_strings
+// is the intended resolution; the behavior is well-defined in C++.
+#pragma warning(disable : 4250)
 //#pragma warning(disable:4355)
 //#pragma warning(disable:4244)
 #endif
@@ -43,6 +49,7 @@ THE SOFTWARE.
 #include <algorithm>
 #include <cstring>
 #include <memory>
+#include <new>
 #include <vector>
 
 #include <coffi/coffi_types.hpp>
@@ -340,7 +347,6 @@ class coffi : public coffi_strings,
         else {
             return save_to_stream(stream);
         }
-        return true;
     }
 
     //---------------------------------------------------------------------
@@ -409,9 +415,13 @@ class coffi : public coffi_strings,
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
             optional_header_ = std::make_unique<optional_header_impl_ti>();
         }
-        coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
-            optional_header_->get_sizeof() + win_header_->get_sizeof() +
-            directories_.get_count() * sizeof(image_data_directory)));
+        uint16_t opt_hdr_size = narrow_cast<uint16_t>(
+            optional_header_->get_sizeof() +
+            (win_header_ ? win_header_->get_sizeof() +
+                               directories_.get_count() *
+                                   sizeof(image_data_directory)
+                         : 0));
+        coff_header_->set_optional_header_size(opt_hdr_size);
     }
 
     //---------------------------------------------------------------------
@@ -726,10 +736,10 @@ class coffi : public coffi_strings,
 
             uint32_t size_of_headers = dos_header_->get_stub_size() +
                 CI_NIDENT1 +
-                coff_header_->get_sizeof() +
+                narrow_cast<uint32_t>(coff_header_->get_sizeof()) +
                 coff_header_->get_optional_header_size();
             for (const auto& section : sections_) {
-              size_of_headers += section.get_sizeof();
+              size_of_headers += narrow_cast<uint32_t>(section.get_sizeof());
             }
             size_of_headers = alignTo(size_of_headers, file_alignment);
 
@@ -984,7 +994,7 @@ class coffi : public coffi_strings,
                     file_alignment - (previous_size % file_alignment);
                 if (previous_dp && previous_dp->type == DATA_PAGE_RAW) {
                     // Extend the previous section data
-                    std::unique_ptr<char[]> padding = std::make_unique<char[]>(size);
+                    std::unique_ptr<char[]> padding(new(std::nothrow) char[size]());
                     if (padding) {
                         std::memset(padding.get(), 0, size);
                         sections_[previous_dp->index]->append_data(padding.get(),
@@ -1018,7 +1028,7 @@ class coffi : public coffi_strings,
     add_unused_space(uint32_t offset, uint32_t size, uint8_t padding_byte = 0)
     {
         unused_space us;
-        us.data = std::make_unique<char[]>(size);
+        us.data.reset(new(std::nothrow) char[size]());
         if (us.data) {
             std::memset(us.data.get(), padding_byte, size);
             us.size   = size;

@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <iostream>
+#include <new>
 
 #include <coffi/coffi_utils.hpp>
 
@@ -126,7 +127,7 @@ class dos_header
 
         if (get_pe_sign_location() > static_cast<int32_t>(sizeof(header))) {
             stub_size_      = get_pe_sign_location() - sizeof(header);
-            std::unique_ptr<char[]> read_stub = std::make_unique<char[]>(stub_size_);
+            std::unique_ptr<char[]> read_stub(new(std::nothrow) char[stub_size_]());
             if (!read_stub) {
                 return false;
             }
@@ -175,7 +176,7 @@ class dos_header
             stub_.reset();
         }
         stub_size_     = size;
-        std::unique_ptr<char[]> new_stub = std::make_unique<char[]>(stub_size_);
+        std::unique_ptr<char[]> new_stub(new(std::nothrow) char[stub_size_]());
         if (!new_stub) {
             stub_size_ = 0;
         }
