@@ -409,9 +409,13 @@ class coffi : public coffi_strings,
         if (architecture_ == COFFI_ARCHITECTURE_TI) {
             optional_header_ = std::make_unique<optional_header_impl_ti>();
         }
-        coff_header_->set_optional_header_size(narrow_cast<uint16_t>(
-            optional_header_->get_sizeof() + win_header_->get_sizeof() +
-            directories_.get_count() * sizeof(image_data_directory)));
+        uint16_t opt_hdr_size = narrow_cast<uint16_t>(
+            optional_header_->get_sizeof() +
+            (win_header_ ? win_header_->get_sizeof() +
+                               directories_.get_count() *
+                                   sizeof(image_data_directory)
+                         : 0));
+        coff_header_->set_optional_header_size(opt_hdr_size);
     }
 
     //---------------------------------------------------------------------
