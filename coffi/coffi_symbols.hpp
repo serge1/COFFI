@@ -156,6 +156,9 @@ class coffi_symbols : public virtual symbol_provider,
     //! @copydoc symbol_provider::get_symbol(uint32_t)
     virtual const symbol* get_symbol(uint32_t index) const
     {
+        if (symbols_.empty()) {
+            return nullptr;
+        }
         uint32_t L = 0;
         uint32_t R = narrow_cast<uint32_t>(symbols_.size()) - 1;
         while (L <= R) {
