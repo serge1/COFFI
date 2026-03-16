@@ -324,7 +324,7 @@ template <class T> class section_impl_tmpl : public section
     virtual void save_line_numbers(std::ostream& stream)
     {
         for (const auto& lnum : line_numbers) {
-            stream.write(reinterpret_cast<char*>(&lnum), sizeof(line_number));
+            stream.write(reinterpret_cast<const char*>(&lnum), sizeof(line_number));
         }
     }
 
