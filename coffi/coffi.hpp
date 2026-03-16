@@ -340,7 +340,6 @@ class coffi : public coffi_strings,
         else {
             return save_to_stream(stream);
         }
-        return true;
     }
 
     //---------------------------------------------------------------------
