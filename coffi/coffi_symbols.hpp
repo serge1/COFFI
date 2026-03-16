@@ -247,7 +247,7 @@ class coffi_symbols : public virtual symbol_provider,
     //---------------------------------------------------------------------
     void save_symbols(std::ostream& stream)
     {
-        for (auto s : symbols_) {
+        for (auto& s : symbols_) {
             s.save(stream);
         }
     }
@@ -256,7 +256,7 @@ class coffi_symbols : public virtual symbol_provider,
     uint32_t get_symbols_filesize()
     {
         uint32_t filesize = 0;
-        for (auto s : symbols_) {
+        for (const auto& s : symbols_) {
             filesize +=
                 sizeof(symbol_record) *
                 (1 + narrow_cast<uint32_t>(s.get_auxiliary_symbols().size()));
