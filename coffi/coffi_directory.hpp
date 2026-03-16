@@ -129,7 +129,7 @@ class directory
             std::unique_ptr<char[]> temp_buffer = std::make_unique<char[]>(get_size());
             stream.seekg(get_virtual_address());
             stream.read(temp_buffer.get(), get_size());
-            if (stream.gcount() != static_cast<int>(get_size())) {
+            if (stream.gcount() != static_cast<std::streamsize>(get_size())) {
                 return false;
             }
             data_ = std::move(temp_buffer);
