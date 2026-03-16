@@ -296,7 +296,7 @@ template <class T> class section_impl_tmpl : public section
     //------------------------------------------------------------------------------
     virtual void save_relocations(std::ostream& stream)
     {
-        for (auto entry : relocations) {
+        for (auto& entry : relocations) {
             entry.save(stream);
         }
     }
@@ -311,7 +311,7 @@ template <class T> class section_impl_tmpl : public section
     //------------------------------------------------------------------------------
     virtual void save_line_numbers(std::ostream& stream)
     {
-        for (auto lnum : line_numbers) {
+        for (const auto& lnum : line_numbers) {
             stream.write(reinterpret_cast<char*>(&lnum), sizeof(line_number));
         }
     }
