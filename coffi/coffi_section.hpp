@@ -389,7 +389,11 @@ class section_impl : public section_impl_tmpl<section_header>
     //------------------------------------------------------------------------------
     uint32_t get_alignment() const
     {
-        return 1 << (((get_flags() >> 20) & 0xF) - 1);
+        uint32_t align_nibble = (get_flags() >> 20) & 0xF;
+        if (align_nibble == 0) {
+            return 1;
+        }
+        return 1u << (align_nibble - 1);
     }
 
     //------------------------------------------------------------------------------
