@@ -65,12 +65,12 @@ THE SOFTWARE.
 
 //! Defines a **set_NAME** function for accessing the **NAME** structure field.
 #define COFFI_SET_ACCESS(TYPE, NAME) \
-    void set_##NAME(TYPE value) { header.NAME = value; }
+    void set_##NAME(TYPE value) { header.NAME = narrow_cast<decltype(header.NAME)>(value); }
 
 //! Defines a **get_NAME** and a **set_NAME** functions for accessing the **NAME** structure field.
 #define COFFI_GET_SET_ACCESS(TYPE, NAME)            \
     TYPE get_##NAME() const { return header.NAME; } \
-    void set_##NAME(TYPE value) { header.NAME = value; }
+    void set_##NAME(TYPE value) { header.NAME = narrow_cast<decltype(header.NAME)>(value); }
 
 //! Disables the **get_NAME** function for prohibiting read accesses to the **NAME** structure field.
 #define COFFI_GET_ACCESS_NONE(TYPE, NAME)                        \
