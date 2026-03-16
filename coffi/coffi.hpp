@@ -33,6 +33,12 @@ THE SOFTWARE.
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
+// C4250: 'coffi' inherits 'coffi_strings::method' via dominance.
+// This is expected and correct — coffi uses diamond virtual inheritance
+// (coffi_strings and coffi_symbols both virtually inherit
+// string_to_name_provider). The dominant path through coffi_strings
+// is the intended resolution; the behavior is well-defined in C++.
+#pragma warning(disable : 4250)
 //#pragma warning(disable:4355)
 //#pragma warning(disable:4244)
 #endif

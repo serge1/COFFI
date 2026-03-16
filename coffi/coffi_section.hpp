@@ -131,18 +131,8 @@ template <class T> class section_impl_tmpl : public section
     COFFI_GET_SET_ACCESS(uint32_t, virtual_address);
     COFFI_GET_SET_ACCESS(uint32_t, data_offset);
     COFFI_GET_SET_ACCESS(uint32_t, reloc_offset);
-    uint32_t get_reloc_count() const { return header.reloc_count; }
-    void set_reloc_count(uint32_t value)
-    {
-        header.reloc_count =
-            narrow_cast<decltype(header.reloc_count)>(value);
-    }
-    uint32_t get_line_num_count() const { return header.line_num_count; }
-    void set_line_num_count(uint32_t value)
-    {
-        header.line_num_count =
-            narrow_cast<decltype(header.line_num_count)>(value);
-    }
+    COFFI_GET_SET_ACCESS(uint32_t, reloc_count);
+    COFFI_GET_SET_ACCESS(uint32_t, line_num_count);
     COFFI_GET_SET_ACCESS(uint32_t, flags);
 
     COFFI_GET_SIZEOF();
