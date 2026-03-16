@@ -730,10 +730,10 @@ class coffi : public coffi_strings,
 
             uint32_t size_of_headers = dos_header_->get_stub_size() +
                 CI_NIDENT1 +
-                coff_header_->get_sizeof() +
+                narrow_cast<uint32_t>(coff_header_->get_sizeof()) +
                 coff_header_->get_optional_header_size();
             for (const auto& section : sections_) {
-              size_of_headers += section.get_sizeof();
+              size_of_headers += narrow_cast<uint32_t>(section.get_sizeof());
             }
             size_of_headers = alignTo(size_of_headers, file_alignment);
 
