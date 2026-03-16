@@ -186,7 +186,7 @@ template <typename T> class unique_ptr_collection
 
         const_iterator operator++(int)
         {
-            iterator tmp = *this;
+            const_iterator tmp = *this;
             iterator_++;
             return tmp;
         }
