@@ -186,6 +186,7 @@ template <class T> class section_impl_tmpl : public section
     {
         if (!data_) {
             set_data(data, size);
+            return;
         }
         if (get_data_size() + size <= data_reserved_) {
             std::copy(data, data + size, data_.get() + get_data_size());
