@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 #include <iostream>
 #include <memory>
+#include <new>
 #include <vector>
 
 #include <coffi/coffi_utils.hpp>
@@ -87,7 +88,7 @@ class directory
             return;
         }
 
-        std::unique_ptr<char[]> temp_buffer = std::make_unique<char[]>(size);
+        std::unique_ptr<char[]> temp_buffer(new(std::nothrow) char[size]());
         if (!temp_buffer) {
             set_size(0);
             return;
@@ -126,7 +127,10 @@ class directory
             return true;
         }
         if ((get_size() > 0) && (get_virtual_address() != 0)) {
-            std::unique_ptr<char[]> temp_buffer = std::make_unique<char[]>(get_size());
+            std::unique_ptr<char[]> temp_buffer(new(std::nothrow) char[get_size()]());
+            if (!temp_buffer) {
+                return false;
+            }
             stream.seekg(get_virtual_address());
             stream.read(temp_buffer.get(), get_size());
             if (stream.gcount() != static_cast<std::streamsize>(get_size())) {

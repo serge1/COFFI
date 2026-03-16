@@ -30,6 +30,7 @@ THE SOFTWARE.
 #define COFFI_STRINGS_HPP
 
 #include <cstring>
+#include <new>
 
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_headers.hpp>
@@ -106,7 +107,7 @@ class coffi_strings : public virtual string_to_name_provider
     //---------------------------------------------------------------------
     virtual void set_strings(const char* str, uint32_t size)
     {
-        std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(size);
+        std::unique_ptr<char[]> new_strings(new(std::nothrow) char[size]());
         if (new_strings) {
             std::copy(str, str + size, new_strings.get());
             strings_          = std::move(new_strings);
@@ -142,7 +143,7 @@ class coffi_strings : public virtual string_to_name_provider
             header->get_symbols_count() * sizeof(symbol_record);
         stream.seekg(strings_offset);
         stream.read(strings_.get(), 4);
-        std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(get_strings_size());
+        std::unique_ptr<char[]> new_strings(new(std::nothrow) char[get_strings_size()]());
         if (!new_strings) {
             return false;
         }
@@ -200,7 +201,7 @@ class coffi_strings : public virtual string_to_name_provider
             if (get_strings_size() + size > strings_reserved_) {
                 uint32_t new_strings_reserved =
                     2 * (strings_reserved_ + narrow_cast<uint32_t>(size));
-                std::unique_ptr<char[]> new_strings = std::make_unique<char[]>(new_strings_reserved);
+                std::unique_ptr<char[]> new_strings(new(std::nothrow) char[new_strings_reserved]());
                 if (!new_strings) {
                     offset = 0;
                     size   = 0;
