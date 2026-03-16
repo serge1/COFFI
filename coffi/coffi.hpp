@@ -43,6 +43,7 @@ THE SOFTWARE.
 #include <algorithm>
 #include <cstring>
 #include <memory>
+#include <new>
 #include <vector>
 
 #include <coffi/coffi_types.hpp>
@@ -987,7 +988,7 @@ class coffi : public coffi_strings,
                     file_alignment - (previous_size % file_alignment);
                 if (previous_dp && previous_dp->type == DATA_PAGE_RAW) {
                     // Extend the previous section data
-                    std::unique_ptr<char[]> padding = std::make_unique<char[]>(size);
+                    std::unique_ptr<char[]> padding(new(std::nothrow) char[size]());
                     if (padding) {
                         std::memset(padding.get(), 0, size);
                         sections_[previous_dp->index]->append_data(padding.get(),
@@ -1021,7 +1022,7 @@ class coffi : public coffi_strings,
     add_unused_space(uint32_t offset, uint32_t size, uint8_t padding_byte = 0)
     {
         unused_space us;
-        us.data = std::make_unique<char[]>(size);
+        us.data.reset(new(std::nothrow) char[size]());
         if (us.data) {
             std::memset(us.data.get(), padding_byte, size);
             us.size   = size;

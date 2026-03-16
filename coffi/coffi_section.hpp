@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <iostream>
+#include <new>
 
 #include <coffi/coffi_utils.hpp>
 #include <coffi/coffi_relocation.hpp>
@@ -163,7 +164,7 @@ template <class T> class section_impl_tmpl : public section
             data_reserved_ = 0;
         }
         else {
-            data_ = std::make_unique<char[]>(size);
+            data_.reset(new(std::nothrow) char[size]());
             if (data_) {
                 data_reserved_ = size;
                 std::copy(data, data + size, data_.get());
@@ -193,7 +194,7 @@ template <class T> class section_impl_tmpl : public section
         }
         else {
             uint32_t new_data_size = 2 * (data_reserved_ + size);
-            std::unique_ptr<char[]> new_data = std::make_unique<char[]>(new_data_size);
+            std::unique_ptr<char[]> new_data(new(std::nothrow) char[new_data_size]());
             if (!new_data) {
                 size = 0;
             }
@@ -246,7 +247,7 @@ template <class T> class section_impl_tmpl : public section
         if (!dont) {
             data_reserved_ = get_data_size();
             if ((get_data_offset() != 0) && (data_reserved_ != 0)) {
-                data_ = std::make_unique<char[]>(data_reserved_);
+                data_.reset(new(std::nothrow) char[data_reserved_]());
                 if (!data_) {
                     return false;
                 }
